@@ -1,0 +1,79 @@
+{
+  "title": "Production-Ready Web Apps",
+  "slug": "production-ready-web-apps",
+  "description": "Take your app from 'it works' to 'it survives the real world at scale.' Master system design, database optimization, background jobs, caching, observability, infrastructure as code, security, and reliability through a single through-line project: scaling Gather to 100K users.",
+  "difficulty": "advanced",
+  "estimatedHours": 50,
+  "priceCents": 7900,
+  "prerequisites": [
+    "Full-Stack Python course (or equivalent Django + Next.js experience)",
+    "TypeScript + React/Next.js proficiency",
+    "Python + Django/DRF proficiency",
+    "Docker + Docker Compose basics",
+    "CI/CD with GitHub Actions"
+  ],
+  "modules": [
+    {
+      "id": "01-system-design-thinking",
+      "title": "System Design Thinking",
+      "estimatedMinutes": 300,
+      "project": "Gather Architecture Review -- analyze bottlenecks, diagram the system, propose a target architecture in an ADR"
+    },
+    {
+      "id": "02-database-performance",
+      "title": "Database Performance and Optimization",
+      "estimatedMinutes": 330,
+      "project": "Gather Under Load -- seed 100K events, profile slow queries, add indexes, set up PgBouncer, benchmark"
+    },
+    {
+      "id": "03-background-jobs",
+      "title": "Background Jobs and Task Queues",
+      "estimatedMinutes": 300,
+      "project": "Async RSVP Pipeline -- move email and notifications to Celery, add retry with backoff and Flower monitoring"
+    },
+    {
+      "id": "04-caching-strategies",
+      "title": "Caching Strategies",
+      "estimatedMinutes": 300,
+      "project": "Speed Up Gather -- implement three caching layers for the event detail page and benchmark before/after"
+    },
+    {
+      "id": "05-object-storage",
+      "title": "Object Storage and File Processing",
+      "estimatedMinutes": 270,
+      "project": "Gather Image Pipeline -- presigned URL uploads, Celery thumbnail generation, responsive images with srcset"
+    },
+    {
+      "id": "06-real-time-at-scale",
+      "title": "Real-Time at Scale",
+      "estimatedMinutes": 300,
+      "project": "Gather Live -- SSE with Redis Pub/Sub for live RSVP counts across multiple server instances"
+    },
+    {
+      "id": "07-observability",
+      "title": "Observability and Incident Response",
+      "estimatedMinutes": 330,
+      "project": "Gather Observability Stack -- OpenTelemetry instrumentation, Grafana dashboard, and incident runbook"
+    },
+    {
+      "id": "08-advanced-deployment",
+      "title": "Advanced Deployment and Infrastructure",
+      "estimatedMinutes": 330,
+      "project": "Gather Zero-Downtime Deploy -- blue-green deploy, Terraform staging, feature flags with gradual rollout"
+    },
+    {
+      "id": "09-security-reliability",
+      "title": "Security and Reliability Patterns",
+      "estimatedMinutes": 300,
+      "project": "Gather Resilience Audit -- OWASP audit, circuit breakers, automated backups, chaos testing with toxiproxy"
+    },
+    {
+      "id": "10-capstone",
+      "title": "Capstone: Gather at Scale",
+      "estimatedMinutes": 330,
+      "project": "Production Launch -- load test 1K concurrent users, hit p95 targets, build observability dashboard, record demo"
+    }
+  ],
+  "author": "We Build Black",
+  "updatedAt": "2026-03-14"
+}

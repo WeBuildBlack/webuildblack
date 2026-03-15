@@ -1,0 +1,148 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Arvo:wght@400;700&family=Jura:wght@300;400;500;700&family=Roboto:wght@400;500;700&display=swap');
+
+@layer base {
+  body {
+    @apply font-body text-brand-near-black bg-white antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading font-bold;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center justify-center px-6 py-3 bg-brand-gold text-brand-near-black font-accent font-bold rounded-lg hover:brightness-110 transition-all duration-200;
+  }
+
+  .btn-outline {
+    @apply inline-flex items-center justify-center px-6 py-3 border-2 border-brand-gold text-brand-gold font-accent font-bold rounded-lg hover:bg-brand-gold hover:text-brand-near-black transition-all duration-200;
+  }
+
+  .btn-brown {
+    @apply inline-flex items-center justify-center px-6 py-3 bg-brand-medium-brown text-white font-accent font-bold rounded-lg hover:bg-brand-warm-brown transition-all duration-200;
+  }
+
+  /* Prose styles for lesson content */
+  .prose-wbb {
+    @apply text-brand-near-black leading-relaxed;
+  }
+
+  .prose-wbb h1 {
+    @apply text-3xl md:text-4xl font-heading font-bold mb-6 text-brand-dark-brown;
+  }
+
+  .prose-wbb h2 {
+    @apply text-2xl md:text-3xl font-heading font-bold mt-10 mb-4 text-brand-dark-brown;
+  }
+
+  .prose-wbb h3 {
+    @apply text-xl md:text-2xl font-heading font-bold mt-8 mb-3 text-brand-medium-brown;
+  }
+
+  .prose-wbb p {
+    @apply mb-4 text-base md:text-lg;
+  }
+
+  .prose-wbb ul, .prose-wbb ol {
+    @apply mb-4 pl-6;
+  }
+
+  .prose-wbb li {
+    @apply mb-2;
+  }
+
+  .prose-wbb ul li {
+    @apply list-disc;
+  }
+
+  .prose-wbb ol li {
+    @apply list-decimal;
+  }
+
+  .prose-wbb a {
+    @apply text-brand-medium-brown underline hover:text-brand-warm-brown transition-colors;
+  }
+
+  .prose-wbb blockquote {
+    @apply border-l-4 border-brand-gold pl-4 my-4 italic text-brand-dark-gray;
+  }
+
+  .prose-wbb code {
+    @apply bg-brand-light-gray text-brand-dark-brown px-1.5 py-0.5 rounded text-sm font-mono;
+    font-variant-ligatures: none;
+    quotes: none;
+  }
+
+  .prose-wbb pre {
+    @apply bg-brand-near-black text-brand-light-gray p-4 rounded-lg overflow-x-auto my-6;
+    position: relative;
+  }
+
+  .prose-wbb pre code {
+    @apply bg-transparent text-inherit p-0 rounded-none;
+  }
+
+  .prose-wbb pre .copy-btn {
+    @apply absolute top-2 right-2 text-xs px-2 py-1 rounded bg-white/10 text-white/70 cursor-pointer;
+    transition: background-color 0.2s, color 0.2s;
+  }
+
+  .prose-wbb pre .copy-btn:hover {
+    @apply bg-white/20 text-white;
+  }
+
+  .prose-wbb img {
+    @apply rounded-lg my-6 max-w-full;
+  }
+
+  .prose-wbb table {
+    @apply w-full border-collapse my-6;
+  }
+
+  .prose-wbb th {
+    @apply bg-brand-dark-brown text-white px-4 py-2 text-left font-accent;
+  }
+
+  .prose-wbb td {
+    @apply border-b border-brand-light-gray px-4 py-2;
+  }
+
+  .prose-wbb hr {
+    @apply my-8 border-brand-light-gray;
+  }
+}
+
+/* Syntax highlighting theme overrides */
+.hljs {
+  background: #110903 !important;
+  color: #e3e2db !important;
+}
+
+.hljs-keyword,
+.hljs-selector-tag {
+  color: #f4cf64 !important;
+}
+
+.hljs-string,
+.hljs-attr {
+  color: #AE8156 !important;
+}
+
+.hljs-comment {
+  color: #767678 !important;
+}
+
+.hljs-function .hljs-title,
+.hljs-title.function_ {
+  color: #f4cf64 !important;
+}
+
+.hljs-number,
+.hljs-literal {
+  color: #AE8156 !important;
+}

@@ -1,0 +1,125 @@
+{
+  "title": "Observability and Incident Response",
+  "questions": [
+    {
+      "id": "obs-q1",
+      "question": "What is the primary difference between monitoring and observability?",
+      "options": [
+        "Monitoring is real-time; observability is historical",
+        "Monitoring answers pre-defined questions; observability lets you investigate unknown failures",
+        "Monitoring uses dashboards; observability uses command-line tools",
+        "Monitoring is for production; observability is for development"
+      ],
+      "correctIndex": 1,
+      "explanation": "Monitoring answers pre-defined questions ('Is CPU above 90%?'). Observability gives you the data and tools to ask questions you did not anticipate, which is essential for diagnosing novel failure modes."
+    },
+    {
+      "id": "obs-q2",
+      "question": "In a distributed trace, what connects all spans from a single request together?",
+      "options": [
+        "The span name",
+        "The service name",
+        "The trace ID",
+        "The timestamp"
+      ],
+      "correctIndex": 2,
+      "explanation": "The trace ID is a unique identifier shared by all spans belonging to the same request. It is propagated through HTTP headers (W3C traceparent) and message headers (Celery) to link spans across service boundaries."
+    },
+    {
+      "id": "obs-q3",
+      "question": "Which OpenTelemetry concept represents a single unit of work within a trace?",
+      "options": [
+        "A metric",
+        "A span",
+        "A log entry",
+        "A resource"
+      ],
+      "correctIndex": 1,
+      "explanation": "A span represents one named, timed operation within a trace. Spans form a tree structure with parent-child relationships. Each span has a name, start time, duration, attributes, and status."
+    },
+    {
+      "id": "obs-q4",
+      "question": "You need to track the number of pending tasks in a Celery queue. This value goes up when tasks are added and down when tasks are processed. Which Prometheus metric type should you use?",
+      "options": [
+        "Counter",
+        "Gauge",
+        "Histogram",
+        "Summary"
+      ],
+      "correctIndex": 1,
+      "explanation": "A gauge is for values that can go up and down, like queue depth, active connections, or memory usage. A counter only goes up (or resets to zero). A histogram measures distributions (like latency)."
+    },
+    {
+      "id": "obs-q5",
+      "question": "What does the PromQL expression histogram_quantile(0.95, rate(http_request_duration_seconds_bucket[5m])) calculate?",
+      "options": [
+        "The average request duration over 5 minutes",
+        "The maximum request duration in the last 5 minutes",
+        "The 95th percentile request duration over the last 5 minutes",
+        "The total number of requests taking more than 0.95 seconds"
+      ],
+      "correctIndex": 2,
+      "explanation": "histogram_quantile(0.95, ...) calculates the 95th percentile (p95) from a histogram. The rate(...[5m]) part computes the per-second rate of bucket increments over the last 5 minutes. Together, they give you the p95 latency over the most recent 5-minute window."
+    },
+    {
+      "id": "obs-q6",
+      "question": "Why is structured logging (JSON format) preferred over plain text logging in production?",
+      "options": [
+        "JSON logs use less disk space than plain text",
+        "JSON logs can be queried and filtered programmatically by field, while plain text requires regex parsing",
+        "JSON logs are human-readable and plain text logs are not",
+        "JSON logs automatically include stack traces"
+      ],
+      "correctIndex": 1,
+      "explanation": "Structured logs with consistent key-value fields (user_id, event_id, trace_id) can be queried like a database. Searching for all errors from user 42 is a simple field filter with structured logs, but requires fragile regex matching with plain text."
+    },
+    {
+      "id": "obs-q7",
+      "question": "What is a correlation ID in the context of observability, and why is it important?",
+      "options": [
+        "A unique ID for each log entry, used to deduplicate logs",
+        "A shared identifier (typically the trace ID) included in logs, traces, and metrics to link data across all three pillars",
+        "A hash of the request body, used to detect duplicate requests",
+        "The process ID of the application server, used to identify which server handled a request"
+      ],
+      "correctIndex": 1,
+      "explanation": "A correlation ID (usually the OpenTelemetry trace ID) is injected into every log entry and attached to traces and metrics. It enables the 'correlation loop': finding a metric anomaly, jumping to the trace, and then searching logs by trace ID to see exactly what happened."
+    },
+    {
+      "id": "obs-q8",
+      "question": "During a production incident, what should be the first priority?",
+      "options": [
+        "Find the root cause and write a permanent fix",
+        "Identify which developer introduced the bug",
+        "Mitigate the user impact as quickly as possible (rollback, restart, feature flag)",
+        "Write a postmortem document for the team"
+      ],
+      "correctIndex": 2,
+      "explanation": "During an active incident, the priority is restoring service. Rollbacks, restarts, scaling up, or disabling broken features are all valid mitigations. Root cause analysis and permanent fixes happen after the incident is resolved. Finding blame is never a priority."
+    },
+    {
+      "id": "obs-q9",
+      "question": "What does 'blameless' mean in the context of a postmortem?",
+      "options": [
+        "The postmortem does not name any specific engineers involved",
+        "The postmortem focuses on systemic causes and process improvements rather than individual mistakes",
+        "The incident was caused by an external factor, not an internal error",
+        "The team decided the incident was not severe enough to require a full investigation"
+      ],
+      "correctIndex": 1,
+      "explanation": "A blameless postmortem focuses on what the system allowed to happen, not who made a mistake. Instead of 'Bob forgot to run tests,' it says 'the deploy pipeline did not include integration tests.' This leads to actionable improvements and builds a culture where people report problems instead of hiding them."
+    },
+    {
+      "id": "obs-q10",
+      "question": "Prometheus uses a pull-based model for metrics collection. What does this mean?",
+      "options": [
+        "Your application pushes metrics to Prometheus on a timer",
+        "Prometheus scrapes a /metrics endpoint on your application at a configured interval",
+        "Prometheus reads metrics from your application's log files",
+        "Your application sends metrics to Prometheus when thresholds are crossed"
+      ],
+      "correctIndex": 1,
+      "explanation": "In Prometheus's pull model, the application exposes a /metrics HTTP endpoint that returns current metric values. Prometheus scrapes this endpoint at a regular interval (typically every 15 seconds). This means Prometheus controls the collection rate, gets built-in health checking (failed scrapes mean the app is down), and the application needs no client-side buffering."
+    }
+  ]
+}

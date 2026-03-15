@@ -1,0 +1,73 @@
+{
+  "title": "Web Development Foundations",
+  "slug": "web-dev-foundations",
+  "description": "Start from zero and build your first portfolio site. Learn the terminal, Git, HTML, CSS, JavaScript, and responsive design through hands-on projects in every module.",
+  "difficulty": "beginner",
+  "estimatedHours": 60,
+  "priceCents": 0,
+  "prerequisites": [],
+  "modules": [
+    {
+      "id": "01-terminal-and-command-line",
+      "title": "Terminal & Command Line Basics",
+      "estimatedMinutes": 180,
+      "project": "Terminal Treasure Hunt — navigate a filesystem to find hidden files"
+    },
+    {
+      "id": "02-how-the-web-works",
+      "title": "How the Web Works",
+      "estimatedMinutes": 150,
+      "project": "Request Inspector — trace a web request from browser to server and back"
+    },
+    {
+      "id": "03-git-and-github",
+      "title": "Git & GitHub",
+      "estimatedMinutes": 180,
+      "project": "Collaboration Sim — fork, branch, and merge a shared repo"
+    },
+    {
+      "id": "04-html-fundamentals",
+      "title": "HTML Fundamentals",
+      "estimatedMinutes": 240,
+      "project": "Recipe Page — build a semantic, accessible recipe site"
+    },
+    {
+      "id": "05-css-fundamentals",
+      "title": "CSS Fundamentals",
+      "estimatedMinutes": 300,
+      "project": "Style a Landing Page — transform plain HTML into a polished design"
+    },
+    {
+      "id": "06-css-layout",
+      "title": "CSS Layout: Flexbox & Grid",
+      "estimatedMinutes": 240,
+      "project": "Photo Gallery — build a responsive image gallery with Flexbox and Grid"
+    },
+    {
+      "id": "07-responsive-design",
+      "title": "Responsive Web Design",
+      "estimatedMinutes": 180,
+      "project": "Mobile-First Blog — redesign a desktop layout for all screen sizes"
+    },
+    {
+      "id": "08-javascript-fundamentals",
+      "title": "JavaScript Fundamentals",
+      "estimatedMinutes": 300,
+      "project": "Quiz App — build an interactive quiz with scoring and feedback"
+    },
+    {
+      "id": "09-javascript-and-the-dom",
+      "title": "JavaScript & the DOM",
+      "estimatedMinutes": 240,
+      "project": "Task Manager — build a dynamic to-do list with DOM manipulation"
+    },
+    {
+      "id": "10-capstone-portfolio",
+      "title": "Capstone: Build Your Portfolio Site",
+      "estimatedMinutes": 300,
+      "project": "Personal Portfolio — your capstone portfolio site deployed to the web"
+    }
+  ],
+  "author": "We Build Black",
+  "updatedAt": "2026-03-14"
+}

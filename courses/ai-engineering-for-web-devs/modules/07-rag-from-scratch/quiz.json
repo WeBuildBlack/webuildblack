@@ -1,0 +1,125 @@
+{
+  "title": "RAG from Scratch Quiz",
+  "questions": [
+    {
+      "id": "q1",
+      "question": "What is the primary problem that Retrieval-Augmented Generation (RAG) solves compared to using a plain LLM call?",
+      "options": [
+        "It makes the LLM generate responses faster by caching previous answers",
+        "It grounds the LLM's answers in your actual data, reducing hallucinations and enabling access to private information",
+        "It replaces the need for an embedding model by using keyword search exclusively",
+        "It fine-tunes the LLM on your documents so it permanently learns your data"
+      ],
+      "correctIndex": 1,
+      "explanation": "RAG retrieves relevant chunks from your own data and injects them into the prompt, so the LLM answers based on evidence rather than guessing from its training data. This reduces hallucinations and lets the model access private information it was never trained on."
+    },
+    {
+      "id": "q2",
+      "question": "You have a 200-page internal wiki that changes weekly. Which approach should you try first?",
+      "options": [
+        "Fine-tune a model on the wiki content every week",
+        "Paste the entire wiki into the system prompt",
+        "Use RAG to index the wiki into a vector store and retrieve relevant chunks at query time",
+        "Train a custom embedding model specifically for your wiki"
+      ],
+      "correctIndex": 2,
+      "explanation": "RAG is ideal for frequently-changing data because you only need to re-index the changed documents, not retrain the model. Fine-tuning would be expensive and stale by the next update. Pasting 200 pages would exceed context limits."
+    },
+    {
+      "id": "q3",
+      "question": "When using recursive character splitting for document chunking, what is the correct order of separators the algorithm tries?",
+      "options": [
+        "Words, then sentences, then lines, then paragraphs",
+        "Paragraphs (\\n\\n), then lines (\\n), then sentences (. ), then words ( )",
+        "Sentences first, then individual characters, then paragraphs",
+        "The order does not matter because all separators are tried simultaneously"
+      ],
+      "correctIndex": 1,
+      "explanation": "Recursive character splitting starts with the largest natural boundary (paragraph breaks \\n\\n) and falls back to progressively smaller ones (lines, sentences, words) only when a chunk exceeds the maximum size. This preserves the most coherent units of text possible."
+    },
+    {
+      "id": "q4",
+      "question": "In a hybrid search system that combines vector search and BM25 keyword search, what technique is commonly used to merge the two result sets?",
+      "options": [
+        "Taking the intersection of both result sets (only results that appear in both)",
+        "Reciprocal Rank Fusion (RRF), which scores each result based on its rank position in each list",
+        "Always preferring vector search results and using keyword results only as a fallback",
+        "Averaging the raw similarity scores from both systems"
+      ],
+      "correctIndex": 1,
+      "explanation": "Reciprocal Rank Fusion (RRF) assigns each result a score based on 1/(k + rank) from each search method, then sums the scores. This elegantly combines rankings from different systems without needing to normalize their raw scores, which are on different scales."
+    },
+    {
+      "id": "q5",
+      "question": "Your RAG system retrieves the correct chunks (high Recall@5) but the generated answers frequently include information not present in the retrieved context. Which metric is failing, and what is the most effective fix?",
+      "options": [
+        "Precision is failing; add more documents to the vector store",
+        "Faithfulness is failing; strengthen the system prompt to only use provided context and lower the temperature",
+        "Correctness is failing; switch to a larger embedding model",
+        "MRR is failing; add a reranking step to improve result ordering"
+      ],
+      "correctIndex": 1,
+      "explanation": "When the model adds information beyond what the context provides, that is a faithfulness problem -- the model is not staying grounded in the retrieved evidence. Strengthening the system prompt ('Answer ONLY using the provided context') and lowering temperature (0-0.1) are the most direct fixes for this issue."
+    },
+    {
+      "id": "q6",
+      "question": "How does chunk size affect RAG retrieval quality, and what is a reasonable starting point?",
+      "options": [
+        "Larger chunks are always better because they contain more context for the LLM to work with",
+        "Smaller chunks give more precise retrieval but less context; larger chunks give more context but may include irrelevant content -- 500-1000 characters is a good starting point for most use cases",
+        "Chunk size does not matter as long as you have enough overlap between chunks",
+        "You should always use the maximum chunk size that fits within the embedding model's token limit"
+      ],
+      "correctIndex": 1,
+      "explanation": "Chunk size is a tradeoff between precision and context. Smaller chunks are more targeted -- a query is more likely to match a chunk that is entirely about the right topic. But small chunks may lack surrounding context needed for a complete answer. Larger chunks preserve more context but dilute the relevance signal. 500-1000 characters is a practical starting range; from there, experiment with your specific data and questions."
+    },
+    {
+      "id": "q7",
+      "question": "What does the Recall@K metric measure in RAG evaluation?",
+      "options": [
+        "The percentage of generated answers that are factually correct",
+        "The average position of the first relevant result in the ranked list",
+        "The fraction of relevant documents that appear in the top K results -- it tells you if relevant content is being found",
+        "The number of tokens used per retrieval query divided by K"
+      ],
+      "correctIndex": 2,
+      "explanation": "Recall@K measures what fraction of all the relevant documents in your corpus actually made it into the top K results. If there are 3 relevant chunks and your top-5 retrieval returns 2 of them, your Recall@5 is 2/3 = 0.67. It answers the question: 'Are we finding the relevant content?' Low recall means the retrieval stage is missing important information."
+    },
+    {
+      "id": "q8",
+      "question": "When should you use RAG vs. fine-tuning to customize an LLM's behavior?",
+      "options": [
+        "RAG is always better because it is cheaper and faster to set up",
+        "Fine-tuning is always better because it permanently changes the model's knowledge",
+        "RAG for factual, up-to-date, or private knowledge; fine-tuning for teaching the model a new style, format, or behavior pattern",
+        "Use RAG for small datasets and fine-tuning for large datasets"
+      ],
+      "correctIndex": 2,
+      "explanation": "RAG and fine-tuning solve different problems. RAG changes WHAT the model knows -- it injects external knowledge at query time, which is ideal for factual Q&A, frequently changing data, and private information. Fine-tuning changes HOW the model writes -- it teaches the model a new style, output format, or domain-specific behavior pattern. Many production systems use both: fine-tuning for consistent output formatting and RAG for up-to-date knowledge."
+    },
+    {
+      "id": "q9",
+      "question": "What is the primary difference in design philosophy between LlamaIndex and LangChain for building RAG applications?",
+      "options": [
+        "LlamaIndex only supports Python while LangChain supports JavaScript and Python",
+        "LlamaIndex is data-first (built around indexing and querying your data), while LangChain is chain-first (built around composing LLM operations into sequences)",
+        "LlamaIndex is for small datasets and LangChain is for large datasets",
+        "LlamaIndex handles retrieval and LangChain handles generation, so you always use both together"
+      ],
+      "correctIndex": 1,
+      "explanation": "LlamaIndex was purpose-built for connecting LLMs to your data. Its core abstractions (Documents, Nodes, Indexes, Query Engines) all center on your data. LangChain was built as a general LLM framework where RAG is one pattern among many. Its core abstractions (Chains, Agents, Tools, Memory) center on composing operations. Both can build RAG, but LlamaIndex is more streamlined for data-centric use cases while LangChain is more flexible for workflows that go beyond retrieval."
+    },
+    {
+      "id": "q10",
+      "question": "A team built their RAG pipeline using LangChain's RetrievalQA chain. They now want to add a reranking step between retrieval and generation. What is the recommended approach using modern LangChain?",
+      "options": [
+        "Modify the RetrievalQA source code to add reranking internally",
+        "Use LangChain Expression Language (LCEL) to compose retriever, reranker, prompt, and LLM as a custom chain with the pipe operator",
+        "Switch to LlamaIndex because LangChain does not support reranking",
+        "Add the reranking logic inside the system prompt and let the LLM handle it"
+      ],
+      "correctIndex": 1,
+      "explanation": "LCEL (LangChain Expression Language) is the modern way to build custom chains in LangChain. Instead of using a pre-built chain like RetrievalQA that's hard to customize, you compose individual components (retriever | reranker | prompt | llm | parser) with the pipe operator. Each component is a Runnable that can be swapped, and the data flow is explicit. This gives you full control over every step while keeping the code readable."
+    }
+  ]
+}

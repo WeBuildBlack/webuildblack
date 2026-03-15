@@ -1,0 +1,124 @@
+{
+  "questions": [
+    {
+      "id": "q1",
+      "question": "In the client-server model, what role does your web browser play?",
+      "options": [
+        "The server — it stores website files and sends them when asked",
+        "The client — it sends requests and displays the responses",
+        "The protocol — it defines the rules for communication",
+        "The network — it carries data between computers"
+      ],
+      "correctIndex": 1,
+      "explanation": "Your web browser is the client. It initiates requests to servers and then renders the responses (HTML, CSS, images) into the pages you see. The server is the computer that stores the files and sends them back."
+    },
+    {
+      "id": "q2",
+      "question": "Which HTTP method is used when you type a URL into your browser and press Enter?",
+      "options": [
+        "POST — because you are sending the URL to the server",
+        "PUT — because you are placing a request",
+        "GET — because you are requesting to retrieve a page",
+        "DELETE — because the previous page is removed from view"
+      ],
+      "correctIndex": 2,
+      "explanation": "When you visit a URL, your browser sends a GET request. GET is used to retrieve or fetch data without making any changes on the server. POST is used when you submit data, like filling out a form."
+    },
+    {
+      "id": "q3",
+      "question": "You try to visit a page and the server responds with status code 404. What does this mean?",
+      "options": [
+        "The server is down and cannot handle any requests right now",
+        "The page has moved to a new URL permanently",
+        "The request was successful and the page is loading",
+        "The server could not find the page you requested"
+      ],
+      "correctIndex": 3,
+      "explanation": "404 means 'Not Found.' The server received your request but could not find the resource at that URL. This usually means the URL is wrong, the page was removed, or there is a typo in the address."
+    },
+    {
+      "id": "q4",
+      "question": "What is the primary purpose of DNS?",
+      "options": [
+        "To encrypt web traffic so it cannot be intercepted",
+        "To translate domain names (like webuildblack.com) into IP addresses",
+        "To store website files and serve them to visitors",
+        "To check whether a website is safe to visit"
+      ],
+      "correctIndex": 1,
+      "explanation": "DNS (Domain Name System) translates human-readable domain names into the numeric IP addresses that computers use to locate each other on the internet. It is often called the 'phone book of the internet.'"
+    },
+    {
+      "id": "q5",
+      "question": "In the URL https://learn.webuildblack.com/courses/web-dev?module=2#overview, what is '/courses/web-dev'?",
+      "options": [
+        "The domain name",
+        "The query string",
+        "The path",
+        "The subdomain"
+      ],
+      "correctIndex": 2,
+      "explanation": "The path (/courses/web-dev) specifies the particular page or resource on the website. The domain is 'webuildblack.com', the subdomain is 'learn', the query string is '?module=2', and the fragment is '#overview'."
+    },
+    {
+      "id": "q6",
+      "question": "What does a status code starting with 5 (like 500) indicate?",
+      "options": [
+        "The request was successful",
+        "The resource has moved to a new location",
+        "The client made an error in the request",
+        "Something went wrong on the server's side"
+      ],
+      "correctIndex": 3,
+      "explanation": "5xx status codes indicate server errors — something went wrong on the server while trying to process your request. A 500 Internal Server Error means the server encountered an unexpected problem. This is different from 4xx errors, which mean the client made a mistake (like a 404 for a wrong URL)."
+    },
+    {
+      "id": "q7",
+      "question": "When a browser loads a single web page, how many HTTP requests does it typically make?",
+      "options": [
+        "Exactly one — one request for the entire page and all its resources",
+        "Exactly two — one for the HTML and one for all other files combined",
+        "Many — one for the HTML, then additional requests for each CSS file, JavaScript file, image, and font",
+        "None — the browser stores all website files locally"
+      ],
+      "correctIndex": 2,
+      "explanation": "Loading a single page involves many HTTP requests. The browser first requests the HTML document. As it reads the HTML, it discovers references to CSS files, JavaScript files, images, and fonts, and sends a separate request for each one. A single page can make anywhere from 10 to 300+ requests."
+    },
+    {
+      "id": "q8",
+      "question": "Which DevTools tab would you use to see why a CSS style is not being applied to an element?",
+      "options": [
+        "The Console tab — to check for CSS error messages",
+        "The Network tab — to see if the CSS file loaded",
+        "The Elements tab and its Styles panel — to inspect the CSS rules on the element",
+        "The Sources tab — to read the raw CSS file"
+      ],
+      "correctIndex": 2,
+      "explanation": "The Elements tab with its Styles panel shows you every CSS rule applied to a selected element. You can see if your rule is listed, if it is being overridden by another rule (shown with a strikethrough), or if there is a typo. This is the fastest way to debug CSS issues."
+    },
+    {
+      "id": "q9",
+      "question": "What is the correct order of steps when a browser renders a web page?",
+      "options": [
+        "Run JavaScript → Parse HTML → Apply CSS → Paint the page",
+        "Apply CSS → Parse HTML → Download images → Run JavaScript",
+        "Parse HTML and build the DOM → Load CSS and apply styles → Run JavaScript → Paint the page",
+        "Paint the page → Parse HTML → Apply CSS → Run JavaScript"
+      ],
+      "correctIndex": 2,
+      "explanation": "The browser first parses the HTML and builds the DOM (the page structure). Then it loads and applies CSS styles. Then it runs any JavaScript. Finally, it paints the pixels on screen. Along the way, it makes additional HTTP requests for any resources it discovers (images, fonts, etc.)."
+    },
+    {
+      "id": "q10",
+      "question": "What happens when you edit HTML or CSS using browser DevTools?",
+      "options": [
+        "The changes are saved permanently and everyone who visits the site will see them",
+        "The changes are sent to the server and update the website's source files",
+        "The changes only affect your view in your browser and disappear when you refresh the page",
+        "The changes are saved to your computer and appear every time you visit that site"
+      ],
+      "correctIndex": 2,
+      "explanation": "Changes made in DevTools are temporary and only affect what you see in your browser. They do not modify the actual website files on the server. When you refresh the page, the browser fetches the original files again and your changes disappear. This makes DevTools a safe place to experiment."
+    }
+  ]
+}

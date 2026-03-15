@@ -1,0 +1,97 @@
+{
+  "title": "WBB Funder Directory",
+  "description": "Relationship tracker for current and prospective funders",
+  "properties": {
+    "Funder Name": {
+      "type": "title",
+      "description": "Organization or individual name"
+    },
+    "Type": {
+      "type": "select",
+      "description": "Funder category",
+      "options": [
+        "Foundation",
+        "Corporate",
+        "Government (Federal)",
+        "Government (State/Local)",
+        "Community Foundation",
+        "Individual",
+        "In-Kind Partner"
+      ]
+    },
+    "Relationship": {
+      "type": "select",
+      "description": "Current relationship status",
+      "options": [
+        "Past Sponsor",
+        "Active",
+        "Prospect",
+        "Researching",
+        "Declined",
+        "Dormant"
+      ]
+    },
+    "Focus Areas": {
+      "type": "multi_select",
+      "description": "Funder's priority areas",
+      "options": [
+        "STEM Education",
+        "Workforce Development",
+        "Racial Equity",
+        "Youth Programs",
+        "Women in Tech",
+        "Community Development",
+        "Digital Literacy",
+        "Entrepreneurship",
+        "NYC Local"
+      ]
+    },
+    "Program Fit": {
+      "type": "multi_select",
+      "description": "Which WBB programs align with this funder",
+      "options": [
+        "Fast Track",
+        "Crowns of Code",
+        "The Bridge",
+        "Mavens I/O",
+        "She Builds Black",
+        "General Operations"
+      ]
+    },
+    "Typical Grant Size": {
+      "type": "select",
+      "description": "Typical funding range",
+      "options": [
+        "< $10K",
+        "$10K - $25K",
+        "$25K - $50K",
+        "$50K - $100K",
+        "$100K - $250K",
+        "$250K - $500K",
+        "$500K+",
+        "In-Kind"
+      ]
+    },
+    "Website": {
+      "type": "url",
+      "description": "Funder website"
+    },
+    "Contact": {
+      "type": "rich_text",
+      "description": "Key contact name, title, email"
+    },
+    "Past Funding": {
+      "type": "number",
+      "format": "dollar",
+      "description": "Total past funding received from this funder"
+    },
+    "Last Contact": {
+      "type": "date",
+      "description": "Last communication date"
+    },
+    "Notes": {
+      "type": "rich_text",
+      "description": "Relationship notes, history, strategy"
+    }
+  }
+}

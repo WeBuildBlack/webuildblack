@@ -1,0 +1,101 @@
+{
+  "title": "OpenAI API Deep Dive Quiz",
+  "questions": [
+    {
+      "id": "q1",
+      "question": "When using the Chat Completions API, what happens if you set `temperature` to 0?",
+      "options": [
+        "The model produces the most deterministic, focused output possible",
+        "The model refuses to generate any output",
+        "The model generates maximally random output",
+        "The API returns an error because 0 is not a valid temperature"
+      ],
+      "correctIndex": 0,
+      "explanation": "A temperature of 0 makes the model nearly deterministic -- it will almost always choose the highest-probability token at each step. This is ideal for tasks like code generation, data extraction, and classification where consistency matters."
+    },
+    {
+      "id": "q2",
+      "question": "In a streaming response, what key difference exists in the data structure compared to a non-streaming response?",
+      "options": [
+        "Streaming responses use XML format instead of JSON",
+        "Each chunk contains a `delta` object instead of a `message` object",
+        "Streaming responses do not include the model name",
+        "Each chunk contains the full response up to that point"
+      ],
+      "correctIndex": 1,
+      "explanation": "In streaming responses, each chunk contains a `delta` object with incremental content, not the full `message` object. You must concatenate the delta content from each chunk to build the complete response."
+    },
+    {
+      "id": "q3",
+      "question": "When implementing function calling, what is the correct order of steps after the model returns a `tool_calls` response?",
+      "options": [
+        "Send the tool result directly to the user without another API call",
+        "Execute the function, then add both the assistant's tool_calls message and the tool result to the messages array, then make another API call",
+        "Make another API call first, then execute the function, then send the result",
+        "Execute the function and immediately start a new conversation with the result"
+      ],
+      "correctIndex": 1,
+      "explanation": "The correct flow is: (1) add the assistant's message containing tool_calls to the messages array, (2) execute the function(s), (3) add the tool result(s) to messages with role 'tool' and the matching tool_call_id, (4) make another API call so the model can incorporate the results into its response."
+    },
+    {
+      "id": "q4",
+      "question": "You need to classify 10,000 short text messages as 'spam' or 'not spam'. Which approach is most cost-effective?",
+      "options": [
+        "Use gpt-4o with temperature 1.5 for each message individually",
+        "Use o1 for maximum accuracy on each message",
+        "Use gpt-4o-mini and batch multiple messages into each API call",
+        "Use gpt-4o with streaming enabled to reduce token costs"
+      ],
+      "correctIndex": 2,
+      "explanation": "For a simple classification task, gpt-4o-mini provides sufficient accuracy at a fraction of the cost (roughly 1/16th of gpt-4o). Batching multiple messages into a single API call further reduces overhead and cost. Streaming does not reduce token costs -- it only changes how the response is delivered."
+    },
+    {
+      "id": "q5",
+      "question": "What is the primary benefit of using `stream_options: { include_usage: true }` when streaming?",
+      "options": [
+        "It makes the stream faster by compressing data",
+        "It includes token usage information in the final chunk, enabling cost tracking for streamed responses",
+        "It automatically caches the response for future identical requests",
+        "It enables parallel streaming of multiple responses"
+      ],
+      "correctIndex": 1,
+      "explanation": "By default, streaming responses do not include token usage data. Setting `stream_options: { include_usage: true }` causes the final chunk to include the usage object with prompt_tokens and completion_tokens, which is essential for cost tracking in production applications."
+    },
+    {
+      "id": "q6",
+      "question": "What is the recommended approach when you receive a 429 (rate limit) error from OpenAI?",
+      "options": [
+        "Immediately retry the request as fast as possible until it succeeds",
+        "Wait for the duration specified in the Retry-After header, then retry with exponential backoff",
+        "Switch to a different API key and retry immediately",
+        "Reduce the temperature parameter and retry"
+      ],
+      "correctIndex": 1,
+      "explanation": "When you receive a 429 rate limit error, the recommended approach is to respect the Retry-After header (if present) and implement exponential backoff -- waiting progressively longer between each retry attempt. This avoids overwhelming the API and gives the rate limit window time to reset."
+    },
+    {
+      "id": "q7",
+      "question": "What does setting `tool_choice: 'required'` do in an OpenAI API call with tools defined?",
+      "options": [
+        "It makes all tools optional but preferred",
+        "It forces the model to call at least one tool -- it cannot respond with plain text",
+        "It requires the user to specify which tool to call",
+        "It enables parallel tool calls"
+      ],
+      "correctIndex": 1,
+      "explanation": "Setting `tool_choice: 'required'` forces the model to call at least one of the defined tools. The model cannot respond with plain text -- it must produce a tool call. This is useful when you know the user's request definitely needs a tool call, such as a database lookup or API request."
+    },
+    {
+      "id": "q8",
+      "question": "What is the benefit of adding `strict: true` to a function definition in OpenAI's API?",
+      "options": [
+        "It makes the function execute faster on OpenAI's servers",
+        "It allows the function to accept additional undeclared parameters",
+        "It guarantees the model's arguments will exactly match the JSON Schema, eliminating malformed output",
+        "It forces the model to always call that function regardless of the user's message"
+      ],
+      "correctIndex": 2,
+      "explanation": "Adding `strict: true` to a function definition enables Structured Outputs mode, which guarantees the model's generated arguments will exactly match the provided JSON Schema. This eliminates the risk of malformed JSON or missing required fields, though it requires all properties to be listed in the `required` array."
+    }
+  ]
+}

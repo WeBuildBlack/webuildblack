@@ -1,0 +1,125 @@
+{
+  "title": "Background Jobs and Task Queues Quiz",
+  "questions": [
+    {
+      "id": "q1",
+      "question": "What is the primary reason to move email sending from the RSVP endpoint to a background task?",
+      "options": [
+        "Emails cannot be sent from a Django view function",
+        "The email operation blocks the HTTP response, making the user wait unnecessarily",
+        "Background tasks use less memory than synchronous code",
+        "Django does not support the send_mail function in production"
+      ],
+      "correctIndex": 1,
+      "explanation": "The core problem is that sending an email (1-2 seconds) blocks the HTTP response. The user only needs to know their RSVP was recorded (a 5ms database write). Moving the email to a background task lets the response return immediately while the email is sent asynchronously by a worker."
+    },
+    {
+      "id": "q2",
+      "question": "In Celery's architecture, what role does Redis play when configured as the broker?",
+      "options": [
+        "It executes the task functions directly",
+        "It stores the Django application code",
+        "It holds task messages in a queue until workers consume them",
+        "It compiles Python tasks into optimized bytecode"
+      ],
+      "correctIndex": 2,
+      "explanation": "The broker is the middleman between producers (Django) and consumers (Celery workers). Redis holds serialized task messages in a list data structure. Workers pop messages from the list and execute the corresponding functions. Redis does not execute any task code itself."
+    },
+    {
+      "id": "q3",
+      "question": "Why should you pass user_id (an integer) to a Celery task instead of passing the User model instance directly?",
+      "options": [
+        "Integers are always faster to process than objects",
+        "Task arguments must be JSON-serializable, and Django model instances are not",
+        "Celery only supports integer arguments",
+        "Django model instances cannot be accessed from background workers"
+      ],
+      "correctIndex": 1,
+      "explanation": "Celery serializes task arguments to JSON (or another format) to push them onto the message broker. Django model instances are complex Python objects that cannot be serialized to JSON. By passing the ID, the task re-fetches the object from the database, which also ensures it gets the most up-to-date data."
+    },
+    {
+      "id": "q4",
+      "question": "What does exponential backoff with jitter accomplish in a retry strategy?",
+      "options": [
+        "It retries the task immediately to resolve the failure faster",
+        "It increases the delay between retries and adds randomness to prevent many tasks from retrying at the same moment",
+        "It decreases the delay between retries so the task completes sooner",
+        "It sends the task to a different queue on each retry attempt"
+      ],
+      "correctIndex": 1,
+      "explanation": "Exponential backoff increases the wait time between retries (30s, 60s, 120s, etc.), giving the failing service time to recover. Jitter adds random variation to each delay so that thousands of failed tasks do not all retry at the exact same second, which would create a thundering herd effect and potentially worsen the outage."
+    },
+    {
+      "id": "q5",
+      "question": "A task sends an email successfully but the worker crashes before acknowledging the message to Redis. With CELERY_TASK_ACKS_LATE=True, what happens?",
+      "options": [
+        "The email is rolled back and the task is lost",
+        "Redis deletes the message automatically after a timeout",
+        "Another worker picks up the unacknowledged message and executes the task again, potentially sending a duplicate email",
+        "Celery detects the crash and marks the task as successful"
+      ],
+      "correctIndex": 2,
+      "explanation": "Late acknowledgment means the message stays in Redis until the worker explicitly acknowledges it after successful execution. If the worker crashes before acknowledging, the message remains in the queue and another worker will pick it up. This prevents task loss but can cause duplicate execution, which is why idempotency is essential."
+    },
+    {
+      "id": "q6",
+      "question": "What is the purpose of a dead letter queue (DLQ) in a task processing system?",
+      "options": [
+        "To speed up task processing by caching frequently used tasks",
+        "To capture tasks that have permanently failed after exhausting all retry attempts so they can be investigated and replayed",
+        "To store task results for later retrieval by the client",
+        "To route tasks to different workers based on priority"
+      ],
+      "correctIndex": 1,
+      "explanation": "A dead letter queue stores tasks that have failed permanently (after all retries are exhausted). Without a DLQ, these failed tasks disappear into log files. With a DLQ, you can inspect the failed task's arguments and exception, diagnose the issue, and replay the task once the underlying problem is fixed."
+    },
+    {
+      "id": "q7",
+      "question": "Which Flower dashboard tab would you check first if users report they are not receiving confirmation emails?",
+      "options": [
+        "The Monitor tab to see CPU usage graphs",
+        "The Workers tab to check if any workers are offline",
+        "The Tasks tab filtered by the email task name to see if tasks are failing or stuck in PENDING state",
+        "The Broker tab to see how many queues exist"
+      ],
+      "correctIndex": 2,
+      "explanation": "The Tasks tab lets you filter by task name and see each task's state (PENDING, STARTED, SUCCESS, FAILURE, RETRY). If email tasks are stuck in PENDING, no worker is picking them up. If they show FAILURE, you can click into the task to see the exception traceback. The Workers tab is a good second check to verify workers are online."
+    },
+    {
+      "id": "q8",
+      "question": "What does the -E flag do when starting a Celery worker with 'celery -A gather worker -l INFO -E'?",
+      "options": [
+        "Enables error logging to stderr",
+        "Enables Celery events, which Flower consumes to display real-time task information",
+        "Enables eager mode, running tasks synchronously",
+        "Enables encryption for messages sent to Redis"
+      ],
+      "correctIndex": 1,
+      "explanation": "The -E flag enables Celery events. Workers emit events at each stage of task processing (received, started, succeeded, failed, retried). Flower subscribes to these events to build its real-time monitoring dashboard. Without -E, Flower can see workers but cannot track individual task executions."
+    },
+    {
+      "id": "q9",
+      "question": "Why is it important to run only ONE instance of Celery Beat?",
+      "options": [
+        "Celery Beat requires exclusive access to the Redis connection",
+        "Multiple Beat instances would submit duplicate periodic tasks on the same schedule",
+        "Beat uses too much memory to run more than one instance",
+        "Celery only supports a single queue for periodic tasks"
+      ],
+      "correctIndex": 1,
+      "explanation": "Celery Beat is a scheduler that sends tasks to the queue at defined intervals. If you run two Beat instances, each one independently triggers the same periodic tasks, resulting in every scheduled task being submitted twice. Unlike workers (which can be scaled horizontally), Beat must be a singleton."
+    },
+    {
+      "id": "q10",
+      "question": "Which approach makes a database update idempotent when processing a waitlist promotion?",
+      "options": [
+        "Using a try/except block around the update",
+        "Running the update inside a transaction",
+        "Using a conditional update that only changes the status if it is still 'waiting' (e.g., .filter(id=entry.id, status='waiting').update(status='promoted'))",
+        "Deleting the waitlist entry after promoting the user"
+      ],
+      "correctIndex": 2,
+      "explanation": "A conditional update (.filter(status='waiting').update(status='promoted')) is an atomic operation. If two workers try to promote the same entry simultaneously, only one will match the filter (where status is still 'waiting') and get updated=1. The other gets updated=0 and knows the promotion already happened. This makes the operation safe to run multiple times."
+    }
+  ]
+}

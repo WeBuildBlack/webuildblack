@@ -1,0 +1,124 @@
+{
+  "questions": [
+    {
+      "id": "q1",
+      "question": "You call `setCount(count + 1)` three times in a row inside one event handler. The current value of `count` is 5. What is the result?",
+      "options": [
+        "count becomes 8 (5 + 1 + 1 + 1)",
+        "count becomes 6 (all three calls see count=5 and set it to 6)",
+        "React throws an error -- you cannot call the same setter multiple times",
+        "count becomes 7 (only the first two calls take effect)"
+      ],
+      "correctIndex": 1,
+      "explanation": "All three calls read `count` from the current render (which is 5) and schedule `setCount(6)`. React batches them into one re-render with the final value of 6. To get count=8, use the updater function: `setCount(prev => prev + 1)` three times."
+    },
+    {
+      "id": "q2",
+      "question": "What is the updater function pattern, and when should you use it?",
+      "options": [
+        "Passing the new value directly to the setter: `setCount(newValue)`. Use it always.",
+        "Passing a function to the setter: `setCount(prev => prev + 1)`. Use it when new state depends on previous state.",
+        "Calling the setter inside a `useEffect`. Use it to avoid re-renders.",
+        "Wrapping setter calls in `React.startTransition`. Use it for expensive updates."
+      ],
+      "correctIndex": 1,
+      "explanation": "The updater function pattern -- `setState(prev => nextValue)` -- ensures you are always working with the most recent state value. React passes the actual latest state to the function, regardless of what was captured in the closure. Use it whenever the new value depends on the previous value."
+    },
+    {
+      "id": "q3",
+      "question": "Why must you never mutate state objects or arrays directly in React?",
+      "options": [
+        "It causes a runtime error in React 18",
+        "React uses reference equality to detect changes. Mutating in place keeps the same reference, so React does not see a change and skips re-rendering.",
+        "It breaks the dependency array in useEffect",
+        "JavaScript arrays are immutable by default"
+      ],
+      "correctIndex": 1,
+      "explanation": "React compares state using `===` (reference equality). If you mutate an object or array in place, the reference stays the same even though the contents changed. React sees `prevState === nextState` and skips the re-render entirely. Always return a new object or array."
+    },
+    {
+      "id": "q4",
+      "question": "What does a `useEffect` cleanup function do, and when does it run?",
+      "options": [
+        "It runs before the component first mounts to reset DOM state",
+        "It runs after every render to clean up the previous render's effects, and when the component unmounts",
+        "It runs instead of the effect when the dependency array is empty",
+        "It prevents the effect from running more than once"
+      ],
+      "correctIndex": 1,
+      "explanation": "The cleanup function (returned from the effect callback) runs in two situations: (1) before the effect runs again due to dependency changes -- to clean up the previous execution, and (2) when the component unmounts. This is where you should clear timers, remove event listeners, cancel subscriptions, and set cancellation flags for async operations."
+    },
+    {
+      "id": "q5",
+      "question": "What is a stale closure in the context of `useEffect`?",
+      "options": [
+        "A closure that references a variable from an outer function scope",
+        "When an effect reads a prop or state variable that was captured from a previous render and is no longer the current value",
+        "A memory leak caused by forgetting to return a cleanup function",
+        "Using `async/await` inside a useEffect without proper error handling"
+      ],
+      "correctIndex": 1,
+      "explanation": "A stale closure occurs when an effect (or any callback inside it) closes over a reactive value -- a prop or state variable -- from the render in which it was created, and that value has since changed. The effect still 'sees' the old value. The fix is to add the value to the dependency array, or use the updater function pattern if you only need the previous state."
+    },
+    {
+      "id": "q6",
+      "question": "What is the key difference between `useRef` and `useState`?",
+      "options": [
+        "`useRef` is for DOM elements only; `useState` is for all other values",
+        "Updating `ref.current` does not trigger a re-render; calling the `useState` setter does",
+        "`useRef` values persist across page navigation; `useState` values do not",
+        "`useState` is asynchronous; `useRef` updates are synchronous"
+      ],
+      "correctIndex": 1,
+      "explanation": "Both `useRef` and `useState` persist values across renders. The critical difference: mutating `ref.current` does NOT schedule a re-render, while calling a `useState` setter does. Use `useRef` when you need to store a value (like an interval ID or previous value) but do not want the component to re-render when it changes."
+    },
+    {
+      "id": "q7",
+      "question": "When does it make sense to use `useMemo`?",
+      "options": [
+        "Anytime you compute a value from props or state inside a component",
+        "Only when filtering or sorting arrays with more than 1000 items",
+        "When a computation is demonstrably expensive and re-runs unnecessarily -- confirmed by profiling",
+        "Every time you create an object or function inside a component"
+      ],
+      "correctIndex": 2,
+      "explanation": "`useMemo` has its own overhead (memory, bookkeeping). Wrapping trivial computations in `useMemo` makes code harder to read without any benefit. The correct approach: write code without `useMemo` first, then use the React Profiler to find real bottlenecks, and add `useMemo` only where profiling shows a measurable improvement."
+    },
+    {
+      "id": "q8",
+      "question": "What is the naming rule for custom hooks, and why does it matter?",
+      "options": [
+        "Custom hooks must start with `use`. This signals to React and linting tools that the function follows the rules of hooks and may call other hooks.",
+        "Custom hooks must start with `use` and end with `Hook`. React uses this convention to identify them.",
+        "The naming rule is a convention only -- it has no functional impact on React's behavior.",
+        "Custom hooks must be named after the data they return, like `userData` or `formState`."
+      ],
+      "correctIndex": 0,
+      "explanation": "Custom hook names must start with `use`. This is required -- not optional. React's rules of hooks linter (`eslint-plugin-react-hooks`) uses the `use` prefix to identify functions that may call hooks and to enforce that they follow the rules. Without the `use` prefix, the linter will not check the function and you lose all safety guarantees."
+    },
+    {
+      "id": "q9",
+      "question": "What problem does the Context API solve?",
+      "options": [
+        "It replaces all `useState` usage with a global state store",
+        "It solves prop drilling: sharing data across many levels of a component tree without passing it through every intermediate component",
+        "It makes `useEffect` dependencies unnecessary by making all values globally available",
+        "It provides a built-in caching layer for API responses"
+      ],
+      "correctIndex": 1,
+      "explanation": "Prop drilling is passing data through intermediate components that do not need it -- just to get it to a deeply nested component that does. Context creates a 'broadcast channel': a Provider at a high level sets a value, and any descendant component can read it with `useContext`, skipping all the intermediates."
+    },
+    {
+      "id": "q10",
+      "question": "What is the main advantage of `useReducer` over multiple `useState` calls for complex state?",
+      "options": [
+        "`useReducer` is faster because it batches all state updates into one",
+        "All state transitions are defined in one place (the reducer function), making it easier to understand how state can change and to add new transitions",
+        "`useReducer` automatically persists state to localStorage",
+        "`useReducer` prevents components from re-rendering when only unrelated parts of the state change"
+      ],
+      "correctIndex": 1,
+      "explanation": "With multiple `useState` calls, state update logic is scattered throughout event handlers and effects. With `useReducer`, every possible state transition is defined in the reducer function -- one place to read to understand all the ways state can change. This makes complex state logic much easier to reason about, test, and maintain."
+    }
+  ]
+}

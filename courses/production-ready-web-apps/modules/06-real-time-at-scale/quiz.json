@@ -1,0 +1,125 @@
+{
+  "title": "Real-Time at Scale Quiz",
+  "questions": [
+    {
+      "id": "q1",
+      "question": "Why is SSE a better choice than WebSockets for Gather's live RSVP counts?",
+      "options": [
+        "SSE is faster than WebSockets for all use cases",
+        "SSE is unidirectional (server-to-client), which matches the RSVP update pattern, and works with standard HTTP infrastructure without requiring ASGI or Django Channels",
+        "WebSockets are deprecated in modern browsers",
+        "SSE supports bidirectional communication while being simpler than WebSockets"
+      ],
+      "correctIndex": 1,
+      "explanation": "RSVP updates flow one way: from the server to watching clients. SSE is designed for exactly this pattern. It works with Django's standard WSGI model, requires no protocol upgrade, and the browser's EventSource API handles reconnection automatically. WebSockets would add unnecessary complexity for a server-push-only feature."
+    },
+    {
+      "id": "q2",
+      "question": "What does the browser's EventSource API do automatically that the WebSocket API does not?",
+      "options": [
+        "Sends binary data more efficiently",
+        "Supports custom request headers",
+        "Reconnects after connection loss and sends the Last-Event-ID header to resume from where it left off",
+        "Encrypts the connection with TLS"
+      ],
+      "correctIndex": 2,
+      "explanation": "When an SSE connection drops, the EventSource API automatically reconnects after the retry interval and includes the Last-Event-ID header so the server can send any missed events. With WebSockets, you must implement all reconnection logic yourself."
+    },
+    {
+      "id": "q3",
+      "question": "In the SSE protocol, what separates one event from the next in the text stream?",
+      "options": [
+        "A JSON closing bracket",
+        "A blank line (double newline \\n\\n)",
+        "The string 'END_EVENT'",
+        "A Content-Length header for each event"
+      ],
+      "correctIndex": 1,
+      "explanation": "SSE messages are plain text. Each field is on its own line (e.g., 'data: {...}\\n'), and a blank line (two consecutive newlines) marks the end of one event and the start of the next. This simplicity is one of SSE's advantages."
+    },
+    {
+      "id": "q4",
+      "question": "Why can't Django workers communicate through in-memory variables when running with Gunicorn?",
+      "options": [
+        "Python's GIL prevents shared memory access",
+        "Gunicorn uses separate OS processes for each worker, and each process has its own isolated memory space",
+        "Django does not support global variables",
+        "Gunicorn encrypts each worker's memory for security"
+      ],
+      "correctIndex": 1,
+      "explanation": "Gunicorn forks separate OS processes for each worker. Unlike threads (which share memory within a process), these processes have completely isolated memory spaces. A variable set in Worker 1 is invisible to Worker 2. This is why an external message bus like Redis Pub/Sub is needed."
+    },
+    {
+      "id": "q5",
+      "question": "Why does the SSE endpoint use pubsub.get_message(timeout=15) instead of pubsub.listen()?",
+      "options": [
+        "get_message() is faster than listen()",
+        "listen() does not support Redis Pub/Sub",
+        "get_message() with a timeout returns None after 15 seconds if no message arrives, allowing the generator to send heartbeat comments that keep the connection alive through proxies",
+        "listen() creates a new Redis connection for every message"
+      ],
+      "correctIndex": 2,
+      "explanation": "pubsub.listen() blocks indefinitely until a message arrives, which means the SSE endpoint could never send heartbeat comments during quiet periods. Proxies and load balancers close idle connections after their timeout (often 60 seconds). get_message(timeout=15) returns None after 15 seconds, giving the generator a chance to send a heartbeat and prevent the connection from being closed."
+    },
+    {
+      "id": "q6",
+      "question": "In a multi-instance deployment with nginx, why is the X-Accel-Buffering: no header important for SSE responses?",
+      "options": [
+        "It enables HTTPS encryption between nginx and Django",
+        "It prevents nginx from buffering the streaming response, which would cause clients to see no events until the buffer fills (typically 4-8KB)",
+        "It tells nginx to cache the SSE responses for better performance",
+        "It enables HTTP/2 server push for faster delivery"
+      ],
+      "correctIndex": 1,
+      "explanation": "By default, nginx buffers upstream responses before forwarding them to clients. For SSE, this means events silently accumulate in the buffer and the client sees nothing until 4-8KB of data has built up. Setting X-Accel-Buffering: no tells nginx to forward each chunk to the client immediately as it arrives from Django."
+    },
+    {
+      "id": "q7",
+      "question": "What is the sliding window algorithm for rate limiting?",
+      "options": [
+        "It limits the total number of requests a server can handle globally",
+        "It counts requests within a moving time window and rejects new requests when the count exceeds the limit",
+        "It gradually increases the allowed request rate over time",
+        "It uses a bucket of tokens that refill at a fixed rate"
+      ],
+      "correctIndex": 1,
+      "explanation": "The sliding window algorithm tracks request timestamps within a rolling time window (e.g., the last 60 seconds). When a new request arrives, it counts how many requests fall within the current window. If the count exceeds the limit, the request is rejected. The token bucket algorithm (option D) is a different approach that allows short bursts."
+    },
+    {
+      "id": "q8",
+      "question": "Why is rate limiting especially important for real-time systems compared to standard REST APIs?",
+      "options": [
+        "Real-time systems use more CPU per request",
+        "One abusive request triggers fan-out through Pub/Sub, amplifying to thousands of SSE deliveries across all connected clients",
+        "Rate limiting is only needed for real-time systems, not REST APIs",
+        "Real-time systems cannot handle more than 10 requests per second"
+      ],
+      "correctIndex": 1,
+      "explanation": "In a standard REST API, one abusive request affects only that one request/response cycle. In a real-time system, one abusive RSVP triggers a Celery task, a Redis Pub/Sub message, and an SSE delivery to every connected client. With 1,000 connected clients, 100 abusive requests generate 100,000 SSE deliveries. The amplification factor makes rate limiting critical."
+    },
+    {
+      "id": "q9",
+      "question": "What is backpressure in the context of a real-time system?",
+      "options": [
+        "Compressing SSE messages to reduce bandwidth",
+        "The system's ability to push back when it cannot keep up with incoming work, such as switching to cached data when queues are overloaded",
+        "Encrypting Redis Pub/Sub messages for security",
+        "Increasing the number of Celery workers during peak traffic"
+      ],
+      "correctIndex": 1,
+      "explanation": "Backpressure is a system's response to being overwhelmed. Rather than letting work pile up until something crashes, a system with backpressure can degrade gracefully. For Gather, this means monitoring the Celery queue depth and switching to cached RSVP counts (slightly stale but still accurate) when the system cannot process real-time updates fast enough."
+    },
+    {
+      "id": "q10",
+      "question": "Why don't SSE connections require sticky sessions (routing the same client to the same server) when using Redis Pub/Sub?",
+      "options": [
+        "SSE connections are stateless by design",
+        "nginx automatically handles session affinity for SSE",
+        "Every Django instance subscribes to the same Redis channels, so any instance can serve any client's stream and receive all Pub/Sub messages",
+        "Sticky sessions are only needed for WebSocket connections"
+      ],
+      "correctIndex": 2,
+      "explanation": "Since every Django instance subscribes to the same Redis Pub/Sub channels, it does not matter which instance serves a particular client's SSE stream. All instances receive all messages. If a client reconnects and gets routed to a different instance, that instance is already subscribed to the same channel and will stream the same updates. Redis Pub/Sub is the shared backbone that eliminates the need for sticky sessions."
+    }
+  ]
+}

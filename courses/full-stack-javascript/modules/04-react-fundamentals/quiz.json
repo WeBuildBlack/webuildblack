@@ -1,0 +1,124 @@
+{
+  "questions": [
+    {
+      "id": "q1",
+      "question": "Which Vite command creates a new React project?",
+      "options": [
+        "npx create-react-app my-app",
+        "npm create vite@latest my-app -- --template react",
+        "npm init react my-app",
+        "vite create my-app --react"
+      ],
+      "correctIndex": 1,
+      "explanation": "Create React App is deprecated. The modern standard is `npm create vite@latest my-app -- --template react`. The double `--` separates npm arguments from Vite arguments."
+    },
+    {
+      "id": "q2",
+      "question": "Why does JSX use `className` instead of `class`?",
+      "options": [
+        "It is a React-specific convention with no technical reason",
+        "HTML5 deprecated the `class` attribute",
+        "`class` is a reserved keyword in JavaScript, so the JSX attribute uses `className`",
+        "Browsers do not support `class` on custom elements"
+      ],
+      "correctIndex": 2,
+      "explanation": "JSX compiles to JavaScript. Since `class` is a reserved keyword in JavaScript (used for ES6 class declarations), JSX uses `className` to avoid a syntax conflict."
+    },
+    {
+      "id": "q3",
+      "question": "A component needs to return two sibling `<p>` elements with no wrapper div. What is the correct approach?",
+      "options": [
+        "Return them as a JavaScript array: `return [<p>A</p>, <p>B</p>]`",
+        "Wrap them in `<React.Fragment>` or the shorthand `<>...</>`",
+        "This is not possible in React -- a wrapper div is required",
+        "Use `ReactDOM.renderMultiple()` instead of a component"
+      ],
+      "correctIndex": 1,
+      "explanation": "React Fragments (`<React.Fragment>` or the shorthand `<>...</>`) let you return multiple sibling elements without adding an extra DOM node. Returning an array also works but requires explicit keys on each element."
+    },
+    {
+      "id": "q4",
+      "question": "Which of the following correctly passes a number prop to a component?",
+      "options": [
+        "<Card count=\"5\" />",
+        "<Card count=5 />",
+        "<Card count={5} />",
+        "<Card count=(5) />"
+      ],
+      "correctIndex": 2,
+      "explanation": "Non-string props must use curly braces: `count={5}`. Using quotes (`count=\"5\"`) passes the string `\"5\"`, not the number `5`. This matters for arithmetic and strict equality checks."
+    },
+    {
+      "id": "q5",
+      "question": "What is wrong with this code: `{items.length && <List items={items} />}`?",
+      "options": [
+        "The `&&` operator cannot be used inside JSX",
+        "When `items.length` is `0`, React renders the number `0` in the DOM",
+        "This is valid and correct -- there is nothing wrong with it",
+        "`items.length` needs to be converted to a string first"
+      ],
+      "correctIndex": 1,
+      "explanation": "When `items.length` is `0`, the expression short-circuits and returns `0`. React renders `0` (a number) as a text node in the DOM. Fix it with `items.length > 0 && <List />` to ensure the left operand is always a boolean."
+    },
+    {
+      "id": "q6",
+      "question": "What is the primary problem with using array index as a `key` prop?",
+      "options": [
+        "Index keys are slower than string keys for React's diffing algorithm",
+        "React throws an error if you use index as a key",
+        "When the list is reordered or an item is inserted, indices shift -- React incorrectly matches component state to the wrong items",
+        "Indexes only work for arrays of primitive values, not objects"
+      ],
+      "correctIndex": 2,
+      "explanation": "Keys should be stable and based on item identity, not position. When items are reordered or inserted, index-based keys shift -- React then matches state (like input values) to the wrong items, causing hard-to-debug bugs."
+    },
+    {
+      "id": "q7",
+      "question": "A component accepts an `items` prop (an array) and needs to add a new item. Which approach is correct?",
+      "options": [
+        "`items.push(newItem)` -- mutate the array directly",
+        "`items[items.length] = newItem` -- assign to the next index",
+        "Create a new array: `const updated = [...items, newItem]`",
+        "Call `items.concat(newItem)` and assign back to `items`"
+      ],
+      "correctIndex": 2,
+      "explanation": "Props are read-only. Never mutate them. Create a new array using the spread operator: `[...items, newItem]`. This leaves the original array untouched and gives React a new reference it can detect as a change."
+    },
+    {
+      "id": "q8",
+      "question": "What is a controlled form input in React?",
+      "options": [
+        "An input wrapped in a `<form>` element with an `onSubmit` handler",
+        "An input whose value is stored in React state and updated via `onChange`",
+        "An input that uses `ref` to access the DOM value on submit",
+        "An input that validates itself using HTML5 constraint validation attributes"
+      ],
+      "correctIndex": 1,
+      "explanation": "A controlled input binds its `value` prop to React state and updates that state on every `onChange` event. React becomes the single source of truth for the input's value, enabling real-time validation and instant access to the current value."
+    },
+    {
+      "id": "q9",
+      "question": "What is the difference between conditional rendering and hiding with CSS `display: none`?",
+      "options": [
+        "There is no functional difference -- both remove the element from the screen",
+        "CSS hiding removes the element from the DOM; conditional rendering keeps it mounted",
+        "Conditional rendering removes the component from the DOM and destroys its state; CSS hiding keeps it mounted and preserves state",
+        "Conditional rendering only works with class components"
+      ],
+      "correctIndex": 2,
+      "explanation": "Conditional rendering (returning `null`) unmounts the component and destroys all local state -- it will start fresh next time it renders. CSS `display: none` keeps the component mounted in the DOM with state preserved. Choose based on whether you need state preserved between show/hide cycles."
+    },
+    {
+      "id": "q10",
+      "question": "What does the `children` prop contain?",
+      "options": [
+        "An array of all child component instances rendered in the app",
+        "The JSX placed between a component's opening and closing tags",
+        "The DOM nodes of a component's child elements",
+        "An array of props passed by the parent component"
+      ],
+      "correctIndex": 1,
+      "explanation": "The `children` prop holds whatever JSX is nested between a component's opening and closing tags: `<Card><p>Hello</p></Card>`. Inside `Card`, `children` is `<p>Hello</p>`. This enables flexible wrapper and layout components that work with any content."
+    }
+  ]
+}

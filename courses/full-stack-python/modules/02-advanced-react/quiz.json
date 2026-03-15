@@ -1,0 +1,125 @@
+{
+  "title": "Advanced React Patterns Quiz",
+  "questions": [
+    {
+      "id": "q1",
+      "question": "Why does React generally favor composition over inheritance for sharing behavior between components?",
+      "options": [
+        "Inheritance is not supported in JavaScript",
+        "Composition allows components to be flexible and reusable without tightly coupling them to a parent class hierarchy",
+        "Composition is faster at runtime than inheritance",
+        "React does not allow class-based components"
+      ],
+      "explanation": "Composition lets you combine simple, focused components to build complex UIs. Each component controls what it renders through children and props, without inheriting behavior from a parent class. This keeps components loosely coupled and independently reusable.",
+      "correctIndex": 1
+    },
+    {
+      "id": "q2",
+      "question": "In the compound component pattern, how do subcomponents (like FilterPanel.Search) access shared state from the root component (FilterPanel)?",
+      "options": [
+        "Through prop drilling from the root to each subcomponent",
+        "By importing a global state variable",
+        "Through React Context provided by the root component and consumed via a custom hook",
+        "By reading from localStorage"
+      ],
+      "explanation": "The root component wraps its children in a Context.Provider. Each subcomponent calls a custom hook (like useFilterContext) that reads from that Context. This allows subcomponents at any nesting depth to access shared state without prop drilling.",
+      "correctIndex": 2
+    },
+    {
+      "id": "q3",
+      "question": "What is a render prop?",
+      "options": [
+        "A prop that determines whether a component should render",
+        "A function prop that a component calls to determine what JSX to render, receiving internal state as arguments",
+        "A special React built-in prop for conditional rendering",
+        "A prop that contains pre-rendered HTML"
+      ],
+      "explanation": "A render prop is a function that a component receives as a prop and calls to produce its rendered output. The component provides its internal state (like mouse position or fetched data) as arguments to the function, and the consumer decides what to render with that data.",
+      "correctIndex": 1
+    },
+    {
+      "id": "q4",
+      "question": "What is the primary disadvantage of stacking multiple Higher-Order Components (HOCs)?",
+      "options": [
+        "HOCs cannot be used with TypeScript",
+        "Each HOC creates a separate React application",
+        "Prop origin becomes unclear, naming collisions can occur, and TypeScript types become complex",
+        "HOCs are significantly slower than regular components"
+      ],
+      "explanation": "When multiple HOCs wrap a component, it becomes difficult to trace where injected props originate. If two HOCs inject a prop with the same name, one silently overwrites the other. The TypeScript generics compound with each layer, making error messages hard to read.",
+      "correctIndex": 2
+    },
+    {
+      "id": "q5",
+      "question": "When should you use React.memo on a component?",
+      "options": [
+        "On every component to ensure maximum performance",
+        "Only on components that use useState",
+        "On components that re-render frequently with unchanged props and have expensive render logic",
+        "Only on class components"
+      ],
+      "explanation": "React.memo adds a shallow prop comparison before each render. This is beneficial when a component re-renders often due to parent re-renders, its props usually stay the same, and its render logic is expensive. For simple components or those that always receive new props, the comparison overhead is wasted.",
+      "correctIndex": 2
+    },
+    {
+      "id": "q6",
+      "question": "What is the relationship between useMemo and useCallback?",
+      "options": [
+        "They are identical and can be used interchangeably",
+        "useMemo caches a computed value while useCallback caches a function reference; useCallback(fn, deps) is equivalent to useMemo(() => fn, deps)",
+        "useMemo is for class components and useCallback is for function components",
+        "useCallback replaces useMemo in React 18+"
+      ],
+      "explanation": "useMemo caches the result of calling a function, while useCallback caches the function itself. useCallback(fn, deps) is syntactic sugar for useMemo(() => fn, deps). useCallback is typically used to maintain stable function references for memoized child components.",
+      "correctIndex": 1
+    },
+    {
+      "id": "q7",
+      "question": "What does React.lazy enable, and what must wrap a lazily-loaded component?",
+      "options": [
+        "It delays component mounting by 1 second; it must be wrapped in a setTimeout",
+        "It splits the component into a separate JavaScript bundle loaded on demand; it must be wrapped in a Suspense boundary",
+        "It reduces the component's render priority; it must be wrapped in React.memo",
+        "It converts a class component to a function component; it must be wrapped in a Fragment"
+      ],
+      "explanation": "React.lazy takes a dynamic import and creates a component that loads the module on demand. The bundler splits it into a separate file. While the module loads, React needs a fallback UI, which Suspense provides through its fallback prop.",
+      "correctIndex": 1
+    },
+    {
+      "id": "q8",
+      "question": "Why must Error Boundaries be class components in React?",
+      "options": [
+        "Class components are faster for error handling",
+        "React has not yet provided hook equivalents for getDerivedStateFromError and componentDidCatch",
+        "Function components cannot catch JavaScript errors",
+        "Error boundaries require lifecycle methods that only exist in React 15"
+      ],
+      "explanation": "Error boundaries rely on two class lifecycle methods (getDerivedStateFromError and componentDidCatch) that have no hook equivalents. The React team has not shipped a useErrorBoundary hook, so class components remain the only way to implement error boundaries.",
+      "correctIndex": 1
+    },
+    {
+      "id": "q9",
+      "question": "What is the key difference between a Suspense boundary and an Error Boundary?",
+      "options": [
+        "Suspense handles loading states for async operations while Error Boundaries catch and handle runtime errors during rendering",
+        "They are the same component with different names",
+        "Suspense works only on the server while Error Boundaries work only on the client",
+        "Error Boundaries handle network errors while Suspense handles JavaScript errors"
+      ],
+      "explanation": "Suspense shows fallback UI while a child component is loading (code splitting, data fetching with compatible libraries). Error Boundaries show fallback UI when a child component throws an error during rendering. They handle different failure modes and are often used together.",
+      "correctIndex": 0
+    },
+    {
+      "id": "q10",
+      "question": "In Next.js 14 App Router, what is the default component type and when should you add 'use client'?",
+      "options": [
+        "All components are Client Components by default; add 'use server' for server rendering",
+        "All components are Server Components by default; add 'use client' only when you need hooks, event handlers, or browser APIs",
+        "Components are neither server nor client by default; you must always specify one",
+        "All components are Server Components by default; add 'use client' for any component that renders HTML"
+      ],
+      "explanation": "In the App Router, every component is a Server Component by default. Server Components run on the server, can access databases directly, and never ship JavaScript to the browser. You add 'use client' only when you need interactivity (useState, onClick), browser APIs (localStorage, window), or React Context.",
+      "correctIndex": 1
+    }
+  ]
+}

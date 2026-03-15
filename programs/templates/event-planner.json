@@ -1,0 +1,37 @@
+{
+  "object": "database",
+  "title": "Event Planner",
+  "description": "Plan and track WBB events",
+  "properties": {
+    "Event Name": { "type": "title", "title": {} },
+    "Date": { "type": "date", "date": {} },
+    "Type": {
+      "type": "select",
+      "select": {
+        "options": [
+          { "name": "Meetup", "color": "blue" },
+          { "name": "Conference", "color": "purple" },
+          { "name": "Workshop", "color": "green" },
+          { "name": "Social", "color": "orange" }
+        ]
+      }
+    },
+    "Location": { "type": "rich_text", "rich_text": {} },
+    "Capacity": { "type": "number", "number": { "format": "number" } },
+    "RSVP Count": { "type": "number", "number": { "format": "number" } },
+    "Status": {
+      "type": "status",
+      "status": {
+        "options": [
+          { "name": "Planning", "color": "gray" },
+          { "name": "Confirmed", "color": "blue" },
+          { "name": "Complete", "color": "green" },
+          { "name": "Cancelled", "color": "red" }
+        ]
+      }
+    },
+    "Budget": { "type": "number", "number": { "format": "dollar" } },
+    "Notes": { "type": "rich_text", "rich_text": {} },
+    "Slack Channel": { "type": "rich_text", "rich_text": {} }
+  }
+}

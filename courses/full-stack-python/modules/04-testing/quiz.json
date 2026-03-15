@@ -1,0 +1,125 @@
+{
+  "title": "Testing Web Applications Quiz",
+  "questions": [
+    {
+      "id": "q1",
+      "question": "In the testing pyramid, which layer should have the MOST tests?",
+      "options": [
+        "End-to-end tests, because they test the most code at once",
+        "Integration tests, because they catch the most bugs per test",
+        "Unit tests, because they are fast, cheap, and reliable",
+        "Snapshot tests, because they require the least effort to write"
+      ],
+      "correctIndex": 2,
+      "explanation": "The testing pyramid places unit tests at the base because they are the fastest, cheapest, and most reliable tests to write and maintain. You should have many unit tests, a moderate number of integration tests, and few E2E tests."
+    },
+    {
+      "id": "q2",
+      "question": "What is the difference between `vi.fn()` and `vi.mock()` in Vitest?",
+      "options": [
+        "vi.fn() mocks entire modules, vi.mock() creates individual spy functions",
+        "vi.fn() creates a spy function you can track calls on, vi.mock() replaces an entire module's exports with mocks",
+        "vi.fn() is synchronous and vi.mock() is asynchronous",
+        "vi.fn() is used in unit tests and vi.mock() is used in integration tests"
+      ],
+      "correctIndex": 1,
+      "explanation": "vi.fn() creates a single mock function that tracks calls, arguments, and return values. vi.mock() replaces an entire imported module with mock implementations, allowing you to control all of a module's exports at once."
+    },
+    {
+      "id": "q3",
+      "question": "In React Testing Library, when should you use `queryByText` instead of `getByText`?",
+      "options": [
+        "When the text might change during the test",
+        "When you want to assert that an element is NOT present in the document",
+        "When the text contains special characters",
+        "When the element is inside a modal or portal"
+      ],
+      "correctIndex": 1,
+      "explanation": "getByText throws an error if the element is not found, making it impossible to assert absence. queryByText returns null when the element is not found, so you can write `expect(screen.queryByText('Error')).not.toBeInTheDocument()` to verify something is not rendered."
+    },
+    {
+      "id": "q4",
+      "question": "Why should you prefer `userEvent` over `fireEvent` in React Testing Library tests?",
+      "options": [
+        "userEvent is faster because it batches DOM updates",
+        "userEvent simulates the full browser event sequence (mousedown, mouseup, click, focus) while fireEvent only dispatches a single event",
+        "userEvent works with TypeScript while fireEvent only works with JavaScript",
+        "userEvent automatically waits for React state updates while fireEvent does not"
+      ],
+      "correctIndex": 1,
+      "explanation": "userEvent simulates realistic user interactions by firing the complete sequence of browser events. When a user clicks a button, the browser fires mousedown, focus, mouseup, and then click. userEvent reproduces this sequence, making tests more realistic and more likely to catch bugs."
+    },
+    {
+      "id": "q5",
+      "question": "What is the purpose of Mock Service Worker (MSW)?",
+      "options": [
+        "To mock React component rendering in test environments",
+        "To mock the browser's DOM APIs for Node.js testing",
+        "To intercept network requests at the service worker level and return mock responses",
+        "To generate mock data for database seeding in E2E tests"
+      ],
+      "correctIndex": 2,
+      "explanation": "MSW intercepts HTTP requests at the service worker (or Node.js request) level, allowing your actual application code to make real fetch calls that get intercepted before reaching the network. This makes tests more realistic than mocking fetch directly because the full request/response pipeline runs."
+    },
+    {
+      "id": "q6",
+      "question": "When is snapshot testing HARMFUL rather than helpful?",
+      "options": [
+        "When testing small, stable components that rarely change",
+        "When testing large, complex components where developers blindly update snapshots without reviewing the diff",
+        "When the snapshot file is stored in version control",
+        "When using inline snapshots instead of file-based snapshots"
+      ],
+      "correctIndex": 1,
+      "explanation": "Snapshot testing becomes harmful for large, complex components because the snapshots are too long to review meaningfully. Developers end up blindly updating snapshots when they fail, which defeats the purpose. If the initial snapshot captured a bug, every future run silently confirms the bug."
+    },
+    {
+      "id": "q7",
+      "question": "What does Playwright's auto-waiting feature do?",
+      "options": [
+        "Automatically adds a 1-second delay before every action",
+        "Polls the server until the application responds before running tests",
+        "Waits for elements to be visible, stable, enabled, and not obscured before interacting with them",
+        "Automatically retries failed tests up to 3 times"
+      ],
+      "correctIndex": 2,
+      "explanation": "Before performing an action like click(), Playwright automatically waits for the target element to be attached to the DOM, visible, stable (not animating), enabled, and not obscured by other elements. This eliminates the most common source of flaky E2E tests: race conditions where tests interact with elements before they are ready."
+    },
+    {
+      "id": "q8",
+      "question": "What does code coverage actually measure?",
+      "options": [
+        "The percentage of bugs that your tests would catch",
+        "The percentage of your code that is executed during test runs",
+        "The percentage of edge cases that your tests handle",
+        "The percentage of user flows that are covered by E2E tests"
+      ],
+      "correctIndex": 1,
+      "explanation": "Code coverage measures which lines, branches, and functions are executed when your tests run. It does NOT measure whether the tests actually assert correct behavior. You can achieve 100% coverage with zero assertions. Coverage is a useful signal for finding untested code, but it is not a measure of test quality."
+    },
+    {
+      "id": "q9",
+      "question": "What is the key difference between integration tests and unit tests?",
+      "options": [
+        "Integration tests are written in a different testing framework",
+        "Integration tests run in the browser while unit tests run in Node.js",
+        "Integration tests verify that multiple units work together correctly, while unit tests verify individual functions in isolation",
+        "Integration tests always require a real database connection"
+      ],
+      "correctIndex": 2,
+      "explanation": "Unit tests exercise a single function or module in isolation with controlled inputs and expected outputs. Integration tests verify that multiple components, hooks, and data flows work together correctly. For React apps, an integration test might render a page component that fetches data via hooks and passes it to child components."
+    },
+    {
+      "id": "q10",
+      "question": "What is the Page Object Model (POM) pattern in E2E testing?",
+      "options": [
+        "A design pattern where each HTML page has a corresponding React component",
+        "A pattern that stores test data in JSON files organized by page",
+        "A pattern that encapsulates page interactions in reusable classes, so tests read like user stories",
+        "A pattern where Playwright creates a virtual DOM model of each page for faster testing"
+      ],
+      "correctIndex": 2,
+      "explanation": "The Page Object Model extracts page-specific locators and interactions into reusable classes. Instead of repeating `page.getByLabel(/email/i).fill(...)` in every test, you call `loginPage.fillEmail(...)`. When the UI changes, you update one Page Object class instead of every test that touches that page."
+    }
+  ]
+}

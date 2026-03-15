@@ -1,0 +1,124 @@
+{
+  "questions": [
+    {
+      "id": "q1",
+      "question": "Which HTML element is most appropriate for wrapping a set of project cards that are each self-contained pieces of content?",
+      "options": [
+        "<div> for the container and <div> for each card",
+        "<section> for the container and <article> for each card",
+        "<main> for the container and <section> for each card",
+        "<ul> for the container and <li> for each card"
+      ],
+      "correctIndex": 1,
+      "explanation": "The <section> element groups related content under a common theme (e.g., 'Projects'), while <article> represents a self-contained, independently meaningful piece of content — which is exactly what a project card is. This is the semantic HTML you learned in Module 04."
+    },
+    {
+      "id": "q2",
+      "question": "You want your project cards to display in a single column on mobile, two columns on tablets, and three columns on desktop. Which CSS approach follows mobile-first design?",
+      "options": [
+        "Start with three columns and use max-width media queries to reduce columns for smaller screens",
+        "Use JavaScript to detect the screen width and set the column count dynamically",
+        "Start with one column in the base styles and use min-width media queries to add columns at wider breakpoints",
+        "Set all three layouts in the base styles and use display: none to hide the ones that don't apply"
+      ],
+      "correctIndex": 2,
+      "explanation": "Mobile-first design means your base CSS (outside any media query) targets the smallest screens. You then use min-width media queries to progressively add complexity for larger screens. This is the approach you learned in Module 07."
+    },
+    {
+      "id": "q3",
+      "question": "When should you use CSS Grid versus Flexbox for layout?",
+      "options": [
+        "Grid is for older browsers and Flexbox is the modern replacement",
+        "Grid is best for two-dimensional layouts (rows and columns), while Flexbox is best for one-dimensional layouts (a single row or column)",
+        "Flexbox is for page-level layout and Grid is for component-level layout",
+        "They are interchangeable — always use whichever you are more comfortable with"
+      ],
+      "correctIndex": 1,
+      "explanation": "CSS Grid excels at two-dimensional layouts where you need to control both rows and columns simultaneously (like a project cards grid). Flexbox is ideal for one-dimensional layouts where items flow in a single direction (like a navigation bar or a row of tags). You often use both in the same project, as you learned in Module 06."
+    },
+    {
+      "id": "q4",
+      "question": "What does the following JavaScript code do?\n\nconst saved = localStorage.getItem('theme');\nif (saved === 'dark') {\n    document.body.classList.add('dark-mode');\n}",
+      "options": [
+        "It checks the user's operating system theme preference and applies it",
+        "It retrieves a previously saved theme preference from the browser's local storage and applies the dark mode class if the saved value is 'dark'",
+        "It sends a request to the server to check the user's theme preference",
+        "It creates a new theme preference and saves it to the browser's cookies"
+      ],
+      "correctIndex": 1,
+      "explanation": "localStorage.getItem() retrieves data that was previously saved with localStorage.setItem(). This pattern lets you persist user preferences across page loads and browser sessions without a server — a technique you learned in Module 09."
+    },
+    {
+      "id": "q5",
+      "question": "You run 'git log --oneline' and see 15 commits for your portfolio project. You want to share your code with a classmate. What is the correct sequence of Git commands to push your local repository to a new GitHub repository?",
+      "options": [
+        "git push origin main",
+        "git clone <url> && git push",
+        "git remote add origin <url> && git branch -M main && git push -u origin main",
+        "git init && git remote add origin <url> && git push"
+      ],
+      "correctIndex": 2,
+      "explanation": "Since you already have a local repository with commits, you need to: (1) connect it to the remote with git remote add origin, (2) ensure your branch is named 'main' with git branch -M main, and (3) push with the -u flag to set the upstream tracking branch. You do NOT need git init because the repo already exists. This workflow is from Module 03."
+    },
+    {
+      "id": "q6",
+      "question": "Your portfolio site loads slowly on mobile. A Lighthouse audit shows that images are the biggest problem. Which combination of techniques would most effectively improve image performance?",
+      "options": [
+        "Add alt text to all images and use CSS to set fixed dimensions",
+        "Resize images to their display dimensions, add loading=\"lazy\" to below-the-fold images, and use appropriate formats (JPEG for photos, PNG for transparency)",
+        "Convert all images to SVG format and load them with JavaScript",
+        "Remove all images and replace them with CSS background colors"
+      ],
+      "correctIndex": 1,
+      "explanation": "Image optimization involves three key strategies: sizing images appropriately so the browser does not download more data than needed, lazy-loading images below the fold so they only load when the user scrolls near them, and using the right format for each type of image. These are performance best practices covered in Module 10."
+    },
+    {
+      "id": "q7",
+      "question": "You add a click event listener to a <div> element to make it behave like a button. Why is this problematic for accessibility?",
+      "options": [
+        "Div elements cannot have event listeners attached to them",
+        "Div elements are not focusable by keyboard, not announced as interactive by screen readers, and do not respond to the Enter or Space keys by default",
+        "Div elements are slower to render than button elements",
+        "Div elements cannot be styled with CSS transitions"
+      ],
+      "correctIndex": 1,
+      "explanation": "A <div> is a generic container with no semantic meaning. It is not included in the keyboard tab order, screen readers do not announce it as a clickable element, and pressing Enter or Space while it is focused does nothing. A <button> element handles all of this automatically. Always use the correct semantic element — a core principle from Module 04."
+    },
+    {
+      "id": "q8",
+      "question": "When a user types your portfolio's URL into their browser and presses Enter, what happens first?",
+      "options": [
+        "The browser reads the HTML file from the user's hard drive",
+        "The browser sends CSS and JavaScript files to the server",
+        "The browser performs a DNS lookup to translate the domain name into an IP address, then sends an HTTP request to that server",
+        "The server pushes the website files to the browser automatically"
+      ],
+      "correctIndex": 2,
+      "explanation": "The browser first needs to find the server. It uses DNS (Domain Name System) to translate the human-readable domain name into an IP address, then sends an HTTP GET request to that IP address. The server responds with the HTML file, and the browser then requests any linked CSS, JavaScript, and image files. This is the request-response cycle from Module 02."
+    },
+    {
+      "id": "q9",
+      "question": "Your contact form has a 'required' attribute on the email input, but you also add the 'novalidate' attribute to the <form> element and write custom JavaScript validation. Why would you do this?",
+      "options": [
+        "The 'required' attribute does not work in modern browsers, so JavaScript is needed as a replacement",
+        "The 'novalidate' attribute disables the browser's built-in validation popups so you can implement custom validation with better UX and consistent styling across browsers",
+        "The 'novalidate' attribute makes the form more secure by preventing HTML injection",
+        "Using both is redundant — you should pick one approach and remove the other"
+      ],
+      "correctIndex": 1,
+      "explanation": "The 'novalidate' attribute tells the browser not to show its default validation popups, which look different in every browser and cannot be styled. By handling validation in JavaScript instead, you get full control over error messages, styling, and timing (like clearing errors as the user types). The 'required' attribute still serves as a semantic indicator and a fallback if JavaScript fails."
+    },
+    {
+      "id": "q10",
+      "question": "Your portfolio project has the following file structure. Which statement correctly describes why this structure is considered professional and well-organized?\n\nportfolio/\n├── index.html\n├── css/\n│   └── styles.css\n├── js/\n│   └── main.js\n├── images/\n├── .gitignore\n└── README.md",
+      "options": [
+        "It follows the convention of putting all code in a single file for simplicity",
+        "It separates concerns — HTML structure, CSS presentation, and JavaScript behavior are in distinct files and directories — and includes Git configuration and documentation",
+        "It is the only file structure that web browsers can read correctly",
+        "It is required by GitHub Pages and will not deploy without this exact structure"
+      ],
+      "correctIndex": 1,
+      "explanation": "This structure follows the principle of separation of concerns: HTML (structure), CSS (presentation), and JavaScript (behavior) are each in their own files and directories. The .gitignore keeps unnecessary files out of version control, and the README.md documents the project for anyone who views the repository. This organization signals professionalism and makes the codebase easy to navigate."
+    }
+  ]
+}

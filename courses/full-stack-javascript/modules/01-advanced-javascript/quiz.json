@@ -1,0 +1,125 @@
+{
+  "title": "Advanced JavaScript Quiz",
+  "questions": [
+    {
+      "id": "q1",
+      "question": "What is the output of the following code?\n\nconst [a, , b] = [10, 20, 30, 40];\nconsole.log(a, b);",
+      "options": [
+        "10 20",
+        "10 30",
+        "20 30",
+        "10 undefined"
+      ],
+      "correctIndex": 1,
+      "explanation": "Array destructuring assigns values by position. 'a' gets index 0 (10), the second slot is skipped with an empty comma, and 'b' gets index 2 (30). The value 40 at index 3 is simply not destructured."
+    },
+    {
+      "id": "q2",
+      "question": "Which of the following correctly destructures the 'city' value from the nested object?\n\nconst data = { user: { address: { city: 'Brooklyn' } } };",
+      "options": [
+        "const { user.address.city } = data;",
+        "const { user: { address: { city } } } = data;",
+        "const { city } = data.user.address;",
+        "Both B and C are correct"
+      ],
+      "correctIndex": 3,
+      "explanation": "Both B and C are valid. Option B uses nested destructuring in a single statement to reach three levels deep. Option C accesses the nested object first with dot notation, then destructures the resulting object. Option A is a syntax error -- dot notation is not valid inside a destructuring pattern."
+    },
+    {
+      "id": "q3",
+      "question": "What does the following arrow function return?\n\nconst makeUser = (name, role) => ({ name, role });",
+      "options": [
+        "undefined, because there is no return statement",
+        "A syntax error, because you cannot use shorthand properties in a return",
+        "An object like { name: 'Jordan', role: 'admin' } when called with those arguments",
+        "A syntax error, because arrow functions cannot return objects"
+      ],
+      "correctIndex": 2,
+      "explanation": "The parentheses around { name, role } tell JavaScript this is an object literal expression, not a function body. This is the correct syntax for implicitly returning an object from an arrow function. The shorthand property syntax (name instead of name: name) is also valid ES6."
+    },
+    {
+      "id": "q4",
+      "question": "In the code below, what does 'this' refer to inside the setTimeout callback?\n\nconst obj = {\n  name: 'WBB',\n  greet() {\n    setTimeout(function() {\n      console.log(this.name);\n    }, 100);\n  }\n};\nobj.greet();",
+      "options": [
+        "The 'obj' object, because greet() is called on obj",
+        "undefined (in strict mode) or the global object (in non-strict mode), because the callback is called as a plain function",
+        "The setTimeout function itself",
+        "The window object, always, regardless of mode"
+      ],
+      "correctIndex": 1,
+      "explanation": "The callback passed to setTimeout is invoked as a plain function, not as a method. In strict mode, 'this' is undefined; in non-strict mode, it falls back to the global object (window in browsers, globalThis in Node). The fact that greet() was called on obj does not propagate 'this' into the nested callback. Using an arrow function for the callback would fix this by capturing 'this' lexically from greet's scope."
+    },
+    {
+      "id": "q5",
+      "question": "Which of the following is a valid reason NOT to use an arrow function?",
+      "options": [
+        "When you want a concise, single-expression function body",
+        "When defining a method on an object that needs to reference 'this'",
+        "When using the function as a callback in an array .map() call",
+        "When the function takes no parameters"
+      ],
+      "correctIndex": 1,
+      "explanation": "Arrow functions do not have their own 'this' -- they inherit it from the surrounding lexical scope. When you define an object method as an arrow function, 'this' will not refer to the object. Regular functions (or method shorthand syntax) should be used for object methods. The other options are all valid use cases for arrow functions."
+    },
+    {
+      "id": "q6",
+      "question": "What is the output of this code?\n\nconst a = { x: 1, y: 2 };\nconst b = { y: 3, z: 4 };\nconst c = { ...a, ...b };\nconsole.log(c);",
+      "options": [
+        "{ x: 1, y: 2, z: 4 }",
+        "{ x: 1, y: 3, z: 4 }",
+        "{ x: 1, y: 2, y: 3, z: 4 }",
+        "An error, because objects with duplicate keys cannot be spread"
+      ],
+      "correctIndex": 1,
+      "explanation": "When the same key appears in multiple spread sources, the last one wins. 'y' appears in both 'a' (value 2) and 'b' (value 3). Since 'b' is spread after 'a', b's value of 3 overrides a's value of 2. The result is { x: 1, y: 3, z: 4 }. This is the intended behavior for 'defaults with overrides' patterns."
+    },
+    {
+      "id": "q7",
+      "question": "What is the difference between a named export and a default export in ES modules?",
+      "options": [
+        "Named exports use curly braces when importing; default exports do not. A module can have multiple named exports but only one default export.",
+        "Named exports are faster to load than default exports.",
+        "Default exports are always functions; named exports can be any value.",
+        "There is no functional difference -- it is purely a style preference."
+      ],
+      "correctIndex": 0,
+      "explanation": "The key differences are syntax and quantity. Named exports are imported with curly braces (import { name } from '...') and a module can have as many as needed. A default export is imported without braces (import anything from '...') and can be given any local name -- but each module can only have one. Both can export any value type: functions, classes, objects, primitives."
+    },
+    {
+      "id": "q8",
+      "question": "What does the following generator function produce?\n\nfunction* gen() {\n  yield 1;\n  yield 2;\n  return 3;\n}\n\nconst result = [...gen()];",
+      "options": [
+        "[1, 2, 3]",
+        "[1, 2]",
+        "[3]",
+        "An error, because generators cannot be spread"
+      ],
+      "correctIndex": 1,
+      "explanation": "Spread and for...of iterate a generator until done: true. The 'return' value of a generator sets done: true and provides a value, but spread and for...of do not include the value from a done: true result -- they stop when they see done: true. So only 1 and 2 (from yield statements, which produce done: false) are included. The returned 3 is available via gen().next().value only after the generator is exhausted."
+    },
+    {
+      "id": "q9",
+      "question": "What is a 'barrel file' in the context of ES modules?",
+      "options": [
+        "A file that imports all modules at the start of an application to preload them",
+        "An index.js file that re-exports from multiple modules in a directory, providing a single import point",
+        "A file that contains only default exports, one per module",
+        "A build artifact that bundles multiple modules into one file"
+      ],
+      "correctIndex": 1,
+      "explanation": "A barrel file (typically index.js or index.ts) re-exports from several modules within a directory using 'export * from' or named re-exports. This gives consumers a single, stable import path (import { thing } from './utils') without needing to know which specific file inside the directory defines 'thing'. It hides internal file organization from the outside world."
+    },
+    {
+      "id": "q10",
+      "question": "What is the output of the following code?\n\nconst obj = { a: 1, b: { c: 2 } };\nconst copy = { ...obj };\ncopy.a = 99;\ncopy.b.c = 99;\n\nconsole.log(obj.a, obj.b.c);",
+      "options": [
+        "1 2",
+        "99 99",
+        "1 99",
+        "99 2"
+      ],
+      "correctIndex": 2,
+      "explanation": "Object spread creates a shallow copy. Primitive values (like 'a': 1) are copied by value, so changing copy.a does not affect obj.a -- obj.a remains 1. Nested objects (like 'b': { c: 2 }) are copied by reference, meaning copy.b and obj.b point to the same object in memory. Changing copy.b.c therefore also changes obj.b.c -- both become 99. This is why 'shallow copy' matters: nested objects are shared, not duplicated."
+    }
+  ]
+}

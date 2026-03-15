@@ -1,0 +1,101 @@
+{
+  "title": "Anthropic API & Claude Quiz",
+  "questions": [
+    {
+      "id": "q1",
+      "question": "How does the Anthropic Messages API handle system prompts differently from OpenAI's Chat Completions API?",
+      "options": [
+        "Anthropic does not support system prompts at all",
+        "The system prompt is a top-level parameter, not a message in the messages array",
+        "The system prompt must be the last message in the messages array",
+        "System prompts are passed as HTTP headers instead of in the request body"
+      ],
+      "correctIndex": 1,
+      "explanation": "In the Anthropic API, the system prompt is passed as a separate top-level `system` parameter in the API call, rather than being included as a message with role 'system' in the messages array. This is one of the most common sources of errors when developers switch from OpenAI to Anthropic."
+    },
+    {
+      "id": "q2",
+      "question": "When Claude returns a tool use response, how are the tool results sent back to continue the conversation?",
+      "options": [
+        "As a message with role 'tool' and a tool_call_id field, identical to OpenAI",
+        "As a new system prompt containing the tool output",
+        "As a message with role 'user' containing tool_result content blocks, each with a tool_use_id",
+        "As a separate API call to a /tool-results endpoint"
+      ],
+      "correctIndex": 2,
+      "explanation": "In the Anthropic API, tool results are sent as a user message containing content blocks of type 'tool_result', each referencing the corresponding tool_use_id. This differs from OpenAI where tool results use role 'tool' with a tool_call_id field."
+    },
+    {
+      "id": "q3",
+      "question": "What is the primary cost benefit of Anthropic's prompt caching for long-context applications?",
+      "options": [
+        "Cached prompts are processed 10x faster with no cost difference",
+        "The first request with cache_control costs nothing, and subsequent requests cost full price",
+        "Subsequent requests pay only ~10% of the normal input token price for cached content, saving up to 90%",
+        "Prompt caching eliminates output token costs entirely"
+      ],
+      "correctIndex": 2,
+      "explanation": "When prompt caching is enabled via cache_control, the first request pays a slight premium to write to the cache, but subsequent requests that hit the cached prefix pay approximately 10% of the normal input token price (a 90% discount). This makes repeated queries over the same large document dramatically cheaper."
+    },
+    {
+      "id": "q4",
+      "question": "Which prompting technique is Claude specifically trained to respond well to, giving it a practical advantage for structured prompts?",
+      "options": [
+        "Using all-caps for emphasis",
+        "Adding emoji to highlight key points",
+        "Wrapping content and instructions in XML-style tags like <document> and <instructions>",
+        "Writing prompts in Markdown table format"
+      ],
+      "correctIndex": 2,
+      "explanation": "Claude is specifically trained to understand and respond to XML-style tags in prompts. Using tags like <document>, <instructions>, <example>, and <output> provides clear, unambiguous boundaries between different parts of your prompt, consistently improving output quality and structure."
+    },
+    {
+      "id": "q5",
+      "question": "You need to build an AI feature that processes a 120-page legal contract and answers user questions about it across multiple queries. Which approach is most cost-effective?",
+      "options": [
+        "Use OpenAI's gpt-4o with the full document in each request",
+        "Split the document into chunks and use RAG with a vector database for each query",
+        "Use Claude with prompt caching -- load the document once with cache_control, then ask multiple questions",
+        "Use Claude Haiku without caching to minimize per-token cost"
+      ],
+      "correctIndex": 2,
+      "explanation": "For repeated queries over the same large document, Claude with prompt caching is the most cost-effective approach. The document fits within Claude's 200K context window, and prompt caching means you pay full price only once (the cache write). Every subsequent question benefits from a 90% discount on the document's input tokens. RAG adds complexity and may miss cross-document connections, while re-sending the full document without caching multiplies costs linearly."
+    },
+    {
+      "id": "q6",
+      "question": "When should you enable extended thinking in a Claude API call?",
+      "options": [
+        "For every API call to maximize response quality",
+        "Only for simple classification and formatting tasks",
+        "For complex reasoning tasks where you want the model to think step-by-step before responding",
+        "Only when you need the response to be shorter"
+      ],
+      "correctIndex": 2,
+      "explanation": "Extended thinking is most valuable for complex reasoning tasks -- debugging, multi-step math/logic, architecture decisions, and analyzing trade-offs. It lets Claude reason through the problem step by step before producing its final answer. For simple tasks like classification or formatting, extended thinking adds unnecessary cost (thinking tokens are billed at the output token rate) without meaningful quality improvement."
+    },
+    {
+      "id": "q7",
+      "question": "What is a key structural requirement of the Anthropic Messages API that differs from OpenAI's Chat Completions API?",
+      "options": [
+        "Anthropic requires all messages to have a timestamp",
+        "Anthropic requires alternating user/assistant messages -- you cannot have two consecutive messages with the same role",
+        "Anthropic requires every message to include a token count estimate",
+        "Anthropic does not allow more than 10 messages in a single request"
+      ],
+      "correctIndex": 1,
+      "explanation": "Anthropic requires strict alternation between user and assistant roles in the messages array. You cannot have two consecutive user messages or two consecutive assistant messages. If you need to combine multiple user inputs, concatenate them into a single message. OpenAI does not enforce this alternation requirement."
+    },
+    {
+      "id": "q8",
+      "question": "What is the minimum number of tokens required for prompt caching to work with Claude Sonnet or Opus?",
+      "options": [
+        "No minimum -- any content can be cached",
+        "512 tokens",
+        "1,024 tokens",
+        "4,096 tokens"
+      ],
+      "correctIndex": 2,
+      "explanation": "Prompt caching requires a minimum of 1,024 tokens for Claude Sonnet and Opus models (2,048 tokens for Haiku). If your cached content is shorter than the minimum, caching silently does nothing -- the content will be processed as regular input tokens without any cache benefit."
+    }
+  ]
+}

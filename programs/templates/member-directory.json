@@ -1,0 +1,27 @@
+{
+  "object": "database",
+  "title": "Member Directory",
+  "description": "WBB community member profiles",
+  "properties": {
+    "Name": { "type": "title", "title": {} },
+    "Email": { "type": "email", "email": {} },
+    "Role": {
+      "type": "select",
+      "select": {
+        "options": [
+          { "name": "Member", "color": "blue" },
+          { "name": "Mentor", "color": "green" },
+          { "name": "Volunteer", "color": "purple" },
+          { "name": "Partner", "color": "orange" },
+          { "name": "Staff", "color": "red" }
+        ]
+      }
+    },
+    "Slack Handle": { "type": "rich_text", "rich_text": {} },
+    "Skills": { "type": "multi_select", "multi_select": { "options": [] } },
+    "Cohort": { "type": "relation", "relation": {} },
+    "Joined": { "type": "date", "date": {} },
+    "LinkedIn": { "type": "url", "url": {} },
+    "Notes": { "type": "rich_text", "rich_text": {} }
+  }
+}

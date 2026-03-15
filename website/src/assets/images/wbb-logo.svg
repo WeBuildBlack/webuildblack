@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <!-- WBB Faceted Gem Logo - Placeholder -->
+  <defs>
+    <linearGradient id="gem-grad-1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#AE8156"/>
+      <stop offset="100%" style="stop-color:#7D4E21"/>
+    </linearGradient>
+    <linearGradient id="gem-grad-2" x1="100%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#2C170B"/>
+      <stop offset="100%" style="stop-color:#200E03"/>
+    </linearGradient>
+    <linearGradient id="gem-grad-3" x1="50%" y1="0%" x2="50%" y2="100%">
+      <stop offset="0%" style="stop-color:#7D4E21"/>
+      <stop offset="100%" style="stop-color:#2C170B"/>
+    </linearGradient>
+  </defs>
+  <!-- Top facet -->
+  <polygon points="100,10 160,60 100,80 40,60" fill="url(#gem-grad-1)"/>
+  <!-- Left facet -->
+  <polygon points="40,60 100,80 100,190 30,100" fill="url(#gem-grad-2)"/>
+  <!-- Right facet -->
+  <polygon points="160,60 170,100 100,190 100,80" fill="url(#gem-grad-3)"/>
+  <!-- Top-left facet -->
+  <polygon points="100,10 40,60 30,100 100,80" fill="#7D4E21" opacity="0.6"/>
+  <!-- Top-right facet -->
+  <polygon points="100,10 160,60 170,100 100,80" fill="#AE8156" opacity="0.5"/>
+  <!-- Bottom facet -->
+  <polygon points="30,100 100,190 170,100 100,80" fill="#200E03" opacity="0.7"/>
+</svg>

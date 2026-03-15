@@ -1,0 +1,67 @@
+{
+  "program": "The Bridge Interview Accountability Program",
+  "period": "12 months (3 cohorts)",
+  "totalBudget": 25000,
+  "lineItems": [
+    {
+      "category": "Personnel",
+      "description": "Program Coordinator (0.2 FTE) — cohort management, pod assignments, weekly check-ins, coaching DM review",
+      "amount": 10000,
+      "notes": "$50,000 annual salary at 20% time allocation; manages 3 cohorts per year (Jan, May, Sep)"
+    },
+    {
+      "category": "Personnel",
+      "description": "Pod facilitator stipends — volunteer facilitators for role-based pods",
+      "amount": 3000,
+      "notes": "$250 per facilitator x 4 facilitators x 3 cohorts; facilitators lead weekly pod meetings"
+    },
+    {
+      "category": "Technology",
+      "description": "Notion workspace — program tracker database, weekly logs, progress dashboards",
+      "amount": 600,
+      "notes": "Notion Plus plan for team workspace; shared across all WBB programs"
+    },
+    {
+      "category": "Technology",
+      "description": "Mock interview platform — Pramp, Interviewing.io, or equivalent subscriptions",
+      "amount": 2400,
+      "notes": "$800 per cohort for premium mock interview access for participants"
+    },
+    {
+      "category": "Technology",
+      "description": "Zoom Pro — virtual pod meetings and coaching sessions",
+      "amount": 500,
+      "notes": "Shared organizational subscription; allocated portion for Bridge sessions"
+    },
+    {
+      "category": "Program Costs",
+      "description": "DSA and interview prep resources — LeetCode Premium group licenses, system design materials",
+      "amount": 1800,
+      "notes": "$600 per cohort for group licenses and curated study materials"
+    },
+    {
+      "category": "Program Costs",
+      "description": "Community events — kickoff socials, mid-program check-ins, graduation celebrations (3 cohorts)",
+      "amount": 2400,
+      "notes": "$800 per cohort; mix of virtual and in-person events"
+    },
+    {
+      "category": "Program Costs",
+      "description": "Guest speaker honoraria — industry professionals for interview workshops and panels",
+      "amount": 1500,
+      "notes": "$500 per cohort for 2 guest speakers each"
+    },
+    {
+      "category": "Marketing",
+      "description": "Recruitment and outreach — social media campaigns, Slack announcements, email marketing",
+      "amount": 1200,
+      "notes": "$400 per cohort for targeted ads and promotional materials"
+    },
+    {
+      "category": "Operations",
+      "description": "Administrative overhead — program reporting, accounting, communications",
+      "amount": 1600,
+      "notes": "General administration across 3 cohort cycles"
+    }
+  ]
+}

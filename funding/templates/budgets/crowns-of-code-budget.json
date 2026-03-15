@@ -1,0 +1,91 @@
+{
+  "program": "Crowns of Code Youth Coding Program",
+  "period": "12 months",
+  "totalBudget": 60000,
+  "lineItems": [
+    {
+      "category": "Personnel",
+      "description": "Lead Instructor (0.5 FTE) — curriculum delivery, lesson planning, student assessment",
+      "amount": 25000,
+      "notes": "$50,000 annual salary at 50% time allocation"
+    },
+    {
+      "category": "Personnel",
+      "description": "Assistant Instructors (2 part-time) — classroom support, small-group facilitation",
+      "amount": 8000,
+      "notes": "$20/hr x 10 hrs/week x 40 weeks, split between two assistants"
+    },
+    {
+      "category": "Program Costs",
+      "description": "Curriculum development — original lesson plans, exercise design, instructional materials",
+      "amount": 4000,
+      "notes": "Contract curriculum designer for age-appropriate coding content"
+    },
+    {
+      "category": "Program Costs",
+      "description": "Student supplies — notebooks, printed materials, take-home activity kits",
+      "amount": 2000,
+      "notes": "~$50 per student for 40 students across sessions"
+    },
+    {
+      "category": "Technology",
+      "description": "Equipment — tablets, Chromebooks, or laptops for classroom use",
+      "amount": 6000,
+      "notes": "15 devices at ~$400 each; reusable across cohorts"
+    },
+    {
+      "category": "Technology",
+      "description": "Software licenses — Scratch, code.org premium, educational coding platforms",
+      "amount": 1500,
+      "notes": "Annual licenses for interactive coding environments"
+    },
+    {
+      "category": "Program Costs",
+      "description": "Snacks and meals — healthy snacks for after-school sessions, meals for full-day workshops",
+      "amount": 3000,
+      "notes": "~$8 per student per session, estimated 375 student-sessions"
+    },
+    {
+      "category": "Program Costs",
+      "description": "Field trips — visits to tech companies, museums, or tech events (2 per year)",
+      "amount": 2500,
+      "notes": "Transportation, admission fees, and chaperone costs for 2 field trips"
+    },
+    {
+      "category": "Program Costs",
+      "description": "End-of-program showcase — student demo day, certificates, family celebration event",
+      "amount": 1500,
+      "notes": "Venue, refreshments, printing, and awards"
+    },
+    {
+      "category": "Marketing",
+      "description": "Recruitment and outreach — flyers for schools and community centers, social media, parent info sessions",
+      "amount": 2000,
+      "notes": "Targeting Brooklyn schools and community organizations"
+    },
+    {
+      "category": "Facilities",
+      "description": "Classroom space rental — after-school and weekend session venue",
+      "amount": 2000,
+      "notes": "Community center or school space rental; some sessions at WBB HQ"
+    },
+    {
+      "category": "Operations",
+      "description": "Background checks and safety compliance — instructor and volunteer screening",
+      "amount": 500,
+      "notes": "Required for all adults working with youth"
+    },
+    {
+      "category": "Operations",
+      "description": "Insurance — supplemental youth program liability coverage",
+      "amount": 1000,
+      "notes": "Additional coverage beyond general organizational policy"
+    },
+    {
+      "category": "Operations",
+      "description": "Administrative overhead — accounting, reporting, office supplies",
+      "amount": 1000,
+      "notes": "General program administration costs"
+    }
+  ]
+}

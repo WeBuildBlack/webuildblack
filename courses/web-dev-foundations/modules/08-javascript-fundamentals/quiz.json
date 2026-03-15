@@ -1,0 +1,124 @@
+{
+  "questions": [
+    {
+      "id": "q1",
+      "question": "Which keyword declares a variable whose value CANNOT be reassigned?",
+      "options": [
+        "let",
+        "var",
+        "const",
+        "fixed"
+      ],
+      "correctIndex": 2,
+      "explanation": "const declares a constant — once you assign a value, you cannot reassign it. Use const by default and switch to let only when you need to change the value later."
+    },
+    {
+      "id": "q2",
+      "question": "What does typeof null return in JavaScript?",
+      "options": [
+        "\"null\"",
+        "\"undefined\"",
+        "\"object\"",
+        "\"boolean\""
+      ],
+      "correctIndex": 2,
+      "explanation": "typeof null returns \"object\" — this is a well-known bug from the first version of JavaScript in 1995. Despite what typeof says, null is NOT an object."
+    },
+    {
+      "id": "q3",
+      "question": "What is the result of the expression \"5\" + 3 in JavaScript?",
+      "options": [
+        "8",
+        "\"53\"",
+        "\"8\"",
+        "NaN"
+      ],
+      "correctIndex": 1,
+      "explanation": "When the + operator encounters a string and a number, it converts the number to a string and concatenates them. \"5\" + 3 becomes \"5\" + \"3\" which equals \"53\"."
+    },
+    {
+      "id": "q4",
+      "question": "Which operator should you use to check if two values are equal in JavaScript?",
+      "options": [
+        "=",
+        "==",
+        "===",
+        "!="
+      ],
+      "correctIndex": 2,
+      "explanation": "=== is the strict equality operator — it checks both value AND type. == (loose equality) can produce surprising results due to type coercion. = is the assignment operator, not a comparison."
+    },
+    {
+      "id": "q5",
+      "question": "Which of these values is truthy in JavaScript?",
+      "options": [
+        "0",
+        "\"\"",
+        "null",
+        "\"0\""
+      ],
+      "correctIndex": 3,
+      "explanation": "The string \"0\" is truthy because it is a non-empty string. The number 0, empty string \"\", and null are all falsy values."
+    },
+    {
+      "id": "q6",
+      "question": "In a for loop written as for (let i = 0; i < 5; i++), how many times does the loop run?",
+      "options": [
+        "4 times",
+        "5 times",
+        "6 times",
+        "It depends on the code inside the loop"
+      ],
+      "correctIndex": 1,
+      "explanation": "The loop runs for i = 0, 1, 2, 3, and 4 — that's 5 iterations. It stops when i reaches 5 because the condition i < 5 becomes false."
+    },
+    {
+      "id": "q7",
+      "question": "What does a function return if it has no return statement?",
+      "options": [
+        "null",
+        "0",
+        "undefined",
+        "An empty string"
+      ],
+      "correctIndex": 2,
+      "explanation": "If a function doesn't explicitly return a value, it returns undefined by default. This is fine for functions that perform actions (like printing), but functions that calculate results should always use return."
+    },
+    {
+      "id": "q8",
+      "question": "What does the array method filter() return?",
+      "options": [
+        "The first item that matches the condition",
+        "A new array containing only items that pass the test",
+        "true or false",
+        "The original array with non-matching items removed"
+      ],
+      "correctIndex": 1,
+      "explanation": "filter() creates and returns a new array containing only the items for which the callback function returned true. The original array is not modified. Use find() if you only want the first match."
+    },
+    {
+      "id": "q9",
+      "question": "Given const obj = { name: \"Maya\", age: 27 }; — which syntax correctly accesses the name property?",
+      "options": [
+        "obj[name]",
+        "obj.\"name\"",
+        "obj.name",
+        "obj->name"
+      ],
+      "correctIndex": 2,
+      "explanation": "Dot notation (obj.name) is the most common way to access object properties. Bracket notation also works but requires quotes: obj[\"name\"]. Without quotes, obj[name] would look for a variable called name."
+    },
+    {
+      "id": "q10",
+      "question": "What is the scope of a variable declared with let inside a function?",
+      "options": [
+        "Global — accessible everywhere in the program",
+        "Local — accessible only inside that function",
+        "Block — accessible only inside the nearest curly braces",
+        "Module — accessible only in the current file"
+      ],
+      "correctIndex": 2,
+      "explanation": "Variables declared with let (and const) are block-scoped — they exist only within the nearest set of curly braces {}. Inside a function, that means they're local to the function. Inside an if block, they're local to that block."
+    }
+  ]
+}

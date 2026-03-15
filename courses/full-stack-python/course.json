@@ -1,0 +1,67 @@
+{
+  "title": "Full-Stack Python",
+  "slug": "full-stack-python",
+  "description": "Go full-stack with Python and modern frontend tools. Master TypeScript, advanced React, state management, testing, Python, Django, and DevOps. Ship a production app built to last.",
+  "difficulty": "advanced",
+  "estimatedHours": 50,
+  "priceCents": 6900,
+  "prerequisites": [
+    "JavaScript (ES6+) proficiency",
+    "React fundamentals (components, hooks, state)",
+    "Node.js & Express basics",
+    "SQL & relational databases",
+    "Git & GitHub workflow"
+  ],
+  "modules": [
+    {
+      "id": "01-typescript",
+      "title": "TypeScript for Web Developers",
+      "estimatedMinutes": 270,
+      "project": "Type-Safe API Client  --  refactor a JS client to fully typed TypeScript"
+    },
+    {
+      "id": "02-advanced-react",
+      "title": "Advanced React Patterns",
+      "estimatedMinutes": 300,
+      "project": "Advanced Dashboard  --  build a dashboard using compound components and render props"
+    },
+    {
+      "id": "03-state-management",
+      "title": "State Management & Data Fetching",
+      "estimatedMinutes": 240,
+      "project": "Real-Time Feed  --  build a live-updating feed with server state and caching"
+    },
+    {
+      "id": "04-testing",
+      "title": "Testing Web Applications",
+      "estimatedMinutes": 270,
+      "project": "Test Suite  --  write unit, integration, and E2E tests for an existing app"
+    },
+    {
+      "id": "05-python-fundamentals",
+      "title": "Python for Web Developers",
+      "estimatedMinutes": 240,
+      "project": "Python CLI Tool  --  build a command-line project manager in Python"
+    },
+    {
+      "id": "06-django",
+      "title": "Django Web Framework",
+      "estimatedMinutes": 300,
+      "project": "Django REST API  --  build a full API with Django REST Framework"
+    },
+    {
+      "id": "07-devops-and-deployment",
+      "title": "DevOps & Deployment",
+      "estimatedMinutes": 240,
+      "project": "CI/CD Pipeline  --  set up automated testing, building, and deployment"
+    },
+    {
+      "id": "08-capstone-production-app",
+      "title": "Capstone: Ship a Production App",
+      "estimatedMinutes": 360,
+      "project": "Production Capstone  --  build, test, and deploy a production-ready application"
+    }
+  ],
+  "author": "We Build Black",
+  "updatedAt": "2026-03-14"
+}

@@ -1,0 +1,101 @@
+{
+  "title": "Full-Stack AI App (Capstone) Quiz",
+  "questions": [
+    {
+      "id": "q1",
+      "question": "In the BrainBase ingestion pipeline, what is the correct order of operations when a user uploads a document?",
+      "options": [
+        "Upload -> Extract text -> Chunk text -> Generate embeddings -> Store in pgvector",
+        "Upload -> Generate embeddings -> Chunk text -> Extract text -> Store in pgvector",
+        "Upload -> Chunk text -> Extract text -> Store in pgvector -> Generate embeddings",
+        "Upload -> Store in pgvector -> Extract text -> Chunk text -> Generate embeddings"
+      ],
+      "correctIndex": 0,
+      "explanation": "The ingestion pipeline follows a linear flow: first the file is uploaded, then text is extracted from the file format (PDF, DOCX, etc.), the text is split into overlapping chunks, each chunk is embedded into a vector, and finally the chunks and their embeddings are stored in Supabase with pgvector."
+    },
+    {
+      "id": "q2",
+      "question": "Why do we use overlapping chunks (e.g., 200 characters of overlap) when splitting document text?",
+      "options": [
+        "To make the embeddings more accurate by providing duplicate training data",
+        "To ensure information at chunk boundaries is not lost, so key concepts that span two chunks appear fully in at least one",
+        "To reduce the total number of chunks needed for a document",
+        "To comply with the OpenAI API's minimum input length requirement"
+      ],
+      "correctIndex": 1,
+      "explanation": "Chunk overlap ensures that information near the boundary between two chunks is not split in a way that loses meaning. If a key concept happens to fall at a split point, the overlap guarantees it appears completely in at least one chunk, improving retrieval quality."
+    },
+    {
+      "id": "q3",
+      "question": "In the RAG chat flow, what role does the system prompt play when retrieved chunks are included?",
+      "options": [
+        "It tells the LLM to ignore the retrieved chunks and use its general knowledge instead",
+        "It provides the retrieved document chunks as context and instructs the LLM to answer based only on that context with source citations",
+        "It sends the retrieved chunks directly to the user without LLM processing",
+        "It uses the chunks to fine-tune the model in real-time before generating a response"
+      ],
+      "correctIndex": 1,
+      "explanation": "The system prompt in RAG injects the retrieved document chunks as context and instructs the LLM to base its answer exclusively on that context. It also includes rules about citing sources using [Source N] notation and being transparent when the context does not contain enough information."
+    },
+    {
+      "id": "q4",
+      "question": "What is the purpose of the Supabase Row Level Security (RLS) policies in the BrainBase application?",
+      "options": [
+        "They encrypt all data at rest in the database",
+        "They ensure each user can only access their own documents, conversations, and messages",
+        "They rate-limit database queries to prevent abuse",
+        "They automatically back up user data to a secondary database"
+      ],
+      "correctIndex": 1,
+      "explanation": "Row Level Security policies in Supabase act as database-level access controls. The policies created for BrainBase use auth.uid() to filter rows, ensuring that each authenticated user can only read, create, and delete their own documents, chunks, conversations, and messages -- even if the API has a bug."
+    },
+    {
+      "id": "q5",
+      "question": "Why does the chat API route use the Vercel AI SDK's streamText function instead of waiting for the complete response before sending it?",
+      "options": [
+        "Streaming is required by the OpenAI API; there is no non-streaming option",
+        "Streaming reduces the total token cost of the API call",
+        "Streaming delivers tokens to the user as they are generated, reducing perceived latency and providing a more responsive experience",
+        "Streaming allows the server to process multiple requests simultaneously on a single thread"
+      ],
+      "correctIndex": 2,
+      "explanation": "Streaming sends response tokens to the client as the LLM generates them, rather than waiting for the entire response to complete. This dramatically reduces perceived latency -- users start seeing the answer within milliseconds instead of waiting several seconds for a complete response. It makes the app feel fast and responsive."
+    },
+    {
+      "id": "q6",
+      "question": "For a personal knowledge base app where users typically have 10-500 documents, which pgvector index type is the better choice and why?",
+      "options": [
+        "IVFFlat, because it uses less memory and is faster to build",
+        "HNSW, because it works on empty tables, requires no retraining, and provides better recall for small-to-medium datasets",
+        "Neither -- you should use a separate vector database like Pinecone instead",
+        "IVFFlat, because HNSW only works with datasets larger than 1 million rows"
+      ],
+      "correctIndex": 1,
+      "explanation": "HNSW is the better choice for a personal knowledge base at this scale. IVFFlat requires training on existing data (it fails on empty tables), needs periodic retraining as data grows, and has lower recall at small dataset sizes. HNSW works immediately on empty tables, maintains high recall without retraining, and performs well for small-to-medium datasets. IVFFlat's advantages (lower memory, faster builds) only matter at very large scale (millions of vectors)."
+    },
+    {
+      "id": "q7",
+      "question": "In the ingestion API route, why is it a security problem to read `userId` from the request body instead of from the authenticated session?",
+      "options": [
+        "The request body is not encrypted, so the userId could be intercepted in transit",
+        "Any client can set any userId in the request body, bypassing access controls -- a user could impersonate another user and upload documents to their account",
+        "Reading from the request body is slower than reading from the session",
+        "The userId in the request body might be in the wrong format"
+      ],
+      "correctIndex": 1,
+      "explanation": "When userId comes from the request body, any client can send any value -- there is no verification that the sender is actually that user. An attacker could set someone else's userId and upload documents to their account, read their data, or delete their documents. The userId should always come from the authenticated session (e.g., Supabase Auth's getUser()), which cryptographically verifies the user's identity."
+    },
+    {
+      "id": "q8",
+      "question": "When a user updates a document that has already been ingested, what is the correct cache invalidation strategy for cached chat responses?",
+      "options": [
+        "Clear the entire cache to be safe",
+        "Do nothing -- cached responses will expire naturally via TTL",
+        "Delete cached responses that reference the updated document's chunks, since the cached answers may contain outdated information",
+        "Keep the cached responses but add a disclaimer that the source data has changed"
+      ],
+      "correctIndex": 2,
+      "explanation": "Cached responses that reference chunks from the updated document may contain outdated information. The correct approach is to identify and delete those specific cache entries. Clearing the entire cache is wasteful (it invalidates unrelated responses), and relying solely on TTL risks serving stale answers for hours. Targeted invalidation preserves valid cache entries while removing only those that may be incorrect."
+    }
+  ]
+}

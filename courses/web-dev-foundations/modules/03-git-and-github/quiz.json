@@ -1,0 +1,124 @@
+{
+  "questions": [
+    {
+      "id": "q1",
+      "question": "What problem does version control solve?",
+      "options": [
+        "It makes your code run faster",
+        "It tracks changes to files over time so you can recall previous versions",
+        "It automatically fixes bugs in your code",
+        "It compresses your files to save disk space"
+      ],
+      "correctIndex": 1,
+      "explanation": "Version control records every change made to your files, who made it, when, and why. This lets you go back to any previous version if needed — like a time machine for your code."
+    },
+    {
+      "id": "q2",
+      "question": "What is the difference between Git and GitHub?",
+      "options": [
+        "They are the same thing — two names for one tool",
+        "Git is for Mac and GitHub is for Windows",
+        "Git is a version control tool that runs locally; GitHub is a website that hosts Git repositories online",
+        "GitHub is the free version and Git is the paid version"
+      ],
+      "correctIndex": 2,
+      "explanation": "Git is the version control tool that runs on your computer and tracks changes to your files. GitHub is a website that stores your Git repositories online, enabling backup, sharing, and collaboration. Think of Git as a word processor and GitHub as Google Drive."
+    },
+    {
+      "id": "q3",
+      "question": "In Git, what are the three states that a file can be in?",
+      "options": [
+        "Created, saved, deleted",
+        "Open, closed, locked",
+        "Modified, staged, committed",
+        "New, old, archived"
+      ],
+      "correctIndex": 2,
+      "explanation": "Modified means you changed the file but haven't told Git yet. Staged means you marked the file to be included in your next commit. Committed means the change is saved as a snapshot in your repository."
+    },
+    {
+      "id": "q4",
+      "question": "What is the correct sequence of commands to stage a file called 'style.css' and save a snapshot?",
+      "options": [
+        "git commit -m \"Add styles\" then git add style.css",
+        "git save style.css -m \"Add styles\"",
+        "git add style.css then git commit -m \"Add styles\"",
+        "git push style.css -m \"Add styles\""
+      ],
+      "correctIndex": 2,
+      "explanation": "You must first stage the file with 'git add style.css' to move it to the staging area, then save the snapshot with 'git commit -m \"Add styles\"'. The order matters — you cannot commit a file that has not been staged."
+    },
+    {
+      "id": "q5",
+      "question": "What does 'git checkout -b feature/navbar' do?",
+      "options": [
+        "Deletes the branch called feature/navbar",
+        "Creates a new branch called feature/navbar and switches to it",
+        "Merges the feature/navbar branch into main",
+        "Downloads the feature/navbar branch from GitHub"
+      ],
+      "correctIndex": 1,
+      "explanation": "The -b flag tells Git to create a new branch with the given name, and 'checkout' switches to it. This is a shortcut that combines 'git branch feature/navbar' and 'git checkout feature/navbar' into one command."
+    },
+    {
+      "id": "q6",
+      "question": "You see the following markers in a file: <<<<<<< HEAD, =======, and >>>>>>> feature-branch. What is happening?",
+      "options": [
+        "Git is showing you the file's encoding format",
+        "The file has been corrupted and needs to be deleted",
+        "There is a merge conflict — two branches changed the same lines and you need to choose what to keep",
+        "Git is commenting out old code automatically"
+      ],
+      "correctIndex": 2,
+      "explanation": "These are merge conflict markers. The content between <<<<<<< HEAD and ======= is your current branch's version. The content between ======= and >>>>>>> feature-branch is the other branch's version. You must edit the file to keep the content you want, remove all conflict markers, then stage and commit."
+    },
+    {
+      "id": "q7",
+      "question": "What command uploads your local commits to a GitHub repository?",
+      "options": [
+        "git upload origin main",
+        "git send origin main",
+        "git push origin main",
+        "git commit origin main"
+      ],
+      "correctIndex": 2,
+      "explanation": "'git push' sends your local commits to a remote repository. 'origin' is the name of the remote (your GitHub repo), and 'main' is the branch you are pushing. After the first push with -u, you can simply use 'git push'."
+    },
+    {
+      "id": "q8",
+      "question": "What is a Pull Request (PR) on GitHub?",
+      "options": [
+        "A command to download code from GitHub to your computer",
+        "A proposal to merge changes from one branch into another, with the opportunity for review and discussion",
+        "A request to pull someone else's repository into yours automatically",
+        "A notification that your repository needs to be updated"
+      ],
+      "correctIndex": 1,
+      "explanation": "A Pull Request is how you propose changes on GitHub. You create a PR to merge a feature branch into main (or another branch). Team members can review the code, leave comments, suggest improvements, and approve the changes before they are merged."
+    },
+    {
+      "id": "q9",
+      "question": "What is the purpose of a .gitignore file?",
+      "options": [
+        "It lists files that Git should not track — such as system files, dependencies, and secrets",
+        "It deletes files from your computer that you no longer need",
+        "It hides files from your text editor so you do not accidentally edit them",
+        "It password-protects sensitive files in your repository"
+      ],
+      "correctIndex": 0,
+      "explanation": "A .gitignore file tells Git which files and folders to ignore. Common entries include .DS_Store (macOS system file), node_modules/ (dependencies that can be reinstalled), and .env (files containing secret API keys and passwords). These files should never be committed to your repository."
+    },
+    {
+      "id": "q10",
+      "question": "Which of the following is a well-written Git commit message?",
+      "options": [
+        "fixed stuff",
+        "I updated the navigation bar and also changed some CSS and fixed a bug",
+        "Add responsive navigation menu",
+        "asdf"
+      ],
+      "correctIndex": 2,
+      "explanation": "Good commit messages use imperative mood (\"Add\" not \"Added\" or \"Adding\"), are short (under 50 characters), and describe one specific change. \"Add responsive navigation menu\" clearly communicates what the commit does. The other options are either vague, too long, or meaningless."
+    }
+  ]
+}

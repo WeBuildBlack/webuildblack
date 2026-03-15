@@ -1,0 +1,125 @@
+{
+  "title": "CSS Fundamentals Quiz",
+  "questions": [
+    {
+      "id": "q1",
+      "question": "What is the specificity score of the selector `.nav-list .nav-link:hover`?",
+      "options": [
+        "3 points (three elements)",
+        "21 points (two classes + one pseudo-class)",
+        "30 points (three classes/pseudo-classes)",
+        "12 points (one class + one element + one pseudo-class)"
+      ],
+      "correctIndex": 2,
+      "explanation": "Class selectors and pseudo-classes each count as 10 points. `.nav-list` (10) + `.nav-link` (10) + `:hover` (10) = 30 points. Pseudo-classes like :hover are scored the same as class selectors."
+    },
+    {
+      "id": "q2",
+      "question": "In the CSS box model, what is the correct order from innermost to outermost?",
+      "options": [
+        "Margin → Border → Padding → Content",
+        "Content → Padding → Border → Margin",
+        "Content → Border → Padding → Margin",
+        "Padding → Content → Border → Margin"
+      ],
+      "correctIndex": 1,
+      "explanation": "The box model layers from inside to outside are: Content (the actual text/image), Padding (space inside the box around the content), Border (the visible edge), and Margin (space outside the box pushing other elements away)."
+    },
+    {
+      "id": "q3",
+      "question": "What does `box-sizing: border-box` do?",
+      "options": [
+        "It removes the border from the element's total width",
+        "It makes the width and height include padding and border, not just content",
+        "It adds a box-shaped border around the element",
+        "It sets the element's display to block"
+      ],
+      "correctIndex": 1,
+      "explanation": "With `box-sizing: border-box`, the `width` and `height` you set include padding and border inside that measurement. Without it (the default `content-box`), padding and border are added on top of the width, making elements wider than expected."
+    },
+    {
+      "id": "q4",
+      "question": "What is the difference between `display: inline` and `display: inline-block`?",
+      "options": [
+        "There is no difference — they behave the same way",
+        "Inline elements can have width and height set; inline-block elements cannot",
+        "Inline-block elements can have width, height, and vertical margins; inline elements cannot",
+        "Inline-block elements always start on a new line; inline elements do not"
+      ],
+      "correctIndex": 2,
+      "explanation": "Inline elements ignore width, height, and top/bottom margins. Inline-block elements flow horizontally like inline elements, but they respect width, height, and all margins — giving you the best of both worlds."
+    },
+    {
+      "id": "q5",
+      "question": "Which CSS color format allows you to set a semi-transparent background without affecting the text inside?",
+      "options": [
+        "Hex (#FF000080)",
+        "The opacity property",
+        "rgba() or hsla()",
+        "Named colors with the transparent keyword"
+      ],
+      "correctIndex": 2,
+      "explanation": "`rgba()` and `hsla()` let you set transparency on just the color itself (e.g., `background-color: rgba(0, 0, 0, 0.5)`). The `opacity` property, by contrast, makes the entire element and all its children transparent — including text."
+    },
+    {
+      "id": "q6",
+      "question": "Which CSS properties are GPU-accelerated and best for smooth animations?",
+      "options": [
+        "width and height",
+        "margin and padding",
+        "transform and opacity",
+        "top, left, right, and bottom"
+      ],
+      "correctIndex": 2,
+      "explanation": "`transform` and `opacity` are GPU-accelerated, meaning the browser can animate them on a separate layer without recalculating the layout of the page. Properties like width, height, margin, and top cause layout recalculations (reflows) that are more expensive and can cause janky animations."
+    },
+    {
+      "id": "q7",
+      "question": "Where should the `transition` property be placed for a hover effect?",
+      "options": [
+        "On the :hover pseudo-class",
+        "On the base state of the element (not the :hover)",
+        "On the parent element",
+        "It doesn't matter — either location works identically"
+      ],
+      "correctIndex": 1,
+      "explanation": "The `transition` property should be placed on the base state (e.g., `.btn`), not on the `:hover` state. This ensures the transition animates both when the user hovers (entering) AND when they move away (leaving). Placing it on :hover would only animate the entrance, and the exit would snap back instantly."
+    },
+    {
+      "id": "q8",
+      "question": "What is the purpose of CSS custom properties (variables) defined on `:root`?",
+      "options": [
+        "They only apply to the <html> element itself",
+        "They create JavaScript variables accessible from CSS",
+        "They define global values that can be referenced anywhere in the stylesheet with var()",
+        "They override all other styles with the highest specificity"
+      ],
+      "correctIndex": 2,
+      "explanation": "CSS custom properties defined on `:root` (which targets the `<html>` element) are available globally throughout the stylesheet. Any rule can reference them with `var(--property-name)`. This makes it easy to maintain consistent colors, fonts, spacing, and other values from a single location."
+    },
+    {
+      "id": "q9",
+      "question": "Two sibling paragraphs have `margin-bottom: 20px` and `margin-top: 16px` respectively. How much space appears between them?",
+      "options": [
+        "36px (the margins add together)",
+        "20px (the larger margin wins due to margin collapse)",
+        "16px (the smaller margin wins)",
+        "18px (the browser averages the two values)"
+      ],
+      "correctIndex": 1,
+      "explanation": "This is margin collapse in action. When top and bottom margins of adjacent block elements meet, they don't add up — the larger margin wins. The 20px bottom margin and 16px top margin collapse into a single 20px gap."
+    },
+    {
+      "id": "q10",
+      "question": "In BEM naming convention, what does the class `.card--featured` represent?",
+      "options": [
+        "An element inside the card component called 'featured'",
+        "A modifier that represents a variation of the card component",
+        "A child block nested inside the card block",
+        "A pseudo-class applied to the card on hover"
+      ],
+      "correctIndex": 1,
+      "explanation": "In BEM (Block, Element, Modifier), double hyphens (`--`) indicate a modifier — a variation of the block or element. `.card--featured` is a modified version of the `.card` block. Elements use double underscores (`.card__title`), and modifiers use double hyphens (`.card--featured`)."
+    }
+  ]
+}

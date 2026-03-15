@@ -1,0 +1,94 @@
+{
+  "object": "database",
+  "title": "Bridge Tracker",
+  "description": "Weekly progress tracking for The Bridge interview accountability program. Each member creates one row per week.",
+  "properties": {
+    "Name": { "type": "title", "title": {} },
+    "Week": {
+      "type": "select",
+      "select": {
+        "options": [
+          { "name": "Week 0", "color": "default" },
+          { "name": "Week 1", "color": "gray" },
+          { "name": "Week 2", "color": "brown" },
+          { "name": "Week 3", "color": "orange" },
+          { "name": "Week 4", "color": "yellow" },
+          { "name": "Week 5", "color": "green" },
+          { "name": "Week 6", "color": "blue" },
+          { "name": "Week 7", "color": "purple" },
+          { "name": "Week 8", "color": "pink" }
+        ]
+      }
+    },
+    "Pod": {
+      "type": "select",
+      "select": {
+        "options": [
+          { "name": "Frontend / Full-Stack", "color": "blue" },
+          { "name": "Backend / Infra", "color": "green" },
+          { "name": "Mobile", "color": "orange" },
+          { "name": "Data", "color": "purple" },
+          { "name": "Design", "color": "pink" },
+          { "name": "Product / PM", "color": "yellow" }
+        ]
+      }
+    },
+    "Cohort": {
+      "type": "select",
+      "select": {
+        "options": [
+          { "name": "bridge-2026-spring", "color": "green" },
+          { "name": "bridge-2026-summer", "color": "yellow" },
+          { "name": "bridge-2026-fall", "color": "orange" }
+        ]
+      }
+    },
+    "DSA Problems": { "type": "number", "number": { "format": "number" } },
+    "System Design Sessions": { "type": "number", "number": { "format": "number" } },
+    "Behavioral Prep": { "type": "number", "number": { "format": "number" } },
+    "Mock Interviews": { "type": "number", "number": { "format": "number" } },
+    "Applications Sent": { "type": "number", "number": { "format": "number" } },
+    "Interviews Scheduled": { "type": "number", "number": { "format": "number" } },
+    "Offers Received": { "type": "number", "number": { "format": "number" } },
+    "Pod Meeting Attended": { "type": "checkbox", "checkbox": {} },
+    "Focus This Week": {
+      "type": "select",
+      "select": {
+        "options": [
+          { "name": "DSA", "color": "blue" },
+          { "name": "System Design", "color": "purple" },
+          { "name": "Behavioral", "color": "green" },
+          { "name": "Applications", "color": "orange" },
+          { "name": "Mix", "color": "gray" }
+        ]
+      }
+    },
+    "Confidence": {
+      "type": "select",
+      "select": {
+        "options": [
+          { "name": "1 - Struggling", "color": "red" },
+          { "name": "2 - Low", "color": "orange" },
+          { "name": "3 - Steady", "color": "yellow" },
+          { "name": "4 - Good", "color": "green" },
+          { "name": "5 - Strong", "color": "blue" }
+        ]
+      }
+    },
+    "Blockers": { "type": "rich_text", "rich_text": {} },
+    "Wins": { "type": "rich_text", "rich_text": {} },
+    "Reflection": { "type": "rich_text", "rich_text": {} },
+    "Slack Handle": { "type": "rich_text", "rich_text": {} },
+    "Email": { "type": "email", "email": {} },
+    "Status": {
+      "type": "status",
+      "status": {
+        "options": [
+          { "name": "Active", "color": "blue" },
+          { "name": "Graduated", "color": "green" },
+          { "name": "Dropped", "color": "red" }
+        ]
+      }
+    }
+  }
+}

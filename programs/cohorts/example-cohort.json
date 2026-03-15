@@ -1,0 +1,11 @@
+{
+  "cohortId": "2026-Q1",
+  "program": "fast-track",
+  "startDate": "2026-01-15",
+  "endDate": "2026-06-30",
+  "notionDbId": "",
+  "slackChannel": "cohort-2026-q1",
+  "tracks": ["Android Dev", "UX Design", "Data Analytics"],
+  "mentors": [],
+  "status": "active"
+}

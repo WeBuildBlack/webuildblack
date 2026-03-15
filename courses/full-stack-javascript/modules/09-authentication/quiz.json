@@ -1,0 +1,124 @@
+{
+  "questions": [
+    {
+      "id": "q1",
+      "question": "A user is logged in but tries to delete another user's post. Your server returns a 403. Which concept does this represent?",
+      "options": [
+        "Authentication failure",
+        "Authorization failure",
+        "Rate limiting",
+        "Session expiry"
+      ],
+      "correctIndex": 1,
+      "explanation": "403 Forbidden means the user is authenticated (their identity is confirmed) but not authorized to perform that action. A 401 would indicate they are not logged in at all."
+    },
+    {
+      "id": "q2",
+      "question": "Which of the following best describes why bcrypt is preferred over SHA-256 for storing passwords?",
+      "options": [
+        "bcrypt produces longer hashes, making them harder to guess",
+        "bcrypt is a two-way function, so you can recover the password if needed",
+        "bcrypt is intentionally slow and includes a built-in salt, making brute-force attacks expensive",
+        "SHA-256 does not support special characters in passwords"
+      ],
+      "correctIndex": 2,
+      "explanation": "bcrypt is designed to be computationally expensive (configurable via salt rounds) and automatically salts each hash. SHA-256 is a general-purpose fast hash -- great for file integrity, but too fast for passwords. The speed that makes SHA-256 efficient for checksums makes it dangerous for passwords."
+    },
+    {
+      "id": "q3",
+      "question": "What is the purpose of a salt in password hashing?",
+      "options": [
+        "To encrypt the hash so only the server can read it",
+        "To add random data to each password before hashing, so two users with the same password get different hashes",
+        "To increase the length of the stored hash for extra security",
+        "To allow the server to recover the original password if needed"
+      ],
+      "correctIndex": 1,
+      "explanation": "A salt is random data added to the password before hashing. This means two users with the same password (e.g., 'password123') will have completely different hashes. Without salts, precomputed rainbow tables can reverse common password hashes instantly."
+    },
+    {
+      "id": "q4",
+      "question": "In a session-based auth flow, what does the session ID stored in the browser cookie represent?",
+      "options": [
+        "The user's encoded profile data, including their role and email",
+        "A cryptographic proof of the user's identity signed with the server's private key",
+        "An opaque random string that points to session data stored on the server",
+        "The user's hashed password for quick re-authentication"
+      ],
+      "correctIndex": 2,
+      "explanation": "The session ID is just a random, opaque identifier. The actual user data (userId, etc.) lives on the server in the session store. When the browser sends the cookie, the server looks up the session by ID. This is the core difference from JWTs, where the token itself carries the data."
+    },
+    {
+      "id": "q5",
+      "question": "Which part of a JWT contains the user data (like userId and email)?",
+      "options": [
+        "Header",
+        "Payload",
+        "Signature",
+        "The data is encrypted and not readable without the secret key"
+      ],
+      "correctIndex": 1,
+      "explanation": "The payload is the middle segment of a JWT and contains the claims (data). It is Base64URL encoded, not encrypted -- anyone with the token can decode and read the payload. Only the signature requires the secret key to verify. This is why you should never put sensitive data like passwords or full SSNs in a JWT payload."
+    },
+    {
+      "id": "q6",
+      "question": "Why should you call `req.session.regenerate()` immediately after a successful login?",
+      "options": [
+        "To clear any previous session data and start with a clean state",
+        "To prevent session fixation attacks, where an attacker pre-sets a known session ID",
+        "To extend the session expiry time after login",
+        "To synchronize the session across multiple server instances"
+      ],
+      "correctIndex": 1,
+      "explanation": "Session fixation is an attack where an attacker obtains a valid session ID before authentication (e.g., by visiting your site), tricks the user into using that session, and then uses it after the user logs in. Regenerating the session ID on login breaks this attack by giving the authenticated session a new, unknown ID."
+    },
+    {
+      "id": "q7",
+      "question": "What does the `httpOnly` flag on a cookie do?",
+      "options": [
+        "Ensures the cookie is only sent over HTTPS connections",
+        "Prevents JavaScript running in the browser from reading the cookie value",
+        "Limits the cookie to requests from the same domain",
+        "Sets the cookie to expire when the browser session ends"
+      ],
+      "correctIndex": 1,
+      "explanation": "`httpOnly: true` means the cookie is inaccessible to JavaScript (including `document.cookie`). This protects the session ID or JWT token from being stolen by XSS-injected scripts. The `secure` flag (separate from `httpOnly`) handles HTTPS-only transmission."
+    },
+    {
+      "id": "q8",
+      "question": "What is the primary advantage of JWT authentication over session-based authentication for a horizontally scaled API?",
+      "options": [
+        "JWTs are encrypted, so they are more secure than session cookies",
+        "JWTs can be verified by any server instance without a shared session store",
+        "JWTs automatically expire and cannot be revoked, which is a security feature",
+        "JWTs are smaller than session cookies, reducing bandwidth usage"
+      ],
+      "correctIndex": 1,
+      "explanation": "JWTs are stateless: verification only requires the secret key, which every server instance has. Session-based auth requires all servers to access the same session store (Redis, DB). With JWTs, you can add server instances freely without coordinating session state. Note: this also makes revocation harder, which is a tradeoff, not a benefit."
+    },
+    {
+      "id": "q9",
+      "question": "Which of the following code patterns is vulnerable to SQL injection?",
+      "options": [
+        "pool.query('SELECT * FROM users WHERE email = $1', [email])",
+        "pool.query(`SELECT * FROM users WHERE email = '${email}'`)",
+        "pool.query('SELECT id, email FROM users WHERE id = $1', [req.userId])",
+        "pool.query('INSERT INTO posts (title, content) VALUES ($1, $2)', [title, content])"
+      ],
+      "correctIndex": 1,
+      "explanation": "Template literal string interpolation directly in a SQL query is never safe. If `email` is `' OR '1'='1`, the query becomes `SELECT * FROM users WHERE email = '' OR '1'='1'`, which returns all users. Parameterized queries ($1, $2) let the database driver handle escaping safely."
+    },
+    {
+      "id": "q10",
+      "question": "Your blog API uses JWT tokens stored in httpOnly cookies. A user reports that after they click 'Logout', they can still access protected routes if they replay a captured request with the old cookie. What is the most likely cause?",
+      "options": [
+        "The JWT secret was not rotated on logout",
+        "The logout endpoint only cleared the cookie on the client but did not invalidate the token server-side",
+        "The token's httpOnly flag was not set, allowing the client to delete it",
+        "The token expiry time is too long"
+      ],
+      "correctIndex": 1,
+      "explanation": "JWTs are stateless: the server does not store them, so 'clearing the cookie' only removes the token from that browser. Anyone who captured the raw cookie value can still use it until expiry. True logout with JWTs requires a server-side token blocklist (a table of invalidated token IDs checked on each request) or very short expiry times paired with refresh tokens."
+    }
+  ]
+}

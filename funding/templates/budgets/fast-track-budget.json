@@ -1,0 +1,61 @@
+{
+  "program": "Fast Track Workforce Training Program",
+  "period": "12 months",
+  "totalBudget": 150000,
+  "lineItems": [
+    {
+      "category": "Personnel",
+      "description": "Program Manager (0.5 FTE) — recruitment, cohort coordination, mentor management, milestone tracking",
+      "amount": 32500,
+      "notes": "$65,000 annual salary at 50% time allocation"
+    },
+    {
+      "category": "Personnel",
+      "description": "Program Assistant (0.25 FTE) — administrative support, data entry, participant communications",
+      "amount": 10000,
+      "notes": "$40,000 annual salary at 25% time allocation"
+    },
+    {
+      "category": "Program Costs",
+      "description": "Participant stipends — 15 participants x 6 milestones x $1,000 per milestone",
+      "amount": 90000,
+      "notes": "Core program incentive; stipends disbursed upon verified milestone completion"
+    },
+    {
+      "category": "Program Costs",
+      "description": "Mentor stipends — 5 mentors x $1,000 each for 12-month commitment",
+      "amount": 5000,
+      "notes": "Industry professionals mentoring 3 participants each"
+    },
+    {
+      "category": "Program Costs",
+      "description": "Curriculum materials and learning resources — subscriptions, textbooks, licenses",
+      "amount": 3000,
+      "notes": "Udemy, Coursera, or equivalent platform licenses for participants"
+    },
+    {
+      "category": "Technology",
+      "description": "Software and tools — Notion workspace, Zoom, collaboration tools",
+      "amount": 1500,
+      "notes": "Annual subscriptions for program management and virtual sessions"
+    },
+    {
+      "category": "Technology",
+      "description": "Participant hardware support — laptop loaner program or subsidies for qualifying participants",
+      "amount": 3000,
+      "notes": "Up to $200 per participant for those demonstrating financial need"
+    },
+    {
+      "category": "Marketing",
+      "description": "Recruitment marketing — social media ads, flyers, community outreach materials",
+      "amount": 1500,
+      "notes": "Targeted outreach to Brooklyn and NYC Black communities"
+    },
+    {
+      "category": "Operations",
+      "description": "Administrative overhead — accounting, insurance, legal, office supplies",
+      "amount": 3500,
+      "notes": "10% indirect costs on non-stipend expenses"
+    }
+  ]
+}

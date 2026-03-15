@@ -1,0 +1,125 @@
+{
+  "title": "APIs and JSON Quiz",
+  "questions": [
+    {
+      "id": "q1",
+      "question": "You send a POST request to create a new user and the server responds with status code 201. What does this mean?",
+      "options": [
+        "The request was received but not yet processed",
+        "The resource was successfully created",
+        "The server redirected you to a new URL",
+        "The request was malformed and rejected"
+      ],
+      "correctIndex": 1,
+      "explanation": "201 Created is the correct status code for a successful POST that results in a new resource being created. It is more specific than 200 OK and signals to the client that a new resource now exists, typically with its server-assigned ID in the response body."
+    },
+    {
+      "id": "q2",
+      "question": "Which of the following is NOT valid JSON?",
+      "options": [
+        "{\"name\": \"Jordan\", \"active\": true}",
+        "{\"scores\": [98, 87, 94], \"count\": 3}",
+        "{'name': 'Jordan', 'active': true}",
+        "{\"value\": null}"
+      ],
+      "correctIndex": 2,
+      "explanation": "JSON requires all strings (including keys) to use double quotes. Single-quoted strings are valid JavaScript but are not valid JSON. The JSON parser will throw a SyntaxError if it encounters single quotes. Options A, B, and D are all valid JSON."
+    },
+    {
+      "id": "q3",
+      "question": "What is the difference between PUT and PATCH?",
+      "options": [
+        "PUT creates a resource; PATCH updates it",
+        "PUT replaces the entire resource; PATCH updates only the specified fields",
+        "PUT is for servers; PATCH is for clients",
+        "PUT requires authentication; PATCH does not"
+      ],
+      "correctIndex": 1,
+      "explanation": "PUT replaces the complete representation of a resource. Any fields you omit may be cleared or set to defaults. PATCH applies a partial update, changing only the fields included in the request body and leaving everything else unchanged. For most update operations, PATCH is the safer choice."
+    },
+    {
+      "id": "q4",
+      "question": "Your request receives a 403 Forbidden response. What is the most likely cause?",
+      "options": [
+        "Your API key or token is expired or missing entirely",
+        "The resource does not exist at this URL",
+        "You are authenticated, but your account lacks permission for this action",
+        "You have exceeded the API rate limit"
+      ],
+      "correctIndex": 2,
+      "explanation": "403 Forbidden means the server understood the request and the caller is authenticated, but the caller does not have permission to perform this action. This differs from 401 Unauthorized, which means authentication itself failed or is missing. A 404 means the resource was not found, and 429 means rate limit exceeded."
+    },
+    {
+      "id": "q5",
+      "question": "What does `response.ok` return in the Fetch API?",
+      "options": [
+        "true if the response body is valid JSON",
+        "true if the status code is between 200 and 299 (inclusive)",
+        "true if the request completed without a network error",
+        "true if the Content-Type header is application/json"
+      ],
+      "correctIndex": 1,
+      "explanation": "response.ok is a convenience property that returns true when the HTTP status code is in the 200-299 range, indicating a successful response. It returns false for 3xx, 4xx, and 5xx codes. Note that fetch() itself does NOT reject on HTTP error status codes -- only on network failures. You must check response.ok manually."
+    },
+    {
+      "id": "q6",
+      "question": "You call `JSON.stringify()` on an object that has a property set to `undefined`. What happens to that property?",
+      "options": [
+        "It is serialized as the string \"undefined\"",
+        "It is serialized as null",
+        "It is omitted from the JSON output entirely",
+        "JSON.stringify() throws a TypeError"
+      ],
+      "correctIndex": 2,
+      "explanation": "JSON has no representation for undefined. When JSON.stringify() encounters an undefined value (as an object property value), it silently drops that key from the output. If undefined appears as an array element, it becomes null instead. This is a common source of bugs when developers expect undefined to become null. Use null explicitly if you need to represent an absent value in JSON."
+    },
+    {
+      "id": "q7",
+      "question": "Which HTTP method and URL combination follows REST conventions for updating only the email address of the user with ID 7?",
+      "options": [
+        "POST /users/update?id=7",
+        "PUT /users/7 with full user object in body",
+        "PATCH /users/7 with {\"email\": \"new@example.com\"} in body",
+        "GET /users/7/updateEmail?email=new@example.com"
+      ],
+      "correctIndex": 2,
+      "explanation": "PATCH /users/7 with only the changed field in the body is the correct REST approach for a partial update. PUT /users/7 would also be a valid URL, but PUT semantics require sending the complete resource, not just the changed field. POST /users/update is not RESTful (it uses a verb in the URL). GET requests should never modify data."
+    },
+    {
+      "id": "q8",
+      "question": "You receive a 429 status code from an API. The response includes a `Retry-After: 30` header. What should your code do?",
+      "options": [
+        "Stop making requests to this API permanently",
+        "Immediately retry the request with different headers",
+        "Wait 30 seconds before retrying the request",
+        "Switch to a different HTTP method and retry immediately"
+      ],
+      "correctIndex": 2,
+      "explanation": "429 Too Many Requests means you have exceeded the API's rate limit. The Retry-After header tells you exactly how many seconds to wait before making another request. Retrying immediately will just get another 429. The correct pattern is to implement exponential backoff, using the Retry-After value when provided or calculating a wait time when it is not."
+    },
+    {
+      "id": "q9",
+      "question": "What does the `reviver` function in `JSON.parse(text, reviver)` allow you to do?",
+      "options": [
+        "Validate that the JSON is well-formed before parsing",
+        "Transform values during the parse step before they are returned",
+        "Specify which keys to include in the parsed result",
+        "Convert the parsed object back into a string"
+      ],
+      "correctIndex": 1,
+      "explanation": "The reviver function is called for each key-value pair during JSON.parse(). It receives the key and parsed value, and whatever it returns becomes the actual value used in the result. A common use case is converting ISO 8601 date strings into JavaScript Date objects automatically during parsing, since JSON has no native date type."
+    },
+    {
+      "id": "q10",
+      "question": "Why should API keys and tokens never appear in frontend JavaScript code that runs in the browser?",
+      "options": [
+        "Browser JavaScript cannot make HTTP requests with custom headers",
+        "Any user who opens browser devtools can read the source code and extract the key",
+        "The browser's same-origin policy blocks requests using API keys",
+        "API keys only work in Node.js environments, not browsers"
+      ],
+      "correctIndex": 1,
+      "explanation": "Any JavaScript that runs in the browser is fully readable by any user who opens the browser's developer tools and looks at the Sources panel or Network tab. This means any API key embedded in frontend code is exposed to every visitor to your site. Sensitive credentials must only be used in server-side code. The browser should call your own backend, which then calls the third-party API using the secret key stored in an environment variable."
+    }
+  ]
+}

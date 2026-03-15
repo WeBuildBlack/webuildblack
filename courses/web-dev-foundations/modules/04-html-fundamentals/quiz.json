@@ -1,0 +1,125 @@
+{
+  "title": "HTML Fundamentals Quiz",
+  "questions": [
+    {
+      "id": "q1",
+      "question": "What is the purpose of the <!DOCTYPE html> declaration at the top of an HTML file?",
+      "options": [
+        "It tells the browser the document is written in HTML5",
+        "It creates the root element of the page",
+        "It links the page to a CSS stylesheet",
+        "It sets the language of the page to English"
+      ],
+      "correctIndex": 0,
+      "explanation": "The <!DOCTYPE html> declaration tells the browser that this document is written in HTML5, the current version of HTML. It must be the very first line in your HTML file, before the <html> tag. Without it, the browser may render the page in a legacy compatibility mode."
+    },
+    {
+      "id": "q2",
+      "question": "Which of the following correctly nests HTML elements?",
+      "options": [
+        "<p>This is <strong>very important</p></strong>",
+        "<p>This is <strong>very important</strong></p>",
+        "<strong><p>This is very important</p></strong>",
+        "<p>This is </p><strong>very important</strong>"
+      ],
+      "correctIndex": 1,
+      "explanation": "HTML elements must be closed in the reverse order they were opened. In the correct answer, <strong> opens inside <p> and closes before </p> closes. The first option has overlapping tags (the </p> closes before </strong>), which is invalid. Think of it like stacking cups — you must remove the inner cup before the outer one."
+    },
+    {
+      "id": "q3",
+      "question": "What is the difference between <strong> and <b> in HTML?",
+      "options": [
+        "<strong> is newer and <b> is deprecated",
+        "<strong> makes text bigger while <b> only makes it bold",
+        "<strong> indicates the content is important (semantic meaning) while <b> is only visual styling",
+        "There is no difference; they are interchangeable"
+      ],
+      "correctIndex": 2,
+      "explanation": "The <strong> element carries semantic meaning — it tells browsers and screen readers that the content is important. A screen reader will emphasize it when reading aloud. The <b> element only applies visual bold styling without any added meaning. Best practice is to default to <strong> when the text is genuinely important."
+    },
+    {
+      "id": "q4",
+      "question": "You have a form with a text input for an email address. Which combination of attributes provides the best user experience and accessibility?",
+      "options": [
+        "<input type=\"text\" name=\"email\" placeholder=\"Email\">",
+        "<input type=\"email\" name=\"email\" id=\"email\" required> with <label for=\"email\">Email</label>",
+        "<input type=\"email\" name=\"email\" placeholder=\"Email\" required>",
+        "<input type=\"text\" name=\"email\" id=\"email\"> with <label for=\"email\">Email</label>"
+      ],
+      "correctIndex": 1,
+      "explanation": "The best combination uses type=\"email\" (which provides built-in validation and shows the @ key on mobile keyboards), a <label> connected via matching for/id attributes (essential for screen readers), the required attribute (prevents empty submissions), and a name attribute (so the data is sent with the form). Placeholder text alone is not a substitute for a label — it disappears when the user starts typing."
+    },
+    {
+      "id": "q5",
+      "question": "Which HTML element should you use for the primary content area of a webpage — the content that is unique to that page?",
+      "options": [
+        "<div id=\"content\">",
+        "<section>",
+        "<article>",
+        "<main>"
+      ],
+      "correctIndex": 3,
+      "explanation": "The <main> element represents the primary content of a page — the content that is unique to that specific page and not repeated across other pages (unlike headers, navs, and footers). There should be only one <main> per page. Screen reader users can use a keyboard shortcut to jump directly to <main>, skipping navigation. A <div> with an id is functionally similar but lacks the semantic meaning that assistive technologies rely on."
+    },
+    {
+      "id": "q6",
+      "question": "What is the correct alt text approach for a company logo that links to the homepage?",
+      "options": [
+        "<a href=\"/\"><img src=\"logo.png\"></a>",
+        "<a href=\"/\"><img src=\"logo.png\" alt=\"logo image\"></a>",
+        "<a href=\"/\"><img src=\"logo.png\" alt=\"Company Name - go to homepage\"></a>",
+        "<a href=\"/\"><img src=\"logo.png\" alt=\"\"></a>"
+      ],
+      "correctIndex": 2,
+      "explanation": "When an image serves as a link, the alt text should describe the function (what happens when you click it), not just what the image looks like. 'Company Name - go to homepage' tells a screen reader user both what the image is and where the link goes. An empty alt would make the link invisible to screen readers. 'logo image' is vague and redundant (screen readers already announce it as an image)."
+    },
+    {
+      "id": "q7",
+      "question": "Which attribute must be added alongside target=\"_blank\" on an anchor tag for security?",
+      "options": [
+        "aria-label=\"external link\"",
+        "rel=\"noopener noreferrer\"",
+        "type=\"external\"",
+        "secure=\"true\""
+      ],
+      "correctIndex": 1,
+      "explanation": "When using target=\"_blank\" to open a link in a new tab, you should always include rel=\"noopener noreferrer\" for security. Without it, the newly opened page could potentially access information about the page that opened it through the window.opener API. The noopener value prevents this access, and noreferrer additionally prevents the new page from knowing which page sent the user there."
+    },
+    {
+      "id": "q8",
+      "question": "You are building a navigation menu for a website. What is the most semantic way to structure it?",
+      "options": [
+        "<div class=\"nav\"><a href=\"/\">Home</a> <a href=\"/about\">About</a></div>",
+        "<nav><a href=\"/\">Home</a> <a href=\"/about\">About</a></nav>",
+        "<nav><ul><li><a href=\"/\">Home</a></li><li><a href=\"/about\">About</a></li></ul></nav>",
+        "<ul><li><a href=\"/\">Home</a></li><li><a href=\"/about\">About</a></li></ul>"
+      ],
+      "correctIndex": 2,
+      "explanation": "The most semantic approach wraps the links in a <nav> element (which tells screen readers this is a navigation section) and uses an unordered list (<ul>) with list items (<li>) to group the links (which communicates that these are a related set of items). A <div> with a class provides no semantic meaning. A <nav> with bare links works but lacks the list structure. A list without <nav> is missing the navigation landmark."
+    },
+    {
+      "id": "q9",
+      "question": "In an HTML form, what makes radio buttons mutually exclusive (so only one can be selected at a time)?",
+      "options": [
+        "They must all have the same id attribute",
+        "They must all have the same name attribute",
+        "They must be wrapped in the same <fieldset> element",
+        "They must all have type=\"radio-exclusive\""
+      ],
+      "correctIndex": 1,
+      "explanation": "Radio buttons are grouped by sharing the same name attribute. When multiple radio buttons have the same name, the browser knows they belong to the same group and only allows one to be selected at a time. Each radio button needs its own unique id (for connecting to its label) and value (for identifying which option was chosen), but it is the shared name that creates the mutual exclusivity."
+    },
+    {
+      "id": "q10",
+      "question": "A keyboard user is trying to navigate your webpage but cannot reach a clickable element that triggers an important action. Which of the following is the most likely cause?",
+      "options": [
+        "The element is a <button> with no text content",
+        "The element is a <div> with an onclick handler instead of a <button>",
+        "The element is an <a> tag without an href attribute",
+        "Both B and C are likely causes"
+      ],
+      "correctIndex": 3,
+      "explanation": "Both are likely causes. A <div> with an onclick handler is not focusable by keyboard — users cannot Tab to it or activate it with Enter. The fix is to use a <button> element, which is keyboard-accessible by default. Similarly, an <a> tag without an href attribute is not added to the tab order, making it unreachable by keyboard. Always use native interactive elements (<button>, <a href=\"...\"> ) to ensure keyboard accessibility."
+    }
+  ]
+}

@@ -1,0 +1,125 @@
+{
+  "title": "Django Web Framework Quiz",
+  "questions": [
+    {
+      "id": "q1",
+      "question": "What is the main philosophical difference between Django and Express?",
+      "options": [
+        "Django is faster than Express",
+        "Django follows a 'batteries included' approach with built-in ORM, auth, and admin, while Express requires you to choose and install each piece separately",
+        "Express supports more databases than Django",
+        "Django only works with Python 3.12 while Express works with any Node version"
+      ],
+      "explanation": "Django ships with an ORM, authentication, admin panel, migrations, and a test runner out of the box. Express is minimal by design and relies on third-party packages for these features.",
+      "correctIndex": 1
+    },
+    {
+      "id": "q2",
+      "question": "Which Django ORM query retrieves all events with a capacity of 50 or more that belong to the 'Workshop' category?",
+      "options": [
+        "Event.objects.get(capacity=50, category='Workshop')",
+        "Event.objects.filter(capacity__gte=50, category__name='Workshop')",
+        "Event.objects.where(capacity >= 50).and(category.name == 'Workshop')",
+        "Event.objects.find({capacity: {$gte: 50}, category: 'Workshop'})"
+      ],
+      "explanation": "Django uses double-underscore lookups for query operators. __gte means 'greater than or equal to', and category__name traverses the ForeignKey relationship to filter by the category's name field.",
+      "correctIndex": 1
+    },
+    {
+      "id": "q3",
+      "question": "What is the purpose of running 'python manage.py makemigrations' followed by 'python manage.py migrate'?",
+      "options": [
+        "makemigrations starts the server and migrate connects to the database",
+        "makemigrations generates Python migration files by diffing your models against the previous state, and migrate executes the SQL to update the database schema",
+        "makemigrations creates a backup and migrate restores it",
+        "makemigrations installs dependencies and migrate runs tests"
+      ],
+      "explanation": "makemigrations compares your current model definitions to the last migration state and generates a new migration file with the necessary changes. migrate then applies those changes to the actual database.",
+      "correctIndex": 1
+    },
+    {
+      "id": "q4",
+      "question": "What is the key difference between a function-based view (FBV) and a class-based view (CBV) in Django?",
+      "options": [
+        "FBVs are faster than CBVs",
+        "CBVs can only handle GET requests",
+        "FBVs use a single function that checks request.method, while CBVs organize HTTP methods into separate class methods (get, post, put, delete)",
+        "FBVs are deprecated in Django 5.0"
+      ],
+      "explanation": "FBVs are functions decorated with @api_view that handle all HTTP methods in one function. CBVs use Python classes where each HTTP method has its own method (get(), post(), put(), delete()), making CRUD endpoints more organized.",
+      "correctIndex": 2
+    },
+    {
+      "id": "q5",
+      "question": "What does a DRF serializer do?",
+      "options": [
+        "It only converts Python objects to JSON",
+        "It handles both serialization (model instances to JSON) and deserialization (incoming JSON to validated Python data), combining the roles of validation schemas and response formatters",
+        "It encrypts data before sending it to the client",
+        "It compresses API responses for faster transfer"
+      ],
+      "explanation": "Serializers handle two-way data transformation. On the way out, they convert model instances to dictionaries (which become JSON). On the way in, they validate incoming data and can create or update model instances. This combines what you'd do with Zod/Joi for validation and manual response mapping in Express.",
+      "correctIndex": 1
+    },
+    {
+      "id": "q6",
+      "question": "What advantage does ModelSerializer have over the base Serializer class?",
+      "options": [
+        "ModelSerializer is more secure",
+        "ModelSerializer automatically generates serializer fields from your model definition, eliminating the need to manually declare each field",
+        "ModelSerializer supports more data types",
+        "ModelSerializer works without a database"
+      ],
+      "explanation": "ModelSerializer inspects your Django model and auto-generates the corresponding serializer fields, including the correct field types, max_length, required settings, and relationship handling. You only need to specify the model and the list of fields in the Meta class.",
+      "correctIndex": 1
+    },
+    {
+      "id": "q7",
+      "question": "How do ViewSets and Routers reduce boilerplate in a DRF application?",
+      "options": [
+        "They generate frontend code automatically",
+        "A ViewSet combines list, create, retrieve, update, and delete logic into one class, and a Router auto-generates the URL patterns for all these actions",
+        "They eliminate the need for models",
+        "They replace the need for serializers"
+      ],
+      "explanation": "A ModelViewSet with a queryset and serializer_class provides full CRUD in just a few lines. The Router then auto-generates URL patterns for list (GET /), create (POST /), retrieve (GET /{pk}/), update (PUT /{pk}/), partial update (PATCH /{pk}/), and delete (DELETE /{pk}/).",
+      "correctIndex": 1
+    },
+    {
+      "id": "q8",
+      "question": "How does the IsEventOrganizer custom permission class work?",
+      "options": [
+        "It checks if the user is a Django superuser",
+        "It allows read access (GET, HEAD, OPTIONS) for anyone, but only allows write access (POST, PUT, PATCH, DELETE) if the request user matches the event's organizer field",
+        "It blocks all access unless the user has a special 'organizer' role",
+        "It only allows access during business hours"
+      ],
+      "explanation": "IsEventOrganizer implements has_object_permission. It checks if the request method is in SAFE_METHODS (GET, HEAD, OPTIONS) and allows those for everyone. For write methods, it compares obj.organizer to request.user and only allows access if they match.",
+      "correctIndex": 1
+    },
+    {
+      "id": "q9",
+      "question": "What is the difference between DRF's TokenAuthentication and JWT authentication?",
+      "options": [
+        "They are identical",
+        "TokenAuthentication stores tokens in the database and requires a lookup on each request (allowing instant revocation), while JWT tokens are stateless and verified using a secret key (no database lookup needed)",
+        "JWT is only for mobile apps",
+        "TokenAuthentication requires HTTPS but JWT does not"
+      ],
+      "explanation": "TokenAuthentication is database-backed, meaning each request involves a database query to validate the token, but tokens can be revoked instantly by deleting the row. JWT tokens are self-contained and verified cryptographically, so they don't need a database lookup, but they can't be revoked until they expire.",
+      "correctIndex": 1
+    },
+    {
+      "id": "q10",
+      "question": "In DRF's APITestCase, what does self.client.credentials(HTTP_AUTHORIZATION='Token abc123') do?",
+      "options": [
+        "It creates a new user with that token",
+        "It sets the Authorization header on all subsequent requests made by self.client, so the test client sends authenticated requests",
+        "It validates that the token exists in the database",
+        "It generates a new token for the current user"
+      ],
+      "explanation": "self.client.credentials() sets default headers on the test client. After calling it with an Authorization header, every subsequent request (get, post, put, delete) made by self.client will include that header, simulating an authenticated user.",
+      "correctIndex": 1
+    }
+  ]
+}

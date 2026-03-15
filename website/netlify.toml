@@ -1,0 +1,50 @@
+[build]
+  publish = "src"
+
+# Redirect old Gatsby URLs to new flat paths
+[[redirects]]
+  from = "/get-involved/events/mavens-conference"
+  to = "/programs/mavens-io.html"
+  status = 301
+
+[[redirects]]
+  from = "/get-involved/events/meetups"
+  to = "/get-involved/meetups.html"
+  status = 301
+
+[[redirects]]
+  from = "/get-involved/programs/fast-track"
+  to = "/programs/fast-track.html"
+  status = 301
+
+[[redirects]]
+  from = "/get-involved/programs/school-coding"
+  to = "/programs/crowns-of-code.html"
+  status = 301
+
+[[redirects]]
+  from = "/make-an-impact/partner"
+  to = "/impact/partner.html"
+  status = 301
+
+[[redirects]]
+  from = "/make-an-impact/partner/apply"
+  to = "/impact/partner-apply.html"
+  status = 301
+
+[[redirects]]
+  from = "/make-an-impact/hire"
+  to = "/impact/hire.html"
+  status = 301
+
+[[redirects]]
+  from = "/make-an-impact/volunteer"
+  to = "/get-involved/volunteer.html"
+  status = 301
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"

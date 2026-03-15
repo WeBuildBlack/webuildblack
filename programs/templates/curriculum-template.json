@@ -1,0 +1,23 @@
+{
+  "object": "database",
+  "title": "Curriculum Planner",
+  "description": "Plan and organize curriculum modules for a WBB program",
+  "properties": {
+    "Module": { "type": "title", "title": {} },
+    "Week": { "type": "number", "number": { "format": "number" } },
+    "Topic": { "type": "rich_text", "rich_text": {} },
+    "Learning Objectives": { "type": "rich_text", "rich_text": {} },
+    "Deliverables": { "type": "rich_text", "rich_text": {} },
+    "Resources": { "type": "url", "url": {} },
+    "Status": {
+      "type": "select",
+      "select": {
+        "options": [
+          { "name": "Draft", "color": "gray" },
+          { "name": "Review", "color": "yellow" },
+          { "name": "Final", "color": "green" }
+        ]
+      }
+    }
+  }
+}

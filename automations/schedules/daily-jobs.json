@@ -1,0 +1,38 @@
+{
+  "jobs": [
+    {
+      "name": "cohort-daily-reminder",
+      "script": "slack/send-reminder.js",
+      "cron": "0 9 * * 1-5",
+      "description": "Send weekday morning reminders to active cohort members",
+      "enabled": true,
+      "notionSource": "NOTION_COHORT_DB_ID",
+      "slackTarget": "cohort channel from cohort config"
+    },
+    {
+      "name": "weekly-digest",
+      "script": "slack/weekly-digest.js",
+      "cron": "0 10 * * 5",
+      "description": "Send weekly community digest every Friday",
+      "enabled": true
+    },
+    {
+      "name": "bridge-weekly-coaching",
+      "script": "slack/bridge-weekly-coaching.js --cohort=bridge-2026-spring",
+      "cron": "0 9 * * 1",
+      "description": "Send personalized coaching DMs to Bridge members every Monday morning",
+      "enabled": true,
+      "notionSource": "NOTION_BRIDGE_DB_ID",
+      "slackTarget": "Slack DMs to individual members"
+    },
+    {
+      "name": "grant-deadline-reminder",
+      "script": "../funding/scripts/notify/deadline-reminder.js",
+      "cron": "0 9 * * 1",
+      "description": "Send Slack alerts for grant deadlines approaching within 14 days (Monday mornings)",
+      "enabled": false,
+      "notionSource": "NOTION_GRANT_TRACKER_DB_ID",
+      "slackTarget": "SLACK_FUNDING_CHANNEL_ID"
+    }
+  ]
+}

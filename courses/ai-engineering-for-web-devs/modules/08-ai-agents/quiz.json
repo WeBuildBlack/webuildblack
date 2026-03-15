@@ -1,0 +1,125 @@
+{
+  "title": "AI Agents Quiz",
+  "questions": [
+    {
+      "id": "q1",
+      "question": "What is the fundamental difference between a simple LLM call and an AI agent?",
+      "options": [
+        "Agents use larger language models with more parameters",
+        "Agents operate in an observe-think-act loop, making dynamic decisions about which tools to call and when to stop",
+        "Agents always produce more accurate answers because they use multiple models",
+        "Agents require fine-tuning before they can be used, while simple LLM calls do not"
+      ],
+      "correctIndex": 1,
+      "explanation": "The core difference is the loop. A simple LLM call is one input, one output. An agent repeatedly observes its environment (including tool results), reasons about what to do next, takes an action, and decides whether to continue or stop. The developer provides tools and guardrails, but the agent makes dynamic decisions about the flow."
+    },
+    {
+      "id": "q2",
+      "question": "In the ReAct pattern, what is the purpose of the explicit 'Thought' step before each action?",
+      "options": [
+        "It forces the model to use fewer tokens, reducing API costs",
+        "It makes the agent's reasoning transparent and debuggable, and research shows explicit reasoning improves accuracy",
+        "It is required by the OpenAI API when using function calling",
+        "It replaces the need for a system prompt by embedding instructions in each step"
+      ],
+      "correctIndex": 1,
+      "explanation": "The Thought step in ReAct (Reasoning + Acting) serves two purposes: it makes the agent's decision-making process visible so developers can debug issues, and it leverages chain-of-thought reasoning which research shows improves the accuracy of the model's decisions. It is a prompting strategy, not an API requirement."
+    },
+    {
+      "id": "q3",
+      "question": "You are building an agent with 25 different tools. The agent frequently picks the wrong tool for the task. What is the recommended architectural solution?",
+      "options": [
+        "Add more detail to every tool description to help the model distinguish between them",
+        "Use a routing agent that first selects the 5 most relevant tools, then pass only those to the execution agent",
+        "Switch to a larger model like GPT-4o which can handle more tools",
+        "Remove tool descriptions entirely and let the model figure it out from the parameter schemas"
+      ],
+      "correctIndex": 1,
+      "explanation": "When an agent has too many tools (15+), the model struggles to pick the right one. The routing agent pattern solves this by using a lightweight LLM call to select a small subset of relevant tools first, then running the actual agent with only those tools. This two-stage approach is more reliable and cheaper than giving all tools at once."
+    },
+    {
+      "id": "q4",
+      "question": "An agent is executing a multi-step plan and step 3 fails because the Slack API returns a rate limit error. What is the best recovery strategy?",
+      "options": [
+        "Immediately abort the entire plan and report failure to the user",
+        "Skip step 3 and continue with step 4, ignoring the Slack message entirely",
+        "Retry step 3 with exponential backoff, and if it continues to fail, let the agent decide whether to skip, modify, or abort",
+        "Restart the entire plan from step 1 with a fresh context"
+      ],
+      "correctIndex": 2,
+      "explanation": "The best approach combines automatic retry with exponential backoff (since rate limits are temporary) and intelligent recovery if retries are exhausted. The agent should be given the context about the failure and allowed to decide the best course of action -- it might skip the message, try a different channel, or save the message to send later. Aborting the entire plan or ignoring the failure are both too extreme."
+    },
+    {
+      "id": "q5",
+      "question": "Which of the following is NOT a recommended guardrail for production AI agents?",
+      "options": [
+        "Setting a maximum iteration limit to prevent runaway loops",
+        "Tracking total token usage and stopping when a cost threshold is exceeded",
+        "Removing all error messages from tool responses so the agent doesn't get confused",
+        "Requiring user confirmation before executing write operations like sending messages or updating records"
+      ],
+      "correctIndex": 2,
+      "explanation": "Removing error messages from tool responses is harmful, not helpful. When a tool fails, the agent needs to see the error message to understand what went wrong and adjust its strategy. The other three options -- iteration limits, cost tracking, and confirmation for write operations -- are all essential guardrails for production agents."
+    },
+    {
+      "id": "q6",
+      "question": "What is the single biggest factor in agent reliability when using tool calling?",
+      "options": [
+        "Using the largest available LLM model for all tool calls",
+        "Clear, specific tool descriptions with parameter details -- the model decides which tool to call based on the description",
+        "Minimizing the number of tools to exactly one per agent",
+        "Always using structured output mode instead of tool calling"
+      ],
+      "correctIndex": 1,
+      "explanation": "The tool description is the most important factor in agent reliability. The LLM never sees your implementation code -- it only sees the name, description, and parameter schema. A vague description like 'Gets data' leads to misuse, while a clear description like 'Search the WBB member directory by name. Returns track, cohort, milestone, and email.' gives the model the information it needs to call the right tool at the right time with the right arguments."
+    },
+    {
+      "id": "q7",
+      "question": "What are the recommended strategies for managing agent costs?",
+      "options": [
+        "Only use free-tier models and avoid paid APIs entirely",
+        "Set MAX_ITERATIONS, use cheaper models for agent loops, and track token usage per run -- an uncontrolled agent can make dozens of expensive API calls",
+        "Limit each agent to a single tool call to minimize LLM requests",
+        "Cache all LLM responses indefinitely and replay them instead of making new calls"
+      ],
+      "correctIndex": 1,
+      "explanation": "Agent cost management requires multiple strategies working together. Setting MAX_ITERATIONS prevents runaway loops. Using cheaper models (like GPT-4o-mini instead of GPT-4o) for agent loops significantly reduces per-iteration cost. Tracking token usage per run gives you visibility into actual spending. Together, these prevent the common scenario where an uncontrolled agent makes dozens of expensive API calls on a single task."
+    },
+    {
+      "id": "q8",
+      "question": "When are planning agents better than reactive (one-step-at-a-time) agents?",
+      "options": [
+        "Planning agents are always better because they produce more thorough results",
+        "Planning agents are better for simple, single-tool tasks where speed matters",
+        "Planning agents are better for multi-step tasks with dependencies between steps -- they create a roadmap first, preventing wasted work from wrong-order execution",
+        "Planning agents are better only when the LLM supports structured output mode"
+      ],
+      "correctIndex": 2,
+      "explanation": "Planning agents excel at complex tasks where steps depend on each other. For example, launching a cohort requires creating the database before importing members, and importing members before sending welcome messages. A reactive agent might try to send welcome messages before having a member list. A planning agent creates the full roadmap first, identifies dependencies, and executes steps in the right order. For simple tasks, reactive agents are faster and sufficient."
+    },
+    {
+      "id": "q9",
+      "question": "What is the key architectural advantage of LangGraph over a hand-rolled agent loop for production agents?",
+      "options": [
+        "LangGraph uses a faster LLM under the hood for better tool selection",
+        "LangGraph models agents as stateful graphs with persistent checkpoints, enabling crash recovery, human-in-the-loop approval, and resumable execution",
+        "LangGraph eliminates the need for tool descriptions by automatically detecting available functions",
+        "LangGraph runs all tool calls in parallel, which a hand-rolled loop cannot do"
+      ],
+      "correctIndex": 1,
+      "explanation": "LangGraph's core advantage is its graph-based state management with persistent checkpointing. Every step in the graph saves state, so if the agent crashes after 5 tool calls, it resumes from step 6 instead of restarting. This also enables human-in-the-loop: the graph pauses at designated nodes (like before executing write operations), waits for human approval, then resumes. A hand-rolled loop loses all state on crash and requires custom code for approval flows."
+    },
+    {
+      "id": "q10",
+      "question": "When would you choose CrewAI over LangGraph for an agent system?",
+      "options": [
+        "When you need persistent state across server restarts",
+        "When your task naturally decomposes into specialized roles (researcher, writer, reviewer) that collaborate sequentially or hierarchically",
+        "When you need complex conditional branching with parallel execution paths",
+        "When you need human-in-the-loop approval before every tool call"
+      ],
+      "correctIndex": 1,
+      "explanation": "CrewAI excels when your task maps naturally to a team of specialists. Instead of one agent with many tools, you create separate agents (researcher, writer, reviewer) each with their own role, backstory, and tools. Tasks flow between agents like work flowing between team members. This is intuitive for content pipelines, analysis workflows, and any task where you'd assign different roles to different people. LangGraph is better when you need complex control flow, persistence, or human approval."
+    }
+  ]
+}

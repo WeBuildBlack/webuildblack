@@ -1,0 +1,125 @@
+{
+  "title": "Security and Reliability Patterns",
+  "questions": [
+    {
+      "id": "q1",
+      "question": "Which OWASP Top 10 (2021) category is ranked as the number one security risk for web applications?",
+      "options": [
+        "Injection",
+        "Broken Access Control",
+        "Cryptographic Failures",
+        "Cross-Site Scripting (XSS)"
+      ],
+      "correctIndex": 1,
+      "explanation": "Broken Access Control moved to the number one position in the 2021 OWASP Top 10. It covers cases where users can perform actions or access data outside their intended permissions, such as modifying another user's resources by changing an ID in the URL."
+    },
+    {
+      "id": "q2",
+      "question": "In a Django REST Framework application, what is the primary defense against Cross-Site Scripting (XSS) when rendering data in templates?",
+      "options": [
+        "CSRF middleware",
+        "Django's template auto-escaping",
+        "CORS configuration",
+        "Rate limiting on input endpoints"
+      ],
+      "correctIndex": 1,
+      "explanation": "Django templates auto-escape all variables by default, converting characters like <, >, and & into their HTML entity equivalents. This prevents injected scripts from being executed. In React/Next.js, JSX provides similar protection by escaping values embedded in JSX expressions. The danger arises when you bypass these protections with Django's |safe filter or React's dangerouslySetInnerHTML."
+    },
+    {
+      "id": "q3",
+      "question": "Why is setting CORS_ALLOW_ALL_ORIGINS = True (or Access-Control-Allow-Origin: *) dangerous in a production API?",
+      "options": [
+        "It prevents browsers from caching API responses",
+        "It allows any website to make authenticated requests to your API using a visitor's cookies",
+        "It disables HTTPS encryption for cross-origin requests",
+        "It blocks legitimate frontend applications from accessing the API"
+      ],
+      "correctIndex": 1,
+      "explanation": "When CORS allows all origins, any website on the internet can make requests to your API from a user's browser. If the user is authenticated (via cookies or session), the malicious site can perform actions on their behalf. The fix is to use an explicit allowlist of trusted origins."
+    },
+    {
+      "id": "q4",
+      "question": "A circuit breaker is in the 'Open' state. What happens when your application tries to call the protected function?",
+      "options": [
+        "The call is made normally, and the circuit breaker records the result",
+        "The call is queued and retried when the circuit closes",
+        "The call fails immediately with a CircuitBreakerError without contacting the downstream service",
+        "The call is made with a reduced timeout to test if the service has recovered"
+      ],
+      "correctIndex": 2,
+      "explanation": "In the Open state, the circuit breaker immediately rejects all calls by raising a CircuitBreakerError. It does not contact the downstream service at all. This is the core benefit of the pattern: failing fast instead of waiting for timeouts on a service that is known to be down. After the reset_timeout period expires, the breaker transitions to Half-Open, where it allows a single test call through."
+    },
+    {
+      "id": "q5",
+      "question": "When implementing graceful degradation for a read endpoint, what is the recommended fallback when the database is slow or unreachable?",
+      "options": [
+        "Return a 503 Service Unavailable error immediately",
+        "Retry the database query up to 10 times with exponential backoff",
+        "Serve cached (potentially stale) data and indicate staleness to the client",
+        "Redirect the user to a static maintenance page"
+      ],
+      "correctIndex": 2,
+      "explanation": "Serving cached data with a staleness indicator gives users a degraded but functional experience. The client can display the data with a note like 'showing cached results' rather than showing an error. Retrying would increase load on an already struggling database. Returning 503 or a maintenance page provides no value to the user when you have valid cached data available."
+    },
+    {
+      "id": "q6",
+      "question": "What is the difference between a logical backup (pg_dump) and a physical backup (pg_basebackup) in PostgreSQL?",
+      "options": [
+        "Logical backups are encrypted, physical backups are not",
+        "Logical backups produce SQL statements to recreate data, physical backups copy the raw data files",
+        "Logical backups are faster for large databases, physical backups are faster for small databases",
+        "Logical backups can only back up individual tables, physical backups always capture the entire cluster"
+      ],
+      "correctIndex": 1,
+      "explanation": "pg_dump produces a logical backup containing SQL statements (or a custom binary format) that can recreate the database. pg_basebackup creates a physical backup by copying the actual data files from the PostgreSQL data directory. Logical backups are portable across major versions but slow for large databases. Physical backups are faster for large databases and enable point-in-time recovery with WAL archiving, but only work with the same PostgreSQL major version."
+    },
+    {
+      "id": "q7",
+      "question": "Your disaster recovery plan specifies an RPO of 6 hours and an RTO of 4 hours. What do these metrics mean?",
+      "options": [
+        "RPO: maximum time to detect an outage. RTO: maximum time to notify stakeholders.",
+        "RPO: maximum acceptable data loss measured in time. RTO: maximum acceptable downtime before service is restored.",
+        "RPO: frequency of backup verification tests. RTO: frequency of disaster recovery drills.",
+        "RPO: maximum time to deploy a fix. RTO: maximum time to roll back a failed deployment."
+      ],
+      "correctIndex": 1,
+      "explanation": "Recovery Point Objective (RPO) is the maximum amount of data loss your organization can tolerate, measured in time. An RPO of 6 hours means you can afford to lose up to 6 hours of data (requiring backups at least every 6 hours). Recovery Time Objective (RTO) is the maximum acceptable downtime. An RTO of 4 hours means you must restore service within 4 hours of an outage."
+    },
+    {
+      "id": "q8",
+      "question": "What is the primary principle behind chaos engineering?",
+      "options": [
+        "Randomly breaking production systems to test the alerting pipeline",
+        "Deliberately injecting failures in controlled conditions to discover weaknesses before they cause real incidents",
+        "Running load tests at 10x normal traffic to find the breaking point",
+        "Disabling security controls temporarily to test defense-in-depth"
+      ],
+      "correctIndex": 1,
+      "explanation": "Chaos engineering is about proactively discovering failure modes by injecting realistic failures in a controlled environment. It follows a scientific approach: define a hypothesis about system behavior under failure, define steady-state metrics, inject the failure, observe results, and compare against the hypothesis. The goal is to find weaknesses before they cause production incidents. It is not random destruction. Every experiment has a specific hypothesis and a way to stop immediately if needed."
+    },
+    {
+      "id": "q9",
+      "question": "In a toxiproxy setup, you create a proxy that listens on port 16379 with an upstream of redis:6379. What does adding a 'reset_peer' toxic with timeout=0 simulate?",
+      "options": [
+        "Redis responding with corrupted data",
+        "Redis accepting connections but responding with 500ms latency",
+        "Redis being completely unreachable, with all connections immediately reset",
+        "Redis dropping 50% of incoming packets randomly"
+      ],
+      "correctIndex": 2,
+      "explanation": "The 'reset_peer' toxic with timeout=0 immediately resets (closes) all TCP connections passing through the proxy. This simulates a service that is completely down. The application's connection attempts are rejected instantly rather than timing out, which is a realistic simulation of a crashed or unreachable service. Other toxics like 'latency' add delay, and 'limit_data' with toxicity can simulate packet loss."
+    },
+    {
+      "id": "q10",
+      "question": "What is the purpose of the Content-Security-Policy HTTP header?",
+      "options": [
+        "It encrypts the response body to prevent man-in-the-middle attacks",
+        "It tells the browser which sources of content (scripts, styles, images) are trusted, blocking execution of unauthorized resources",
+        "It replaces CORS by specifying which origins can make API requests",
+        "It enforces HTTPS by redirecting all HTTP requests to HTTPS"
+      ],
+      "correctIndex": 1,
+      "explanation": "Content Security Policy (CSP) instructs the browser to only load and execute resources (JavaScript, CSS, images, fonts, frames) from explicitly trusted sources. Even if an attacker manages to inject a <script> tag into your page, the browser will refuse to execute it if the script's source is not in the CSP allowlist. CSP is the strongest defense against XSS attacks. It is separate from CORS (which controls cross-origin API requests) and HSTS (which enforces HTTPS)."
+    }
+  ]
+}

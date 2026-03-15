@@ -1,0 +1,93 @@
+{
+  "title": "WBB Grant Tracker",
+  "description": "Pipeline for tracking grant opportunities from research through submission",
+  "properties": {
+    "Grant Name": {
+      "type": "title",
+      "description": "Name of the grant opportunity"
+    },
+    "Funder": {
+      "type": "select",
+      "description": "Organization offering the grant",
+      "options": [
+        "Google", "Google.org", "JPMorgan Chase", "Microsoft", "Shopify",
+        "The New York Times", "Birchbox", "Robin Hood Foundation",
+        "New York Community Trust", "Ford Foundation", "Kapor Center",
+        "Mozilla Foundation", "Chan Zuckerberg Initiative", "Other"
+      ]
+    },
+    "Amount": {
+      "type": "number",
+      "format": "dollar",
+      "description": "Grant amount in USD"
+    },
+    "Deadline": {
+      "type": "date",
+      "description": "Application deadline"
+    },
+    "Status": {
+      "type": "select",
+      "description": "Pipeline stage",
+      "options": [
+        "Researched",
+        "Qualified",
+        "Drafting",
+        "Internal Review",
+        "Submitted",
+        "Awarded",
+        "Declined",
+        "Passed"
+      ]
+    },
+    "Program Alignment": {
+      "type": "multi_select",
+      "description": "Which WBB programs this grant supports",
+      "options": [
+        "Fast Track",
+        "Crowns of Code",
+        "The Bridge",
+        "Mavens I/O",
+        "She Builds Black",
+        "General Operations"
+      ]
+    },
+    "Grant Type": {
+      "type": "select",
+      "description": "Category of funding",
+      "options": [
+        "Foundation Grant",
+        "Corporate Sponsorship",
+        "Government Grant",
+        "Community Grant",
+        "Individual Donor",
+        "In-Kind"
+      ]
+    },
+    "Priority Score": {
+      "type": "select",
+      "description": "1 (highest) to 4 (lowest) priority",
+      "options": ["1 - Critical", "2 - High", "3 - Medium", "4 - Low"]
+    },
+    "Effort Level": {
+      "type": "select",
+      "description": "Estimated effort to apply",
+      "options": ["Low (LOI only)", "Medium (short proposal)", "High (full proposal)", "Very High (federal/state)"]
+    },
+    "Match Score": {
+      "type": "number",
+      "description": "Automated match score 0-100 from grant-matcher.js"
+    },
+    "URL": {
+      "type": "url",
+      "description": "Link to grant opportunity page"
+    },
+    "Notes": {
+      "type": "rich_text",
+      "description": "Research notes, requirements, contacts"
+    },
+    "Date Added": {
+      "type": "date",
+      "description": "When this opportunity was first recorded"
+    }
+  }
+}

@@ -1,0 +1,125 @@
+{
+  "title": "Asynchronous JavaScript Quiz",
+  "questions": [
+    {
+      "id": "q1",
+      "question": "What is the output of the following code?\n\nconsole.log('A');\nsetTimeout(() => console.log('B'), 0);\nPromise.resolve().then(() => console.log('C'));\nconsole.log('D');",
+      "options": [
+        "A, B, C, D",
+        "A, D, B, C",
+        "A, D, C, B",
+        "A, C, D, B"
+      ],
+      "correctIndex": 2,
+      "explanation": "Synchronous code runs first (A, D). Then the microtask queue drains (C -- Promise.resolve().then is a microtask). Then the task queue fires (B -- setTimeout is a macro-task). Microtasks always run before the next macro-task."
+    },
+    {
+      "id": "q2",
+      "question": "Which of the following correctly describes the difference between the microtask queue and the task queue?",
+      "options": [
+        "The task queue runs before the microtask queue after each macro-task completes.",
+        "The microtask queue is completely drained before the next task from the task queue is picked up.",
+        "Both queues are drained simultaneously before the call stack executes new code.",
+        "setTimeout callbacks go into the microtask queue and Promise callbacks go into the task queue."
+      ],
+      "correctIndex": 1,
+      "explanation": "After every task (including the initial script), the engine completely drains the microtask queue before picking the next item from the task queue. This is why Promise callbacks always run before setTimeout callbacks scheduled at the same time."
+    },
+    {
+      "id": "q3",
+      "question": "What does this code print?\n\nconst p = new Promise((resolve) => {\n  resolve(1);\n  resolve(2);\n  resolve(3);\n});\np.then(val => console.log(val));",
+      "options": [
+        "1, 2, 3",
+        "3",
+        "1",
+        "undefined"
+      ],
+      "correctIndex": 2,
+      "explanation": "A Promise can only settle once. The first call to resolve(1) moves the Promise to the fulfilled state with value 1. Subsequent resolve calls are silently ignored. The .then callback receives 1."
+    },
+    {
+      "id": "q4",
+      "question": "What is the bug in this code?\n\nasync function getPostsForUser(userId) {\n  const user = await fetchUser(userId);\n  const posts = await fetchPosts(userId);\n  return { user, posts };\n}",
+      "options": [
+        "There is no bug -- this is correct async/await syntax.",
+        "The two awaits are sequential, but fetchPosts does not depend on user. Both should be fetched in parallel with Promise.all.",
+        "async functions cannot return objects -- only primitives.",
+        "await cannot be used on functions that return Promises; it only works on native async operations."
+      ],
+      "correctIndex": 1,
+      "explanation": "fetchPosts(userId) does not depend on the result of fetchUser -- it uses the same userId. Running them sequentially wastes time. They should be launched in parallel: const [user, posts] = await Promise.all([fetchUser(userId), fetchPosts(userId)]). This runs both simultaneously instead of one after the other."
+    },
+    {
+      "id": "q5",
+      "question": "You call Promise.all([p1, p2, p3]) and p2 rejects. What happens?",
+      "options": [
+        "Promise.all waits for p1 and p3 to settle, then rejects with an array of all errors.",
+        "Promise.all immediately rejects with p2's rejection reason. p1 and p3 continue running but their results are ignored.",
+        "Promise.all immediately rejects with p2's rejection reason and cancels p1 and p3.",
+        "Promise.all fulfills with the results of p1 and p3, skipping the failed p2."
+      ],
+      "correctIndex": 1,
+      "explanation": "Promise.all rejects immediately when any input Promise rejects -- this is the 'fail fast' behavior. However, it does NOT cancel the other Promises. p1 and p3 continue running in the background; their results are simply not accessible through Promise.all. Use Promise.allSettled if you need to handle partial failures."
+    },
+    {
+      "id": "q6",
+      "question": "What is the difference between Promise.allSettled and Promise.all?",
+      "options": [
+        "Promise.allSettled is faster because it stops as soon as the first Promise resolves.",
+        "Promise.allSettled waits for all Promises to settle and always fulfills with an array of result objects, regardless of whether any rejected. Promise.all rejects immediately if any Promise rejects.",
+        "Promise.allSettled only works with synchronous code; Promise.all works with async code.",
+        "There is no difference -- they are aliases for the same behavior."
+      ],
+      "correctIndex": 1,
+      "explanation": "Promise.allSettled never rejects. It waits for every Promise to settle (fulfilled or rejected) and returns an array of objects with a 'status' field ('fulfilled' or 'rejected') and either 'value' or 'reason'. This is the right choice when you want to process partial results even if some operations failed."
+    },
+    {
+      "id": "q7",
+      "question": "What does this code do wrong?\n\nasync function loadData() {\n  fetchUser(1).then(user => {\n    fetchPosts(user.id).then(posts => {\n      console.log(posts);\n    });\n  });\n}",
+      "options": [
+        "async functions cannot contain .then() chains.",
+        "The Promises are not returned from the .then() handlers, re-creating a nested callback pyramid instead of a flat chain. Errors will not propagate correctly.",
+        "fetchUser and fetchPosts must be awaited, not chained with .then().",
+        "Nothing is wrong -- this is valid and idiomatic async code."
+      ],
+      "correctIndex": 1,
+      "explanation": "This re-creates the callback pyramid of doom using Promises. The inner .then() is nested inside the outer one, and neither is returned. Error handling is fragmented (no .catch() on either chain). The correct pattern is to chain .then() calls flat: fetchUser(1).then(user => fetchPosts(user.id)).then(posts => console.log(posts)).catch(...)."
+    },
+    {
+      "id": "q8",
+      "question": "You have an async function that makes a fetch request. The user navigates away and you want to cancel the request. Which API should you use?",
+      "options": [
+        "clearTimeout() with the fetch timer ID",
+        "Promise.reject() called on the pending fetch Promise",
+        "AbortController -- pass its .signal to fetch and call .abort() to cancel",
+        "Set the fetch result variable to null"
+      ],
+      "correctIndex": 2,
+      "explanation": "AbortController is the standard browser/Node.js API for cancelling fetch requests. Create a controller, pass controller.signal to fetch as an option, then call controller.abort() to cancel. The fetch will reject with an AbortError. Check err.name === 'AbortError' to distinguish intentional cancellations from genuine failures."
+    },
+    {
+      "id": "q9",
+      "question": "What is printed by this code?\n\nasync function test() {\n  try {\n    const result = await Promise.reject(new Error('oops'));\n    console.log('success:', result);\n  } catch (err) {\n    console.log('caught:', err.message);\n  }\n}\ntest();",
+      "options": [
+        "success: undefined",
+        "caught: oops",
+        "Nothing -- the error is silently swallowed.",
+        "Uncaught Error: oops"
+      ],
+      "correctIndex": 1,
+      "explanation": "When an awaited Promise rejects, it throws inside the async function. The try/catch block catches that throw. So 'caught: oops' is printed. This is one of the main benefits of async/await: you can use standard try/catch for async errors instead of .catch() chains."
+    },
+    {
+      "id": "q10",
+      "question": "Which retry strategy correctly implements exponential backoff between attempts?",
+      "options": [
+        "Retry immediately on each failure, up to maxAttempts times.",
+        "Wait a fixed 1000ms before every retry, regardless of how many attempts have been made.",
+        "Wait baseDelay * 2^(attemptNumber - 1) before each retry, so delays grow as 500ms, 1000ms, 2000ms...",
+        "Wait a random amount of time between 0 and 5000ms for each retry."
+      ],
+      "correctIndex": 2,
+      "explanation": "Exponential backoff doubles the wait time after each failed attempt: attempt 1 waits 500ms, attempt 2 waits 1000ms, attempt 3 waits 2000ms, and so on. This is the formula: baseDelay * Math.pow(2, attempt - 1). Adding a small random jitter (e.g., up to 20% of the delay) prevents multiple clients from retrying simultaneously and overwhelming a recovering server."
+    }
+  ]
+}

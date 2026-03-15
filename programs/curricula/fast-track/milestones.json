@@ -1,0 +1,10 @@
+{
+  "milestones": [
+    { "id": 1, "title": "Foundation", "stipend": 1000, "description": "Complete onboarding, set up dev environment, finish introductory coursework" },
+    { "id": 2, "title": "Core Skills", "stipend": 1000, "description": "Complete core track curriculum and pass assessment" },
+    { "id": 3, "title": "Project Start", "stipend": 1000, "description": "Begin capstone project with mentor guidance" },
+    { "id": 4, "title": "Mid-Point Review", "stipend": 1000, "description": "Present progress to cohort, incorporate feedback" },
+    { "id": 5, "title": "Project Completion", "stipend": 1000, "description": "Complete and present capstone project" },
+    { "id": 6, "title": "Career Launch", "stipend": 1000, "description": "Complete resume, portfolio, and interview prep. Begin job search." }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "name": "wbb-automations",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "WBB automation scripts for Notion and Slack integrations",
+  "scripts": {
+    "reminder": "node scripts/slack/send-reminder.js",
+    "reminder:dry": "node scripts/slack/send-reminder.js --dry-run",
+    "announce": "node scripts/slack/send-announcement.js",
+    "digest": "node scripts/slack/weekly-digest.js",
+    "welcome": "node scripts/slack/welcome-message.js",
+    "bridge:coaching": "node scripts/slack/bridge-weekly-coaching.js",
+    "bridge:coaching:dry": "node scripts/slack/bridge-weekly-coaching.js --dry-run",
+    "cohort:pods": "node scripts/cohort/form-pods-and-notify.js",
+    "cohort:pods:dry": "node scripts/cohort/form-pods-and-notify.js --dry-run",
+    "cohort:coaching": "node scripts/cohort/weekly-coaching.js",
+    "cohort:coaching:dry": "node scripts/cohort/weekly-coaching.js --dry-run"
+  },
+  "dependencies": {
+    "@notionhq/client": "^2.2.0",
+    "@slack/web-api": "^7.0.0",
+    "@supabase/supabase-js": "^2.39.0"
+  }
+}

@@ -1,0 +1,124 @@
+{
+  "questions": [
+    {
+      "id": "q1",
+      "question": "What is the correct signature for an Express error-handling middleware function?",
+      "options": [
+        "(req, res, next)",
+        "(err, req, res)",
+        "(err, req, res, next)",
+        "(error, request, response, next)"
+      ],
+      "correctIndex": 2,
+      "explanation": "Error-handling middleware in Express must have exactly four parameters: (err, req, res, next). Express identifies it as an error handler based on the parameter count, not the parameter names."
+    },
+    {
+      "id": "q2",
+      "question": "In Node.js ESM modules, why is `__dirname` not available by default?",
+      "options": [
+        "It was removed in Node 18",
+        "ESM modules do not have access to CommonJS globals like __dirname",
+        "You must enable it with a flag: --enable-dirname",
+        "__dirname only works in .mjs files"
+      ],
+      "correctIndex": 1,
+      "explanation": "CommonJS provides __dirname automatically, but ESM modules do not. The workaround is: `const __dirname = path.dirname(fileURLToPath(import.meta.url))`."
+    },
+    {
+      "id": "q3",
+      "question": "You have this Express route: `app.get('/users/:id', handler)`. A request comes in for `/users/abc`. What is the value of `req.params.id`?",
+      "options": [
+        "undefined",
+        "null",
+        "NaN",
+        "'abc'"
+      ],
+      "correctIndex": 3,
+      "explanation": "Route parameters are always strings in Express. req.params.id would be the string 'abc'. If you need a number, you must parse it: parseInt(req.params.id) or use z.coerce.number() with Zod."
+    },
+    {
+      "id": "q4",
+      "question": "Which of the following is the correct way to add `express.json()` middleware so it applies to all routes?",
+      "options": [
+        "app.use(express.json); // without calling it",
+        "app.use(express.json());",
+        "app.middleware(express.json());",
+        "app.before(express.json());"
+      ],
+      "correctIndex": 1,
+      "explanation": "app.use() registers middleware globally. express.json() must be called as a function -- it returns the middleware function that app.use() registers. Forgetting the () is a common mistake."
+    },
+    {
+      "id": "q5",
+      "question": "What happens if an Express middleware calls neither `next()` nor sends a response?",
+      "options": [
+        "Express automatically calls next() after 30 seconds",
+        "The request is passed to the next middleware anyway",
+        "The request hangs and never receives a response",
+        "Express throws an error and sends a 500 response"
+      ],
+      "correctIndex": 2,
+      "explanation": "Every middleware must either call next() to pass control along, or end the request by calling res.json(), res.send(), etc. If it does neither, the request hangs indefinitely until the client times out."
+    },
+    {
+      "id": "q6",
+      "question": "You want to create a Router for `/api/posts/:postId/comments` that can access the `:postId` parameter. Which Router configuration is required?",
+      "options": [
+        "Router({ passParams: true })",
+        "Router({ mergeParams: true })",
+        "Router({ inheritParams: true })",
+        "No special configuration needed -- params are always inherited"
+      ],
+      "correctIndex": 1,
+      "explanation": "By default, a Router only sees its own route parameters. To access params defined on the parent route (like :postId in app.use('/api/posts/:postId/comments', commentsRouter)), you must create the Router with { mergeParams: true }."
+    },
+    {
+      "id": "q7",
+      "question": "What does `z.coerce.number()` do differently from `z.number()` in Zod?",
+      "options": [
+        "It validates that the number is positive",
+        "It converts the value using Number() before validating -- useful for strings like query params",
+        "It allows both integers and floats",
+        "It is an alias for z.number().int()"
+      ],
+      "correctIndex": 1,
+      "explanation": "z.coerce.number() calls Number() on the input before validating. This means the string '42' becomes the number 42. This is essential for route parameters and query strings, which Express always provides as strings."
+    },
+    {
+      "id": "q8",
+      "question": "What is the purpose of the `asyncHandler` wrapper in an Express API?",
+      "options": [
+        "It makes synchronous route handlers run asynchronously",
+        "It catches errors thrown in async route handlers and passes them to next()",
+        "It adds async/await support to Express routers",
+        "It prevents multiple responses from being sent"
+      ],
+      "correctIndex": 1,
+      "explanation": "Express does not catch errors thrown inside async functions. asyncHandler wraps the function in a Promise and calls .catch(next) so any thrown error is automatically forwarded to the error-handling middleware."
+    },
+    {
+      "id": "q9",
+      "question": "In which order should these items be registered in app.js?",
+      "options": [
+        "Routes, then middleware, then error handler",
+        "Error handler, then routes, then middleware",
+        "Middleware, then routes, then 404 handler, then error handler",
+        "Middleware, then error handler, then routes, then 404 handler"
+      ],
+      "correctIndex": 2,
+      "explanation": "The correct order is: (1) pre-route middleware like express.json() and logging, (2) your route handlers, (3) a 404 catch-all for unmatched routes, and (4) the error handler last. The error handler must be last because it needs 4 parameters and must come after routes."
+    },
+    {
+      "id": "q10",
+      "question": "When should you use `npm install --save-dev` instead of `npm install`?",
+      "options": [
+        "For packages that are imported in your source code",
+        "For packages that are only needed during development, like nodemon or testing tools",
+        "For packages larger than 1MB",
+        "For packages with TypeScript type definitions"
+      ],
+      "correctIndex": 1,
+      "explanation": "devDependencies are packages needed during development but not when the app runs in production. nodemon (auto-restart during dev), test frameworks, and linters are typical devDependencies. Express, zod, and other runtime dependencies belong in dependencies."
+    }
+  ]
+}

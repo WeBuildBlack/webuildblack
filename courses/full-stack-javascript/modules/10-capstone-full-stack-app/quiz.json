@@ -1,0 +1,134 @@
+{
+  "questions": [
+    {
+      "id": "q1",
+      "module": "Advanced JavaScript (ES6+)",
+      "question": "What does the following code log to the console?\n\n```js\nconst obj = { a: 1, b: 2, c: 3 };\nconst { a, ...rest } = obj;\nconsole.log(rest);\n```",
+      "options": [
+        "{ a: 1 }",
+        "{ b: 2, c: 3 }",
+        "[ 2, 3 ]",
+        "undefined"
+      ],
+      "correctIndex": 1,
+      "explanation": "The rest syntax in destructuring collects all remaining own enumerable properties that were not explicitly destructured. After pulling out `a`, the remaining properties `b` and `c` are collected into `rest` as a new object `{ b: 2, c: 3 }`."
+    },
+    {
+      "id": "q2",
+      "module": "Async JavaScript",
+      "question": "You have three independent API calls that can run concurrently. Which approach finishes fastest and correctly handles the case where all three must succeed before proceeding?\n\n```js\n// Option A\nconst a = await fetchA();\nconst b = await fetchB();\nconst c = await fetchC();\n\n// Option B\nconst [a, b, c] = await Promise.all([fetchA(), fetchB(), fetchC()]);\n\n// Option C\nconst [a, b, c] = await Promise.allSettled([fetchA(), fetchB(), fetchC()]);\n\n// Option D\nconst a = fetchA();\nconst b = fetchB();\nconst c = fetchC();\n```",
+      "options": [
+        "Option A -- awaiting each call sequentially is safest",
+        "Option B -- starts all three concurrently and rejects if any fail",
+        "Option C -- starts all three concurrently and always resolves, even if some fail",
+        "Option D -- fires all three but never awaits the results"
+      ],
+      "correctIndex": 1,
+      "explanation": "Option B uses `Promise.all`, which starts all three promises concurrently and resolves with an array of all three results only when every promise resolves. If any one rejects, the whole `Promise.all` rejects. Option A runs them sequentially (slower). Option C always resolves even on failure (useful when you want all results regardless). Option D fires the calls but never awaits them."
+    },
+    {
+      "id": "q3",
+      "module": "APIs and JSON",
+      "question": "A fetch call to an API returns a response with HTTP status 404. What does the following code log?\n\n```js\ntry {\n  const res = await fetch('https://api.example.com/missing');\n  const data = await res.json();\n  console.log('success', data);\n} catch (err) {\n  console.log('caught', err.message);\n}\n```",
+      "options": [
+        "caught -- fetch rejects on non-2xx status codes",
+        "success -- fetch only rejects on network failure, not HTTP error status codes",
+        "caught -- JSON parsing always throws on a 404 response",
+        "Neither -- the code throws a SyntaxError before reaching either log"
+      ],
+      "correctIndex": 1,
+      "explanation": "The `fetch` API does NOT reject on HTTP error status codes like 404 or 500. It only rejects on network failure (no connection, DNS error, etc.). A 404 response is a resolved promise. The code will log 'success' along with whatever JSON the server returns in the 404 body (which may be an error object). To detect HTTP errors, you must check `res.ok` or `res.status` manually."
+    },
+    {
+      "id": "q4",
+      "module": "React Fundamentals",
+      "question": "A React component receives a `user` prop. The component renders correctly when `user` is an object, but throws an error when `user` is `null`. Which pattern correctly guards against this?\n\n```jsx\n// Which of these renders safely when user is null?\n```",
+      "options": [
+        "`<p>{user.name}</p>` -- React handles null automatically",
+        "`{user && <p>{user.name}</p>}` -- short-circuit evaluation skips rendering when user is null",
+        "`<p>{user?.name}</p>` -- optional chaining prevents the error but renders an empty `<p>` tag",
+        "Both B and C are valid guards, with different rendering behavior"
+      ],
+      "correctIndex": 3,
+      "explanation": "Both B and C guard against the null error, but behave differently. Option B (`user && ...`) renders nothing at all when `user` is null (the whole element is skipped). Option C with optional chaining renders an empty `<p></p>` element when `user` is null. Which is correct depends on your intent -- option B is usually preferred when you want no output, option C when you want the element to always render (possibly empty)."
+    },
+    {
+      "id": "q5",
+      "module": "React State and Hooks",
+      "question": "Why does the following code NOT correctly increment the counter three times when the button is clicked?\n\n```jsx\nfunction Counter() {\n  const [count, setCount] = useState(0);\n\n  function handleClick() {\n    setCount(count + 1);\n    setCount(count + 1);\n    setCount(count + 1);\n  }\n\n  return <button onClick={handleClick}>{count}</button>;\n}\n```",
+      "options": [
+        "You cannot call `setCount` more than once per event handler",
+        "All three calls read the same stale `count` value from the closure, so all three set state to the same value",
+        "React batches state updates and only applies the last one",
+        "The component needs `useReducer` to handle multiple increments"
+      ],
+      "correctIndex": 1,
+      "explanation": "Each `setCount(count + 1)` call reads `count` from the closure, which is the same value (say, 0) for all three calls. So all three enqueue a state update to `0 + 1 = 1`. The fix is to use the functional update form: `setCount(prev => prev + 1)`. This passes a function that receives the latest queued state value, so three calls correctly increment by three."
+    },
+    {
+      "id": "q6",
+      "module": "Node.js and Express",
+      "question": "An Express route handler throws an unhandled error inside an async function. What happens if there is no `try/catch` and no `next(err)` call?\n\n```js\napp.get('/data', async (req, res) => {\n  const result = await db.query('SELECT * FROM broken_table');\n  res.json(result.rows);\n});\n```",
+      "options": [
+        "Express catches async errors automatically and calls the error middleware",
+        "The server crashes with an unhandled promise rejection",
+        "Express returns a 500 response automatically",
+        "The request hangs indefinitely with no response sent to the client"
+      ],
+      "correctIndex": 3,
+      "explanation": "In Express 4, async errors in route handlers are NOT caught automatically. If the promise rejects and there is no `try/catch`, the error becomes an unhandled promise rejection. Express never calls `next(err)`, so the error middleware is never triggered. The request hangs with no response. The fix is to wrap async handlers in try/catch and call `next(err)` in the catch block, or use a wrapper like `express-async-errors`. (Express 5, currently in release candidate, handles this automatically.)"
+    },
+    {
+      "id": "q7",
+      "module": "SQL and PostgreSQL",
+      "question": "You want to fetch every user and the total number of posts they have written, including users who have written zero posts. Which query is correct?\n\n```sql\n-- Table: users(id, username)\n-- Table: posts(id, user_id, title)\n```",
+      "options": [
+        "`SELECT u.username, COUNT(p.id) FROM users u INNER JOIN posts p ON u.id = p.user_id GROUP BY u.id`",
+        "`SELECT u.username, COUNT(p.id) FROM users u LEFT JOIN posts p ON u.id = p.user_id GROUP BY u.id`",
+        "`SELECT u.username, COUNT(*) FROM users u RIGHT JOIN posts p ON u.id = p.user_id GROUP BY u.id`",
+        "`SELECT u.username, COUNT(p.id) FROM posts p JOIN users u ON p.user_id = u.id GROUP BY u.id`"
+      ],
+      "correctIndex": 1,
+      "explanation": "A LEFT JOIN keeps all rows from the left table (users) even when there is no matching row in the right table (posts). For users with no posts, `p.id` will be NULL, and `COUNT(p.id)` correctly returns 0 (COUNT ignores NULLs). An INNER JOIN (options A and D) excludes users with no posts entirely. A RIGHT JOIN (option C) would keep all posts but drop users with no posts, which is the same problem."
+    },
+    {
+      "id": "q8",
+      "module": "Full-Stack Integration",
+      "question": "Your React frontend makes requests to `http://localhost:3000/api/data` from `http://localhost:5173`. The browser blocks every request with a CORS error. Your Express server has this code:\n\n```js\napp.use(cors({ origin: 'http://localhost:5173' }));\n```\n\nBut requests are still blocked. What is the most likely cause?",
+      "options": [
+        "CORS must be configured on the frontend, not the backend",
+        "The `cors()` middleware is placed after the route definitions in `app.js`, so it never runs for those routes",
+        "The `origin` value must be a regex, not a string",
+        "Browsers block all localhost-to-localhost requests regardless of CORS headers"
+      ],
+      "correctIndex": 1,
+      "explanation": "Express middleware runs in the order it is registered. If `app.use(cors(...))` appears after `app.get('/api/data', ...)`, the CORS headers are never added to those responses because the route handler responds before the CORS middleware runs. CORS middleware must be registered before route handlers. This is one of the most common Express configuration bugs."
+    },
+    {
+      "id": "q9",
+      "module": "Authentication and Security",
+      "question": "A user logs in and receives a JWT. Later, the user changes their password because they suspect their account was compromised. The old JWT is still valid and has not expired. Which of the following correctly addresses this security gap?",
+      "options": [
+        "Nothing -- JWTs are stateless and cannot be invalidated before expiry, so this is an accepted limitation",
+        "Store a `passwordChangedAt` timestamp in the database and reject tokens issued before that timestamp in the auth middleware",
+        "Delete the JWT from the user's browser -- the old token becomes invalid automatically",
+        "Use a longer JWT secret after the password change"
+      ],
+      "correctIndex": 1,
+      "explanation": "Stateless JWTs cannot be individually revoked before expiry. The standard mitigation is to embed a version or timestamp in the token payload and check it against the database on every request. Storing `passwordChangedAt` in the user record and rejecting tokens whose `iat` (issued-at) is before that timestamp is a lightweight, effective pattern. Option C (deleting from browser) only prevents that browser from sending the token -- the token itself remains valid and anyone else holding it can still use it."
+    },
+    {
+      "id": "q10",
+      "module": "Full-Stack Capstone (Integrative)",
+      "question": "You are building the 'create recipe' feature. The request body contains a recipe object and an array of ingredients. You need to insert the recipe row first (to get its `id`), then insert all ingredient rows referencing that `id`. If the fifth ingredient insert fails, you want to roll back the recipe insert too. Which implementation is correct?",
+      "options": [
+        "Run the recipe INSERT, store the returned `id`, then run all ingredient INSERTs. If an ingredient INSERT fails, run a DELETE on the recipe row to clean up.",
+        "Use a PostgreSQL transaction: BEGIN before the recipe INSERT, loop through ingredient INSERTs, COMMIT if all succeed, ROLLBACK in the catch block if anything fails.",
+        "Insert all ingredients first with a placeholder `recipe_id` of 0, then insert the recipe and run an UPDATE to fix the `recipe_id` on all ingredient rows.",
+        "Use `Promise.all` to run the recipe INSERT and all ingredient INSERTs concurrently, since they are independent operations."
+      ],
+      "correctIndex": 1,
+      "explanation": "A database transaction is the correct tool here. BEGIN wraps all the INSERT statements into a single atomic unit: either every statement commits together, or none of them do. The manual delete approach (option A) is error-prone -- the delete itself could fail, leaving orphaned data. Option C inserts invalid data intentionally and then corrects it, which violates foreign key constraints if `recipe_id = 0` does not exist and is generally a bad pattern. Option D is wrong because ingredient inserts are NOT independent -- they depend on the recipe `id` that is returned by the recipe INSERT."
+    }
+  ]
+}

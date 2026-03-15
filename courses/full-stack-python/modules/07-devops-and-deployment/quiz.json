@@ -1,0 +1,125 @@
+{
+  "title": "DevOps & Deployment Quiz",
+  "questions": [
+    {
+      "id": "q1",
+      "question": "What is the key difference between containers and virtual machines?",
+      "options": [
+        "Containers run on Windows only, while VMs run on Linux only",
+        "Containers share the host kernel and package only the app and dependencies, while VMs run a full guest operating system with its own kernel",
+        "Containers are more secure than VMs because they use encryption",
+        "VMs start faster than containers because they are smaller"
+      ],
+      "explanation": "Containers share the host machine's kernel and only include the application code, libraries, and configuration. VMs run a complete guest operating system with its own kernel, making them heavier (gigabytes vs megabytes) and slower to start (minutes vs seconds).",
+      "correctIndex": 1
+    },
+    {
+      "id": "q2",
+      "question": "Why should you copy requirements.txt and run pip install BEFORE copying the rest of your application code in a Dockerfile?",
+      "options": [
+        "Python requires dependencies to be installed before any code files exist",
+        "It prevents Docker from accessing your source code during the build",
+        "Docker caches each layer, so if your code changes but dependencies don't, the pip install layer is reused from cache instead of re-running",
+        "It reduces the final image size by 50%"
+      ],
+      "explanation": "Docker caches each instruction as a layer. If a layer's input hasn't changed, Docker reuses the cached result. By copying requirements.txt separately, a code change only invalidates the COPY . . layer and beyond, not the slow pip install layer. This dramatically speeds up rebuilds.",
+      "correctIndex": 2
+    },
+    {
+      "id": "q3",
+      "question": "In a docker-compose.yml file, how does the Django backend service connect to the PostgreSQL database service named 'db'?",
+      "options": [
+        "Using localhost:5432 as the hostname",
+        "Using the container's IP address, which must be hardcoded",
+        "Using 'db' as the hostname (the service name), since Docker Compose creates a shared network where services are reachable by name",
+        "Using 127.0.0.1:5432, which Docker maps automatically"
+      ],
+      "explanation": "Docker Compose creates a shared network for all services defined in the file. Each service is reachable by its service name as the hostname. So the Django backend connects to PostgreSQL using 'db' as the hostname (e.g., postgres://user:pass@db:5432/dbname).",
+      "correctIndex": 2
+    },
+    {
+      "id": "q4",
+      "question": "Which GitHub Actions trigger would run a workflow only when a pull request is opened or updated against the main branch?",
+      "options": [
+        "on: push",
+        "on: pull_request: branches: [main]",
+        "on: merge: branches: [main]",
+        "on: commit: branches: [main]"
+      ],
+      "explanation": "The pull_request trigger with a branches filter runs the workflow when a PR targeting the specified branch is opened, synchronized (new commits pushed), or reopened. There is no 'merge' or 'commit' trigger in GitHub Actions.",
+      "correctIndex": 1
+    },
+    {
+      "id": "q5",
+      "question": "What is the difference between Continuous Integration (CI) and Continuous Deployment (CD)?",
+      "options": [
+        "CI runs tests locally, while CD runs tests on a server",
+        "CI automatically builds and tests code on every push to catch integration problems early. CD automatically deploys code to production after it passes all checks.",
+        "CI and CD are the same thing with different names",
+        "CI deploys to staging, while CD deploys to production"
+      ],
+      "explanation": "CI focuses on validating code quality by automatically running builds, tests, linters, and type checks on every push or pull request. CD extends this by automatically deploying the validated code to production (or a staging environment). CI answers 'is this safe to merge?' while CD answers 'how do we ship it?'",
+      "correctIndex": 1
+    },
+    {
+      "id": "q6",
+      "question": "How does dependency caching in GitHub Actions speed up CI workflows?",
+      "options": [
+        "It skips the testing step if dependencies haven't changed",
+        "It stores installed packages between workflow runs and restores them when the lock file hasn't changed, avoiding repeated downloads and installations",
+        "It compresses the source code to reduce transfer time",
+        "It runs multiple workflows in parallel on the same runner"
+      ],
+      "explanation": "Dependency caching stores the npm or pip cache directory between runs. When the lock file (package-lock.json or requirements.txt) hasn't changed, the cached packages are restored instead of downloaded and installed from scratch. This can save minutes on each CI run.",
+      "correctIndex": 1
+    },
+    {
+      "id": "q7",
+      "question": "Why is Vercel recommended for deploying the Next.js frontend while Railway is recommended for the Django backend?",
+      "options": [
+        "Vercel is free and Railway is paid",
+        "Vercel was built by the Next.js team and has seamless integration (preview deploys, edge functions, automatic optimization), while Railway provides better Python support and built-in PostgreSQL",
+        "Railway doesn't support JavaScript applications",
+        "Vercel includes a built-in database that Django requires"
+      ],
+      "explanation": "Vercel was created by the same team that builds Next.js, so it offers the best integration with features like automatic preview deployments, edge rendering, and zero-config builds. Railway excels at running backend services with built-in database provisioning and CLI-based deployment, making it well suited for Django apps.",
+      "correctIndex": 1
+    },
+    {
+      "id": "q8",
+      "question": "What does Sentry provide that standard logging does not?",
+      "options": [
+        "Sentry writes logs to a file, while standard logging only prints to the console",
+        "Sentry captures unhandled exceptions with full stack traces, groups similar errors, tracks error frequency over time, and provides browser and request context for each error",
+        "Sentry replaces the need for any logging in your application",
+        "Sentry only works in development, not in production"
+      ],
+      "explanation": "Sentry goes beyond logging by capturing the full context of errors: stack traces with local variables, browser information, user actions leading up to the crash (breadcrumbs), and request details. It also groups similar errors, tracks whether they are new or recurring, and provides performance monitoring.",
+      "correctIndex": 1
+    },
+    {
+      "id": "q9",
+      "question": "What should a production health check endpoint verify, and what HTTP status code should it return when a critical dependency fails?",
+      "options": [
+        "It should verify the server is running and return 200 regardless of dependency status",
+        "It should verify the server and critical dependencies (like the database) are operational, returning 200 when healthy and 503 (Service Unavailable) when a dependency fails",
+        "It should return 500 when any error occurs and 201 when healthy",
+        "It should only check memory usage and return 429 if memory is low"
+      ],
+      "explanation": "A production health check should verify both the application server and critical dependencies like the database. Returning 503 (Service Unavailable) when a dependency is down tells load balancers and monitoring tools that the service is unhealthy, allowing them to route traffic elsewhere or trigger alerts.",
+      "correctIndex": 1
+    },
+    {
+      "id": "q10",
+      "question": "Why should sensitive values like API keys and database passwords be stored as GitHub Actions secrets rather than in workflow YAML files?",
+      "options": [
+        "YAML files cannot contain special characters that are common in passwords",
+        "Secrets are encrypted at rest, masked in logs, and not accessible to workflows triggered by forks, preventing credential exposure in version control and CI output",
+        "GitHub charges extra for workflows that contain hardcoded values",
+        "Secrets make workflows run faster because they are pre-loaded"
+      ],
+      "explanation": "GitHub Actions secrets are encrypted at rest and injected at runtime. They are automatically masked in workflow logs (replaced with ***) and are not available to pull request workflows triggered from forked repositories. Hardcoding secrets in YAML files exposes them in version control history, making them visible to anyone with repo access.",
+      "correctIndex": 1
+    }
+  ]
+}

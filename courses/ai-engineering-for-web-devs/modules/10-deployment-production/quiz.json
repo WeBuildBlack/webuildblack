@@ -1,0 +1,125 @@
+{
+  "title": "Deployment & Production Quiz",
+  "questions": [
+    {
+      "id": "q1",
+      "question": "A production AI app uses GPT-4o at $2.50/1M input tokens and $10.00/1M output tokens. Switching to GPT-4o-mini at $0.15/1M input and $0.60/1M output would save approximately what percentage on costs for the same workload?",
+      "options": [
+        "About 50% savings",
+        "About 75% savings",
+        "About 90-95% savings",
+        "About 99% savings"
+      ],
+      "correctIndex": 2,
+      "explanation": "GPT-4o-mini's input price ($0.15) is about 6% of GPT-4o's ($2.50), and its output price ($0.60) is about 6% of GPT-4o's ($10.00). This means switching saves roughly 94% on costs. Model selection is the single highest-impact cost optimization available."
+    },
+    {
+      "id": "q2",
+      "question": "What is the key advantage of semantic caching over exact match caching for AI applications?",
+      "options": [
+        "Semantic caching is faster because it uses less memory",
+        "Semantic caching catches queries that mean the same thing but are worded differently, like 'What is ML?' and 'What is machine learning?'",
+        "Semantic caching eliminates the need for a database entirely",
+        "Semantic caching works without generating any embeddings"
+      ],
+      "correctIndex": 1,
+      "explanation": "Semantic caching uses embedding similarity to match queries by meaning rather than exact text. So 'What is ML?' and 'Explain machine learning' would both match a cached response, even though the text is completely different. Exact match caching would miss these near-duplicates. The trade-off is that semantic caching requires generating an embedding per query, but this cost is negligible compared to the LLM call it avoids."
+    },
+    {
+      "id": "q3",
+      "question": "Which approach is MOST effective for defending against prompt injection attacks in a production AI application?",
+      "options": [
+        "Using a single strong system prompt and trusting the LLM to follow it",
+        "Blocking all user messages that contain the word 'ignore'",
+        "Defense in depth: combining input validation, pattern detection, armored prompts, and a secondary LLM guard",
+        "Encrypting the system prompt so users cannot read it"
+      ],
+      "correctIndex": 2,
+      "explanation": "No single defense is sufficient against prompt injection. The most effective approach is defense in depth: validate inputs for basic issues, use pattern detection for known injection signatures, structure your system prompt with clear boundaries (armored prompts), and optionally use a secondary LLM to classify whether inputs are injection attempts. Each layer catches attacks that the others might miss."
+    },
+    {
+      "id": "q4",
+      "question": "When implementing retry logic for LLM API calls, why is 'jitter' added to the exponential backoff delay?",
+      "options": [
+        "To make the delays shorter so users wait less time",
+        "To prevent multiple clients from retrying at exactly the same time, which would cause another spike of rate-limited requests",
+        "To satisfy a requirement of the OpenAI API terms of service",
+        "To randomize which LLM model receives the retry request"
+      ],
+      "correctIndex": 1,
+      "explanation": "Without jitter, if 100 clients all get rate-limited at the same time, they would all retry after exactly the same delay (e.g., 1 second, then 2 seconds), causing synchronized spikes that hit the rate limit again. Adding random jitter (a small random variation to the delay) spreads out the retries over time, making the traffic smoother and increasing the chance that retries succeed on the first attempt."
+    },
+    {
+      "id": "q5",
+      "question": "What is the purpose of using a queue-based architecture for document ingestion in an AI application instead of processing documents synchronously in the API route?",
+      "options": [
+        "Queues make the embeddings more accurate because they process documents slower",
+        "Queues allow the API to respond immediately with a job ID while heavy processing (text extraction, chunking, embedding) happens in the background, preventing request timeouts",
+        "Queues are required by Vercel and cannot be avoided on serverless platforms",
+        "Queues reduce the cost of generating embeddings by batching them"
+      ],
+      "correctIndex": 1,
+      "explanation": "Document ingestion involves multiple time-consuming steps: parsing files, chunking text, generating embeddings, and storing data. On serverless platforms like Vercel, functions have a 10-60 second timeout. A large PDF could easily exceed this limit. By enqueuing the work and returning immediately with a job ID, the user gets instant feedback, the API route does not time out, and the heavy processing happens on a background worker that can take as long as it needs."
+    },
+    {
+      "id": "q6",
+      "question": "What are the two main concerns with storing full user messages and LLM responses in a logging table indefinitely?",
+      "options": [
+        "It slows down the LLM and increases token costs",
+        "It raises both storage cost and privacy compliance concerns -- logs accumulate quickly and may contain PII subject to GDPR/CCPA regulations",
+        "It causes the database to crash after 1 million rows",
+        "It violates the OpenAI and Anthropic terms of service"
+      ],
+      "correctIndex": 1,
+      "explanation": "Storing full user messages and LLM responses indefinitely creates two problems. First, storage costs grow continuously -- at 1,000 requests/day with ~2KB per entry, you accumulate ~60MB/month of log data. Second, and more importantly, these logs may contain personal information subject to privacy regulations like GDPR and CCPA. Best practices include setting retention policies (e.g., delete logs after 30 days), redacting PII before logging, and giving users the ability to request deletion of their data."
+    },
+    {
+      "id": "q7",
+      "question": "Why does an in-memory rate limiter (using a JavaScript Map) fail to work correctly on serverless platforms like Vercel?",
+      "options": [
+        "JavaScript Maps are not supported in serverless environments",
+        "Serverless functions have read-only memory and cannot create new Map objects",
+        "Each function invocation may run in a separate instance with its own memory, so rate limit counters are not shared across requests",
+        "Serverless functions cannot access the Date.now() function needed for rate limiting"
+      ],
+      "correctIndex": 2,
+      "explanation": "On serverless platforms like Vercel, each function invocation may run in a completely separate container with its own memory space. An in-memory Map in one instance is invisible to all other instances. So if a user makes 20 requests and they are handled by 20 different instances, each instance sees only 1 request -- the rate limit never triggers. For production rate limiting on serverless, use a shared external store like Redis, Vercel KV, or Upstash that all instances can read from and write to."
+    },
+    {
+      "id": "q8",
+      "question": "What is the difference between 'fail open' and 'fail closed' in an AI safety guard, and when would you choose each?",
+      "options": [
+        "Fail open means the guard is disabled; fail closed means it is enabled. Always use fail closed.",
+        "Fail open allows requests through when the guard errors, prioritizing availability; fail closed blocks requests when uncertain, prioritizing safety. Choose based on risk level.",
+        "Fail open logs the error; fail closed throws an exception. They produce the same user experience.",
+        "Fail open means the guard runs before the LLM call; fail closed means it runs after. Order does not matter."
+      ],
+      "correctIndex": 1,
+      "explanation": "When a safety guard encounters an error (e.g., the moderation API is down), it must decide what to do with the pending request. 'Fail open' lets the request through, prioritizing user experience and availability -- the user is not blocked, but a potentially unsafe input might slip through. 'Fail closed' blocks the request until the guard can make a determination, prioritizing safety -- no unsafe input gets through, but legitimate users may be blocked. For most consumer apps (chatbots, knowledge bases), fail open is appropriate. For high-risk applications (financial advice, medical information, legal documents), fail closed is the safer choice."
+    },
+    {
+      "id": "q9",
+      "question": "What is the primary advantage of using Langfuse for prompt evaluation over simply testing prompts manually in a chat UI?",
+      "options": [
+        "Langfuse uses a proprietary LLM that produces better evaluations than any other model",
+        "Langfuse lets you build reusable evaluation datasets, run both prompt versions against the same test cases, and compare scores quantitatively across dimensions like faithfulness and relevance",
+        "Langfuse automatically fixes bad prompts by rewriting them",
+        "Langfuse is required by OpenAI's terms of service for production applications"
+      ],
+      "correctIndex": 1,
+      "explanation": "Manual testing is subjective and inconsistent. You might test 5 questions, feel good about the results, and miss a regression on the 50 questions you didn't test. Langfuse provides structured evaluation: build a dataset of test cases with expected outputs, run your prompt against all of them, score each response on multiple dimensions (faithfulness, relevance, hallucination), and compare versions with actual numbers. This turns prompt engineering from guesswork into a data-driven process."
+    },
+    {
+      "id": "q10",
+      "question": "Your document ingestion pipeline embeds 1000 chunks, but the OpenAI API fails at chunk 800 due to a rate limit. Without a durable workflow engine, what happens, and how does Temporal solve this?",
+      "options": [
+        "The pipeline pauses for 60 seconds and retries chunk 800 automatically without Temporal",
+        "Without durability, the entire pipeline fails and must restart from chunk 1, re-embedding 800 chunks you already paid for. Temporal checkpoints each activity, so it retries only chunk 800's batch and resumes from there.",
+        "Temporal prevents rate limits by automatically slowing down API calls",
+        "The embeddings for chunks 1-799 are cached in memory and reused on retry even without Temporal"
+      ],
+      "correctIndex": 1,
+      "explanation": "Without durability, a failure at step 800 means restarting from zero. You re-parse, re-chunk, and re-embed all 800 chunks you already paid for. Temporal solves this by recording the result of each completed activity (step). When the workflow restarts after a failure, Temporal replays the workflow from the beginning but uses the recorded results for completed steps instead of re-executing them. It only actually re-runs the failed activity (the batch containing chunk 800) and continues from there. For AI workloads where each step costs real API dollars, this is a significant cost and time savings."
+    }
+  ]
+}

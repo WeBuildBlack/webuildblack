@@ -1,0 +1,125 @@
+{
+  "title": "Python Fundamentals Quiz",
+  "questions": [
+    {
+      "id": "q1",
+      "question": "In Python, how do you define a code block (e.g., the body of an if statement)?",
+      "options": [
+        "With curly braces { }",
+        "With indentation (typically 4 spaces) after a colon",
+        "With parentheses ( )",
+        "With begin/end keywords"
+      ],
+      "correctIndex": 1,
+      "explanation": "Python uses indentation to define code blocks. A colon ends the statement line (if, for, def, etc.), and the indented lines below it form the block. This is enforced by the language, not just a style convention."
+    },
+    {
+      "id": "q2",
+      "question": "What does this list comprehension produce? [x * 2 for x in range(5) if x % 2 == 0]",
+      "options": [
+        "[0, 2, 4, 6, 8]",
+        "[0, 4, 8]",
+        "[2, 4, 6, 8]",
+        "[0, 2, 4]"
+      ],
+      "correctIndex": 1,
+      "explanation": "range(5) produces 0, 1, 2, 3, 4. The condition x % 2 == 0 filters to even numbers: 0, 2, 4. Then x * 2 doubles each one: 0, 4, 8. List comprehensions apply the filter first, then the transformation."
+    },
+    {
+      "id": "q3",
+      "question": "What is the correct way to safely access a dictionary key that might not exist?",
+      "options": [
+        "event?.title (optional chaining)",
+        "event.get(\"title\", \"default\")",
+        "event[\"title\"] || \"default\"",
+        "event.title ?? \"default\""
+      ],
+      "correctIndex": 1,
+      "explanation": "The .get(key, default) method returns the value if the key exists, or the default value if it doesn't. Python does not have optional chaining (?.) or nullish coalescing (??) operators. Using bracket notation on a missing key raises a KeyError."
+    },
+    {
+      "id": "q4",
+      "question": "What do type hints do in Python?",
+      "options": [
+        "They enforce types at runtime, like TypeScript's compiler",
+        "They automatically convert values to the specified type",
+        "They serve as documentation and enable static analysis tools, but are not enforced at runtime",
+        "They make Python code run faster by optimizing for specific types"
+      ],
+      "correctIndex": 2,
+      "explanation": "Python type hints are annotations only. They are not enforced at runtime, unlike TypeScript which checks types at compile time. However, tools like mypy and pyright can perform static type checking, and IDEs use them for autocompletion and error detection."
+    },
+    {
+      "id": "q5",
+      "question": "What does **kwargs do in a function definition?",
+      "options": [
+        "It spreads a dictionary into individual variables",
+        "It collects extra keyword arguments into a dictionary",
+        "It makes all parameters required",
+        "It creates a deep copy of the arguments"
+      ],
+      "correctIndex": 1,
+      "explanation": "**kwargs collects any keyword arguments not explicitly defined in the function signature into a dictionary. For example, def f(**kwargs) called as f(name=\"Kai\", age=25) results in kwargs being {\"name\": \"Kai\", \"age\": 25}. This is similar to collecting rest properties with ...rest in JavaScript object destructuring."
+    },
+    {
+      "id": "q6",
+      "question": "What is the purpose of the 'with' statement when opening files?",
+      "options": [
+        "It opens the file in write mode",
+        "It encrypts the file contents automatically",
+        "It ensures the file is automatically closed when the block exits, even if an error occurs",
+        "It reads the entire file into memory at once"
+      ],
+      "correctIndex": 2,
+      "explanation": "The 'with' statement creates a context manager that guarantees cleanup when the block exits. For files, this means the file handle is always closed, even if an exception is raised inside the block. This prevents resource leaks and is equivalent to wrapping code in try/finally in JavaScript."
+    },
+    {
+      "id": "q7",
+      "question": "What does the 'else' clause do in a try/except/else/finally block?",
+      "options": [
+        "It runs when any exception is caught",
+        "It runs only if no exception was raised in the try block",
+        "It runs as an alternative to the finally block",
+        "It runs when a specific exception type is not found"
+      ],
+      "correctIndex": 1,
+      "explanation": "The else clause runs only if the try block completed without raising any exception. This is useful for separating code that might fail (in try) from code that should only run on success (in else). JavaScript's try/catch does not have an equivalent feature."
+    },
+    {
+      "id": "q8",
+      "question": "Why do Python projects use virtual environments?",
+      "options": [
+        "To make Python code run faster in an isolated process",
+        "To encrypt project files for security",
+        "To isolate project dependencies so different projects can use different package versions",
+        "To run Python code in a Docker container automatically"
+      ],
+      "correctIndex": 2,
+      "explanation": "Virtual environments give each project its own isolated set of installed packages, similar to how node_modules works per-project in JavaScript. Without them, pip installs packages globally, which causes version conflicts when different projects need different versions of the same package."
+    },
+    {
+      "id": "q9",
+      "question": "Given: from datetime import datetime, timedelta -- what does this import?",
+      "options": [
+        "The entire datetime module and the entire timedelta module",
+        "The datetime class and timedelta class from the datetime module",
+        "Only the datetime class (timedelta is ignored)",
+        "A datetime alias called timedelta"
+      ],
+      "correctIndex": 1,
+      "explanation": "The 'from module import name1, name2' syntax imports specific items from a module. Here, it imports the datetime class and the timedelta class from the datetime module. This lets you use them directly (datetime.now(), timedelta(days=7)) without the module prefix."
+    },
+    {
+      "id": "q10",
+      "question": "What does the @timer decorator do in this code?\n\ndef timer(func):\n    def wrapper(*args, **kwargs):\n        start = time.time()\n        result = func(*args, **kwargs)\n        print(time.time() - start)\n        return result\n    return wrapper\n\n@timer\ndef process(data):\n    pass",
+      "options": [
+        "It replaces the process function with a new function that measures execution time",
+        "It runs the process function in a separate thread",
+        "It adds a 'timer' property to the process function",
+        "It delays the execution of the process function by one second"
+      ],
+      "correctIndex": 0,
+      "explanation": "The @timer decorator is syntactic sugar for process = timer(process). It wraps the original function in a new function (wrapper) that records the start time, calls the original function, prints the elapsed time, and returns the result. This is the same pattern as Higher-Order Components in React, where you wrap a component to add behavior."
+    }
+  ]
+}

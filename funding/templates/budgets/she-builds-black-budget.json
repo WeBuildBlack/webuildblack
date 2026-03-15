@@ -1,0 +1,79 @@
+{
+  "program": "She Builds Black Women's Chapter",
+  "period": "12 months",
+  "totalBudget": 50000,
+  "lineItems": [
+    {
+      "category": "Personnel",
+      "description": "Program Lead (0.35 FTE) — chapter strategy, event planning, mentorship coordination, community management",
+      "amount": 17500,
+      "notes": "$50,000 annual salary at 35% time allocation"
+    },
+    {
+      "category": "Personnel",
+      "description": "Program Assistant (0.15 FTE) — administrative support, event logistics, communications",
+      "amount": 5250,
+      "notes": "$35,000 annual salary at 15% time allocation"
+    },
+    {
+      "category": "Program Costs",
+      "description": "Workshop facilitator fees — 8 technical and professional development workshops per year",
+      "amount": 6000,
+      "notes": "$750 per facilitator for 8 workshops; topics include coding, leadership, salary negotiation, personal branding"
+    },
+    {
+      "category": "Program Costs",
+      "description": "Mentorship program — mentor matching, mentor training, mentorship resources",
+      "amount": 3000,
+      "notes": "20 mentor-mentee pairs; includes mentor onboarding materials and quarterly mentor appreciation"
+    },
+    {
+      "category": "Program Costs",
+      "description": "Networking events — quarterly mixers and community gatherings (4 per year)",
+      "amount": 4000,
+      "notes": "$1,000 per event for venue, food, and beverages"
+    },
+    {
+      "category": "Program Costs",
+      "description": "Annual retreat or summit — full-day women's leadership and tech summit",
+      "amount": 3500,
+      "notes": "Venue, catering, speaker honoraria, and materials for signature annual event"
+    },
+    {
+      "category": "Program Costs",
+      "description": "Professional development stipends — conference tickets, course enrollments, certifications",
+      "amount": 3000,
+      "notes": "$150 stipend for up to 20 active members to attend external events or courses"
+    },
+    {
+      "category": "Program Costs",
+      "description": "Guest speaker honoraria — monthly speaker series with women in tech leadership",
+      "amount": 2400,
+      "notes": "$200 per speaker for 12 monthly speaker events"
+    },
+    {
+      "category": "Technology",
+      "description": "Software and tools — Slack channels, Notion workspace, Zoom, design tools",
+      "amount": 850,
+      "notes": "Allocated portion of organizational subscriptions for chapter use"
+    },
+    {
+      "category": "Marketing",
+      "description": "Chapter marketing and recruitment — social media campaigns, branded content, outreach",
+      "amount": 2000,
+      "notes": "Targeted outreach to Black women in tech in NYC; Instagram and LinkedIn focused"
+    },
+    {
+      "category": "Marketing",
+      "description": "Branded materials — chapter-specific swag, event materials, welcome kits",
+      "amount": 1000,
+      "notes": "Welcome kits for new members, branded items for events"
+    },
+    {
+      "category": "Operations",
+      "description": "Administrative overhead — accounting, insurance allocation, reporting",
+      "amount": 1500,
+      "notes": "General program administration and organizational overhead"
+    }
+  ]
+}

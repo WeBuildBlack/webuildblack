@@ -1,0 +1,125 @@
+{
+  "title": "System Design Thinking",
+  "questions": [
+    {
+      "id": "q1",
+      "question": "Your API's average response time is 50ms, but users are complaining about slow performance. Which metric would best reveal the problem?",
+      "options": [
+        "Mean response time across all endpoints",
+        "p99 latency (99th percentile response time)",
+        "Total requests per second",
+        "Server CPU utilization percentage"
+      ],
+      "correctIndex": 1,
+      "explanation": "Averages hide outliers. The p99 latency shows you the worst experience that 1 in 100 users has. If the p99 is 2 seconds while the average is 50ms, you have a long-tail latency problem that the average completely obscures."
+    },
+    {
+      "id": "q2",
+      "question": "You have a Django API running 8 worker processes. Each request takes an average of 100ms to complete. Using Little's Law, what is the maximum throughput of this setup?",
+      "options": [
+        "8 requests per second",
+        "80 requests per second",
+        "800 requests per second",
+        "100 requests per second"
+      ],
+      "correctIndex": 1,
+      "explanation": "Little's Law: throughput = concurrency / latency. With 8 workers (concurrency = 8) and 100ms average latency (0.1 seconds), throughput = 8 / 0.1 = 80 requests per second."
+    },
+    {
+      "id": "q3",
+      "question": "Your PostgreSQL server is handling 95 active connections out of its default limit of 100. Adding more Django workers will push you over the limit. What should you do first?",
+      "options": [
+        "Increase PostgreSQL's max_connections to 500",
+        "Deploy PgBouncer for connection pooling between Django and PostgreSQL",
+        "Switch to a NoSQL database that handles more connections",
+        "Reduce Django workers to 4 to use fewer connections"
+      ],
+      "correctIndex": 1,
+      "explanation": "PgBouncer multiplexes many application connections onto a smaller pool of database connections. Simply increasing max_connections degrades PostgreSQL performance because each connection consumes significant memory. Reducing workers limits your throughput. Connection pooling is the standard solution."
+    },
+    {
+      "id": "q4",
+      "question": "According to the CAP theorem, what happens when a network partition occurs between two database nodes?",
+      "options": [
+        "The system automatically becomes faster because load is distributed",
+        "You must choose between consistency (reject requests) and availability (serve potentially stale data)",
+        "Both nodes continue operating independently with no tradeoffs",
+        "The system shuts down until the partition is resolved"
+      ],
+      "correctIndex": 1,
+      "explanation": "During a network partition, the two nodes cannot communicate. A CP system rejects requests from the isolated node to maintain consistency. An AP system serves responses from both nodes, accepting that they may return different data. There is no option that preserves both consistency and availability during a partition."
+    },
+    {
+      "id": "q5",
+      "question": "Gather displays RSVP counts on event listing cards. These counts are cached for 30 seconds. What consistency model does this represent?",
+      "options": [
+        "Strong consistency",
+        "Causal consistency",
+        "Eventual consistency",
+        "Read-your-own-writes consistency"
+      ],
+      "correctIndex": 2,
+      "explanation": "With a 30-second cache TTL, the displayed RSVP count may be up to 30 seconds stale. This is eventual consistency: if no new RSVPs are created, the cached value will eventually match the database value (within 30 seconds). This is an acceptable tradeoff for display-only data like RSVP counts."
+    },
+    {
+      "id": "q6",
+      "question": "You want to scale your Django API from 1 server to 3 servers behind a load balancer. Your app stores user sessions in Django's in-memory cache and uploaded files on the local filesystem. What must you change?",
+      "options": [
+        "Nothing. The load balancer handles all state synchronization automatically.",
+        "Move sessions to Redis or a database, and move file storage to S3 or equivalent object storage.",
+        "Configure the load balancer to use sticky sessions so each user always hits the same server.",
+        "Increase each server's memory to store copies of all sessions and files."
+      ],
+      "correctIndex": 1,
+      "explanation": "Horizontal scaling requires stateless application servers. In-memory sessions and local file storage are local state that other servers cannot access. Moving sessions to Redis (shared) and files to object storage (shared) makes each Django server interchangeable. Sticky sessions are a workaround, not a solution, because they create uneven load and still fail when a server restarts."
+    },
+    {
+      "id": "q7",
+      "question": "Which load balancing algorithm would you choose if your API has some endpoints that take 50ms and others that take 2 seconds?",
+      "options": [
+        "Round robin, because it distributes requests evenly",
+        "IP hash, because it keeps users on the same server",
+        "Least connections, because it accounts for varying request durations",
+        "Random selection, because it's the simplest to implement"
+      ],
+      "correctIndex": 2,
+      "explanation": "Least connections sends each new request to the server with the fewest active connections. When some requests take much longer than others, round robin creates imbalanced load (a server stuck processing slow requests gets the same number of new requests as a server handling fast ones). Least connections naturally adapts because slow-request servers accumulate more active connections and receive fewer new requests."
+    },
+    {
+      "id": "q8",
+      "question": "A Gather user RSVPs to an event, then immediately views the event page. They don't see themselves on the attendee list because their read was served by a database replica that hasn't received the write yet. Which consistency model would prevent this?",
+      "options": [
+        "Eventual consistency with a longer convergence window",
+        "Strong consistency across all reads",
+        "Read-your-own-writes consistency",
+        "Causal consistency across all users"
+      ],
+      "correctIndex": 2,
+      "explanation": "Read-your-own-writes consistency guarantees that after a user performs a write, their subsequent reads reflect that write. This is typically implemented by routing the user's reads to the primary database for a few seconds after a write. Strong consistency would also work but is unnecessarily expensive for other users' reads. Eventual consistency with a longer window still allows the gap."
+    },
+    {
+      "id": "q9",
+      "question": "Your system handles 100 requests per second with a p50 latency of 30ms and a p99 latency of 500ms. What is the most accurate summary of this system's performance?",
+      "options": [
+        "The system is fast. 30ms median response time is well within acceptable range.",
+        "The system has a severe tail latency problem. 1 in 100 requests takes over 16x longer than typical.",
+        "The system is slow. Average latency is around 265ms.",
+        "The system needs more throughput. 100 RPS is too low."
+      ],
+      "correctIndex": 1,
+      "explanation": "While the median (p50) is fast at 30ms, the p99 of 500ms means 1 in 100 requests is extremely slow. At 100 RPS, that's 1 slow request per second. The 16x gap between p50 and p99 indicates an inconsistent system with a significant tail latency problem that needs investigation (likely caused by cache misses, garbage collection, or lock contention)."
+    },
+    {
+      "id": "q10",
+      "question": "You are designing Gather's target architecture. Payment processing for paid events requires strong consistency, but event browsing should prioritize low latency. How should you handle these different requirements?",
+      "options": [
+        "Use strong consistency everywhere so you never serve stale data",
+        "Use eventual consistency everywhere since most features don't need strong consistency",
+        "Use different consistency models for different features: strong for payments, eventual for browsing",
+        "Build two separate applications, one for payments and one for browsing"
+      ],
+      "correctIndex": 2,
+      "explanation": "Different features have different consistency requirements. Payments must be strongly consistent to prevent double-charging or missed payments. Event browsing can tolerate slightly stale data in exchange for faster response times. Applying one consistency model everywhere either adds unnecessary latency to reads (strong everywhere) or risks correctness in payments (eventual everywhere). Choosing per feature is the standard approach."
+    }
+  ]
+}

@@ -1,0 +1,109 @@
+{
+  "program": "Mavens I/O Technology Conference",
+  "period": "12 months (annual event with year-round planning)",
+  "totalBudget": 120000,
+  "lineItems": [
+    {
+      "category": "Personnel",
+      "description": "Conference Director (0.4 FTE) — overall event strategy, speaker curation, sponsor relations",
+      "amount": 26000,
+      "notes": "$65,000 annual salary at 40% time allocation"
+    },
+    {
+      "category": "Personnel",
+      "description": "Event Coordinator (contract, 4 months) — logistics, vendor management, day-of operations",
+      "amount": 12000,
+      "notes": "$3,000/month for 4 months of intensive planning and execution"
+    },
+    {
+      "category": "Personnel",
+      "description": "Volunteer Coordinator (contract, 2 months) — recruit, train, and manage 20+ event volunteers",
+      "amount": 3000,
+      "notes": "$1,500/month for 2 months pre-event"
+    },
+    {
+      "category": "Facilities",
+      "description": "Venue rental — conference venue in Brooklyn (main hall, breakout rooms, networking space)",
+      "amount": 18000,
+      "notes": "Full-day venue rental including setup and teardown time"
+    },
+    {
+      "category": "Program Costs",
+      "description": "Speaker honoraria — 12 speakers/panelists at $500-$1,500 each",
+      "amount": 12000,
+      "notes": "Keynotes at $1,500, panelists and workshop leaders at $500-$750"
+    },
+    {
+      "category": "Program Costs",
+      "description": "Speaker travel and accommodation — out-of-town speaker flights and hotel",
+      "amount": 6000,
+      "notes": "Estimated 4 out-of-town speakers at ~$1,500 each (flight + 2 nights hotel)"
+    },
+    {
+      "category": "Program Costs",
+      "description": "Catering — breakfast, lunch, snacks, and beverages for attendees and staff",
+      "amount": 15000,
+      "notes": "~$50 per person for 300 attendees"
+    },
+    {
+      "category": "Technology",
+      "description": "A/V production — sound system, projectors, screens, livestream equipment, tech crew",
+      "amount": 8000,
+      "notes": "Professional A/V vendor for main stage and breakout rooms"
+    },
+    {
+      "category": "Technology",
+      "description": "Livestream and recording — professional video recording and live broadcast",
+      "amount": 3000,
+      "notes": "Multi-camera recording for post-event content; YouTube livestream"
+    },
+    {
+      "category": "Technology",
+      "description": "Event platform and registration — Eventbrite or Luma, badge printing, check-in system",
+      "amount": 1500,
+      "notes": "Registration platform fees plus on-site badge printing"
+    },
+    {
+      "category": "Marketing",
+      "description": "Conference marketing and design — website, social media campaigns, email marketing",
+      "amount": 4000,
+      "notes": "Paid social ads, email platform, conference microsite design"
+    },
+    {
+      "category": "Marketing",
+      "description": "Print and signage — banners, signage, programs, sponsor displays",
+      "amount": 2500,
+      "notes": "Event branding, wayfinding signage, printed programs"
+    },
+    {
+      "category": "Program Costs",
+      "description": "Swag and attendee materials — branded items, tote bags, notebooks, stickers",
+      "amount": 3000,
+      "notes": "~$10 per attendee for 300 attendees"
+    },
+    {
+      "category": "Operations",
+      "description": "Event insurance — one-day event liability coverage",
+      "amount": 1500,
+      "notes": "General liability and event cancellation coverage"
+    },
+    {
+      "category": "Operations",
+      "description": "Photography — professional event photographer for documentation and marketing",
+      "amount": 1500,
+      "notes": "Full-day photographer; photos used for post-event content and future marketing"
+    },
+    {
+      "category": "Operations",
+      "description": "Accessibility services — ASL interpretation, captioning, accessibility accommodations",
+      "amount": 1500,
+      "notes": "Live captioning for main stage; ASL interpreter available upon request"
+    },
+    {
+      "category": "Operations",
+      "description": "Administrative overhead — accounting, legal review, post-event reporting",
+      "amount": 1500,
+      "notes": "Contract review, financial reconciliation, sponsor reporting"
+    }
+  ]
+}

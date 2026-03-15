@@ -1,0 +1,125 @@
+{
+  "title": "CSS Layout Quiz",
+  "questions": [
+    {
+      "id": 1,
+      "question": "Which `position` value removes an element from the normal document flow AND positions it relative to the browser viewport (so it stays in place when you scroll)?",
+      "options": [
+        "position: absolute",
+        "position: relative",
+        "position: fixed",
+        "position: sticky"
+      ],
+      "correctAnswer": 2,
+      "explanation": "`position: fixed` removes the element from the normal flow and positions it relative to the viewport. It stays in place even when the page scrolls — that's why it's used for fixed navigation bars and floating buttons."
+    },
+    {
+      "id": 2,
+      "question": "What does `z-index` control, and what is required for it to work?",
+      "options": [
+        "It controls element width, and works on any element",
+        "It controls stacking order (which element appears on top), and only works on positioned elements (not `static`)",
+        "It controls the zoom level of an element, and works on all elements",
+        "It controls stacking order, and works on all elements including `position: static`"
+      ],
+      "correctAnswer": 1,
+      "explanation": "`z-index` controls which overlapping element appears on top (the stacking order). Higher values sit on top of lower values. It only works on elements with a `position` value other than `static` — meaning `relative`, `absolute`, `fixed`, or `sticky`."
+    },
+    {
+      "id": 3,
+      "question": "In a Flexbox container with the default `flex-direction: row`, what does `justify-content` control?",
+      "options": [
+        "The vertical alignment of items",
+        "The horizontal distribution/spacing of items along the main axis",
+        "The order in which items appear",
+        "Whether items wrap to the next line"
+      ],
+      "correctAnswer": 1,
+      "explanation": "`justify-content` controls how items are distributed along the main axis. With the default `flex-direction: row`, the main axis is horizontal, so `justify-content` controls horizontal spacing — values like `center`, `space-between`, and `flex-end` move items left and right."
+    },
+    {
+      "id": 4,
+      "question": "What is the difference between `justify-content` and `align-items` in Flexbox?",
+      "options": [
+        "`justify-content` works on the main axis, `align-items` works on the cross axis (perpendicular to the main axis)",
+        "They do the same thing but for different browsers",
+        "`justify-content` only works with `flex-direction: row`, `align-items` only works with `flex-direction: column`",
+        "`justify-content` works on individual items, `align-items` works on the container"
+      ],
+      "correctAnswer": 0,
+      "explanation": "`justify-content` aligns items along the main axis (horizontal by default), while `align-items` aligns items along the cross axis (vertical by default). When you change `flex-direction` to `column`, the axes swap — `justify-content` becomes vertical and `align-items` becomes horizontal."
+    },
+    {
+      "id": 5,
+      "question": "Which Flexbox property do you set on the container to allow items to wrap to the next line when they don't fit?",
+      "options": [
+        "flex-flow: wrap",
+        "flex-wrap: wrap",
+        "flex-direction: wrap",
+        "overflow: wrap"
+      ],
+      "correctAnswer": 1,
+      "explanation": "`flex-wrap: wrap` allows flex items to wrap to the next line instead of shrinking to fit on one line. The default is `nowrap`, which forces all items to stay on a single line."
+    },
+    {
+      "id": 6,
+      "question": "What does `grid-template-columns: repeat(3, 1fr)` create?",
+      "options": [
+        "A single column that is 3 fractions wide",
+        "Three columns, each taking one-third of the available space",
+        "Three rows of equal height",
+        "A grid that repeats three times"
+      ],
+      "correctAnswer": 1,
+      "explanation": "`repeat(3, 1fr)` creates three columns, each getting one fraction (1fr) of the available space — so each column is one-third of the container width. The `fr` unit distributes space proportionally, and `repeat()` is shorthand to avoid writing `1fr 1fr 1fr`."
+    },
+    {
+      "id": 7,
+      "question": "What does the `fr` unit represent in CSS Grid?",
+      "options": [
+        "A fixed unit equal to 16 pixels",
+        "A fraction of the remaining available space in the grid container",
+        "The full row height",
+        "A percentage of the viewport width"
+      ],
+      "correctAnswer": 1,
+      "explanation": "The `fr` unit stands for 'fraction' and represents a share of the available space in the grid container. `1fr 2fr` means the second column gets twice as much space as the first. The browser calculates `fr` values after subtracting any fixed-size tracks (like `200px`)."
+    },
+    {
+      "id": 8,
+      "question": "What does `grid-template-areas` allow you to do?",
+      "options": [
+        "Set the background color for different grid regions",
+        "Name regions of your grid layout and assign elements to them using `grid-area`",
+        "Automatically generate grid columns based on content",
+        "Add padding inside grid cells"
+      ],
+      "correctAnswer": 1,
+      "explanation": "`grid-template-areas` lets you define named regions in your grid layout using a visual text map. You then assign elements to those regions with `grid-area: region-name`. It makes your layout code readable — you can literally see the page structure in your CSS."
+    },
+    {
+      "id": 9,
+      "question": "When should you choose CSS Grid over Flexbox?",
+      "options": [
+        "When centering a single element",
+        "When you need a two-dimensional layout with control over both rows and columns simultaneously",
+        "When you have only two or three items to align",
+        "When you need items to wrap to the next line"
+      ],
+      "correctAnswer": 1,
+      "explanation": "CSS Grid excels at two-dimensional layouts — when you need to control both rows and columns at the same time. Page layouts with headers, sidebars, content areas, and footers are a natural fit. Flexbox is better for one-dimensional layouts (a single row or column of items)."
+    },
+    {
+      "id": 10,
+      "question": "What is the difference between `auto-fit` and `auto-fill` in `grid-template-columns: repeat(auto-fit, minmax(250px, 1fr))`?",
+      "options": [
+        "There is no difference — they are aliases for the same behavior",
+        "`auto-fit` is for rows and `auto-fill` is for columns",
+        "`auto-fit` collapses empty tracks so items stretch to fill the space, while `auto-fill` keeps empty tracks even when there aren't enough items to fill them",
+        "`auto-fill` only works with the `fr` unit, `auto-fit` works with any unit"
+      ],
+      "correctAnswer": 2,
+      "explanation": "Both create as many columns as will fit, but they differ when there aren't enough items to fill all columns. `auto-fit` collapses the empty tracks, letting existing items expand to fill the container. `auto-fill` keeps the empty tracks, so items don't stretch beyond their maximum size. In most cases, `auto-fit` is what you want."
+    }
+  ]
+}

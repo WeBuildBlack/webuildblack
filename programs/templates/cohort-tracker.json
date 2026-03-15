@@ -1,0 +1,56 @@
+{
+  "object": "database",
+  "title": "Cohort Tracker",
+  "description": "Track member progress through a WBB program cohort",
+  "properties": {
+    "Name": { "type": "title", "title": {} },
+    "Email": { "type": "email", "email": {} },
+    "Track": {
+      "type": "select",
+      "select": {
+        "options": [
+          { "name": "Android Dev", "color": "blue" },
+          { "name": "UX Design", "color": "purple" },
+          { "name": "Data Analytics", "color": "green" }
+        ]
+      }
+    },
+    "Cohort": {
+      "type": "select",
+      "select": {
+        "options": [
+          { "name": "2026-Q1", "color": "gray" },
+          { "name": "2026-Q2", "color": "gray" }
+        ]
+      }
+    },
+    "Milestone": {
+      "type": "select",
+      "select": {
+        "options": [
+          { "name": "1", "color": "red" },
+          { "name": "2", "color": "orange" },
+          { "name": "3", "color": "yellow" },
+          { "name": "4", "color": "green" },
+          { "name": "5", "color": "blue" },
+          { "name": "6", "color": "purple" }
+        ]
+      }
+    },
+    "Status": {
+      "type": "status",
+      "status": {
+        "options": [
+          { "name": "Not Started", "color": "default" },
+          { "name": "In Progress", "color": "blue" },
+          { "name": "Complete", "color": "green" }
+        ]
+      }
+    },
+    "Mentor": { "type": "people", "people": {} },
+    "Stipend Paid": { "type": "number", "number": { "format": "dollar" } },
+    "Notes": { "type": "rich_text", "rich_text": {} },
+    "Slack Handle": { "type": "rich_text", "rich_text": {} },
+    "Last Check-in": { "type": "date", "date": {} }
+  }
+}

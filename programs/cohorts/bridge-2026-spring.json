@@ -1,0 +1,21 @@
+{
+  "cohortId": "bridge-2026-spring",
+  "program": "the-bridge",
+  "startDate": "2026-01-19",
+  "endDate": "2026-03-13",
+  "notionDbId": "",
+  "slackChannels": {
+    "cohort": "bridge-2026-spring",
+    "pods": []
+  },
+  "pods": [
+    { "name": "Frontend / Full-Stack", "slug": "frontend", "channel": "bridge-2026-spring-frontend", "members": [] },
+    { "name": "Backend / Infra", "slug": "backend", "channel": "bridge-2026-spring-backend", "members": [] },
+    { "name": "Mobile", "slug": "mobile", "channel": "bridge-2026-spring-mobile", "members": [] },
+    { "name": "Data", "slug": "data", "channel": "bridge-2026-spring-data", "members": [] },
+    { "name": "Design", "slug": "design", "channel": "bridge-2026-spring-design", "members": [] },
+    { "name": "Product / PM", "slug": "product", "channel": "bridge-2026-spring-product", "members": [] }
+  ],
+  "capacity": 30,
+  "status": "active"
+}

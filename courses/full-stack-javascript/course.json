@@ -1,0 +1,78 @@
+{
+  "title": "Full-Stack JavaScript",
+  "slug": "full-stack-javascript",
+  "description": "Go from frontend to full-stack. Master advanced JavaScript, React, Node.js, Express, PostgreSQL, and authentication -- with a build project in every module.",
+  "difficulty": "intermediate",
+  "estimatedHours": 60,
+  "priceCents": 4900,
+  "prerequisites": [
+    "HTML & CSS fundamentals",
+    "JavaScript basics (variables, functions, loops, DOM)",
+    "Git & GitHub basics",
+    "Command line basics"
+  ],
+  "modules": [
+    {
+      "id": "01-advanced-javascript",
+      "title": "Advanced JavaScript (ES6+)",
+      "estimatedMinutes": 270,
+      "project": "Utility Library -- build a mini Lodash with ES6+ features"
+    },
+    {
+      "id": "02-async-javascript",
+      "title": "Asynchronous JavaScript",
+      "estimatedMinutes": 240,
+      "project": "Async Data Dashboard -- fetch and display data from multiple APIs"
+    },
+    {
+      "id": "03-apis-and-json",
+      "title": "APIs & JSON",
+      "estimatedMinutes": 240,
+      "project": "API Explorer -- build a tool to browse and test public APIs"
+    },
+    {
+      "id": "04-react-fundamentals",
+      "title": "React.js Fundamentals",
+      "estimatedMinutes": 300,
+      "project": "Component Library -- build a reusable UI component kit in React"
+    },
+    {
+      "id": "05-react-state-and-hooks",
+      "title": "React State & Hooks",
+      "estimatedMinutes": 270,
+      "project": "Shopping Cart -- build a cart with global state and persistent storage"
+    },
+    {
+      "id": "06-nodejs-and-express",
+      "title": "Node.js & Express",
+      "estimatedMinutes": 300,
+      "project": "REST API Server -- build a CRUD API with Express and validation"
+    },
+    {
+      "id": "07-sql-and-postgresql",
+      "title": "SQL & PostgreSQL",
+      "estimatedMinutes": 300,
+      "project": "Bookstore Database -- design a schema and write complex queries"
+    },
+    {
+      "id": "08-full-stack-integration",
+      "title": "Full-Stack Integration",
+      "estimatedMinutes": 270,
+      "project": "Full-Stack Blog -- connect a React frontend to an Express/Postgres backend"
+    },
+    {
+      "id": "09-authentication",
+      "title": "Authentication & Security",
+      "estimatedMinutes": 240,
+      "project": "Secure Auth System -- add signup, login, sessions, and protected routes"
+    },
+    {
+      "id": "10-capstone-full-stack-app",
+      "title": "Capstone: Full-Stack Application",
+      "estimatedMinutes": 360,
+      "project": "Full-Stack Capstone -- build and deploy a complete web application"
+    }
+  ],
+  "author": "We Build Black",
+  "updatedAt": "2026-03-14"
+}

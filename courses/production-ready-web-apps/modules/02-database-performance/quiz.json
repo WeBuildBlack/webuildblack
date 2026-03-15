@@ -1,0 +1,125 @@
+{
+  "title": "Database Performance and Optimization Quiz",
+  "questions": [
+    {
+      "id": "q1",
+      "question": "In EXPLAIN ANALYZE output, what does 'Rows Removed by Filter: 75168' tell you?",
+      "options": [
+        "75,168 rows were deleted from the table during the query",
+        "PostgreSQL read 75,168 rows from disk but discarded them because they did not match the WHERE condition",
+        "The index skipped 75,168 rows that were already cached",
+        "75,168 rows were returned to the client but filtered by the application"
+      ],
+      "correctIndex": 1,
+      "explanation": "'Rows Removed by Filter' indicates that PostgreSQL read those rows (typically via a sequential scan), evaluated the WHERE condition, and discarded them. This is wasted work that an appropriate index would eliminate by reading only matching rows."
+    },
+    {
+      "id": "q2",
+      "question": "You have a composite index on (user_id, status) on the RSVP table. Which of these queries can use this index efficiently?",
+      "options": [
+        "RSVP.objects.filter(status='confirmed')",
+        "RSVP.objects.filter(user_id=42, status='confirmed')",
+        "RSVP.objects.filter(event_id=100)",
+        "RSVP.objects.filter(status='confirmed', event_id=100)"
+      ],
+      "correctIndex": 1,
+      "explanation": "A composite index on (user_id, status) can be used when the query filters on user_id alone or on both user_id and status. It cannot be used efficiently when the query skips the first column (user_id) and only filters on status, because B-tree indexes require a left-prefix match."
+    },
+    {
+      "id": "q3",
+      "question": "What is the main advantage of a partial index like CREATE INDEX idx_rsvp_confirmed ON events_rsvp (event_id) WHERE status = 'confirmed'?",
+      "options": [
+        "It makes INSERT operations faster on the RSVP table",
+        "It automatically converts cancelled RSVPs to confirmed ones",
+        "It is smaller and faster than a full index because it only includes rows matching the WHERE condition",
+        "It prevents users from creating non-confirmed RSVPs"
+      ],
+      "correctIndex": 2,
+      "explanation": "A partial index only includes rows that match its WHERE condition. If 40% of RSVPs are not confirmed, the index is 40% smaller, uses less disk space, and is faster to scan. It is ideal when queries consistently filter to the same subset of rows."
+    },
+    {
+      "id": "q4",
+      "question": "Which PgBouncer pooling mode is recommended for Django web applications?",
+      "options": [
+        "Session pooling, because Django requires persistent connections for the ORM",
+        "Transaction pooling, because it reclaims connections between transactions and Django does not use session-level features by default",
+        "Statement pooling, because it provides the best connection utilization",
+        "Round-robin pooling, because it distributes load evenly across connections"
+      ],
+      "correctIndex": 1,
+      "explanation": "Transaction pooling returns connections to the pool after each transaction completes. Since a typical Django request holds a database connection for only a few milliseconds (the query portion), transaction pooling lets hundreds of workers share a small pool. Statement pooling breaks Django's transaction.atomic(), and session pooling does not improve connection sharing significantly."
+    },
+    {
+      "id": "q5",
+      "question": "Why should you set CONN_MAX_AGE=0 in Django when using PgBouncer in transaction pooling mode?",
+      "options": [
+        "PgBouncer requires fresh connections for each query",
+        "Django's connection persistence would hold onto PgBouncer connections between requests, defeating the purpose of transaction pooling",
+        "CONN_MAX_AGE=0 makes queries run faster by reducing connection overhead",
+        "PostgreSQL does not support persistent connections when PgBouncer is in the middle"
+      ],
+      "correctIndex": 1,
+      "explanation": "With CONN_MAX_AGE set to a positive value, Django keeps its connection to PgBouncer open between requests. In transaction pooling mode, this means the PgBouncer connection is reserved for that worker even during idle time. Setting CONN_MAX_AGE=0 tells Django to release the connection after each request, allowing PgBouncer to reassign it to another worker."
+    },
+    {
+      "id": "q6",
+      "question": "What is the safe three-step pattern for adding a NOT NULL column to a production table with 100K+ rows?",
+      "options": [
+        "Drop the table, recreate it with the new column, and reload the data",
+        "Add the column as nullable, backfill existing rows in batches, then add the NOT NULL constraint",
+        "Take the application offline, add the column with a default value, then restart",
+        "Add the column with NOT NULL and a default value in a single migration, since PostgreSQL 11+ handles this instantly"
+      ],
+      "correctIndex": 1,
+      "explanation": "The three-step pattern (add nullable, backfill, constrain) is the safest approach because each step involves minimal locking. Adding a nullable column is nearly instant. Backfilling in batches avoids long-held locks. Adding the NOT NULL constraint (with the NOT VALID trick) avoids a full table rewrite. While PostgreSQL 11+ can add a NOT NULL column with a constant default instantly, the three-step pattern is needed when backfill logic depends on existing data."
+    },
+    {
+      "id": "q7",
+      "question": "Why must you set atomic = False on a Django migration that uses AddIndexConcurrently?",
+      "options": [
+        "Concurrent operations are always non-atomic in Django",
+        "CREATE INDEX CONCURRENTLY cannot run inside a database transaction, and Django migrations run in a transaction by default",
+        "The atomic flag controls whether the migration is reversible",
+        "Django requires non-atomic migrations for any index operation"
+      ],
+      "correctIndex": 1,
+      "explanation": "PostgreSQL's CREATE INDEX CONCURRENTLY cannot run inside a transaction block. Django wraps each migration in a transaction by default. Setting atomic = False disables that wrapper, allowing the concurrent index build to proceed. The tradeoff is that if the migration fails partway through, it will not roll back automatically."
+    },
+    {
+      "id": "q8",
+      "question": "In a primary/replica PostgreSQL setup with Django's DATABASE_ROUTERS, what is 'read-your-writes consistency' and how do you handle it?",
+      "options": [
+        "It means all reads must go to the primary. Handle it by not using replicas.",
+        "It means that after a user writes data, their subsequent reads should see that data. Handle it by routing reads to the primary for a few seconds after any write.",
+        "It means reads and writes must use the same database connection. Handle it by setting CONN_MAX_AGE to a high value.",
+        "It means the replica must always be perfectly in sync. Handle it by using synchronous replication."
+      ],
+      "correctIndex": 1,
+      "explanation": "Read-your-writes consistency means a user should see their own recent writes reflected in subsequent reads. Because replicas can lag behind the primary by milliseconds to seconds, a read routed to a replica immediately after a write might return stale data. The common solution is to temporarily route that user's reads to the primary (for example, for 5 seconds after a write) using a session flag."
+    },
+    {
+      "id": "q9",
+      "question": "You are running 4 Django servers with 8 Gunicorn workers each, plus 2 Celery servers with 16 workers each. PgBouncer uses transaction pooling with DEFAULT_POOL_SIZE=20. How many actual PostgreSQL connections does PgBouncer maintain at steady state?",
+      "options": [
+        "64 connections (one per application worker)",
+        "20 connections (the DEFAULT_POOL_SIZE)",
+        "84 connections (64 app workers + 20 pool)",
+        "200 connections (MAX_CLIENT_CONN)"
+      ],
+      "correctIndex": 1,
+      "explanation": "PgBouncer maintains DEFAULT_POOL_SIZE (20) actual PostgreSQL connections, regardless of how many application workers connect to it. The 64 application connections (32 web + 32 Celery) are client connections to PgBouncer, which are cheap. PgBouncer multiplexes them across the 20 real PostgreSQL connections using transaction pooling, assigning a real connection only while a transaction is active."
+    },
+    {
+      "id": "q10",
+      "question": "What does 'Heap Fetches: 0' in an Index Only Scan tell you?",
+      "options": [
+        "The table has zero rows",
+        "PostgreSQL answered the entire query from the index without reading the table, because the index contains all the columns the query needs",
+        "The heap memory was not used during the scan",
+        "PostgreSQL used a bitmap scan instead of a heap scan"
+      ],
+      "correctIndex": 1,
+      "explanation": "In an Index Only Scan, PostgreSQL tries to answer the query entirely from the index. 'Heap Fetches' counts how many times it had to go back to the table (heap) to check visibility or fetch columns not in the index. A value of 0 means the index contained everything needed, making it the fastest possible scan type. This is achievable with covering indexes that INCLUDE the selected columns."
+    }
+  ]
+}

@@ -1,0 +1,109 @@
+{
+  "program": "General Operations",
+  "period": "12 months",
+  "totalBudget": 200000,
+  "lineItems": [
+    {
+      "category": "Personnel",
+      "description": "Executive Director (1.0 FTE) — organizational leadership, fundraising, partnership development, strategic planning",
+      "amount": 85000,
+      "notes": "Full-time salary; ED also serves as primary fundraiser and public representative"
+    },
+    {
+      "category": "Personnel",
+      "description": "Operations Manager (1.0 FTE) — day-to-day operations, HR, vendor management, program support",
+      "amount": 50000,
+      "notes": "Full-time salary; manages organizational systems and supports all program areas"
+    },
+    {
+      "category": "Personnel",
+      "description": "Part-time Communications Coordinator — social media, newsletter, website updates, press",
+      "amount": 18000,
+      "notes": "$25/hr x 15 hrs/week x 48 weeks"
+    },
+    {
+      "category": "Personnel",
+      "description": "Payroll taxes and benefits — employer FICA, unemployment insurance, workers comp",
+      "amount": 11500,
+      "notes": "~7.5% of total payroll for employer-side taxes and statutory benefits"
+    },
+    {
+      "category": "Facilities",
+      "description": "Office and coworking space — dedicated desks or small office at 147 Front Street, Brooklyn",
+      "amount": 9600,
+      "notes": "$800/month for coworking membership or small office lease"
+    },
+    {
+      "category": "Operations",
+      "description": "General liability and directors & officers insurance",
+      "amount": 3000,
+      "notes": "Annual premium for nonprofit GL and D&O coverage"
+    },
+    {
+      "category": "Operations",
+      "description": "Accounting and bookkeeping — monthly bookkeeping, annual audit preparation, Form 990 filing",
+      "amount": 6000,
+      "notes": "$500/month for outsourced nonprofit bookkeeping and annual tax filing"
+    },
+    {
+      "category": "Operations",
+      "description": "Legal services — contract review, compliance, employment matters",
+      "amount": 3000,
+      "notes": "Retainer or as-needed legal counsel; pro bono supplemented with paid hours"
+    },
+    {
+      "category": "Technology",
+      "description": "Technology infrastructure — Google Workspace, Slack, Notion, GitHub, cloud hosting",
+      "amount": 3600,
+      "notes": "$300/month for organizational SaaS stack (nonprofit discounts applied)"
+    },
+    {
+      "category": "Technology",
+      "description": "Website hosting and domain — Netlify hosting, domain registration, SSL",
+      "amount": 500,
+      "notes": "Netlify free tier plus domain renewal and any premium features"
+    },
+    {
+      "category": "Technology",
+      "description": "Hardware and IT — staff laptops, peripherals, repairs",
+      "amount": 2000,
+      "notes": "Replacement and maintenance budget for staff equipment"
+    },
+    {
+      "category": "Marketing",
+      "description": "Brand and marketing — graphic design, content creation, social media management tools",
+      "amount": 2400,
+      "notes": "$200/month for design tools (Canva Pro, Adobe), scheduling tools, and ad spend"
+    },
+    {
+      "category": "Marketing",
+      "description": "Email marketing platform — Mailchimp or SendGrid for newsletters and announcements",
+      "amount": 600,
+      "notes": "Nonprofit-tier pricing for email platform"
+    },
+    {
+      "category": "Operations",
+      "description": "Professional development — staff training, conference attendance, skill building",
+      "amount": 2000,
+      "notes": "$1,000 per FTE staff member for conferences, courses, or certifications"
+    },
+    {
+      "category": "Operations",
+      "description": "Travel — local transportation, donor meetings, partner site visits",
+      "amount": 1200,
+      "notes": "MetroCard, rideshare, and occasional regional travel for meetings"
+    },
+    {
+      "category": "Operations",
+      "description": "Office supplies and printing — general supplies, printing, postage",
+      "amount": 600,
+      "notes": "Basic office supplies and printed materials"
+    },
+    {
+      "category": "Operations",
+      "description": "Miscellaneous and contingency — unexpected expenses, small unbudgeted needs",
+      "amount": 1000,
+      "notes": "0.5% contingency reserve for unanticipated operational costs"
+    }
+  ]
+}

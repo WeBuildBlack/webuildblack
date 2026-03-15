@@ -1,0 +1,101 @@
+{
+  "title": "Embeddings & Vector Databases",
+  "questions": [
+    {
+      "id": "q1",
+      "question": "What is the primary purpose of converting text into embeddings (vectors of numbers)?",
+      "options": [
+        "To compress text so it takes up less storage space in a database",
+        "To represent the semantic meaning of text as numbers, so that similar meanings produce similar vectors that can be compared mathematically",
+        "To encrypt text so it cannot be read without a decryption key",
+        "To convert text into a format that can be displayed as an image"
+      ],
+      "correctIndex": 1,
+      "explanation": "Embeddings capture the semantic meaning of text as a vector (list of numbers). The key property is that texts with similar meanings produce vectors that are close together in vector space. This lets you find related content by comparing vectors mathematically using cosine similarity, even when the texts use completely different words."
+    },
+    {
+      "id": "q2",
+      "question": "When splitting a long document into chunks for embedding, why is it important to include overlap between consecutive chunks?",
+      "options": [
+        "Overlap increases the embedding quality by duplicating important tokens",
+        "Overlap is required by the OpenAI embeddings API or the request will fail",
+        "Overlap ensures that concepts spanning a chunk boundary are captured in at least one chunk with sufficient context",
+        "Overlap makes the cosine similarity calculations more accurate"
+      ],
+      "correctIndex": 2,
+      "explanation": "Without overlap, a concept that spans the boundary between two chunks gets split, and neither chunk captures it fully. For example, if a sentence starts at the end of chunk 1 and finishes at the beginning of chunk 2, both chunks have an incomplete thought. Overlap ensures that the boundary region appears in both chunks, so the concept is fully represented in at least one embedding."
+    },
+    {
+      "id": "q3",
+      "question": "What is the main advantage of HNSW indexing over IVFFlat for vector similarity search in pgvector?",
+      "options": [
+        "HNSW uses less memory than IVFFlat",
+        "HNSW is faster to build initially than IVFFlat",
+        "HNSW provides better recall (accuracy) and handles dynamic data well without needing index rebuilds after inserts",
+        "HNSW supports more vector dimensions than IVFFlat"
+      ],
+      "correctIndex": 2,
+      "explanation": "HNSW (Hierarchical Navigable Small Worlds) builds a multi-layer graph structure that provides better search accuracy (recall) than IVFFlat at comparable speeds. Critically, HNSW handles inserts and updates without needing to rebuild the index, making it ideal for dynamic datasets. IVFFlat is simpler and uses less memory, but its accuracy degrades after many inserts unless the index is rebuilt."
+    },
+    {
+      "id": "q4",
+      "question": "In the semantic search pipeline, why is it beneficial to prepend the document title to each chunk before generating its embedding?",
+      "options": [
+        "It increases the vector dimensions, making the embedding more precise",
+        "It provides contextual information so the embedding captures what document the chunk belongs to, improving search relevance for chunks that reference context defined elsewhere in the document",
+        "The OpenAI API requires a title field or it returns lower-quality embeddings",
+        "It makes the chunks longer, and longer text always produces better embeddings"
+      ],
+      "correctIndex": 1,
+      "explanation": "Individual chunks often lack context about their source. A chunk that says 'The deadline is March 15th and all submissions must be in PDF format' doesn't indicate what it's about. Prepending the title ('Conference Paper Submission Guidelines') gives the embedding model context about the document, producing a more meaningful vector. This is especially important for chunks in the middle of a document that reference concepts defined earlier."
+    },
+    {
+      "id": "q5",
+      "question": "A developer's semantic search returns decent results but misses some clearly relevant documents. They want to improve result quality. Which approach would be MOST effective?",
+      "options": [
+        "Switch from text-embedding-3-small to text-embedding-3-large for higher-dimensional embeddings",
+        "Implement hybrid search that combines keyword matching (full-text search) with semantic similarity, using weighted scoring to merge both result sets",
+        "Reduce the chunk size from 800 to 200 characters so each chunk is more focused",
+        "Increase the similarity threshold from 0.5 to 0.8 to only return highly relevant results"
+      ],
+      "correctIndex": 1,
+      "explanation": "Hybrid search combines the strengths of both approaches: keyword search catches exact term matches that semantic search might score lower, while semantic search catches conceptually related content that keyword search misses entirely. Research consistently shows that combining both methods outperforms either one alone. Switching embedding models gives marginal improvement, reducing chunk size can hurt context, and increasing the threshold would return fewer results, not better ones."
+    },
+    {
+      "id": "q6",
+      "question": "What is the range of cosine similarity values, and what do the values mean?",
+      "options": [
+        "0 to 1, where 1 means identical and 0 means completely different",
+        "-1 to 1, where 1 means identical direction, 0 means unrelated, and -1 means opposite meaning",
+        "0 to 100, representing a percentage of similarity",
+        "-infinity to infinity, where higher values indicate more similarity"
+      ],
+      "correctIndex": 1,
+      "explanation": "Cosine similarity measures the cosine of the angle between two vectors, ranging from -1 to 1. A value of 1 means the vectors point in exactly the same direction (identical meaning), 0 means they are orthogonal (unrelated), and -1 means they point in opposite directions (opposite meaning). In practice with text embeddings, most values fall between 0 and 1, with highly similar texts scoring above 0.8."
+    },
+    {
+      "id": "q7",
+      "question": "How does the cost of generating embeddings compare to the cost of LLM inference (chat completions)?",
+      "options": [
+        "Embeddings are more expensive because they require more computation per token",
+        "They cost about the same per token",
+        "Embeddings are much cheaper than LLM inference -- typically $0.02-0.13 per million tokens compared to $1-15+ per million tokens for chat models",
+        "Embeddings are free; only chat completions cost money"
+      ],
+      "correctIndex": 2,
+      "explanation": "Embedding generation is dramatically cheaper than LLM inference. For example, OpenAI's text-embedding-3-small costs $0.02 per million tokens, while GPT-4o costs $2.50-10.00 per million tokens -- a 100x+ difference. This makes it practical to embed large document collections without worrying about cost. A million tokens of text (roughly 3,000 pages) costs about 2 cents to embed."
+    },
+    {
+      "id": "q8",
+      "question": "When should you choose text-embedding-3-large over text-embedding-3-small for your embeddings?",
+      "options": [
+        "Always -- larger models are always better",
+        "Only when you have more than 1 million documents to embed",
+        "When your task requires high precision, such as legal or medical document search, where subtle semantic differences matter",
+        "Only when using Pinecone instead of pgvector"
+      ],
+      "correctIndex": 2,
+      "explanation": "text-embedding-3-large produces higher-dimensional embeddings (3072 vs 1536) that capture finer semantic distinctions, making it better for tasks where precision matters -- like legal document search, medical literature retrieval, or any domain where subtle differences in meaning are important. For most general-purpose applications (blog search, FAQ matching, recommendation systems), text-embedding-3-small is sufficient and significantly cheaper. Choose based on your accuracy requirements, not just dataset size."
+    }
+  ]
+}

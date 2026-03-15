@@ -1,0 +1,124 @@
+{
+  "questions": [
+    {
+      "id": "q1",
+      "question": "In a three-tier architecture, which tier does the React app belong to?",
+      "options": [
+        "The data tier",
+        "The server tier",
+        "The client tier",
+        "The middleware tier"
+      ],
+      "correctIndex": 2,
+      "explanation": "React runs in the browser and is the client tier. It handles rendering the UI and user interactions. It never talks directly to the database -- it communicates with the server tier via HTTP."
+    },
+    {
+      "id": "q2",
+      "question": "You call fetch('http://localhost:3001/api/posts') from your React app and the server returns a 500 status. What does the fetch() Promise do?",
+      "options": [
+        "It rejects with an error",
+        "It resolves, but response.ok is false",
+        "It resolves, and response.ok is true",
+        "It hangs and eventually times out"
+      ],
+      "correctIndex": 1,
+      "explanation": "fetch() only rejects when the network request itself fails (server unreachable, DNS failure, etc.). HTTP error responses (4xx, 5xx) resolve the Promise normally but set response.ok to false and response.status to the error code. You must check response.ok explicitly."
+    },
+    {
+      "id": "q3",
+      "question": "What is the primary purpose of the `cancelled` flag in a useFetch hook's useEffect cleanup function?",
+      "options": [
+        "To abort the HTTP request mid-flight",
+        "To prevent calling setState after the component has unmounted",
+        "To cancel the next scheduled render",
+        "To clear the browser cache for that URL"
+      ],
+      "correctIndex": 1,
+      "explanation": "When a component unmounts before an async fetch completes, calling setState would trigger a React warning about updating state on an unmounted component. The cancelled flag, set to true in the cleanup function, prevents this by making the fetch callback a no-op after unmount."
+    },
+    {
+      "id": "q4",
+      "question": "Your React app is at http://localhost:5173 and your Express API is at http://localhost:3001. You get a CORS error. Where do you fix it?",
+      "options": [
+        "In the React component's fetch call",
+        "In the Vite config file",
+        "In the Express server by adding CORS headers",
+        "In the browser's security settings"
+      ],
+      "correctIndex": 2,
+      "explanation": "CORS is enforced by the browser based on headers the server sends. The fix is always on the server: add the cors() middleware to Express so it includes the Access-Control-Allow-Origin header in responses. Client-side code cannot bypass CORS."
+    },
+    {
+      "id": "q5",
+      "question": "In a Vite project, you define MY_API_KEY=abc123 in the client .env file without a VITE_ prefix. What happens when you access import.meta.env.MY_API_KEY in your React code?",
+      "options": [
+        "It returns 'abc123'",
+        "It returns undefined",
+        "It throws a ReferenceError",
+        "It returns the value only in development, not in production builds"
+      ],
+      "correctIndex": 1,
+      "explanation": "Vite only exposes environment variables prefixed with VITE_ to client-side code. Variables without this prefix are never embedded in the JavaScript bundle. This is a security feature -- it prevents secrets like database passwords from accidentally shipping to the browser."
+    },
+    {
+      "id": "q6",
+      "question": "You have an async Express route handler that throws an AppError. The error never reaches your errorHandler middleware. What is most likely the cause?",
+      "options": [
+        "The errorHandler is not the last middleware registered",
+        "The route handler is not wrapped with asyncHandler",
+        "AppError is not extending the built-in Error class",
+        "The CORS middleware is blocking the error response"
+      ],
+      "correctIndex": 1,
+      "explanation": "Express does not automatically catch errors thrown from async functions. Without asyncHandler (which wraps the handler and calls next(err) on rejection), the thrown error becomes an unhandled Promise rejection that never reaches the error middleware. The client gets no response."
+    },
+    {
+      "id": "q7",
+      "question": "When deploying the backend to Render and the frontend to Vercel, what must you update in Express after the Vercel deployment URL is known?",
+      "options": [
+        "The DATABASE_URL to point to the Vercel database",
+        "The PORT environment variable",
+        "The CORS allowed origins to include the Vercel URL",
+        "The vite.config.js proxy setting"
+      ],
+      "correctIndex": 2,
+      "explanation": "The Express CORS configuration must explicitly allow the production Vercel origin. In development you allow localhost:5173. In production you must add the Vercel URL (e.g., https://blog.vercel.app) to the allowed origins list, or the browser will block the React app from calling your API."
+    },
+    {
+      "id": "q8",
+      "question": "What does React's Error Boundary catch?",
+      "options": [
+        "Errors thrown inside event handlers like onClick",
+        "Errors thrown inside async functions like fetch callbacks",
+        "Errors thrown during the render phase of descendant components",
+        "All JavaScript errors anywhere in the application"
+      ],
+      "correctIndex": 2,
+      "explanation": "Error Boundaries catch errors thrown during rendering, including in constructors and lifecycle methods of class components and the body of function components. They do NOT catch errors in event handlers (use try/catch there) or async code (errors in setTimeout, fetch callbacks, etc.)."
+    },
+    {
+      "id": "q9",
+      "question": "In the monorepo structure for this module's project, why does each of client/ and server/ have its own package.json instead of sharing one at the root?",
+      "options": [
+        "Because npm does not support nested package.json files",
+        "Because they have different runtime environments, build tools, and deployment targets",
+        "Because sharing a package.json would cause CORS errors",
+        "Because concurrently requires separate package.json files to work"
+      ],
+      "correctIndex": 1,
+      "explanation": "The client is a React app built with Vite that compiles to static files for Vercel. The server is a Node.js process deployed to Render. They have completely different dependencies, build commands, start commands, and environment variables. Keeping them separate makes deployment straightforward and prevents development dependencies from one leaking into the other."
+    },
+    {
+      "id": "q10",
+      "question": "You implement optimistic delete: the post disappears from the UI immediately, then postsApi.remove() is called. The API call fails with a 500 error. What should happen next?",
+      "options": [
+        "The post stays deleted from the UI because the optimistic update already happened",
+        "The page refreshes automatically to restore the correct state",
+        "The original post is restored to the list and an error message is shown to the user",
+        "The delete is retried automatically up to three times"
+      ],
+      "correctIndex": 2,
+      "explanation": "Optimistic updates must include a rollback strategy. Before removing the post from state, save a reference to it. In the catch block, add it back to the list and show the user an error message explaining what happened. Silently failing while leaving the UI in an incorrect state would confuse and frustrate users."
+    }
+  ]
+}

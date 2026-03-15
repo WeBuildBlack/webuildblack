@@ -1,0 +1,125 @@
+{
+  "title": "Production Capstone Quiz",
+  "questions": [
+    {
+      "id": "q1",
+      "question": "You have a function that can return either a successful result or an error, each with different fields. Which TypeScript pattern best models this?",
+      "options": [
+        "A single interface with all fields optional",
+        "A discriminated union with a shared literal type field",
+        "A generic type parameter with a default value",
+        "An intersection type combining both result shapes"
+      ],
+      "explanation": "A discriminated union uses a shared field (like 'status: \"success\" | \"error\"') with a literal type to let TypeScript narrow the type in each branch. This is safer than optional fields (which allow impossible states) and more precise than intersection types (which require all fields to exist simultaneously).",
+      "correctIndex": 1
+    },
+    {
+      "id": "q2",
+      "question": "An event detail page shows static event information (title, date, description) and a dynamic RSVP button that depends on the logged-in user. How should you split this between server and client components in Next.js?",
+      "options": [
+        "Make the entire page a client component so the RSVP button can use hooks",
+        "Make the entire page a server component and handle RSVP with a server action",
+        "Make the page a server component and render the RSVP button as a client component",
+        "Use getServerSideProps to fetch all data and pass it as props to a client component"
+      ],
+      "explanation": "The page itself can be a server component, which is better for SEO and initial load performance since the static event data is rendered on the server. The RSVP button needs client-side interactivity (hooks, mutations, optimistic updates), so it should be a client component embedded within the server component. This gives you the best of both worlds.",
+      "correctIndex": 2
+    },
+    {
+      "id": "q3",
+      "question": "Your app needs to track which sidebar panel is open (a UI concern) and also fetch and cache the list of events from your API (a server data concern). Which state management approach is correct?",
+      "options": [
+        "Store both in Zustand for a single source of truth",
+        "Store both in TanStack Query since it handles caching",
+        "Use Zustand for the sidebar state and TanStack Query for the events data",
+        "Use React Context for both since they need to be accessible across the component tree"
+      ],
+      "explanation": "Zustand is designed for client-side UI state (which panel is open, form drafts, theme preferences). TanStack Query is designed for server state (API data that needs caching, background refetching, and stale-while-revalidate behavior). Mixing these concerns into one tool either overcomplicates the simple case (UI state in TanStack Query) or loses important features (server data in Zustand without caching or refetching).",
+      "correctIndex": 2
+    },
+    {
+      "id": "q4",
+      "question": "You want to verify that when a user clicks 'Join Waitlist' on a full event, the button text changes to 'Leaving...' and their position appears. Which type of test is most appropriate?",
+      "options": [
+        "A Django unit test that checks the waitlist model logic",
+        "A Vitest component test that renders WaitlistButton with mocked hooks",
+        "A Playwright E2E test that logs in and interacts with a real event page",
+        "A Vitest unit test that calls the useJoinWaitlist hook directly"
+      ],
+      "explanation": "This is testing component behavior in response to user interaction, which is the domain of component tests with React Testing Library. You mock the hooks to control the data, render the component, simulate the click, and assert on what the user sees. An E2E test could also verify this, but it is slower and tests more than just the component. A Django test cannot verify frontend rendering. Testing the hook directly misses the component rendering logic.",
+      "correctIndex": 1
+    },
+    {
+      "id": "q5",
+      "question": "Given a list of RSVP dictionaries, which Python expression returns only the confirmed RSVPs sorted by creation date (newest first)?",
+      "options": [
+        "filter(lambda r: r['status'] == 'confirmed', sorted(rsvps, key=lambda r: r['created_at'], reverse=True))",
+        "sorted([r for r in rsvps if r['status'] == 'confirmed'], key=lambda r: r['created_at'], reverse=True)",
+        "[r for r in sorted(rsvps, key=lambda r: r['created_at']) if r['status'] == 'confirmed']",
+        "rsvps.filter(status='confirmed').order_by('-created_at')"
+      ],
+      "explanation": "Option B uses a list comprehension to filter confirmed RSVPs, then sorts the filtered list by created_at in descending order (reverse=True). Option A applies filter after sort, which works but returns a filter object, not a list. Option C sorts first then filters, which wastes time sorting entries that get discarded. Option D is Django ORM syntax, not plain Python.",
+      "correctIndex": 1
+    },
+    {
+      "id": "q6",
+      "question": "You need a Django API endpoint where only the event organizer can view the waitlist, but any authenticated user can join it. Which approach correctly implements this?",
+      "options": [
+        "Set permission_classes = [IsAuthenticated, IsEventOrganizer] on the ViewSet",
+        "Use separate permission_classes per action using get_permissions() override",
+        "Check request.user in each action method and return 403 manually",
+        "Create two separate ViewSets, one with IsAuthenticated and one with IsEventOrganizer"
+      ],
+      "explanation": "Overriding get_permissions() lets you return different permission classes based on self.action. The join action returns [IsAuthenticated()] while the list_entries action returns [IsAuthenticated(), IsEventOrganizer()]. Setting permissions at the ViewSet level (option A) applies the same permissions to all actions. Manual checks in each method (option C) work but bypass DRF's permission framework and its automatic 403 responses. Two ViewSets (option D) splits related logic unnecessarily.",
+      "correctIndex": 1
+    },
+    {
+      "id": "q7",
+      "question": "Your GitHub Actions CI pipeline builds a Docker image, runs tests inside it, and then pushes the image to a registry. The tests are failing because the database container is not ready when tests start. What is the correct fix?",
+      "options": [
+        "Add a 30-second sleep command before the test step",
+        "Use a health check on the database service and depends_on with condition: service_healthy",
+        "Run the database on the host machine instead of in a container",
+        "Skip the database-dependent tests in CI and only run them locally"
+      ],
+      "explanation": "Docker Compose health checks let you define a command (like 'pg_isready') that verifies the database is accepting connections. The depends_on condition: service_healthy setting ensures the application container waits until the health check passes before starting. A sleep command (option A) is fragile because startup time varies. Running the database on the host (option C) defeats the purpose of containerized CI. Skipping tests (option D) means your CI pipeline does not actually verify your code works.",
+      "correctIndex": 1
+    },
+    {
+      "id": "q8",
+      "question": "What is the primary purpose of an Architecture Decision Record (ADR)?",
+      "options": [
+        "To document the API endpoints for frontend developers",
+        "To capture a significant technical decision, its context, and the reasoning behind it",
+        "To create a project timeline with milestones and deadlines",
+        "To list all the technologies used in the project and their versions"
+      ],
+      "explanation": "An ADR captures why a specific technical decision was made, including the context, constraints, alternatives considered, and trade-offs. This is valuable because codebases outlive the memory of the people who wrote them. When a future developer asks 'why was it done this way?' the ADR provides the answer. API docs, timelines, and tech stack lists serve different purposes.",
+      "correctIndex": 1
+    },
+    {
+      "id": "q9",
+      "question": "Your Next.js frontend calls a Django REST API endpoint. The API returns a 201 status with a JSON body on success and a 409 status with an error message when the user is already on the waitlist. How should the TanStack Query mutation handle the 409?",
+      "options": [
+        "Check the status code in the onSuccess callback and show an error toast if it is 409",
+        "Let the fetch call throw on non-2xx status codes so the mutation's onError callback receives it",
+        "Use a try/catch inside the mutationFn and return null on 409",
+        "Ignore the 409 since TanStack Query automatically retries failed mutations"
+      ],
+      "explanation": "The standard pattern is to throw an error in the mutationFn when the response is not OK (non-2xx). This causes TanStack Query to treat it as a failed mutation, triggering the onError callback where you can show an appropriate error message to the user. The onSuccess callback (option A) only runs on success, not on 409. Returning null (option C) silently swallows the error. TanStack Query does not automatically retry mutations (option D), and even if it did, retrying a 409 would just produce the same conflict.",
+      "correctIndex": 1
+    },
+    {
+      "id": "q10",
+      "question": "Your application is deployed. CI is green. The health check returns 200. But users report that the waitlist join button does nothing when clicked. What is the most efficient first debugging step?",
+      "options": [
+        "Roll back to the previous deployment and investigate later",
+        "Add console.log statements to the click handler, push, and wait for a new deploy",
+        "Check Sentry for frontend errors and the deployment platform logs for backend errors",
+        "Ask users to clear their browser cache and try again"
+      ],
+      "explanation": "Sentry captures frontend JavaScript errors with full stack traces, browser info, and the sequence of user actions leading up to the error. Deployment platform logs (Railway, Vercel) show backend request logs and errors. Together, these two sources will tell you whether the button is failing to send the request, whether the request is reaching the backend, and what error (if any) occurred. Rolling back (option A) is premature without understanding the issue. Adding console.log (option B) is slow and pollutes production code. Asking users to clear cache (option D) is unlikely to help and wastes their time.",
+      "correctIndex": 2
+    }
+  ]
+}

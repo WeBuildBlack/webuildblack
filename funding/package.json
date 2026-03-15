@@ -1,0 +1,24 @@
+{
+  "name": "wbb-funding",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "WBB funding workspace — grant research, tracking, and proposal generation",
+  "scripts": {
+    "evaluate": "node scripts/research/evaluate-opportunity.js",
+    "search": "node scripts/research/search-grants.js",
+    "add": "node scripts/notion/add-opportunity.js",
+    "add:dry": "node scripts/notion/add-opportunity.js --dry-run",
+    "sync:grants": "node scripts/notion/sync-grant-tracker.js",
+    "sync:funders": "node scripts/notion/sync-funder-directory.js",
+    "proposal": "node scripts/proposals/generate-proposal.js",
+    "budget": "node scripts/proposals/generate-budget.js",
+    "pipeline": "node scripts/reports/pipeline-report.js",
+    "deadlines": "node scripts/reports/deadline-check.js",
+    "deadlines:notify": "node scripts/notify/deadline-reminder.js",
+    "deadlines:notify:dry": "node scripts/notify/deadline-reminder.js --dry-run"
+  },
+  "dependencies": {
+    "@notionhq/client": "^2.2.0",
+    "@slack/web-api": "^7.0.0"
+  }
+}

@@ -1,0 +1,124 @@
+{
+  "questions": [
+    {
+      "id": "q1",
+      "question": "Which SQL clause would you use to filter groups after using GROUP BY?",
+      "options": [
+        "WHERE",
+        "HAVING",
+        "FILTER",
+        "LIMIT"
+      ],
+      "correctIndex": 1,
+      "explanation": "HAVING filters groups after aggregation. WHERE filters individual rows before grouping. You cannot use WHERE to filter on aggregate functions like COUNT(*) -- use HAVING instead."
+    },
+    {
+      "id": "q2",
+      "question": "What is the correct way to check for NULL values in a WHERE clause?",
+      "options": [
+        "WHERE column = NULL",
+        "WHERE column == NULL",
+        "WHERE column IS NULL",
+        "WHERE ISNULL(column)"
+      ],
+      "correctIndex": 2,
+      "explanation": "NULL is not a value -- it is the absence of a value. You cannot compare NULL with = or ==. Use IS NULL or IS NOT NULL. The expression NULL = NULL evaluates to NULL (unknown), not TRUE."
+    },
+    {
+      "id": "q3",
+      "question": "You have a `users` table and a `posts` table. You want to list ALL users, including those who have written zero posts, along with a count of their posts. Which type of join should you use?",
+      "options": [
+        "INNER JOIN -- it returns all matching rows",
+        "LEFT JOIN -- it returns all rows from the left table (users) including those with no match",
+        "RIGHT JOIN -- it returns all rows from the right table (posts)",
+        "CROSS JOIN -- it returns the Cartesian product of both tables"
+      ],
+      "correctIndex": 1,
+      "explanation": "LEFT JOIN returns all rows from the left table (users) plus matching rows from the right (posts). When there are no matching posts, the posts columns are NULL and COUNT(posts.id) returns 0. An INNER JOIN would exclude users with no posts."
+    },
+    {
+      "id": "q4",
+      "question": "What does `ON DELETE CASCADE` on a foreign key constraint mean?",
+      "options": [
+        "When a child row is deleted, the parent row is also deleted",
+        "When a parent row is deleted, all child rows are automatically deleted",
+        "Deletions are cascaded to all tables in the database",
+        "The foreign key is ignored during DELETE operations"
+      ],
+      "correctIndex": 1,
+      "explanation": "ON DELETE CASCADE means: when a parent row is deleted, all child rows that reference it are automatically deleted. For example, if a post is deleted and comments.post_id references posts.id ON DELETE CASCADE, all comments for that post are also deleted."
+    },
+    {
+      "id": "q5",
+      "question": "Which PostgreSQL data type should you use to store a monetary value like a product price?",
+      "options": [
+        "FLOAT",
+        "DOUBLE PRECISION",
+        "NUMERIC(10, 2)",
+        "INTEGER"
+      ],
+      "correctIndex": 2,
+      "explanation": "NUMERIC(10, 2) stores exact decimal values with up to 10 significant digits and 2 decimal places. FLOAT and DOUBLE PRECISION are approximate and can introduce rounding errors (0.1 + 0.2 != 0.3). Never use floating-point types for monetary values."
+    },
+    {
+      "id": "q6",
+      "question": "What is a parameterized query and why is it important?",
+      "options": [
+        "A query stored in a file with parameters at the top -- useful for organization",
+        "A query where user values are passed as separate arguments ($1, $2), preventing SQL injection",
+        "A query that uses EXPLAIN ANALYZE to measure performance",
+        "A query wrapped in a transaction for atomic execution"
+      ],
+      "correctIndex": 1,
+      "explanation": "Parameterized queries pass user values separately from the SQL string using placeholders ($1, $2 in PostgreSQL). The database driver sends them as data, not SQL. This prevents SQL injection -- no matter what the user inputs, it cannot alter the query structure."
+    },
+    {
+      "id": "q7",
+      "question": "What does `INSERT INTO posts (title) VALUES ($1) RETURNING *` do?",
+      "options": [
+        "Inserts a row and returns the number of rows inserted",
+        "Inserts a row and returns all columns of the inserted row",
+        "Inserts a row only if it does not already exist",
+        "Inserts a row and then selects it in a second query"
+      ],
+      "correctIndex": 1,
+      "explanation": "RETURNING * causes PostgreSQL to return the full inserted row, including auto-generated columns like id and created_at. This is how you get the new row's ID after an INSERT without running a separate SELECT."
+    },
+    {
+      "id": "q8",
+      "question": "You have a `posts` table with 2 million rows. The query `SELECT * FROM posts WHERE author_id = 42` is very slow. What is the most likely fix?",
+      "options": [
+        "Add LIMIT 1000 to the query",
+        "Create an index: CREATE INDEX ON posts(author_id)",
+        "Switch from SERIAL to UUID primary keys",
+        "Use EXPLAIN instead of SELECT"
+      ],
+      "correctIndex": 1,
+      "explanation": "Without an index on author_id, PostgreSQL must scan all 2 million rows to find matches (sequential scan). An index on author_id allows the database to jump directly to matching rows in O(log n) time. Foreign key columns are almost always worth indexing."
+    },
+    {
+      "id": "q9",
+      "question": "What is the difference between `Pool` and `Client` in the `pg` library?",
+      "options": [
+        "Pool is for PostgreSQL; Client is for MySQL",
+        "Pool manages multiple reusable connections; Client is a single connection you must manually manage",
+        "Pool is synchronous; Client is asynchronous",
+        "Pool requires authentication; Client does not"
+      ],
+      "correctIndex": 1,
+      "explanation": "Pool maintains a set of connections that are checked out and returned automatically. It is the right choice for web servers handling concurrent requests. Client is a single connection you must connect() and end() manually -- appropriate for scripts and one-time operations."
+    },
+    {
+      "id": "q10",
+      "question": "Which query correctly implements pagination to get the third page of results, with 10 items per page, ordered by created_at descending?",
+      "options": [
+        "SELECT * FROM posts ORDER BY created_at DESC LIMIT 10 PAGE 3",
+        "SELECT * FROM posts ORDER BY created_at DESC LIMIT 10 SKIP 20",
+        "SELECT * FROM posts ORDER BY created_at DESC LIMIT 10 OFFSET 20",
+        "SELECT * FROM posts ORDER BY created_at DESC WHERE page = 3 LIMIT 10"
+      ],
+      "correctIndex": 2,
+      "explanation": "OFFSET skips a number of rows before returning results. For page 3 with 10 items per page: LIMIT 10 OFFSET 20 (skip the first 20 rows, which are pages 1 and 2). The formula is OFFSET = (page - 1) * limit."
+    }
+  ]
+}

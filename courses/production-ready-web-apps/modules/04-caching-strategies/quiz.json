@@ -1,0 +1,125 @@
+{
+  "title": "Caching Strategies Quiz",
+  "questions": [
+    {
+      "id": "q1",
+      "question": "In the caching hierarchy, which layer offers the lowest latency but the smallest capacity?",
+      "options": [
+        "RAM (main memory)",
+        "L1 CPU cache",
+        "Redis application cache",
+        "CDN edge cache"
+      ],
+      "correctIndex": 1,
+      "explanation": "L1 CPU cache has the lowest latency (about 1 nanosecond) but the smallest capacity (32-64 KB per core). Each layer in the hierarchy trades speed for capacity. L1 is the fastest and smallest, while disk is the slowest and largest."
+    },
+    {
+      "id": "q2",
+      "question": "You set a cache key in Redis with `cache.set('event:42', data, timeout=300)`. What happens when you call `cache.get('event:42')` after 301 seconds?",
+      "options": [
+        "Redis returns the data but marks it as stale",
+        "Redis raises a TimeoutError",
+        "Redis returns None because the key has expired",
+        "Redis returns the data and resets the TTL to 300 seconds"
+      ],
+      "correctIndex": 2,
+      "explanation": "When a key's TTL expires, Redis automatically deletes it. Any subsequent GET returns None (a cache miss). This is the TTL-based expiration strategy. The next request must fetch fresh data from the database and re-populate the cache."
+    },
+    {
+      "id": "q3",
+      "question": "What is the key difference between write-through cache and cache-aside (lazy loading)?",
+      "options": [
+        "Write-through uses Redis while cache-aside uses Memcached",
+        "Write-through updates the cache on every write, while cache-aside only populates the cache on read (cache miss)",
+        "Write-through is faster for reads while cache-aside is faster for writes",
+        "Write-through supports TTL while cache-aside does not"
+      ],
+      "correctIndex": 1,
+      "explanation": "In a write-through cache, every database write also updates the cache, keeping it always fresh. In cache-aside, the cache is only populated when a read request finds a cache miss. Write-through ensures cache hits after writes but adds latency to every write operation. Cache-aside only caches data that is actually being read."
+    },
+    {
+      "id": "q4",
+      "question": "You use Django signals (post_save) to invalidate the cache when an RSVP is created. But when you call `RSVP.objects.bulk_create(rsvp_list)`, the cache is not invalidated. Why?",
+      "options": [
+        "bulk_create uses a different database connection that signals cannot monitor",
+        "bulk_create bypasses the ORM's per-instance save process, so post_save signals are not fired",
+        "Django signals only work with the admin interface, not the ORM",
+        "bulk_create automatically handles cache invalidation without signals"
+      ],
+      "correctIndex": 1,
+      "explanation": "Django's bulk_create, QuerySet.update(), and QuerySet.delete() bypass per-instance processing for performance. Since post_save fires as part of the per-instance save cycle, these bulk operations skip it entirely. You must manually invalidate the cache after bulk operations."
+    },
+    {
+      "id": "q5",
+      "question": "What does the HTTP header `Cache-Control: public, max-age=60, s-maxage=300` mean?",
+      "options": [
+        "Browsers cache for 300 seconds, CDNs cache for 60 seconds",
+        "Both browsers and CDNs cache for 360 seconds total",
+        "Browsers cache for 60 seconds, shared caches (CDNs/proxies) cache for 300 seconds",
+        "The response is cached publicly for 60 seconds and then privately for 300 seconds"
+      ],
+      "correctIndex": 2,
+      "explanation": "max-age controls how long private caches (browsers) store the response. s-maxage (shared max-age) overrides max-age for shared caches like CDNs and reverse proxies. This lets you keep browser caches short (users see updates sooner on refresh) while letting CDNs cache longer (reducing origin server load)."
+    },
+    {
+      "id": "q6",
+      "question": "A client sends `If-None-Match: \"abc123\"` in its request header. The server computes the current ETag as `\"abc123\"`. What should the server respond with?",
+      "options": [
+        "200 OK with the full response body",
+        "304 Not Modified with no response body",
+        "204 No Content",
+        "400 Bad Request because ETags should not be sent by clients"
+      ],
+      "correctIndex": 1,
+      "explanation": "When the client's If-None-Match header matches the server's current ETag, it means the client's cached copy is still valid. The server responds with 304 Not Modified and no body. The client uses its cached copy, saving bandwidth and processing time."
+    },
+    {
+      "id": "q7",
+      "question": "What does a CDN do when it receives a request for a page that is past its s-maxage but within the stale-while-revalidate window?",
+      "options": [
+        "Returns a 504 Gateway Timeout error",
+        "Blocks the request until it fetches a fresh copy from the origin server",
+        "Serves the stale cached copy immediately and fetches a fresh copy from the origin in the background",
+        "Redirects the client directly to the origin server"
+      ],
+      "correctIndex": 2,
+      "explanation": "The stale-while-revalidate directive tells the CDN to serve the stale copy instantly (so the user never waits) while fetching a fresh copy in the background. The next request after the background fetch completes will receive the fresh content. This is the key pattern behind Next.js ISR."
+    },
+    {
+      "id": "q8",
+      "question": "Your Gather event detail API has a cache hit ratio of 90%. After optimization, you improve it to 99%. How does this affect database load?",
+      "options": [
+        "Database load decreases by 9%",
+        "Database load decreases by 10x (from 10% misses to 1% misses)",
+        "Database load stays the same because the hit ratio improvement is small",
+        "Database load increases because more data must be cached"
+      ],
+      "correctIndex": 1,
+      "explanation": "At 90% hit ratio, 10% of requests hit the database. At 99%, only 1% hit the database. That is a 10x reduction in database load (from 10 out of 100 requests to 1 out of 100). Each percentage point near the top has an outsized impact because it represents a large proportional reduction in the remaining misses."
+    },
+    {
+      "id": "q9",
+      "question": "In Django's cache configuration, why should you use a different Redis database number for caching (db 1) than for Celery (db 0)?",
+      "options": [
+        "Redis databases on different numbers run on different CPU cores for better performance",
+        "It allows you to flush the cache (FLUSHDB on db 1) without destroying Celery's task queue in db 0",
+        "Django requires database 1 specifically for caching",
+        "Celery cannot connect to Redis databases other than 0"
+      ],
+      "correctIndex": 1,
+      "explanation": "Using separate Redis databases isolates the two concerns. If you need to clear all cached data (during debugging or after a schema change), you can run FLUSHDB on database 1 without affecting Celery's pending tasks, results, and broker state in database 0. Both databases share the same Redis instance and memory, so there is no performance difference."
+    },
+    {
+      "id": "q10",
+      "question": "Which of the following data should you set to `Cache-Control: no-store` instead of caching?",
+      "options": [
+        "A public event listing page that all users see",
+        "Static CSS and JavaScript files with hashed filenames",
+        "An authentication endpoint that returns a session token",
+        "An event detail page with RSVP count"
+      ],
+      "correctIndex": 2,
+      "explanation": "Authentication endpoints return sensitive data (session tokens, credentials) that must never be stored by any cache. no-store prevents both browsers and shared caches from storing the response. Public event listings, static assets, and event details can all benefit from caching with appropriate TTLs and visibility settings."
+    }
+  ]
+}

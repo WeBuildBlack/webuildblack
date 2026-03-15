@@ -1,0 +1,124 @@
+{
+  "questions": [
+    {
+      "id": "q1",
+      "question": "What is the DOM?",
+      "options": [
+        "A programming language used to style web pages",
+        "A live, tree-structured representation of an HTML page that JavaScript can read and modify",
+        "A database that stores website content on a server",
+        "A file format for saving web page layouts"
+      ],
+      "correctIndex": 1,
+      "explanation": "The DOM (Document Object Model) is a live representation of your HTML document that the browser builds when it parses the HTML. JavaScript can interact with this tree to read content, modify elements, add new elements, and respond to user actions."
+    },
+    {
+      "id": "q2",
+      "question": "What is the difference between document.querySelector('#menu') and document.getElementById('menu')?",
+      "options": [
+        "querySelector is faster because it uses a simpler lookup method",
+        "getElementById can select by any CSS selector, while querySelector can only select by ID",
+        "querySelector uses CSS selector syntax (requiring the # for IDs), while getElementById takes just the ID name. Both return the same element.",
+        "querySelector returns all matching elements, while getElementById returns only one"
+      ],
+      "correctIndex": 2,
+      "explanation": "Both methods can select an element by ID and return the same result. querySelector('#menu') uses CSS selector syntax, so it requires the # prefix. getElementById('menu') takes just the ID name without #. querySelector is more versatile because it can also select by class, tag, attribute, and complex CSS selectors."
+    },
+    {
+      "id": "q3",
+      "question": "What is the key difference between textContent and innerHTML?",
+      "options": [
+        "textContent is faster but innerHTML supports more browsers",
+        "textContent treats everything as plain text, while innerHTML parses and renders HTML tags",
+        "innerHTML can only be used to read content, not set it",
+        "textContent works on all elements but innerHTML only works on div elements"
+      ],
+      "correctIndex": 1,
+      "explanation": "textContent treats everything as plain text — if you include HTML tags, they appear as visible text on the page. innerHTML parses HTML tags and renders them as actual HTML elements. For security, always use textContent when inserting user-provided data, because innerHTML can be exploited for XSS (cross-site scripting) attacks."
+    },
+    {
+      "id": "q4",
+      "question": "Which classList method adds a class if the element does NOT have it, and removes it if the element DOES have it?",
+      "options": [
+        "classList.add()",
+        "classList.switch()",
+        "classList.contains()",
+        "classList.toggle()"
+      ],
+      "correctIndex": 3,
+      "explanation": "classList.toggle() checks whether the element has the specified class. If it does, toggle removes it. If it does not, toggle adds it. This is perfect for show/hide patterns, dark mode switches, and any on/off behavior."
+    },
+    {
+      "id": "q5",
+      "question": "What does addEventListener('click', handleClick) do?",
+      "options": [
+        "It immediately runs the handleClick function once",
+        "It replaces any existing click behavior on the element",
+        "It registers the handleClick function to run every time the element is clicked",
+        "It creates a new button element with a click handler"
+      ],
+      "correctIndex": 2,
+      "explanation": "addEventListener registers a callback function (handleClick) to run each time the specified event ('click') occurs on that element. The function is not called immediately — it waits until the event happens. You can add multiple listeners for the same event on the same element, and they will all run."
+    },
+    {
+      "id": "q6",
+      "question": "What is event delegation?",
+      "options": [
+        "Removing all event listeners from a page to improve performance",
+        "Attaching one event listener to a parent element and using event.target to identify which child triggered the event",
+        "Passing an event object from one function to another",
+        "Creating a separate JavaScript file for each event handler"
+      ],
+      "correctIndex": 1,
+      "explanation": "Event delegation takes advantage of event bubbling — when an event occurs on a child element, it bubbles up to its parent. By placing one listener on the parent and checking event.target, you can handle events for all children, including ones added dynamically after the listener was created. This is more efficient than adding individual listeners to every child."
+    },
+    {
+      "id": "q7",
+      "question": "How do you save a JavaScript array to localStorage?",
+      "options": [
+        "localStorage.setItem('key', myArray)",
+        "localStorage.save('key', myArray)",
+        "localStorage.setItem('key', JSON.stringify(myArray))",
+        "localStorage.setArray('key', myArray)"
+      ],
+      "correctIndex": 2,
+      "explanation": "localStorage can only store strings. To save an array or object, you must first convert it to a JSON string using JSON.stringify(). To read it back, use JSON.parse(localStorage.getItem('key')) to convert the JSON string back into a JavaScript array or object."
+    },
+    {
+      "id": "q8",
+      "question": "What does the fetch() function return, and how do you get the JSON data from it?",
+      "options": [
+        "It returns the JSON data directly — just use the return value",
+        "It returns a Promise that resolves to a Response object. Call .json() on the Response to get the parsed data.",
+        "It returns an HTML string that you parse with document.createElement()",
+        "It returns a callback function that you must invoke manually"
+      ],
+      "correctIndex": 1,
+      "explanation": "fetch() returns a Promise that resolves to a Response object. The Response does not automatically contain parsed data — you need to call response.json() to parse the response body as JSON. This also returns a Promise, so you use .then() or await to get the final data. Always wrap fetch calls in try/catch to handle network errors."
+    },
+    {
+      "id": "q9",
+      "question": "What is the correct sequence to create a new element and add it to the page?",
+      "options": [
+        "document.addElement('li') then set its content",
+        "document.createElement('li'), set its content/attributes, then use appendChild() or similar method to insert it into an existing element",
+        "document.querySelector('li').create(), then call render()",
+        "document.innerHTML += '<li>' to automatically create and insert it"
+      ],
+      "correctIndex": 1,
+      "explanation": "To dynamically create and add an element: first call document.createElement('tagName') to create it in memory, then set its properties (textContent, classList, attributes, etc.), and finally insert it into the DOM using a method like appendChild(), prepend(), before(), or after() on the parent element where you want it to appear."
+    },
+    {
+      "id": "q10",
+      "question": "What does event.preventDefault() do, and when would you use it?",
+      "options": [
+        "It stops the event from reaching other event listeners on the same element",
+        "It prevents the browser's default behavior for that event — like stopping a form submission from reloading the page",
+        "It removes the event listener after the event fires once",
+        "It prevents the element from being clicked again"
+      ],
+      "correctIndex": 1,
+      "explanation": "Some events have default browser behaviors — form submissions reload the page, link clicks navigate to a new URL, etc. event.preventDefault() stops that default behavior so your JavaScript can handle the event instead. The most common use case is form handling: calling event.preventDefault() in a submit event listener lets you process form data with JavaScript without the page reloading."
+    }
+  ]
+}

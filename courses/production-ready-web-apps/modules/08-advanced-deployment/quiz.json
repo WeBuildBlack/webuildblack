@@ -1,0 +1,125 @@
+{
+  "title": "Advanced Deployment and Infrastructure Quiz",
+  "questions": [
+    {
+      "id": "q1",
+      "question": "What is the key difference between a blue-green deploy and a canary deploy?",
+      "options": [
+        "Blue-green requires Kubernetes while canary works with Docker Compose",
+        "Blue-green switches 100% of traffic at once while canary gradually increases the percentage routed to the new version",
+        "Canary deploys are faster to roll back than blue-green deploys",
+        "Blue-green supports feature flags while canary does not"
+      ],
+      "correctIndex": 1,
+      "explanation": "In a blue-green deploy, you run the new version in the idle environment and switch all traffic to it at once. In a canary deploy, you route a small percentage of traffic (e.g., 5%) to the new version, monitor it, and gradually increase the percentage. Both support instant rollback, but canary limits the blast radius by exposing fewer users to potential issues."
+    },
+    {
+      "id": "q2",
+      "question": "Which type of feature flag would you use to disable an expensive recommendation engine during a traffic spike?",
+      "options": [
+        "Release flag",
+        "Experiment flag",
+        "Ops flag (kill switch)",
+        "Permission flag"
+      ],
+      "correctIndex": 2,
+      "explanation": "An ops flag (also called a kill switch) is designed for exactly this scenario. It lets the operations team disable expensive functionality during incidents or high load without a code deploy. Unlike release flags, ops flags are typically permanent and controlled by the operations team rather than product managers."
+    },
+    {
+      "id": "q3",
+      "question": "What does Terraform store in its state file?",
+      "options": [
+        "Only the HCL configuration files",
+        "The mapping between configuration resources and their real-world counterparts, including attribute values",
+        "A log of all terraform plan and apply commands",
+        "Encrypted backups of all managed infrastructure"
+      ],
+      "correctIndex": 1,
+      "explanation": "The Terraform state file maps each resource in your configuration to the real infrastructure object it represents, including all attribute values (IDs, IP addresses, and potentially sensitive values like passwords). This is why you must never commit state files to Git and should use encrypted remote backends for team environments."
+    },
+    {
+      "id": "q4",
+      "question": "In HCL, what does the version constraint '~> 3.0' mean for a provider?",
+      "options": [
+        "Exactly version 3.0, no other versions allowed",
+        "Any version 3.x (3.0, 3.1, 3.99, etc.) but not 4.0 or higher",
+        "Version 3.0 or any higher version including 4.0, 5.0, etc.",
+        "The latest available version, ignoring the 3.0 specification"
+      ],
+      "correctIndex": 1,
+      "explanation": "The ~> operator (called the pessimistic constraint) allows the rightmost version component to increment. '~> 3.0' means any 3.x release but not 4.0 or higher. This protects against breaking changes in major version bumps while still allowing patch and minor updates."
+    },
+    {
+      "id": "q5",
+      "question": "Which of the following is a core benefit of Infrastructure as Code over manual infrastructure setup?",
+      "options": [
+        "It eliminates the need for cloud provider accounts",
+        "It makes infrastructure changes faster by skipping review processes",
+        "It makes infrastructure reproducible, version-controlled, and self-documenting",
+        "It reduces the cost of cloud resources by optimizing allocation"
+      ],
+      "correctIndex": 2,
+      "explanation": "The core benefits of IaC are reproducibility (the same config always produces the same result), version control (changes are tracked in Git with full history), and self-documentation (the code IS the documentation of your infrastructure). IaC does not eliminate cloud accounts, should not skip reviews, and does not inherently reduce costs."
+    },
+    {
+      "id": "q6",
+      "question": "Why is Kubernetes often overkill for a small team running a single application like Gather?",
+      "options": [
+        "Kubernetes does not support Docker containers",
+        "Kubernetes cannot run on a single server",
+        "The operational complexity (cluster management, YAML manifests, debugging layers) outweighs the benefits at small scale",
+        "Kubernetes requires a paid license from the Cloud Native Computing Foundation"
+      ],
+      "correctIndex": 2,
+      "explanation": "Kubernetes provides powerful orchestration capabilities, but it requires significant operational investment: managing node pools, writing dozens of YAML manifests, debugging across multiple abstraction layers, and learning a steep technology curve. For a small team with a single application, simpler alternatives like Docker Swarm, Fly.io, or Railway provide production-grade reliability with far less overhead."
+    },
+    {
+      "id": "q7",
+      "question": "What is the difference between a liveness probe and a readiness probe?",
+      "options": [
+        "Liveness probes check CPU usage while readiness probes check memory usage",
+        "Liveness probes determine if a container should be restarted while readiness probes determine if it should receive traffic",
+        "Readiness probes run during startup only while liveness probes run continuously",
+        "Liveness probes are for databases while readiness probes are for web servers"
+      ],
+      "correctIndex": 1,
+      "explanation": "A liveness probe answers 'is the process alive?' If it fails, the orchestrator kills and restarts the container. A readiness probe answers 'can this container handle traffic?' If it fails, the orchestrator stops sending traffic to it but does not restart it. This distinction is important: a container that is still starting up should fail readiness (do not send traffic yet) but pass liveness (do not kill it, it is still booting)."
+    },
+    {
+      "id": "q8",
+      "question": "Why do .env files fail as a secrets management strategy in production?",
+      "options": [
+        "Environment variables are slower to read than database queries",
+        "The .env format does not support string values longer than 256 characters",
+        "They lack access control, audit logging, rotation support, and are easily committed to Git by accident",
+        "Most production servers do not support the .env file format"
+      ],
+      "correctIndex": 2,
+      "explanation": ".env files are plain text with no access control (anyone who can read the file sees all secrets), no audit trail (no record of who accessed what), no rotation mechanism (changing a secret means editing files on every server), and they are frequently committed to Git by accident. Production secrets management tools like AWS Secrets Manager, Vault, and Doppler address all of these shortcomings."
+    },
+    {
+      "id": "q9",
+      "question": "During a blue-green deploy, what is the fastest way to roll back if the new version has a bug?",
+      "options": [
+        "Rebuild the previous Docker image and redeploy it",
+        "Switch the nginx upstream back to the previous environment, which is still running",
+        "Revert the Git commit and trigger a new CI/CD pipeline",
+        "Scale the new version to zero replicas and scale the old version back up"
+      ],
+      "correctIndex": 1,
+      "explanation": "The key advantage of blue-green deploys is instant rollback. After switching traffic to the new environment (say, green), the old environment (blue) is still running with the previous version. Rolling back means changing the nginx upstream back to blue and reloading nginx. This takes seconds, compared to minutes for rebuilding images or running pipelines."
+    },
+    {
+      "id": "q10",
+      "question": "What is the correct approach to managing a feature flag after it has been rolled out to 100% of users and is stable?",
+      "options": [
+        "Leave the flag in place permanently so you can turn it off if needed in the future",
+        "Remove the flag check from the code (keeping only the enabled path), delete the flag from the flag service, and update the registry",
+        "Convert it from a release flag to an ops flag",
+        "Set the flag to 'permanent' status in the flag service and leave the conditional in the code"
+      ],
+      "correctIndex": 1,
+      "explanation": "Release flags should be cleaned up after full rollout. Remove the conditional check from the code (keep only the enabled code path), delete the flag from the flag service (Unleash, django-flags, etc.), and update the flags registry. Leaving stale flags in the codebase creates technical debt: conditional branches that may never execute, confusion about which flags are still active, and unnecessary complexity."
+    }
+  ]
+}

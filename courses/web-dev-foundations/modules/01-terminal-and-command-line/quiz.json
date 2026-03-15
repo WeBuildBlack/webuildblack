@@ -1,0 +1,124 @@
+{
+  "questions": [
+    {
+      "id": "q1",
+      "question": "What is the terminal?",
+      "options": [
+        "A special web browser for developers",
+        "A text-based interface for interacting with your computer by typing commands",
+        "A programming language used to build websites",
+        "An app that only works on Mac computers"
+      ],
+      "correctIndex": 1,
+      "explanation": "The terminal is a text-based way to interact with your computer. Instead of clicking icons and menus, you type commands and press Enter. It works on Mac, Windows, and Linux."
+    },
+    {
+      "id": "q2",
+      "question": "Which command tells you your current location in the filesystem?",
+      "options": [
+        "ls",
+        "cd",
+        "pwd",
+        "where"
+      ],
+      "correctIndex": 2,
+      "explanation": "pwd stands for 'print working directory.' It prints the full path to the folder you are currently in. Think of it as dropping a pin on a map — it tells you exactly where you are."
+    },
+    {
+      "id": "q3",
+      "question": "You are in /Users/sarah/Documents and you run 'cd ..'. Where are you now?",
+      "options": [
+        "/Users/sarah/Documents/parent",
+        "/Users/sarah",
+        "/Users",
+        "/Users/sarah/Documents/.."
+      ],
+      "correctIndex": 1,
+      "explanation": "The '..' always means 'the parent directory' — one level up from where you currently are. From /Users/sarah/Documents, going up one level takes you to /Users/sarah."
+    },
+    {
+      "id": "q4",
+      "question": "What is the difference between 'mkdir projects' and 'mkdir -p projects/website/css'?",
+      "options": [
+        "There is no difference — they both create a single folder",
+        "The -p flag makes the folder permanent so it cannot be deleted",
+        "The -p flag creates all the folders in the path, including parent folders that do not exist yet",
+        "The -p flag creates a protected folder that requires a password"
+      ],
+      "correctIndex": 2,
+      "explanation": "The -p flag (parents) tells mkdir to create the entire chain of folders. Without -p, mkdir would fail if 'projects' or 'website' did not already exist. With -p, it creates all of them in one command."
+    },
+    {
+      "id": "q5",
+      "question": "What happens when you run 'rm important-file.txt'?",
+      "options": [
+        "The file is moved to the Trash and can be recovered",
+        "The file is permanently deleted with no way to recover it",
+        "The terminal asks you to confirm before deleting",
+        "The file is hidden but not deleted"
+      ],
+      "correctIndex": 1,
+      "explanation": "The rm command permanently deletes files. There is no trash can, no undo, and no confirmation prompt (unless you use the -i flag). Always double-check your rm commands before pressing Enter."
+    },
+    {
+      "id": "q6",
+      "question": "Which command would you use to view the contents of a short text file called notes.txt?",
+      "options": [
+        "open notes.txt",
+        "read notes.txt",
+        "cat notes.txt",
+        "view notes.txt"
+      ],
+      "correctIndex": 2,
+      "explanation": "The cat command prints the entire contents of a file to the terminal screen. For short files, cat is the quickest way to see what is inside. For longer files, use 'less' to page through them."
+    },
+    {
+      "id": "q7",
+      "question": "What does the command 'grep -r \"error\" projects/' do?",
+      "options": [
+        "Deletes all files containing the word 'error' in the projects folder",
+        "Searches for files named 'error' inside the projects folder",
+        "Searches for the text 'error' inside all files in the projects folder and its subfolders",
+        "Renames all files containing 'error' in the projects folder"
+      ],
+      "correctIndex": 2,
+      "explanation": "grep searches inside files for matching text. The -r flag makes it recursive, meaning it searches through the specified folder and all of its subfolders. It prints every line that contains the search term."
+    },
+    {
+      "id": "q8",
+      "question": "What is the difference between an absolute path and a relative path?",
+      "options": [
+        "Absolute paths are longer and relative paths are shorter — that is the only difference",
+        "Absolute paths start from the root (/) and always work; relative paths start from your current location",
+        "Absolute paths are for files and relative paths are for folders",
+        "Absolute paths only work on Mac and relative paths only work on Windows"
+      ],
+      "correctIndex": 1,
+      "explanation": "An absolute path starts from the root (/) and works no matter where you are — like giving directions from the front door. A relative path describes how to get somewhere from your current location — like saying 'go down the hall.' Both are useful in different situations."
+    },
+    {
+      "id": "q9",
+      "question": "What does the pipe symbol (|) do in a command like 'ls | grep css'?",
+      "options": [
+        "It runs both commands at the same time independently",
+        "It saves the output of 'ls' to a file called 'grep css'",
+        "It takes the output of the first command and passes it as input to the second command",
+        "It tells the terminal to choose between ls or grep depending on the situation"
+      ],
+      "correctIndex": 2,
+      "explanation": "The pipe (|) connects two commands like an assembly line. The output of 'ls' (a list of files) becomes the input for 'grep css' (which filters for lines containing 'css'). This lets you chain simple commands together to do powerful things."
+    },
+    {
+      "id": "q10",
+      "question": "You ran a command and the terminal seems frozen — nothing is happening and you cannot type. What should you press?",
+      "options": [
+        "Enter — to submit the command again",
+        "Ctrl + Z — to undo the command",
+        "Ctrl + C — to cancel the current operation and get your prompt back",
+        "Delete — to remove the last command"
+      ],
+      "correctIndex": 2,
+      "explanation": "Ctrl + C is your escape hatch. It cancels whatever is currently running and returns you to the command prompt. This is one of the most important keyboard shortcuts to memorize — use it any time the terminal seems stuck."
+    }
+  ]
+}

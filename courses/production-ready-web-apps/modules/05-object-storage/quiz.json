@@ -1,0 +1,101 @@
+{
+  "title": "Object Storage and File Processing",
+  "questions": [
+    {
+      "id": "q1",
+      "question": "Why is storing uploaded images as BYTEA/BLOB columns in PostgreSQL a poor choice at scale?",
+      "options": [
+        "PostgreSQL does not support binary data types",
+        "Binary data cannot be indexed, so queries are always slow",
+        "It inflates database size, slows backups, wastes connection pool capacity, and prevents CDN usage",
+        "BLOB columns are limited to 1 MB per row in PostgreSQL"
+      ],
+      "correctIndex": 2,
+      "explanation": "PostgreSQL does support binary data via BYTEA, and there is no 1 MB limit. The real problems are practical: the database grows 10-50x larger with image data, backups take much longer, connections are tied up streaming binary data instead of serving fast queries, and CDNs cannot serve files that are locked inside database rows."
+    },
+    {
+      "id": "q2",
+      "question": "In S3, what is the relationship between a bucket and a key?",
+      "options": [
+        "A bucket is a folder, and a key is a subfolder within it",
+        "A bucket is a top-level container, and a key is the unique identifier (path) for an object within that bucket",
+        "A bucket is a region, and a key is the encryption credential for accessing objects",
+        "A bucket is a database table, and a key is the primary key of a row"
+      ],
+      "correctIndex": 1,
+      "explanation": "A bucket is a top-level namespace for objects, and each object is identified by its key (a string that looks like a file path, e.g., 'events/42/cover.jpg'). There are no actual directories in S3. The slash characters in a key are just part of the string."
+    },
+    {
+      "id": "q3",
+      "question": "What security guarantee does a presigned URL provide?",
+      "options": [
+        "It encrypts the file contents during transfer",
+        "It ensures the uploaded file is free of malware",
+        "It authorizes a specific operation on a specific key for a limited time, without exposing the server's secret key",
+        "It prevents the file from being downloaded by unauthorized users after upload"
+      ],
+      "correctIndex": 2,
+      "explanation": "A presigned URL contains a cryptographic signature that authorizes one specific operation (e.g., PUT) on one specific S3 key, and it expires after a configured duration. The client never sees the server's secret access key. Presigned URLs do not encrypt content, scan for malware, or control post-upload access policies."
+    },
+    {
+      "id": "q4",
+      "question": "What is the primary purpose of MinIO in a development Docker Compose setup?",
+      "options": [
+        "It provides a PostgreSQL-compatible database for testing",
+        "It runs an S3-compatible object storage server locally so you can develop without an AWS account",
+        "It acts as a reverse proxy for routing requests to S3",
+        "It provides a web-based IDE for editing uploaded files"
+      ],
+      "correctIndex": 1,
+      "explanation": "MinIO implements the full S3 API as an open-source server. Running it in Docker Compose gives you local object storage that behaves identically to AWS S3, DigitalOcean Spaces, or Backblaze B2. You can develop and test your entire upload pipeline without needing cloud credentials."
+    },
+    {
+      "id": "q5",
+      "question": "Why is Celery a good fit for generating image thumbnails after upload?",
+      "options": [
+        "Celery can upload files to S3 faster than Django",
+        "Image resizing is CPU-intensive work that would block the upload response if done synchronously",
+        "Celery automatically optimizes images better than Pillow",
+        "Django does not have access to the Pillow library, so only Celery workers can process images"
+      ],
+      "correctIndex": 1,
+      "explanation": "Generating multiple thumbnail sizes and format conversions takes several seconds of CPU time. Doing this in the upload request handler would make the user wait. By dispatching a Celery task, the upload endpoint returns immediately while the worker processes images in the background. Django can use Pillow directly, but doing so in a request would block the response."
+    },
+    {
+      "id": "q6",
+      "question": "Given this HTML, what does the `sizes` attribute tell the browser?\n\n```html\n<img srcset=\"sm.jpg 400w, md.jpg 800w, lg.jpg 1200w\"\n     sizes=\"(max-width: 640px) 400px, 800px\"\n     src=\"md.jpg\" />\n```",
+      "options": [
+        "The image file sizes are 400 KB, 800 KB, and 1200 KB",
+        "The image should be displayed at 400px on viewports up to 640px, and 800px on wider viewports",
+        "The browser should download all three images and pick the sharpest one",
+        "The image should be cropped to 400px or 800px depending on the viewport"
+      ],
+      "correctIndex": 1,
+      "explanation": "The sizes attribute tells the browser how wide the image will be displayed at different viewport widths. The browser combines this with the srcset widths (400w, 800w, 1200w) to pick the best file. On a 375px phone, it knows the image displays at 400px, so it picks sm.jpg (400w). On a desktop, it picks md.jpg (800w). It only downloads one file, not all three."
+    },
+    {
+      "id": "q7",
+      "question": "What is the main advantage of serving images in WebP format instead of JPEG?",
+      "options": [
+        "WebP supports animation, while JPEG does not",
+        "WebP files are typically 25-35% smaller than JPEG at equivalent visual quality",
+        "WebP loads faster because browsers decode it on the GPU",
+        "WebP is the only format supported by modern CDNs"
+      ],
+      "correctIndex": 1,
+      "explanation": "WebP's primary advantage for photographs is smaller file sizes at the same visual quality. A typical event cover image might be 380 KB as JPEG but only 260 KB as WebP. WebP does support animation, but that is not its main advantage over JPEG for photo content. All modern browsers support both formats, and CDNs can serve any format."
+    },
+    {
+      "id": "q8",
+      "question": "In the direct upload flow, what is the correct sequence of operations?",
+      "options": [
+        "Browser uploads to Django, Django uploads to S3, Django returns URL",
+        "Browser requests presigned URL from Django, browser uploads directly to S3, browser confirms upload with Django",
+        "Django uploads a placeholder to S3, browser replaces it via presigned URL, S3 notifies Django",
+        "Browser uploads to S3 anonymously, Django verifies the upload, Django moves it to the correct bucket"
+      ],
+      "correctIndex": 1,
+      "explanation": "The direct upload flow has three steps: (1) the browser asks Django for a presigned URL, (2) the browser uploads the file directly to S3 using that URL (bypassing Django entirely), and (3) the browser tells Django the upload is done so Django can verify the file and trigger processing. This keeps large file transfers off your Django server."
+    }
+  ]
+}

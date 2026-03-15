@@ -1,0 +1,101 @@
+{
+  "title": "Prompt Engineering Quiz",
+  "questions": [
+    {
+      "id": "q1",
+      "question": "In a chat-based LLM API call, where should you define the AI assistant's persona, behavior rules, and output format constraints?",
+      "options": [
+        "In the first user message",
+        "In the system message",
+        "In an assistant message at the beginning of the conversation",
+        "In the API request headers"
+      ],
+      "correctIndex": 1,
+      "explanation": "The system message is designed specifically for setting the model's identity, behavior rules, output format, and constraints. It's treated as high-authority instructions by the model. While you could put some of this in a user message, the system role is the standard and most effective place for these directives."
+    },
+    {
+      "id": "q2",
+      "question": "You need an LLM to classify support tickets into categories: 'billing', 'technical', 'account', and 'other'. Zero-shot classification gives 75% accuracy. What is the most effective next step to improve accuracy?",
+      "options": [
+        "Switch to a more expensive model",
+        "Add 3-5 diverse few-shot examples covering each category",
+        "Increase the temperature to 1.0 for more creative responses",
+        "Add 'think step by step' to the prompt"
+      ],
+      "correctIndex": 1,
+      "explanation": "Few-shot prompting is the most effective way to improve classification accuracy. By showing the model 3-5 diverse examples covering each category, you demonstrate the exact input/output pattern you expect. This typically improves accuracy by 10-20% for classification tasks. Chain of thought is overkill for simple classification, and higher temperature increases randomness which hurts consistency."
+    },
+    {
+      "id": "q3",
+      "question": "When should you use Chain of Thought (CoT) prompting instead of a direct prompt?",
+      "options": [
+        "For all tasks, since reasoning always improves output quality",
+        "For simple classification and data extraction tasks",
+        "For tasks requiring multi-step reasoning, math, or complex analysis",
+        "Only when using OpenAI's o1 and o3 reasoning models"
+      ],
+      "correctIndex": 2,
+      "explanation": "Chain of Thought prompting is most beneficial for tasks that require multi-step reasoning, mathematical calculations, or complex analysis. For simple tasks like classification and extraction, CoT adds unnecessary tokens and latency without improving quality. And for o1/o3 models, CoT is already built in -- adding it explicitly is redundant."
+    },
+    {
+      "id": "q4",
+      "question": "What is the most reliable way to get schema-validated JSON output from an OpenAI model?",
+      "options": [
+        "Add 'respond in JSON' to the system prompt",
+        "Use response_format: { type: 'json_object' }",
+        "Use response_format with type 'json_schema' and a strict JSON Schema definition",
+        "Prefill the assistant message with an opening curly brace"
+      ],
+      "correctIndex": 2,
+      "explanation": "OpenAI's Structured Outputs (response_format with type 'json_schema' and strict: true) provides the strongest guarantee. The model is constrained to produce output that exactly matches your JSON Schema, including correct types, required fields, and enum values. Plain JSON mode only guarantees valid JSON (not schema compliance), and prompt-based approaches have no format guarantees."
+    },
+    {
+      "id": "q5",
+      "question": "In a chatbot application, the conversation history grows with each turn, increasing token usage and cost. What is the recommended strategy to manage this?",
+      "options": [
+        "Clear the entire conversation history after every 5 messages",
+        "Keep all messages but switch to a cheaper model as the conversation grows",
+        "Summarize older messages while preserving the system prompt and recent exchanges",
+        "Send only the latest user message without any conversation history"
+      ],
+      "correctIndex": 2,
+      "explanation": "Summarizing older messages is the best strategy because it preserves important context while reducing token count. You keep the system prompt (for consistent behavior) and recent messages (for conversational coherence), while condensing older exchanges into a compact summary. Clearing history entirely loses context. Sending only the latest message eliminates the model's ability to maintain a coherent conversation."
+    },
+    {
+      "id": "q6",
+      "question": "How does the Anthropic API handle system prompts differently from OpenAI?",
+      "options": [
+        "Anthropic doesn't support system prompts at all",
+        "The system prompt is a top-level parameter, not a message in the messages array",
+        "The system prompt must be the last message in the array",
+        "Anthropic requires multiple system messages for different instructions"
+      ],
+      "correctIndex": 1,
+      "explanation": "In the Anthropic API, the system prompt is passed as a separate top-level 'system' parameter in the API call, not as a message with role 'system' in the messages array. In OpenAI's API, the system prompt is included as a message with role 'system' in the messages array. This is an important API difference to handle when building abstractions that work across providers."
+    },
+    {
+      "id": "q7",
+      "question": "What is the purpose of including a partial assistant message (like starting with '{') in Claude's message history?",
+      "options": [
+        "It signals Claude to respond in a formal tone",
+        "It forces the model to continue from that point, ensuring a specific output format",
+        "It tells Claude to ignore the system prompt",
+        "It enables streaming mode for the response"
+      ],
+      "correctIndex": 1,
+      "explanation": "Assistant prefilling is a technique where you include a partial assistant message (like an opening curly brace '{') in the messages array. Claude will continue generating from that point, effectively forcing it to produce output in the format you've started. This is commonly used to ensure JSON output. By starting with '{', Claude will continue writing valid JSON rather than adding explanatory text before the data."
+    },
+    {
+      "id": "q8",
+      "question": "A developer uses 5 few-shot examples (~100 tokens each) in every API call. They make 10,000 calls/day with GPT-4o. Approximately how much do the examples alone cost per day?",
+      "options": [
+        "$0.50",
+        "$2.50",
+        "$12.50",
+        "$125.00"
+      ],
+      "correctIndex": 2,
+      "explanation": "5 examples × 100 tokens = 500 extra input tokens per call. 500 tokens × 10,000 calls = 5,000,000 (5M) input tokens per day. GPT-4o input pricing is $2.50 per 1M tokens. 5M × $2.50/1M = $12.50 per day just for the few-shot examples. This is why prompt caching (offered by both Anthropic and OpenAI) is so valuable: it can reduce the cost of these repeated prompt prefixes by 50-90%."
+    }
+  ]
+}

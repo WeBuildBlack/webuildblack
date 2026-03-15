@@ -1,0 +1,101 @@
+{
+  "title": "LLM Fundamentals Quiz",
+  "questions": [
+    {
+      "id": "q1",
+      "question": "What is the core training objective of a Large Language Model?",
+      "options": [
+        "Predict the next token in a sequence",
+        "Memorize and retrieve facts from a database",
+        "Translate text between languages",
+        "Classify text into predefined categories"
+      ],
+      "correctIndex": 0,
+      "explanation": "LLMs are trained to predict the next token (word or subword) in a sequence. From this simple objective, complex capabilities like reasoning, code generation, and conversation emerge. They don't memorize facts in a database; they learn statistical patterns about language."
+    },
+    {
+      "id": "q2",
+      "question": "What does the 'attention' mechanism in a Transformer allow each token to do?",
+      "options": [
+        "Only look at the token immediately before it",
+        "Look at every other token in the sequence and determine which are most relevant",
+        "Skip irrelevant tokens entirely to save computation",
+        "Reorder tokens into the most logical sequence"
+      ],
+      "correctIndex": 1,
+      "explanation": "Self-attention allows each token to compute a relevance score with every other token in the sequence. This is what makes Transformers so powerful; they can capture relationships between distant parts of the text simultaneously, unlike older sequential models that processed one token at a time."
+    },
+    {
+      "id": "q3",
+      "question": "A web application processes 500 user requests per day, each using approximately 2,000 input tokens and 500 output tokens with GPT-4o ($2.50/1M input, $10.00/1M output). What is the approximate daily API cost?",
+      "options": [
+        "$0.25",
+        "$5.00",
+        "$50.00",
+        "$5,000.00"
+      ],
+      "correctIndex": 1,
+      "explanation": "Daily input tokens: 500 * 2,000 = 1,000,000. Input cost: (1M / 1M) * $2.50 = $2.50. Daily output tokens: 500 * 500 = 250,000. Output cost: (0.25M / 1M) * $10.00 = $2.50. Total daily cost: $2.50 + $2.50 = $5.00. Understanding token economics is essential for building sustainable AI features."
+    },
+    {
+      "id": "q4",
+      "question": "You need to analyze a 400-page legal document (approximately 300,000 tokens) in a single API call. Which model would be your best choice?",
+      "options": [
+        "GPT-4o (128K context window)",
+        "Claude 4 Sonnet (200K context window)",
+        "Gemini 1.5 Pro (2M context window)",
+        "Llama 3 8B (128K context window)"
+      ],
+      "correctIndex": 2,
+      "explanation": "At 300,000 tokens, the document exceeds the context windows of GPT-4o (128K), Claude 4 Sonnet (200K), and Llama 3 (128K). Only Gemini 1.5 Pro with its 2M token context window can handle the entire document in a single call. Alternatively, you could chunk the document and process it in pieces with any model."
+    },
+    {
+      "id": "q5",
+      "question": "When would you choose an open-source model like Llama 3 over a proprietary API like GPT-4o?",
+      "options": [
+        "When you need the absolute best performance regardless of cost",
+        "When you need to process sensitive data with full privacy control and the ability to fine-tune",
+        "When you want the simplest possible integration with no infrastructure management",
+        "When you need native multimodal capabilities for processing images and video"
+      ],
+      "correctIndex": 1,
+      "explanation": "Open-source models like Llama 3 are ideal when data privacy is critical (healthcare, finance, legal) because you process everything on your own infrastructure. They also allow full fine-tuning on your domain-specific data. Proprietary APIs are generally easier to set up and may offer better out-of-the-box performance, but you must send your data to a third party."
+    },
+    {
+      "id": "q6",
+      "question": "What happens when you set an LLM's temperature parameter to 0?",
+      "options": [
+        "The model refuses to generate any output",
+        "The output becomes nearly deterministic: the same input produces the same output",
+        "The model generates the longest possible response",
+        "The model only uses words from its training data"
+      ],
+      "correctIndex": 1,
+      "explanation": "Temperature controls the randomness of token selection. At temperature 0, the model always picks the most probable next token, making the output nearly deterministic: the same input will produce the same (or very similar) output every time. This is useful for factual tasks, evaluations, and any situation where consistency is important."
+    },
+    {
+      "id": "q7",
+      "question": "Why does code typically use more tokens than equivalent prose?",
+      "options": [
+        "Code is always written in ASCII, which uses more bytes",
+        "Code contains special characters, indentation, and syntax that tokenizers split into more pieces",
+        "LLMs process code in a separate, less efficient pipeline",
+        "Code tokens are counted double to account for compilation"
+      ],
+      "correctIndex": 1,
+      "explanation": "Tokenizers are trained primarily on natural language text, so common English words often map to single tokens. Code contains special characters (brackets, semicolons, operators), indentation (spaces/tabs), and uncommon identifiers (variable names, camelCase) that tokenizers split into multiple smaller pieces. This means the same amount of 'content' in code form uses more tokens than in prose form, which has real cost implications."
+    },
+    {
+      "id": "q8",
+      "question": "Which of the following is a capability of modern multimodal LLMs like GPT-4o and Claude?",
+      "options": [
+        "Real-time internet access to look up current information",
+        "Understanding and analyzing images provided alongside text",
+        "Running code directly on a server and returning the output",
+        "Accessing and querying external databases automatically"
+      ],
+      "correctIndex": 1,
+      "explanation": "Modern multimodal LLMs like GPT-4o and Claude can process images alongside text, enabling tasks like image description, visual Q&A, chart reading, and document analysis from screenshots. They cannot inherently access the internet, run code, or query databases. Those capabilities require additional tooling (like RAG for data access or code interpreters for execution) that we'll cover in later modules."
+    }
+  ]
+}

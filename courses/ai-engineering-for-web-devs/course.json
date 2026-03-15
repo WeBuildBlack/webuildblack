@@ -1,0 +1,78 @@
+{
+  "title": "AI Engineering for Web Developers",
+  "slug": "ai-engineering-for-web-devs",
+  "description": "Build real AI-powered features using LLM APIs, embeddings, RAG, and agents. A hands-on course for web developers ready to add AI to their toolkit, with a build project in every module.",
+  "difficulty": "intermediate",
+  "estimatedHours": 54,
+  "priceCents": 4900,
+  "prerequisites": [
+    "JavaScript (ES6+)",
+    "Basic Python",
+    "Familiarity with REST APIs",
+    "HTML/CSS fundamentals"
+  ],
+  "modules": [
+    {
+      "id": "01-llm-fundamentals",
+      "title": "LLM Fundamentals",
+      "estimatedMinutes": 255,
+      "project": "Model Showdown -- compare LLM outputs side-by-side"
+    },
+    {
+      "id": "02-prompt-engineering",
+      "title": "Prompt Engineering",
+      "estimatedMinutes": 275,
+      "project": "Prompt Lab -- evaluate prompt variants with a test harness"
+    },
+    {
+      "id": "03-openai-api",
+      "title": "OpenAI API Deep Dive",
+      "estimatedMinutes": 315,
+      "project": "AI Code Reviewer -- streaming review with function calling"
+    },
+    {
+      "id": "04-anthropic-api",
+      "title": "Anthropic API & Claude",
+      "estimatedMinutes": 315,
+      "project": "Doc Analyzer -- extract structured data from long documents"
+    },
+    {
+      "id": "05-ai-web-features",
+      "title": "Building AI Features in Web Apps",
+      "estimatedMinutes": 335,
+      "project": "AI Chat Widget -- full-stack streaming chat component"
+    },
+    {
+      "id": "06-embeddings-vectors",
+      "title": "Embeddings & Vector Databases",
+      "estimatedMinutes": 315,
+      "project": "Smart Bookmark Search -- semantic search for your notes"
+    },
+    {
+      "id": "07-rag-from-scratch",
+      "title": "RAG from Scratch",
+      "estimatedMinutes": 385,
+      "project": "Ask My Docs -- RAG Q&A bot with citations"
+    },
+    {
+      "id": "08-ai-agents",
+      "title": "AI Agents",
+      "estimatedMinutes": 375,
+      "project": "Research Agent -- autonomous web research with ReAct"
+    },
+    {
+      "id": "09-capstone",
+      "title": "Full-Stack AI App (Capstone)",
+      "estimatedMinutes": 375,
+      "project": "AI Knowledge Base -- the full capstone build"
+    },
+    {
+      "id": "10-deployment-production",
+      "title": "Deployment & Production",
+      "estimatedMinutes": 440,
+      "project": "Production Hardening -- caching, safety, monitoring"
+    }
+  ],
+  "author": "We Build Black",
+  "updatedAt": "2026-03-15"
+}

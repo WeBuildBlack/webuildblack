@@ -1,0 +1,135 @@
+{
+  "title": "Responsive Design Quiz",
+  "questions": [
+    {
+      "id": "rwd-01",
+      "question": "What is the main advantage of the mobile-first approach over desktop-first?",
+      "type": "multiple_choice",
+      "options": [
+        "Mobile-first websites load faster on desktop computers",
+        "You start with the simplest layout and add complexity for larger screens, which is easier to maintain and better for performance",
+        "Mobile-first is required by all web browsers",
+        "Desktop-first does not support media queries"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Mobile-first means your base CSS is the simplest version (mobile), and you progressively add layout features for wider screens using min-width media queries. This is easier to build and maintain because you are adding complexity rather than removing it. It also performs better because mobile devices only process the base styles."
+    },
+    {
+      "id": "rwd-02",
+      "question": "What does the viewport meta tag <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"> do?",
+      "type": "multiple_choice",
+      "options": [
+        "It makes the website automatically responsive without any CSS",
+        "It locks the page to a fixed width of 1024 pixels",
+        "It tells the mobile browser to use the device's actual screen width instead of pretending the screen is ~980px wide",
+        "It prevents users from zooming in or out on the page"
+      ],
+      "correctAnswer": 2,
+      "explanation": "Without the viewport meta tag, mobile browsers pretend the screen is about 980px wide and shrink the entire page to fit. The viewport meta tag tells the browser to use the actual device width and display content at a 1:1 scale. This is required for responsive CSS to work on mobile devices."
+    },
+    {
+      "id": "rwd-03",
+      "question": "Which CSS media query syntax follows the mobile-first approach?",
+      "type": "multiple_choice",
+      "options": [
+        "@media (max-width: 768px) { }",
+        "@media (min-width: 768px) { }",
+        "@media (device-width: 768px) { }",
+        "@media (width: 768px) { }"
+      ],
+      "correctAnswer": 1,
+      "explanation": "min-width means 'apply these styles when the viewport is at least this wide.' In mobile-first design, your base styles (no media query) handle mobile, and min-width queries add styles for progressively larger screens. max-width is the desktop-first approach, where you start with desktop styles and override for smaller screens."
+    },
+    {
+      "id": "rwd-04",
+      "question": "How should you choose breakpoints for your responsive design?",
+      "type": "multiple_choice",
+      "options": [
+        "Always use exactly 768px and 1024px because those are the only correct breakpoints",
+        "Match every breakpoint to a specific phone or tablet model",
+        "Add breakpoints where your content and layout start to look awkward as the viewport widens",
+        "Use as many breakpoints as possible for the smoothest experience"
+      ],
+      "correctAnswer": 2,
+      "explanation": "The best breakpoints are content-driven, not device-driven. Slowly widen your viewport from narrow to wide and add a breakpoint wherever the layout starts to look broken or awkward. Common values like 768px and 1024px are good starting points because many designs naturally break near those widths, but your specific content should determine the exact values."
+    },
+    {
+      "id": "rwd-05",
+      "question": "What CSS rule makes images responsive so they never overflow their container?",
+      "type": "multiple_choice",
+      "options": [
+        "img { width: auto; height: 100%; }",
+        "img { max-width: 100%; height: auto; }",
+        "img { display: flex; object-fit: contain; }",
+        "img { position: relative; overflow: hidden; }"
+      ],
+      "correctAnswer": 1,
+      "explanation": "max-width: 100% prevents the image from ever being wider than its container (it shrinks if needed), and height: auto maintains the image's original aspect ratio so it does not get stretched or squished. This is the single most important responsive image rule."
+    },
+    {
+      "id": "rwd-06",
+      "question": "Why is rem generally preferred over px for font sizes in responsive design?",
+      "type": "multiple_choice",
+      "options": [
+        "rem values are always larger than px values",
+        "rem is relative to the root element's font size, so it respects user browser preferences and scales consistently without compounding",
+        "px does not work on mobile browsers",
+        "rem automatically adjusts font size based on screen width"
+      ],
+      "correctAnswer": 1,
+      "explanation": "rem (root em) is relative to the <html> element's font size (typically 16px by default). When users change their browser's default font size for accessibility reasons, rem-based text scales accordingly — px-based text does not. Unlike em, rem does not compound through nested elements, making it predictable and consistent."
+    },
+    {
+      "id": "rwd-07",
+      "question": "What does clamp(1.5rem, 4vw, 3rem) do when used as a font-size?",
+      "type": "multiple_choice",
+      "options": [
+        "Sets the font size to exactly 4vw on all screen sizes",
+        "Sets the font to 1.5rem on mobile and 3rem on desktop, with no in-between sizes",
+        "Sets a fluid font size that scales with the viewport width but never goes below 1.5rem or above 3rem",
+        "Randomly picks a font size between 1.5rem and 3rem"
+      ],
+      "correctAnswer": 2,
+      "explanation": "clamp() takes three values: a minimum (1.5rem), a preferred value (4vw, which scales with viewport width), and a maximum (3rem). The browser uses the preferred value as long as it falls between the minimum and maximum. On narrow screens, the font hits the minimum floor. On wide screens, it hits the maximum ceiling. In between, it scales fluidly."
+    },
+    {
+      "id": "rwd-08",
+      "question": "What is the purpose of the <picture> element in HTML?",
+      "type": "multiple_choice",
+      "options": [
+        "It replaces the <img> element entirely in HTML5",
+        "It lets you serve different image files based on screen size, resolution, or browser format support",
+        "It automatically compresses images for faster loading",
+        "It adds a decorative frame around images"
+      ],
+      "correctAnswer": 1,
+      "explanation": "The <picture> element contains <source> elements with media or type attributes that let the browser choose the most appropriate image. You can serve different crops for different screen sizes (art direction), or different formats (AVIF, WebP, JPEG) based on browser support. The <img> inside <picture> serves as the fallback."
+    },
+    {
+      "id": "rwd-09",
+      "question": "In the CSS-only hamburger menu pattern, what technique is used to toggle the navigation open and closed without JavaScript?",
+      "type": "multiple_choice",
+      "options": [
+        "The :hover pseudo-class on the hamburger icon",
+        "A hidden checkbox whose :checked state controls the visibility of the nav via sibling selectors",
+        "The <details> and <summary> HTML elements",
+        "CSS keyframe animations that run once on page load"
+      ],
+      "correctAnswer": 1,
+      "explanation": "The checkbox hack uses a hidden <input type=\"checkbox\"> connected to a visible <label> styled as the hamburger icon. When the user clicks the label, the checkbox toggles. CSS sibling selectors (.nav-toggle:checked ~ .main-nav) detect the checked state and change the nav's visibility — typically by toggling max-height between 0 and a large value."
+    },
+    {
+      "id": "rwd-10",
+      "question": "What do the media queries prefers-color-scheme and prefers-reduced-motion detect?",
+      "type": "multiple_choice",
+      "options": [
+        "The browser type (Chrome, Firefox, Safari) and its rendering engine",
+        "The user's operating system preferences for dark/light mode and motion sensitivity",
+        "The website's CSS variables and animation keyframes",
+        "The device's screen resolution and pixel density"
+      ],
+      "correctAnswer": 1,
+      "explanation": "prefers-color-scheme detects whether the user has set their operating system to dark mode or light mode, letting you automatically match their preference. prefers-reduced-motion detects whether the user has enabled a 'reduce motion' setting (common for people with vestibular disorders), letting you disable or simplify animations. Both respect user accessibility preferences."
+    }
+  ]
+}

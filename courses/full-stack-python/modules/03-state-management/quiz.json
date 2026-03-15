@@ -1,0 +1,125 @@
+{
+  "title": "State Management & Data Fetching Quiz",
+  "questions": [
+    {
+      "id": "q1",
+      "question": "Which category of state describes data fetched from a remote API, such as a list of events from a REST endpoint?",
+      "options": [
+        "UI state",
+        "Server state",
+        "Form state",
+        "URL state"
+      ],
+      "explanation": "Server state is data that lives on a remote server and is fetched into the application. It is asynchronous, can become stale, needs caching, and has a remote source of truth. API data like event lists fits squarely into this category.",
+      "correctIndex": 1
+    },
+    {
+      "id": "q2",
+      "question": "When should you choose Zustand over React Context for sharing state between components?",
+      "options": [
+        "When the state changes very infrequently, like a theme toggle",
+        "When the state changes frequently and you need granular re-render control via selectors",
+        "When you need to share state between only a parent and its direct children",
+        "When you want to avoid installing any third-party libraries"
+      ],
+      "explanation": "React Context re-renders all consumers whenever any value in the context changes. Zustand allows components to subscribe to specific slices of state via selectors, so only the components that read the changed value re-render. This makes Zustand the better choice for state that updates frequently, like filter inputs or UI toggles.",
+      "correctIndex": 1
+    },
+    {
+      "id": "q3",
+      "question": "In TanStack Query, what is the difference between staleTime and gcTime?",
+      "options": [
+        "staleTime is how long before data is deleted from cache; gcTime is how long before data is refetched",
+        "staleTime controls how long data is considered fresh (no refetch needed); gcTime controls how long unused data stays in cache before being garbage collected",
+        "staleTime applies to queries; gcTime applies to mutations",
+        "They are the same setting with different names for backward compatibility"
+      ],
+      "explanation": "staleTime determines how long after fetching the data is considered fresh. While fresh, TanStack Query returns cached data without triggering a background refetch. gcTime (garbage collection time) determines how long data stays in the cache after all components consuming it have unmounted. After gcTime expires, the data is removed from cache entirely.",
+      "correctIndex": 1
+    },
+    {
+      "id": "q4",
+      "question": "In an optimistic update with TanStack Query, what is the purpose of the onMutate callback?",
+      "options": [
+        "To send the mutation request to the server",
+        "To cancel in-flight queries, snapshot the current cache, apply the optimistic change, and return the snapshot for potential rollback",
+        "To handle the server's response after the mutation succeeds",
+        "To retry the mutation if it fails"
+      ],
+      "explanation": "onMutate runs before the mutation function fires. It cancels in-flight queries (to prevent them from overwriting the optimistic update), snapshots the current cached data (so onError can roll back if the server rejects), and applies the optimistic update to the cache using setQueryData. The returned snapshot becomes the context available to onError and onSettled.",
+      "correctIndex": 1
+    },
+    {
+      "id": "q5",
+      "question": "When you call queryClient.invalidateQueries({ queryKey: ['events'] }), which cached queries are affected?",
+      "options": [
+        "Only the query with the exact key ['events']",
+        "All queries whose keys start with ['events'], including ['events', 'list'], ['events', 'detail', 'evt_001'], etc.",
+        "All queries in the entire cache, regardless of their keys",
+        "Only queries that are currently being rendered by a mounted component"
+      ],
+      "explanation": "TanStack Query uses hierarchical key matching. Invalidating ['events'] invalidates every query whose key starts with ['events']. This includes ['events', 'list'], ['events', 'list', { category: 'Tech' }], ['events', 'detail', 'evt_001'], and so on. This is why structuring query keys hierarchically and using a key factory is important for precise invalidation control.",
+      "correctIndex": 1
+    },
+    {
+      "id": "q6",
+      "question": "What does useInfiniteQuery's getNextPageParam function return to signal there are no more pages to load?",
+      "options": [
+        "null",
+        "false",
+        "undefined",
+        "-1"
+      ],
+      "explanation": "When getNextPageParam returns undefined, TanStack Query sets hasNextPage to false, indicating that all available pages have been loaded. Returning any other defined value (including null, false, or a number) would be treated as a valid page parameter for the next fetch.",
+      "correctIndex": 2
+    },
+    {
+      "id": "q7",
+      "question": "What happens during the WebSocket upgrade handshake?",
+      "options": [
+        "The client sends a regular GET request and the server responds with JSON data",
+        "The client sends an HTTP request with an Upgrade: websocket header, and the server responds with HTTP 101 Switching Protocols to establish a persistent bidirectional connection",
+        "The client opens a TCP socket directly without any HTTP involvement",
+        "The server initiates the connection by sending a push notification to the client"
+      ],
+      "explanation": "A WebSocket connection starts as a standard HTTP request that includes an Upgrade: websocket header. The server agrees by responding with HTTP 101 (Switching Protocols). After this handshake, the connection switches from the HTTP protocol to the WebSocket protocol, enabling persistent bidirectional communication with minimal framing overhead.",
+      "correctIndex": 1
+    },
+    {
+      "id": "q8",
+      "question": "Why should query keys include filter parameters, such as ['events', 'list', { category: 'Tech' }]?",
+      "options": [
+        "To make the keys longer and more readable in DevTools",
+        "Because TanStack Query requires at least three elements in every key",
+        "So that each unique combination of filters has its own cache entry, preventing filtered results from overwriting unfiltered results",
+        "To allow the server to read the query key and know which data to return"
+      ],
+      "explanation": "Including filter parameters in the query key ensures that each set of filters maps to its own cache entry. Without this, fetching events with category 'Tech' would overwrite the cache for all events. With filter-aware keys, ['events', 'list', { category: 'Tech' }] and ['events', 'list', {}] are separate cache entries that can coexist and be invalidated independently.",
+      "correctIndex": 2
+    },
+    {
+      "id": "q9",
+      "question": "What is the purpose of calling queryClient.setQueryData inside a WebSocket message handler?",
+      "options": [
+        "To send data back to the WebSocket server",
+        "To directly update the TanStack Query cache with real-time data, causing all components reading that cache entry to re-render with the new values",
+        "To create a new query that fetches data from the server",
+        "To permanently override the server's data so future fetches return the updated value"
+      ],
+      "explanation": "setQueryData updates the cached data for a specific query key without making a network request. When a WebSocket message arrives with new data (like an updated attendee count), calling setQueryData updates the cache, and every component that reads from that cache entry automatically re-renders with the new value. The cache update is temporary and will be replaced by the next server fetch.",
+      "correctIndex": 1
+    },
+    {
+      "id": "q10",
+      "question": "Which Zustand middleware would you use to persist the selected event category across page refreshes?",
+      "options": [
+        "devtools",
+        "immer",
+        "persist",
+        "subscribeWithSelector"
+      ],
+      "explanation": "The persist middleware serializes specified store state to a storage backend (localStorage by default) and restores it when the page loads. You can use the partialState option to persist only certain fields (like the selected category) while leaving others (like search text) ephemeral. devtools connects to Redux DevTools for debugging, and immer enables mutable-syntax immutable updates.",
+      "correctIndex": 2
+    }
+  ]
+}

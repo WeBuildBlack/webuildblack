@@ -1,0 +1,125 @@
+{
+  "title": "TypeScript Fundamentals Quiz",
+  "questions": [
+    {
+      "id": "q1",
+      "question": "What does TypeScript do with type annotations when it compiles to JavaScript?",
+      "options": [
+        "Converts them to runtime type checks",
+        "Strips them out completely",
+        "Converts them to JSDoc comments",
+        "Keeps them as metadata in the output"
+      ],
+      "correctIndex": 1,
+      "explanation": "TypeScript erases all type annotations during compilation. The output is plain JavaScript with zero runtime overhead from types. Types exist only at development/compile time."
+    },
+    {
+      "id": "q2",
+      "question": "When should you prefer a type alias over an interface?",
+      "options": [
+        "When defining the shape of an object with properties",
+        "When you need declaration merging",
+        "When defining a union type, tuple, or computed type",
+        "When you want the type to be extendable with 'extends'"
+      ],
+      "correctIndex": 2,
+      "explanation": "Type aliases are the right choice for union types, tuples, primitives, and computed types. Interfaces are better for object shapes because they support extension and declaration merging."
+    },
+    {
+      "id": "q3",
+      "question": "Given `function fetchData<T>(url: string): Promise<T>`, what does the `<T>` represent?",
+      "options": [
+        "A variable named T that stores the return type at runtime",
+        "A type parameter that gets filled in when the function is called",
+        "A constraint that limits the function to only accept string URLs",
+        "A default type that is used when no type is specified"
+      ],
+      "correctIndex": 1,
+      "explanation": "The `<T>` declares a type parameter, which is a placeholder for a type. When you call `fetchData<GatherEvent>(url)`, T becomes GatherEvent, and the return type becomes Promise<GatherEvent>."
+    },
+    {
+      "id": "q4",
+      "question": "What does `Omit<GatherEvent, 'id' | 'createdAt'>` produce?",
+      "options": [
+        "A type with only the 'id' and 'createdAt' properties",
+        "A type with all GatherEvent properties except 'id' and 'createdAt'",
+        "A type where 'id' and 'createdAt' are optional",
+        "A type where 'id' and 'createdAt' are readonly"
+      ],
+      "correctIndex": 1,
+      "explanation": "Omit<T, Keys> creates a new type with all properties of T except the ones listed in Keys. It's commonly used to create payload types that exclude server-generated fields like id and timestamps."
+    },
+    {
+      "id": "q5",
+      "question": "Why is `React.FC<Props>` no longer recommended for typing React components?",
+      "options": [
+        "It was removed from the React type definitions",
+        "It causes TypeScript compilation errors in strict mode",
+        "It implicitly accepts children and makes generic components awkward",
+        "It only works with class components, not function components"
+      ],
+      "correctIndex": 2,
+      "explanation": "React.FC implicitly adds children to props (even when your component doesn't use them), doesn't work well with generic components, and has inconsistent default prop behavior. The recommended approach is typing props directly in the function parameter."
+    },
+    {
+      "id": "q6",
+      "question": "What is a discriminated union?",
+      "options": [
+        "A union of types that share no common properties",
+        "A union where each member has a common property with a unique literal type value",
+        "A union that can only contain primitive types",
+        "A union that TypeScript automatically converts to an enum"
+      ],
+      "correctIndex": 1,
+      "explanation": "A discriminated union is a union type where each member has a shared property (the discriminant) with a unique literal type. For example, `{ status: 'success'; data: T } | { status: 'error'; error: string }` uses 'status' as the discriminant."
+    },
+    {
+      "id": "q7",
+      "question": "What does a type guard function's return type `value is GatherEvent` mean?",
+      "options": [
+        "The function always returns a GatherEvent",
+        "The function throws if value is not a GatherEvent",
+        "If the function returns true, TypeScript narrows the value to GatherEvent in the calling scope",
+        "The function converts the value to a GatherEvent at runtime"
+      ],
+      "correctIndex": 2,
+      "explanation": "The `value is Type` syntax is a type predicate. It tells TypeScript that when the function returns true, the parameter should be narrowed to the specified type. This enables safe type narrowing for values coming from external sources like API responses."
+    },
+    {
+      "id": "q8",
+      "question": "What is the difference between `as const` and a regular type annotation?",
+      "options": [
+        "`as const` makes the value mutable at runtime",
+        "`as const` infers the narrowest possible type with literal values and readonly properties",
+        "`as const` converts the value to a TypeScript enum",
+        "`as const` is the same as using `Object.freeze()` at runtime"
+      ],
+      "correctIndex": 1,
+      "explanation": "`as const` tells TypeScript to infer literal types instead of widened types. For example, `['a', 'b'] as const` is typed as `readonly ['a', 'b']` instead of `string[]`. This preserves exact values at the type level while making properties readonly."
+    },
+    {
+      "id": "q9",
+      "question": "What does the `satisfies` operator do?",
+      "options": [
+        "Casts a value to a specific type, overriding TypeScript's checks",
+        "Validates that a value matches a type without changing its inferred type",
+        "Creates a new type by intersecting two existing types",
+        "Makes all properties of an interface required"
+      ],
+      "correctIndex": 1,
+      "explanation": "The `satisfies` operator checks that a value conforms to a type without widening the inferred type. This means you get validation (e.g., all keys of a Record are present) while preserving literal types for autocomplete and precise type checking."
+    },
+    {
+      "id": "q10",
+      "question": "Which tsconfig.json option ensures that `arr[0]` returns `T | undefined` instead of just `T`?",
+      "options": [
+        "strictNullChecks",
+        "noImplicitAny",
+        "noUncheckedIndexedAccess",
+        "strictPropertyInitialization"
+      ],
+      "correctIndex": 2,
+      "explanation": "The `noUncheckedIndexedAccess` option adds `undefined` to the type of any indexed access (array elements, Record values). Without it, `arr[0]` is typed as `T` even though the index could be out of bounds. This catches real bugs where code assumes an array element exists."
+    }
+  ]
+}
