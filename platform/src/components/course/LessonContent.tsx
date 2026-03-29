@@ -1,7 +1,13 @@
 'use client';
 
-import { MDXRemote, type MDXRemoteSerializeResult } from 'next-mdx-remote';
+import dynamic from 'next/dynamic';
+import { type MDXRemoteSerializeResult } from 'next-mdx-remote';
 import { useEffect } from 'react';
+
+const MDXRemote = dynamic(
+  () => import('next-mdx-remote').then((mod) => mod.MDXRemote),
+  { ssr: false }
+);
 
 interface Props {
   source: MDXRemoteSerializeResult;
@@ -36,5 +42,5 @@ export default function LessonContent({ source }: Props) {
     });
   }, [source]);
 
-  return <MDXRemote {...source} />;
+  return <MDXRemote {...(source as any)} />;
 }
