@@ -5,104 +5,126 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>WBB Volunteer Intake Form | We Build Black</title>
   <meta name="description" content="Volunteer with We Build Black. Use your skills for the cause and make a huge impact on the community.">
-  <link rel="icon" href="../assets/images/wbb-gem.svg" type="image/svg+xml">
+  <link rel="icon" type="image/png" sizes="32x32" href="../assets/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon-16x16.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Arvo:wght@700&family=Jura:wght@300;500;700&family=Roboto:wght@700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
 </head>
 <body>
-  <nav class="nav" role="navigation" aria-label="Main navigation">
-    <div class="container">
-      <a href="../index.html" class="nav-logo" aria-label="We Build Black home">
-        <img src="../assets/images/wbb-logo.svg" alt="We Build Black" width="44" height="44">
+  <!-- NAV -->
+  <nav class="nav" role="navigation" aria-label="We Build Black site navigation">
+    <div class="nav__inner">
+      <a href="../index.html" class="nav__brand" aria-label="We Build Black home">
+        <img src="../assets/images/wbb-wordmark-white.svg" alt="We Build Black" class="nav__logo">
       </a>
-      <button class="nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Toggle navigation">
-        <span></span><span></span><span></span>
-      </button>
-      <ul class="nav-menu" id="nav-menu" role="menubar">
-        <li><a href="../about.html" role="menuitem">About</a></li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" role="menuitem" aria-expanded="false" aria-haspopup="true">Get Involved</a>
-          <ul class="dropdown-menu" role="menu">
-            <li><span class="dropdown-label">Events</span></li>
-            <li><a href="../programs/mavens-io.html" role="menuitem">Mavens I/O Conference</a></li>
-            <li><a href="meetups.html" role="menuitem">Meetups</a></li>
-            <li><span class="dropdown-label">Programs</span></li>
-            <li><a href="../programs/fast-track.html" role="menuitem">Fast Track</a></li>
-            <li><a href="../programs/crowns-of-code.html" role="menuitem">Crowns of Code</a></li>
-            <li><a href="../programs/the-bridge.html" role="menuitem">The Bridge</a></li>
-            <li><span class="dropdown-label">Community</span></li>
-            <li><a href="slack.html" role="menuitem">Join our Slack</a></li>
+      <button class="nav__mobile-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Menu">Menu</button>
+      <ul class="nav__menu" id="nav-menu" role="menubar" aria-label="We Build Black site navigation">
+        <li role="none" class="nav__item">
+          <a href="../about.html" role="menuitem" class="nav__link">About</a>
+        </li>
+        <li role="none" class="nav__item nav__dropdown">
+          <button type="button" role="menuitem" class="nav__link nav__dropdown-btn" aria-controls="get-involved-dropdown" aria-expanded="false">Get Involved</button>
+          <ul class="nav__dropdown-menu" id="get-involved-dropdown" role="menu">
+            <li role="none"><a role="menuitem" class="nav__dropdown-link" href="../programs/mavens-io.html">Mavens I/O</a></li>
+            <li role="none"><a role="menuitem" class="nav__dropdown-link" href="../get-involved/meetups.html">Meetups</a></li>
+            <li role="none"><a role="menuitem" class="nav__dropdown-link" href="../programs/fast-track.html">Fast Track</a></li>
+            <li role="none"><a role="menuitem" class="nav__dropdown-link" href="../programs/crowns-of-code.html">Crowns of Code</a></li>
+            <li role="none"><a role="menuitem" class="nav__dropdown-link" href="../programs/the-bridge.html">The Bridge</a></li>
+            <li role="none"><a role="menuitem" class="nav__dropdown-link" href="https://join.slack.com/t/webuildblack/shared_invite/zt-5qjylgiv-qHmkSNCRYWmowuBLV0O~rg" target="_blank" rel="noreferrer">Slack</a></li>
           </ul>
         </li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" role="menuitem" aria-expanded="false" aria-haspopup="true">Make an Impact</a>
-          <ul class="dropdown-menu" role="menu">
-            <li><a href="../impact/hire.html" role="menuitem">Hire</a></li>
-            <li><a href="../impact/partner.html" role="menuitem">Partner</a></li>
-            <li><a href="volunteer.html" role="menuitem">Volunteer</a></li>
+        <li role="none" class="nav__item nav__dropdown">
+          <button type="button" role="menuitem" class="nav__link nav__dropdown-btn" aria-controls="impact-dropdown" aria-expanded="false">Make an Impact</button>
+          <ul class="nav__dropdown-menu" id="impact-dropdown" role="menu">
+            <li role="none"><a role="menuitem" class="nav__dropdown-link" href="../impact/hire.html">Hire</a></li>
+            <li role="none"><a role="menuitem" class="nav__dropdown-link" href="../impact/partner.html">Partner</a></li>
+            <li role="none"><a role="menuitem" class="nav__dropdown-link" href="../get-involved/volunteer.html" target="_blank" rel="noreferrer">Volunteer</a></li>
           </ul>
         </li>
-        <li><a href="https://shop.webuildblack.com" target="_blank" rel="noopener" role="menuitem">Shop</a></li>
+        <li role="none" class="nav__item">
+          <a href="../courses/index.html" role="menuitem" class="nav__link">Courses</a>
+        </li>
+        <li role="none" class="nav__item">
+          <a href="https://shop.webuildblack.com" role="menuitem" class="nav__link" target="_blank" rel="noopener">Shop</a>
+        </li>
+        <li role="none" class="nav__item nav__item--donate">
+          <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank" class="nav__donate-form">
+            <input type="hidden" name="cmd" value="_s-xclick">
+            <input type="hidden" name="hosted_button_id" value="RZWPA5VWQSV3U">
+            <button type="submit" role="menuitem" class="nav__donate-btn">Donate</button>
+          </form>
+        </li>
       </ul>
     </div>
   </nav>
 
-  <section class="section">
-    <div class="container" style="max-width:900px;">
-      <div class="section-header">
-        <h1>WBB Volunteer Intake Form</h1>
-        <p>We Build Black is only possible with the help of people like you. Using and growing your skills for the cause makes a huge impact on our community and your career.</p>
-        <p style="margin-top:var(--space-xs);">This questionnaire enables our team to know how your talents align with our current and future needs. When opportunities match your specific skill set, we'll reach out to the email you provide.</p>
-      </div>
-      <div class="form-embed">
-        <iframe
-          src="https://docs.google.com/forms/d/e/1FAIpQLSehvJrGiab38dw51yaKrqLP1Z5FIZHnprKBYjyyI4wtJmvs4w/viewform?embedded=true"
-          title="WBB Volunteer Intake Form"
-          loading="lazy"
-        >Loading form…</iframe>
-      </div>
+  <!-- HERO -->
+  <header class="bridge-hero">
+    <div class="bridge-hero__text">
+      <h1 class="bridge-hero__heading">Volunteer With Us</h1>
+      <p class="bridge-hero__sub">Use your skills for the cause. Make a huge impact on our community and your career.</p>
+    </div>
+  </header>
+
+  <!-- FORM -->
+  <section class="bridge-section bridge-section--dark">
+    <div class="form-embed">
+      <iframe
+        src="https://docs.google.com/forms/d/e/1FAIpQLSehvJrGiab38dw51yaKrqLP1Z5FIZHnprKBYjyyI4wtJmvs4w/viewform?embedded=true"
+        title="WBB Volunteer Intake Form"
+        loading="lazy"
+      >Loading form...</iframe>
     </div>
   </section>
-
-  <footer class="footer">
-    <div class="container">
-      <div class="footer__grid">
-        <div class="footer__brand">
-          <img src="../assets/images/wbb-logo.svg" alt="We Build Black" width="48" height="48">
-          <p>Empowering the Black community through technical education and professional development since 2017.</p>
+  <!-- FOOTER -->
+  <footer class="footer" id="footer">
+    <div class="footer__main">
+      <div class="footer__left">
+        <div class="footer__left-content">
+          <h3>Make an impact</h3>
+          <ul class="footer__links">
+            <li class="footer__donate-item">
+              <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank" class="footer__donate-form">
+                <input type="hidden" name="cmd" value="_s-xclick">
+                <input type="hidden" name="hosted_button_id" value="RZWPA5VWQSV3U">
+                <button type="submit" class="footer__donate-btn">Donate</button>
+              </form>
+            </li>
+            <li><a href="../impact/hire.html">Hire</a></li>
+            <li><a href="../impact/partner.html">Partner</a></li>
+            <li><a href="../get-involved/volunteer.html" target="_blank" rel="noreferrer">Volunteer</a></li>
+          </ul>
         </div>
-        <div>
-          <h4>Programs</h4>
-          <a href="../programs/fast-track.html">Fast Track</a>
-          <a href="../programs/crowns-of-code.html">Crowns of Code</a>
-          <a href="../programs/mavens-io.html">Mavens I/O</a>
-          <a href="../programs/the-bridge.html">The Bridge</a>
-          <a href="../courses/index.html">Courses</a>
-        </div>
-        <div>
-          <h4>Community</h4>
-          <a href="slack.html">Join Slack</a>
-          <a href="meetups.html">Meetups</a>
-          <a href="volunteer.html">Volunteer</a>
-          <a href="../about.html">About Us</a>
-        </div>
-        <div>
-          <h4>Connect</h4>
-          <div class="footer__social">
-            <a href="https://instagram.com/webuildblack" target="_blank" rel="noopener" aria-label="Instagram">IG</a>
-            <a href="https://youtube.com/webuildblack" target="_blank" rel="noopener" aria-label="YouTube">YT</a>
-            <a href="https://linkedin.com/company/we-build-black" target="_blank" rel="noopener" aria-label="LinkedIn">LI</a>
-            <a href="https://twitter.com/webuildblack" target="_blank" rel="noopener" aria-label="Twitter">TW</a>
-            <a href="https://facebook.com/WeBuildBlackOfficial" target="_blank" rel="noopener" aria-label="Facebook">FB</a>
-            <a href="https://github.com/WeBuildBlack" target="_blank" rel="noopener" aria-label="GitHub">GH</a>
-          </div>
+        <div class="footer__logo">
+          <img src="../assets/images/wbb-gem.svg" alt="We Build Black">
         </div>
       </div>
-      <div class="footer__bottom">
-        <p>We Build Black &copy; 2026. 501(c)(3) Non-Profit Organization.</p>
+      <div class="footer__right">
+        <h3>Get in touch</h3>
+        <p class="footer__condensed">We Build Black</p>
+        <p class="footer__condensed">147 Front Street</p>
+        <p>Brooklyn, NY 11201</p>
+        <p>info@webuildblack.com</p>
+        <h3>Stay in the loop</h3>
+        <p>Be first to know about the latest community news, events, and job opportunities.</p>
+        <div class="footer__subscribe">
+          <a href="#" class="btn btn--subscribe">Subscribe</a>
+        </div>
       </div>
+    </div>
+    <div class="footer__end">
+      <ul class="footer__social">
+        <li><a href="https://instagram.com/webuildblack" target="_blank" rel="noreferrer" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a></li>
+        <li><a href="https://youtube.com/webuildblack" target="_blank" rel="noreferrer" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a></li>
+        <li><a href="https://linkedin.com/company/we-build-black" target="_blank" rel="noreferrer" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a></li>
+        <li><a href="https://twitter.com/webuildblack" target="_blank" rel="noreferrer" aria-label="Twitter"><i class="fa-brands fa-twitter"></i></a></li>
+        <li><a href="https://facebook.com/WeBuildBlackOfficial" target="_blank" rel="noreferrer" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a></li>
+        <li><a href="https://github.com/WeBuildBlack" target="_blank" rel="noreferrer" aria-label="GitHub"><i class="fa-brands fa-github"></i></a></li>
+      </ul>
+      <p class="footer__copyright">We Build Black &copy; 2026</p>
     </div>
   </footer>
   <script src="../js/main.js"></script>

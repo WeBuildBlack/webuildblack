@@ -5,241 +5,190 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>FAST TRACK | We Build Black</title>
   <meta name="description" content="FAST TRACK is WBB's workforce development program taking participants from techie-in-training to employed junior technologists.">
-  <link rel="icon" href="../assets/images/wbb-gem.svg" type="image/svg+xml">
+  <link rel="icon" type="image/png" sizes="32x32" href="../assets/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon-16x16.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Arvo:wght@700&family=Jura:wght@300;500;700&family=Roboto:wght@700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
 </head>
 <body>
-  <nav class="nav" role="navigation" aria-label="Main navigation">
-    <div class="container">
-      <a href="../index.html" class="nav-logo" aria-label="We Build Black home">
-        <img src="../assets/images/wbb-logo.svg" alt="We Build Black" width="44" height="44">
+  <!-- NAV -->
+  <nav class="nav" role="navigation" aria-label="We Build Black site navigation">
+    <div class="nav__inner">
+      <a href="../index.html" class="nav__brand" aria-label="We Build Black home">
+        <img src="../assets/images/wbb-wordmark-white.svg" alt="We Build Black" class="nav__logo">
       </a>
-      <button class="nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Toggle navigation">
-        <span></span><span></span><span></span>
-      </button>
-      <ul class="nav-menu" id="nav-menu" role="menubar">
-        <li><a href="../about.html" role="menuitem">About</a></li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" role="menuitem" aria-expanded="false" aria-haspopup="true">Get Involved</a>
-          <ul class="dropdown-menu" role="menu">
-            <li><span class="dropdown-label">Events</span></li>
-            <li><a href="mavens-io.html" role="menuitem">Mavens I/O Conference</a></li>
-            <li><a href="../get-involved/meetups.html" role="menuitem">Meetups</a></li>
-            <li><span class="dropdown-label">Programs</span></li>
-            <li><a href="fast-track.html" role="menuitem">Fast Track</a></li>
-            <li><a href="crowns-of-code.html" role="menuitem">Crowns of Code</a></li>
-            <li><a href="the-bridge.html" role="menuitem">The Bridge</a></li>
-            <li><span class="dropdown-label">Community</span></li>
-            <li><a href="../get-involved/slack.html" role="menuitem">Join our Slack</a></li>
+      <button class="nav__mobile-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Menu">Menu</button>
+      <ul class="nav__menu" id="nav-menu" role="menubar" aria-label="We Build Black site navigation">
+        <li role="none" class="nav__item">
+          <a href="../about.html" role="menuitem" class="nav__link">About</a>
+        </li>
+        <li role="none" class="nav__item nav__dropdown">
+          <button type="button" role="menuitem" class="nav__link nav__dropdown-btn" aria-controls="get-involved-dropdown" aria-expanded="false">Get Involved</button>
+          <ul class="nav__dropdown-menu" id="get-involved-dropdown" role="menu">
+            <li role="none"><a role="menuitem" class="nav__dropdown-link" href="../programs/mavens-io.html">Mavens I/O</a></li>
+            <li role="none"><a role="menuitem" class="nav__dropdown-link" href="../get-involved/meetups.html">Meetups</a></li>
+            <li role="none"><a role="menuitem" class="nav__dropdown-link" href="../programs/fast-track.html">Fast Track</a></li>
+            <li role="none"><a role="menuitem" class="nav__dropdown-link" href="../programs/crowns-of-code.html">Crowns of Code</a></li>
+            <li role="none"><a role="menuitem" class="nav__dropdown-link" href="../programs/the-bridge.html">The Bridge</a></li>
+            <li role="none"><a role="menuitem" class="nav__dropdown-link" href="https://join.slack.com/t/webuildblack/shared_invite/zt-5qjylgiv-qHmkSNCRYWmowuBLV0O~rg" target="_blank" rel="noreferrer">Slack</a></li>
           </ul>
         </li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" role="menuitem" aria-expanded="false" aria-haspopup="true">Make an Impact</a>
-          <ul class="dropdown-menu" role="menu">
-            <li><a href="../impact/hire.html" role="menuitem">Hire</a></li>
-            <li><a href="../impact/partner.html" role="menuitem">Partner</a></li>
-            <li><a href="../get-involved/volunteer.html" role="menuitem">Volunteer</a></li>
+        <li role="none" class="nav__item nav__dropdown">
+          <button type="button" role="menuitem" class="nav__link nav__dropdown-btn" aria-controls="impact-dropdown" aria-expanded="false">Make an Impact</button>
+          <ul class="nav__dropdown-menu" id="impact-dropdown" role="menu">
+            <li role="none"><a role="menuitem" class="nav__dropdown-link" href="../impact/hire.html">Hire</a></li>
+            <li role="none"><a role="menuitem" class="nav__dropdown-link" href="../impact/partner.html">Partner</a></li>
+            <li role="none"><a role="menuitem" class="nav__dropdown-link" href="../get-involved/volunteer.html" target="_blank" rel="noreferrer">Volunteer</a></li>
           </ul>
         </li>
-        <li><a href="https://shop.webuildblack.com" target="_blank" rel="noopener" role="menuitem">Shop</a></li>
+        <li role="none" class="nav__item">
+          <a href="../courses/index.html" role="menuitem" class="nav__link">Courses</a>
+        </li>
+        <li role="none" class="nav__item">
+          <a href="https://shop.webuildblack.com" role="menuitem" class="nav__link" target="_blank" rel="noopener">Shop</a>
+        </li>
+        <li role="none" class="nav__item nav__item--donate">
+          <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank" class="nav__donate-form">
+            <input type="hidden" name="cmd" value="_s-xclick">
+            <input type="hidden" name="hosted_button_id" value="RZWPA5VWQSV3U">
+            <button type="submit" role="menuitem" class="nav__donate-btn">Donate</button>
+          </form>
+        </li>
       </ul>
     </div>
   </nav>
 
-  <!-- Hero -->
-  <section class="hero hero--page" style="min-height:40vh;">
-    <div class="hero__bg" style="background: linear-gradient(135deg, #110903, #2C170B);"></div>
-    <div class="hero__content">
-      <h1>FAST TRACK</h1>
-      <p class="hero__tagline">Workforce Development Program</p>
+  <!-- HERO IMAGE -->
+  <div class="ft-hero-image" style="background-image:url('../assets/images/Mentor1.jpg');"></div>
+
+  <!-- WHAT IS FAST TRACK -->
+  <section class="ft-section ft-section--intro">
+    <div class="ft-heading-wrapper">
+      <h1 class="ft-heading">What was FAST TRACK?</h1>
+      <p style="color:var(--color-gold);margin-top:0.5em;">This program has been sunset. Below is an archive of what FAST TRACK accomplished.</p>
+    </div>
+    <div class="ft-intro-text">
+      <p>FAST TRACK was a tech workforce development program that took Black women and those under the poverty line from techie-in-training to employed junior technologists in one year or less. The program provided education, dedicated mentors, resume assistance, and internship placements.</p>
     </div>
   </section>
 
-  <!-- What is Fast Track -->
-  <section class="section">
-    <div class="container" style="max-width:800px;">
-      <div class="reveal">
-        <h2>What is FAST TRACK?</h2>
-        <p>FAST TRACK is the #1 tech workforce development program in the nation. We take Black women and those under the poverty line from techie-in-training to employed junior technologists in one year or less! That means education, dedicated mentors, resume assistance, and internships! Keep reading to learn more or click on one of the buttons below to get involved.</p>
-      </div>
-      <div class="cta-row reveal" style="margin-top:var(--space-lg);">
-        <a href="https://forms.gle/6QAyeXEaJrCXVgw88" target="_blank" rel="noopener" class="btn btn--primary">Become an Internship Partner</a>
-        <a href="https://forms.gle/Vhco9cSYRAdMkQdj9" target="_blank" rel="noopener" class="btn btn--primary">Become a Student</a>
-        <a href="https://forms.gle/qtVksFapsLtCR3388" target="_blank" rel="noopener" class="btn btn--primary">Become a Mentor</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Google Partnership -->
-  <section class="section section--alt">
-    <div class="container" style="max-width:800px;">
-      <div class="reveal">
-        <h2>Android Engineer, UX/UI Designer, Data Scientist! Which do you want to be?</h2>
-        <p>Google has partnered with us to give our students scholarships to their online courses. They have training in Android Engineering, UX/UI Design, and Data Analysis. The Google Career Certificate program can help you get on the fast track to a competitively paid job in a high-growth field. You don't need relevant experience or a degree to complete this flexible, online job training. Just put the skills, passion, and ambition you already have to work.</p>
+  <!-- GOOGLE CERTS -->
+  <section class="ft-section">
+    <div class="ft-heading-wrapper"><h2 class="ft-heading">Android Engineer, UX/UI Designer, Data Scientist! Which do you want to be?</h2></div>
+    <div class="ft-content">
+      <img src="../assets/images/google-certificates.png" alt="Google Career Certificates" class="ft-content__image">
+      <div class="ft-content__text">
+        <p>Google partnered with us to give our students scholarships to their online courses. They had training in Android Engineering, UX/UI Design, and Data Analysis. The Google Career Certificate program helped students get on the fast track to a competitively paid job in a high-growth field, without needing relevant experience or a degree.</p>
       </div>
     </div>
   </section>
 
-  <!-- Stipends -->
-  <section class="section">
-    <div class="container" style="max-width:800px;">
-      <div class="reveal">
-        <h2>Free Macbook, iPhone, and Learning Stipends</h2>
-        <p>Our program is targeting Black women and those under the poverty line. That being said, we understand the financial barriers that come with committing time to learning something for free. In response to these challenges, our program is an earn-to-learn program where students will earn $1,000 for every course milestone they achieve ($6,000 total).</p>
-        <p>We're also aware that not everyone has access to a computer or phone. To address this, every student in our program gets a new Macbook and iPhone.</p>
+  <!-- STIPENDS -->
+  <section class="ft-section">
+    <div class="ft-heading-wrapper"><h2 class="ft-heading">Free Macbook, iPhone, and learning stipends</h2></div>
+    <div class="ft-content">
+      <img src="../assets/images/macbook-iphone.jpeg" alt="MacBook and iPhone" class="ft-content__image ft-content__image--right">
+      <div class="ft-content__text">
+        <p>The program targeted Black women and those under the poverty line. Understanding the financial barriers that come with committing time to learning, FAST TRACK was an earn-to-learn program where students earned $1,000 for every course milestone they achieved ($6,000 total).</p>
+        <p>Recognizing that not everyone has access to a computer or phone, every student in the program received a new MacBook and iPhone.</p>
       </div>
     </div>
   </section>
 
-  <!-- Mentorship -->
-  <section class="section section--alt">
-    <div class="container" style="max-width:800px;">
-      <div class="reveal">
-        <h2>A Mentor Employed in Your Field of Study</h2>
-        <p>Data shows that only 5% of people finish their online courses. This is because when you get stuck, searching online can only take you so far. You need a real live person who's been there and can hold your hand to the next step. Every program participant receives a dedicated mentor that is employed in their field of study at reputable tech companies.</p>
+  <!-- MENTORSHIP -->
+  <section class="ft-section">
+    <div class="ft-heading-wrapper"><h2 class="ft-heading">A mentor employed in your field of study</h2></div>
+    <div class="ft-content">
+      <img src="../assets/images/mentor2.png" alt="Mentor" class="ft-content__image">
+      <div class="ft-content__text">
+        <p>Data shows that only 5% of people finish their online courses. When you get stuck, searching online can only take you so far. You need a real live person who's been there and can guide you to the next step. Every FAST TRACK participant received a dedicated mentor employed in their field of study at reputable tech companies.</p>
       </div>
     </div>
   </section>
 
-  <!-- Internships -->
-  <section class="section">
-    <div class="container" style="max-width:800px;">
-      <div class="reveal">
-        <h2>Full-time Internships</h2>
-        <p>A fast track into the industry isn't complete without on-the-job training. We've partnered with Shopify to give internships to our students in data, design, and development. Their internships are full-time, well paid and as long as you perform well there's a high chance you'll be hired.</p>
-        <p>In the event that you don't receive the job from Shopify, we've partnered with CareerCircle to give all of our students resume assistance and interview connections. CareerCircle's whole business model is to get diverse people like you into interviews at top tech companies.</p>
+  <!-- INTERNSHIPS -->
+  <section class="ft-section">
+    <div class="ft-heading-wrapper"><h2 class="ft-heading">Full-time Internships</h2></div>
+    <div class="ft-content">
+      <img src="../assets/images/woman-coding.jpg" alt="Woman coding" class="ft-content__image ft-content__image--right">
+      <div class="ft-content__text">
+        <p>A fast track into the industry isn't complete without on-the-job training. We partnered with Shopify to provide internships to our students in data, design, and development. Their internships were full-time and well paid, with a high chance of being hired upon strong performance.</p>
+        <p>We also partnered with CareerCircle to provide all students with resume assistance and interview connections at top tech companies.</p>
       </div>
     </div>
   </section>
 
-  <!-- Program Calendar -->
-  <section class="section section--alt">
-    <div class="container text-center reveal">
-      <h2>Program Calendar</h2>
-      <p style="color:var(--text-muted);">Program dates and milestones will be announced for the next cohort. Check back soon or join our Slack for updates.</p>
+  <!-- PARTNERS -->
+  <section class="ft-section">
+    <div class="ft-heading-wrapper"><h2 class="ft-heading">Program Partners</h2></div>
+    <div class="ft-buttons">
+      <img src="../assets/images/shopify.png" alt="Shopify" class="ft-content__image" style="max-width:200px;">
+      <img src="../assets/images/google-logo-transparent.png" alt="Google" class="ft-content__image" style="max-width:200px;">
+      <img src="../assets/images/microsoft.png" alt="Microsoft" class="ft-content__image" style="max-width:200px;">
     </div>
   </section>
 
-  <!-- FAQ -->
-  <section class="section">
-    <div class="container">
-      <div class="section-header reveal">
-        <h2>Frequently Asked Questions</h2>
-        <p>For other questions email <a href="mailto:info@webuildblack.com" style="color:var(--color-medium-brown);">info@webuildblack.com</a></p>
+  <!-- CHECK OUT OTHER PROGRAMS -->
+  <section class="ft-section" style="text-align:center;">
+    <div class="ft-heading-wrapper">
+      <h2 class="ft-heading">Interested in our active programs?</h2>
+      <p style="margin-top:0.5em;">Check out our current programs and courses.</p>
+    </div>
+    <div class="ft-buttons">
+      <a href="the-bridge.html" class="ft-btn">The Bridge</a>
+      <a href="../courses/index.html" class="ft-btn">Courses</a>
+      <a href="https://join.slack.com/t/webuildblack/shared_invite/zt-5qjylgiv-qHmkSNCRYWmowuBLV0O~rg" target="_blank" rel="noreferrer" class="ft-btn">Join Our Slack</a>
+    </div>
+  </section>
+  <!-- FOOTER -->
+  <footer class="footer" id="footer">
+    <div class="footer__main">
+      <div class="footer__left">
+        <div class="footer__left-content">
+          <h3>Make an impact</h3>
+          <ul class="footer__links">
+            <li class="footer__donate-item">
+              <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank" class="footer__donate-form">
+                <input type="hidden" name="cmd" value="_s-xclick">
+                <input type="hidden" name="hosted_button_id" value="RZWPA5VWQSV3U">
+                <button type="submit" class="footer__donate-btn">Donate</button>
+              </form>
+            </li>
+            <li><a href="../impact/hire.html">Hire</a></li>
+            <li><a href="../impact/partner.html">Partner</a></li>
+            <li><a href="../get-involved/volunteer.html" target="_blank" rel="noreferrer">Volunteer</a></li>
+          </ul>
+        </div>
+        <div class="footer__logo">
+          <img src="../assets/images/wbb-gem.svg" alt="We Build Black">
+        </div>
       </div>
-      <div class="accordion reveal">
-        <div class="accordion-item">
-          <button class="accordion-trigger" aria-expanded="false" aria-controls="faq-1">What are the requirements to join the program?</button>
-          <div class="accordion-panel" id="faq-1" hidden>
-            <p>Applicants must identify as Black and be at least 18 years old. No prior tech experience is required — just motivation and commitment to completing the program.</p>
-          </div>
-        </div>
-        <div class="accordion-item">
-          <button class="accordion-trigger" aria-expanded="false" aria-controls="faq-2">How do I apply to join the program?</button>
-          <div class="accordion-panel" id="faq-2" hidden>
-            <p>Click the "Become a Student" button above to fill out the application form. We review applications on a rolling basis.</p>
-          </div>
-        </div>
-        <div class="accordion-item">
-          <button class="accordion-trigger" aria-expanded="false" aria-controls="faq-3">When will I know if I'm accepted?</button>
-          <div class="accordion-panel" id="faq-3" hidden>
-            <p>Applicants will be notified of their acceptance status within 2 weeks of submitting their application.</p>
-          </div>
-        </div>
-        <div class="accordion-item">
-          <button class="accordion-trigger" aria-expanded="false" aria-controls="faq-4">When do applications open and close?</button>
-          <div class="accordion-panel" id="faq-4" hidden>
-            <p>Application windows are announced on our Slack and social media channels. Join our community to stay updated on the next cohort.</p>
-          </div>
-        </div>
-        <div class="accordion-item">
-          <button class="accordion-trigger" aria-expanded="false" aria-controls="faq-5">When is the first day of class?</button>
-          <div class="accordion-panel" id="faq-5" hidden>
-            <p>The program start date varies by cohort. Accepted students receive all scheduling details in their welcome packet.</p>
-          </div>
-        </div>
-        <div class="accordion-item">
-          <button class="accordion-trigger" aria-expanded="false" aria-controls="faq-6">How do I apply to be a mentor?</button>
-          <div class="accordion-panel" id="faq-6" hidden>
-            <p>Click the "Become a Mentor" button above. We're looking for professionals with at least 2 years of experience in Android development, UX design, or data analytics.</p>
-          </div>
-        </div>
-        <div class="accordion-item">
-          <button class="accordion-trigger" aria-expanded="false" aria-controls="faq-7">How do I apply for my company to be an internship partner?</button>
-          <div class="accordion-panel" id="faq-7" hidden>
-            <p>Click the "Become an Internship Partner" button above to fill out our partnership inquiry form. A member of our team will follow up within one week.</p>
-          </div>
+      <div class="footer__right">
+        <h3>Get in touch</h3>
+        <p class="footer__condensed">We Build Black</p>
+        <p class="footer__condensed">147 Front Street</p>
+        <p>Brooklyn, NY 11201</p>
+        <p>info@webuildblack.com</p>
+        <h3>Stay in the loop</h3>
+        <p>Be first to know about the latest community news, events, and job opportunities.</p>
+        <div class="footer__subscribe">
+          <a href="#" class="btn btn--subscribe">Subscribe</a>
         </div>
       </div>
     </div>
-  </section>
-
-  <!-- Partners -->
-  <section class="section section--alt">
-    <div class="container text-center">
-      <div class="section-header reveal">
-        <h2>Our Partners</h2>
-      </div>
-      <div class="partner-logos reveal">
-        <!-- TODO: Replace with real partner logo images -->
-        <img src="../assets/images/wbb-gem.svg" alt="Shopify" style="height:50px;">
-        <img src="../assets/images/wbb-gem.svg" alt="Google" style="height:50px;">
-        <img src="../assets/images/wbb-gem.svg" alt="Microsoft" style="height:50px;">
-      </div>
-    </div>
-  </section>
-
-  <!-- Bottom CTAs -->
-  <section class="section section--dark">
-    <div class="container text-center reveal">
-      <div class="cta-row">
-        <a href="https://forms.gle/6QAyeXEaJrCXVgw88" target="_blank" rel="noopener" class="btn btn--primary">Become an Internship Partner</a>
-        <a href="https://forms.gle/Vhco9cSYRAdMkQdj9" target="_blank" rel="noopener" class="btn btn--outline">Become a Student</a>
-        <a href="https://forms.gle/qtVksFapsLtCR3388" target="_blank" rel="noopener" class="btn btn--outline">Become a Mentor</a>
-      </div>
-    </div>
-  </section>
-
-  <footer class="footer">
-    <div class="container">
-      <div class="footer__grid">
-        <div class="footer__brand">
-          <img src="../assets/images/wbb-logo.svg" alt="We Build Black" width="48" height="48">
-          <p>Empowering the Black community through technical education and professional development since 2017.</p>
-        </div>
-        <div>
-          <h4>Programs</h4>
-          <a href="fast-track.html">Fast Track</a>
-          <a href="crowns-of-code.html">Crowns of Code</a>
-          <a href="mavens-io.html">Mavens I/O</a>
-          <a href="the-bridge.html">The Bridge</a>
-          <a href="../courses/index.html">Courses</a>
-        </div>
-        <div>
-          <h4>Community</h4>
-          <a href="../get-involved/slack.html">Join Slack</a>
-          <a href="../get-involved/meetups.html">Meetups</a>
-          <a href="../get-involved/volunteer.html">Volunteer</a>
-          <a href="../about.html">About Us</a>
-        </div>
-        <div>
-          <h4>Connect</h4>
-          <div class="footer__social">
-            <a href="https://instagram.com/webuildblack" target="_blank" rel="noopener" aria-label="Instagram">IG</a>
-            <a href="https://youtube.com/webuildblack" target="_blank" rel="noopener" aria-label="YouTube">YT</a>
-            <a href="https://linkedin.com/company/we-build-black" target="_blank" rel="noopener" aria-label="LinkedIn">LI</a>
-            <a href="https://twitter.com/webuildblack" target="_blank" rel="noopener" aria-label="Twitter">TW</a>
-            <a href="https://facebook.com/WeBuildBlackOfficial" target="_blank" rel="noopener" aria-label="Facebook">FB</a>
-            <a href="https://github.com/WeBuildBlack" target="_blank" rel="noopener" aria-label="GitHub">GH</a>
-          </div>
-        </div>
-      </div>
-      <div class="footer__bottom">
-        <p>We Build Black &copy; 2026. 501(c)(3) Non-Profit Organization.</p>
-      </div>
+    <div class="footer__end">
+      <ul class="footer__social">
+        <li><a href="https://instagram.com/webuildblack" target="_blank" rel="noreferrer" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a></li>
+        <li><a href="https://youtube.com/webuildblack" target="_blank" rel="noreferrer" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a></li>
+        <li><a href="https://linkedin.com/company/we-build-black" target="_blank" rel="noreferrer" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a></li>
+        <li><a href="https://twitter.com/webuildblack" target="_blank" rel="noreferrer" aria-label="Twitter"><i class="fa-brands fa-twitter"></i></a></li>
+        <li><a href="https://facebook.com/WeBuildBlackOfficial" target="_blank" rel="noreferrer" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a></li>
+        <li><a href="https://github.com/WeBuildBlack" target="_blank" rel="noreferrer" aria-label="GitHub"><i class="fa-brands fa-github"></i></a></li>
+      </ul>
+      <p class="footer__copyright">We Build Black &copy; 2026</p>
     </div>
   </footer>
   <script src="../js/main.js"></script>

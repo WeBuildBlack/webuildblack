@@ -5,278 +5,269 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>THE BRIDGE | We Build Black</title>
   <meta name="description" content="The Bridge is WBB's 8-week interview accountability program. Join a small pod, sharpen your skills, and land your next role — together.">
-  <link rel="icon" href="../assets/images/wbb-gem.svg" type="image/svg+xml">
+  <link rel="icon" type="image/png" sizes="32x32" href="../assets/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon-16x16.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Arvo:wght@700&family=Jura:wght@300;500;700&family=Roboto:wght@700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
 </head>
 <body>
-  <nav class="nav" role="navigation" aria-label="Main navigation">
-    <div class="container">
-      <a href="../index.html" class="nav-logo" aria-label="We Build Black home">
-        <img src="../assets/images/wbb-logo.svg" alt="We Build Black" width="44" height="44">
+  <!-- NAV -->
+  <nav class="nav" role="navigation" aria-label="We Build Black site navigation">
+    <div class="nav__inner">
+      <a href="../index.html" class="nav__brand" aria-label="We Build Black home">
+        <img src="../assets/images/wbb-wordmark-white.svg" alt="We Build Black" class="nav__logo">
       </a>
-      <button class="nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Toggle navigation">
-        <span></span><span></span><span></span>
-      </button>
-      <ul class="nav-menu" id="nav-menu" role="menubar">
-        <li><a href="../about.html" role="menuitem">About</a></li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" role="menuitem" aria-expanded="false" aria-haspopup="true">Get Involved</a>
-          <ul class="dropdown-menu" role="menu">
-            <li><span class="dropdown-label">Events</span></li>
-            <li><a href="mavens-io.html" role="menuitem">Mavens I/O Conference</a></li>
-            <li><a href="../get-involved/meetups.html" role="menuitem">Meetups</a></li>
-            <li><span class="dropdown-label">Programs</span></li>
-            <li><a href="fast-track.html" role="menuitem">Fast Track</a></li>
-            <li><a href="crowns-of-code.html" role="menuitem">Crowns of Code</a></li>
-            <li><a href="the-bridge.html" role="menuitem">The Bridge</a></li>
-            <li><span class="dropdown-label">Community</span></li>
-            <li><a href="../get-involved/slack.html" role="menuitem">Join our Slack</a></li>
+      <button class="nav__mobile-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Menu">Menu</button>
+      <ul class="nav__menu" id="nav-menu" role="menubar" aria-label="We Build Black site navigation">
+        <li role="none" class="nav__item">
+          <a href="../about.html" role="menuitem" class="nav__link">About</a>
+        </li>
+        <li role="none" class="nav__item nav__dropdown">
+          <button type="button" role="menuitem" class="nav__link nav__dropdown-btn" aria-controls="get-involved-dropdown" aria-expanded="false">Get Involved</button>
+          <ul class="nav__dropdown-menu" id="get-involved-dropdown" role="menu">
+            <li role="none"><a role="menuitem" class="nav__dropdown-link" href="../programs/mavens-io.html">Mavens I/O</a></li>
+            <li role="none"><a role="menuitem" class="nav__dropdown-link" href="../get-involved/meetups.html">Meetups</a></li>
+            <li role="none"><a role="menuitem" class="nav__dropdown-link" href="../programs/fast-track.html">Fast Track</a></li>
+            <li role="none"><a role="menuitem" class="nav__dropdown-link" href="../programs/crowns-of-code.html">Crowns of Code</a></li>
+            <li role="none"><a role="menuitem" class="nav__dropdown-link" href="../programs/the-bridge.html">The Bridge</a></li>
+            <li role="none"><a role="menuitem" class="nav__dropdown-link" href="https://join.slack.com/t/webuildblack/shared_invite/zt-5qjylgiv-qHmkSNCRYWmowuBLV0O~rg" target="_blank" rel="noreferrer">Slack</a></li>
           </ul>
         </li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" role="menuitem" aria-expanded="false" aria-haspopup="true">Make an Impact</a>
-          <ul class="dropdown-menu" role="menu">
-            <li><a href="../impact/hire.html" role="menuitem">Hire</a></li>
-            <li><a href="../impact/partner.html" role="menuitem">Partner</a></li>
-            <li><a href="../get-involved/volunteer.html" role="menuitem">Volunteer</a></li>
+        <li role="none" class="nav__item nav__dropdown">
+          <button type="button" role="menuitem" class="nav__link nav__dropdown-btn" aria-controls="impact-dropdown" aria-expanded="false">Make an Impact</button>
+          <ul class="nav__dropdown-menu" id="impact-dropdown" role="menu">
+            <li role="none"><a role="menuitem" class="nav__dropdown-link" href="../impact/hire.html">Hire</a></li>
+            <li role="none"><a role="menuitem" class="nav__dropdown-link" href="../impact/partner.html">Partner</a></li>
+            <li role="none"><a role="menuitem" class="nav__dropdown-link" href="../get-involved/volunteer.html" target="_blank" rel="noreferrer">Volunteer</a></li>
           </ul>
         </li>
-        <li><a href="https://shop.webuildblack.com" target="_blank" rel="noopener" role="menuitem">Shop</a></li>
+        <li role="none" class="nav__item">
+          <a href="../courses/index.html" role="menuitem" class="nav__link">Courses</a>
+        </li>
+        <li role="none" class="nav__item">
+          <a href="https://shop.webuildblack.com" role="menuitem" class="nav__link" target="_blank" rel="noopener">Shop</a>
+        </li>
+        <li role="none" class="nav__item nav__item--donate">
+          <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank" class="nav__donate-form">
+            <input type="hidden" name="cmd" value="_s-xclick">
+            <input type="hidden" name="hosted_button_id" value="RZWPA5VWQSV3U">
+            <button type="submit" role="menuitem" class="nav__donate-btn">Donate</button>
+          </form>
+        </li>
       </ul>
     </div>
   </nav>
 
-  <!-- Hero -->
-  <section class="hero hero--page" style="min-height:45vh;">
-    <div class="hero__bg" style="background: linear-gradient(135deg, #200E03 0%, #7D4E21 100%);"></div>
-    <div class="hero__content">
-      <h1>THE BRIDGE</h1>
-      <p class="hero__tagline">Connecting where you are to where you want to be.</p>
+  <!-- HERO -->
+  <header class="bridge-hero">
+    <div class="bridge-hero__text">
+      <h1 class="bridge-hero__heading">The Bridge</h1>
+      <p class="bridge-hero__sub">Connecting where you are to where you want to be.</p>
+    </div>
+  </header>
+
+  <!-- WHAT IS THE BRIDGE -->
+  <section class="bridge-section">
+    <h2 class="bridge-section__heading">What is The Bridge?</h2>
+    <p class="bridge-section__text">The Bridge is an 8-week virtual accountability program where small pods of 4-5 WBB members support each other through the tech interview process. You'll be grouped by target role, meet weekly on your own terms, and receive personalized coaching insights via Slack every week.</p>
+    <p class="bridge-section__text">The job search is isolating. The Bridge fixes that. You get a crew of people going through the same thing: practicing together, applying together, and pushing each other to the finish line.</p>
+    <div class="bridge-buttons">
+      <a href="https://forms.gle/BRIDGE_APPLICATION_LINK" target="_blank" rel="noopener" class="ft-btn">Apply Now</a>
+      <a href="https://join.slack.com/t/webuildblack/shared_invite/zt-5qjylgiv-qHmkSNCRYWmowuBLV0O~rg" target="_blank" rel="noopener" class="ft-btn">Join Our Slack</a>
     </div>
   </section>
 
-  <!-- What is The Bridge -->
-  <section class="section">
-    <div class="container" style="max-width:800px;">
-      <div class="reveal">
-        <h2>What is The Bridge?</h2>
-        <p>The Bridge is an 8-week virtual accountability program where small pods of 4-5 WBB members support each other through the tech interview process. You'll be grouped by target role, meet weekly on your own terms, and receive personalized coaching insights via Slack every week.</p>
-        <p>The job search is isolating. The Bridge fixes that. You get a crew of people going through the same thing — practicing together, applying together, and pushing each other to the finish line.</p>
+  <!-- HOW IT WORKS -->
+  <section class="bridge-section bridge-section--dark">
+    <h2 class="bridge-section__heading">How It Works</h2>
+    <div class="bridge-steps">
+      <div class="bridge-step">
+        <h3 class="bridge-step__title">1. Apply &amp; Get Matched</h3>
+        <p>Fill out the application. We group you into a pod of 4-5 people targeting similar roles: frontend, backend, data, design, product, or mobile.</p>
       </div>
-      <div class="cta-row reveal" style="margin-top:var(--space-lg);">
-        <a href="https://forms.gle/BRIDGE_APPLICATION_LINK" target="_blank" rel="noopener" class="btn btn--primary">Apply Now</a>
-        <a href="../get-involved/slack.html" class="btn btn--outline">Join our Slack</a>
+      <div class="bridge-step">
+        <h3 class="bridge-step__title">2. Meet Weekly. Your Way.</h3>
+        <p>Your pod meets once a week over Google Meet. You choose when, how long, and what you work on: mock interviews, leetcode sessions, application sprints, resume reviews, or interview debriefs.</p>
       </div>
-    </div>
-  </section>
-
-  <!-- How It Works -->
-  <section class="section section--alt">
-    <div class="container" style="max-width:800px;">
-      <div class="reveal">
-        <h2>How It Works</h2>
-        <ol class="vision-list">
-          <li class="reveal"><strong>Apply & Get Matched.</strong> Fill out the application. We group you into a pod of 4-5 people targeting similar roles — frontend, backend, data, design, product, or mobile.</li>
-          <li class="reveal"><strong>Meet Weekly. Your Way.</strong> Your pod meets once a week over Google Meet. You choose when, how long, and what you work on — mock interviews, leetcode sessions, application sprints, resume reviews, or interview debriefs.</li>
-          <li class="reveal"><strong>Track Your Progress.</strong> Log your weekly activity in Notion — problems practiced, applications sent, interviews scheduled, wins, and blockers. Takes 5 minutes.</li>
-          <li class="reveal"><strong>Get Personalized Coaching.</strong> Every Monday, you'll get a Slack DM with insights based on your data — what's working, where to focus, and a nudge when you need it. No human overhead. Just smart, automated support.</li>
-        </ol>
+      <div class="bridge-step">
+        <h3 class="bridge-step__title">3. Track Your Progress</h3>
+        <p>Log your weekly activity in Notion: problems practiced, applications sent, interviews scheduled, wins, and blockers. Takes 5 minutes.</p>
       </div>
-    </div>
-  </section>
-
-  <!-- Pod Sessions -->
-  <section class="section">
-    <div class="container" style="max-width:800px;">
-      <div class="reveal">
-        <h2>What Do Pods Do Together?</h2>
-        <p>Your pod picks from a menu of session formats each week. Here are some options:</p>
-        <ul style="list-style:none; padding:0; margin-top:var(--space-md);">
-          <li style="padding:var(--space-sm) 0; border-bottom:1px solid var(--color-light-gray);"><strong>Mock Interview Pairs</strong> — Take turns interviewing each other (behavioral or technical)</li>
-          <li style="padding:var(--space-sm) 0; border-bottom:1px solid var(--color-light-gray);"><strong>Leetcode Together</strong> — Solve 2-3 problems as a group, discuss approaches</li>
-          <li style="padding:var(--space-sm) 0; border-bottom:1px solid var(--color-light-gray);"><strong>System Design Jam</strong> — One person presents a design, the group critiques</li>
-          <li style="padding:var(--space-sm) 0; border-bottom:1px solid var(--color-light-gray);"><strong>Application Sprint</strong> — Everyone applies to 3-5 jobs on the call together</li>
-          <li style="padding:var(--space-sm) 0; border-bottom:1px solid var(--color-light-gray);"><strong>Resume & Portfolio Roast</strong> — Constructive feedback on each other's materials</li>
-          <li style="padding:var(--space-sm) 0; border-bottom:1px solid var(--color-light-gray);"><strong>Interview Debrief</strong> — Share experiences from real interviews that week</li>
-          <li style="padding:var(--space-sm) 0;"><strong>Salary & Negotiation Prep</strong> — Research comp ranges, practice negotiation scripts</li>
-        </ul>
+      <div class="bridge-step">
+        <h3 class="bridge-step__title">4. Get Personalized Coaching</h3>
+        <p>Every Monday, you'll get a Slack DM with insights based on your data: what's working, where to focus, and a nudge when you need it.</p>
       </div>
     </div>
   </section>
 
-  <!-- The 8 Weeks -->
-  <section class="section section--alt">
-    <div class="container" style="max-width:800px;">
-      <div class="reveal">
-        <h2>The 8-Week Journey</h2>
+  <!-- POD SESSIONS -->
+  <section class="bridge-section">
+    <h2 class="bridge-section__heading">What Do Pods Do Together?</h2>
+    <p class="bridge-section__text">Your pod picks from a menu of session formats each week:</p>
+    <ul class="bridge-list">
+      <li><strong>Mock Interview Pairs</strong> &mdash; Take turns interviewing each other (behavioral or technical)</li>
+      <li><strong>Leetcode Together</strong> &mdash; Solve 2-3 problems as a group, discuss approaches</li>
+      <li><strong>System Design Jam</strong> &mdash; One person presents a design, the group critiques</li>
+      <li><strong>Application Sprint</strong> &mdash; Everyone applies to 3-5 jobs on the call together</li>
+      <li><strong>Resume &amp; Portfolio Roast</strong> &mdash; Constructive feedback on each other's materials</li>
+      <li><strong>Interview Debrief</strong> &mdash; Share experiences from real interviews that week</li>
+      <li><strong>Salary &amp; Negotiation Prep</strong> &mdash; Research comp ranges, practice negotiation scripts</li>
+    </ul>
+  </section>
+
+  <!-- THE 8 WEEKS -->
+  <section class="bridge-section bridge-section--dark">
+    <h2 class="bridge-section__heading">The 8-Week Journey</h2>
+    <div class="bridge-timeline">
+      <div class="bridge-timeline__item">
+        <h3>Week 0: Kickoff</h3>
+        <p>All pods gather for a virtual kickoff. Meet your pod, set your goals, schedule your first meeting.</p>
       </div>
-      <div class="reveal" style="margin-top:var(--space-md);">
-        <h3>Week 0 — Kickoff</h3>
-        <p>All pods gather for a virtual kickoff. Meet your pod, set your goals, schedule your first meeting. This is the only session WBB hosts live.</p>
-      </div>
-      <div class="reveal" style="margin-top:var(--space-md);">
-        <h3>Weeks 1-2 — Foundation</h3>
+      <div class="bridge-timeline__item">
+        <h3>Weeks 1-2: Foundation</h3>
         <p>Assess where you are. Build your study plan. Review resumes. Create your target company list. Establish your pod's rhythm.</p>
       </div>
-      <div class="reveal" style="margin-top:var(--space-md);">
-        <h3>Weeks 3-6 — The Grind</h3>
-        <p>This is where the work happens. Practice DSA, system design, and behavioral questions. Send applications. Do mock interviews. Your weekly coaching DMs keep you focused and balanced.</p>
+      <div class="bridge-timeline__item">
+        <h3>Weeks 3-6: The Grind</h3>
+        <p>Practice DSA, system design, and behavioral questions. Send applications. Do mock interviews. Your weekly coaching DMs keep you focused.</p>
       </div>
-      <div class="reveal" style="margin-top:var(--space-md);">
-        <h3>Weeks 7-8 — Final Sprint</h3>
-        <p>Push hard on applications and interviews. Do a retrospective with your pod. Celebrate your growth. Exchange contact info to stay connected.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- What You Get -->
-  <section class="section">
-    <div class="container" style="max-width:800px;">
-      <div class="reveal">
-        <h2>What You Get</h2>
-        <ul style="list-style:none; padding:0;">
-          <li style="padding:var(--space-sm) 0;">A pod of 4-5 people in your target role who have your back</li>
-          <li style="padding:var(--space-sm) 0;">Weekly personalized coaching insights via Slack DM</li>
-          <li style="padding:var(--space-sm) 0;">A structured 8-week framework to keep you accountable</li>
-          <li style="padding:var(--space-sm) 0;">A menu of proven pod session formats to choose from</li>
-          <li style="padding:var(--space-sm) 0;">Access to the full WBB Slack community and #jobs channel</li>
-          <li style="padding:var(--space-sm) 0;">A digital certificate of completion when you graduate</li>
-        </ul>
+      <div class="bridge-timeline__item">
+        <h3>Weeks 7-8: Final Sprint</h3>
+        <p>Push hard on applications and interviews. Retrospective with your pod. Celebrate your growth.</p>
       </div>
     </div>
   </section>
 
-  <!-- Cohort Schedule -->
-  <section class="section section--alt">
-    <div class="container text-center reveal">
-      <h2>Cohort Schedule</h2>
-      <p>The Bridge runs 3 times per year, aligned with peak hiring seasons.</p>
-      <div style="margin-top:var(--space-lg); display:flex; flex-wrap:wrap; gap:var(--space-md); justify-content:center;">
-        <div style="flex:1; min-width:200px; max-width:280px; padding:var(--space-md); background:var(--color-white); border-radius:12px;">
-          <h3 style="color:var(--color-medium-brown);">Spring</h3>
-          <p>January — March</p>
-          <p style="font-size:0.875rem; color:var(--text-muted);">Applications open December</p>
-        </div>
-        <div style="flex:1; min-width:200px; max-width:280px; padding:var(--space-md); background:var(--color-white); border-radius:12px;">
-          <h3 style="color:var(--color-medium-brown);">Summer</h3>
-          <p>May — July</p>
-          <p style="font-size:0.875rem; color:var(--text-muted);">Applications open April</p>
-        </div>
-        <div style="flex:1; min-width:200px; max-width:280px; padding:var(--space-md); background:var(--color-white); border-radius:12px;">
-          <h3 style="color:var(--color-medium-brown);">Fall</h3>
-          <p>September — November</p>
-          <p style="font-size:0.875rem; color:var(--text-muted);">Applications open August</p>
-        </div>
+  <!-- WHAT YOU GET -->
+  <section class="bridge-section">
+    <h2 class="bridge-section__heading">What You Get</h2>
+    <ul class="bridge-list bridge-list--no-border">
+      <li>A pod of 4-5 people in your target role who have your back</li>
+      <li>Weekly personalized coaching insights via Slack DM</li>
+      <li>A structured 8-week framework to keep you accountable</li>
+      <li>A menu of proven pod session formats to choose from</li>
+      <li>Access to the full WBB Slack community and #jobs channel</li>
+      <li>A digital certificate of completion when you graduate</li>
+    </ul>
+  </section>
+
+  <!-- COHORT SCHEDULE -->
+  <section class="bridge-section bridge-section--dark">
+    <h2 class="bridge-section__heading" style="text-align:center;">Cohort Schedule</h2>
+    <p class="bridge-section__text" style="text-align:center;">The Bridge runs 3 times per year, aligned with peak hiring seasons.</p>
+    <div class="bridge-cohorts">
+      <div class="bridge-cohort">
+        <h3 class="bridge-cohort__season">Spring</h3>
+        <p>January to March</p>
+        <p class="bridge-cohort__note">Applications open December</p>
+      </div>
+      <div class="bridge-cohort">
+        <h3 class="bridge-cohort__season">Summer</h3>
+        <p>May to July</p>
+        <p class="bridge-cohort__note">Applications open April</p>
+      </div>
+      <div class="bridge-cohort">
+        <h3 class="bridge-cohort__season">Fall</h3>
+        <p>September to November</p>
+        <p class="bridge-cohort__note">Applications open August</p>
       </div>
     </div>
   </section>
 
   <!-- FAQ -->
-  <section class="section">
-    <div class="container">
-      <div class="section-header reveal">
-        <h2>Frequently Asked Questions</h2>
-        <p>For other questions email <a href="mailto:info@webuildblack.com" style="color:var(--color-medium-brown);">info@webuildblack.com</a></p>
+  <section class="bridge-section">
+    <h2 class="bridge-section__heading">Frequently Asked Questions</h2>
+    <p class="bridge-section__text" style="margin-bottom:2em;">For other questions email <a href="mailto:info@webuildblack.com" style="color:var(--color-gold);">info@webuildblack.com</a></p>
+    <div class="accordion ft-faq">
+      <div class="accordion-item">
+        <button class="accordion-trigger" aria-expanded="false" aria-controls="faq-1">Who is The Bridge for?</button>
+        <div class="accordion-panel" id="faq-1" hidden><p>Any WBB community member who is actively job searching or preparing for tech interviews. All experience levels are welcome. Pods are grouped by target role, not seniority.</p></div>
       </div>
-      <div class="accordion reveal">
-        <div class="accordion-item">
-          <button class="accordion-trigger" aria-expanded="false" aria-controls="faq-1">Who is The Bridge for?</button>
-          <div class="accordion-panel" id="faq-1" hidden>
-            <p>Any WBB community member who is actively job searching or preparing for tech interviews. All experience levels are welcome — pods are grouped by target role, not seniority.</p>
-          </div>
-        </div>
-        <div class="accordion-item">
-          <button class="accordion-trigger" aria-expanded="false" aria-controls="faq-2">How much does it cost?</button>
-          <div class="accordion-panel" id="faq-2" hidden>
-            <p>Nothing. The Bridge is completely free. All tools used in the program (Notion, Slack, Google Meet) are free as well.</p>
-          </div>
-        </div>
-        <div class="accordion-item">
-          <button class="accordion-trigger" aria-expanded="false" aria-controls="faq-3">How much time does it take per week?</button>
-          <div class="accordion-panel" id="faq-3" hidden>
-            <p>One pod meeting per week (45-90 minutes, your pod decides) plus 5 minutes to log your progress in Notion. Everything else — study time, applications, practice — is up to you and your schedule.</p>
-          </div>
-        </div>
-        <div class="accordion-item">
-          <button class="accordion-trigger" aria-expanded="false" aria-controls="faq-4">What if I'm not actively interviewing yet?</button>
-          <div class="accordion-panel" id="faq-4" hidden>
-            <p>That's fine. Many people join The Bridge during their prep phase. Weeks 1-2 are specifically designed for skill assessment and planning. Your pod will help you build momentum to start applying.</p>
-          </div>
-        </div>
-        <div class="accordion-item">
-          <button class="accordion-trigger" aria-expanded="false" aria-controls="faq-5">What roles are supported?</button>
-          <div class="accordion-panel" id="faq-5" hidden>
-            <p>We form pods around: Frontend/Full-Stack Web, Backend/Infrastructure, Mobile Development, Data (Analytics, Engineering, Science), Design (UX/UI, Product Design), and Product/Program Management.</p>
-          </div>
-        </div>
-        <div class="accordion-item">
-          <button class="accordion-trigger" aria-expanded="false" aria-controls="faq-6">What do I need to graduate?</button>
-          <div class="accordion-panel" id="faq-6" hidden>
-            <p>Log your progress at least 6 of 8 weeks, attend at least 6 pod meetings, complete at least 4 mock interviews, and submit at least 10 job applications. That's it.</p>
-          </div>
-        </div>
-        <div class="accordion-item">
-          <button class="accordion-trigger" aria-expanded="false" aria-controls="faq-7">Can I do this program more than once?</button>
-          <div class="accordion-panel" id="faq-7" hidden>
-            <p>Yes. If you didn't land a role in your first cohort, you're welcome to apply again. Many people find that a second round with fresh pod members gives them the push they need.</p>
-          </div>
-        </div>
+      <div class="accordion-item">
+        <button class="accordion-trigger" aria-expanded="false" aria-controls="faq-2">How much does it cost?</button>
+        <div class="accordion-panel" id="faq-2" hidden><p>Nothing. The Bridge is completely free. All tools used in the program (Notion, Slack, Google Meet) are free as well.</p></div>
+      </div>
+      <div class="accordion-item">
+        <button class="accordion-trigger" aria-expanded="false" aria-controls="faq-3">How much time does it take per week?</button>
+        <div class="accordion-panel" id="faq-3" hidden><p>One pod meeting per week (45-90 minutes, your pod decides) plus 5 minutes to log your progress in Notion. Everything else is up to you and your schedule.</p></div>
+      </div>
+      <div class="accordion-item">
+        <button class="accordion-trigger" aria-expanded="false" aria-controls="faq-4">What if I'm not actively interviewing yet?</button>
+        <div class="accordion-panel" id="faq-4" hidden><p>That's fine. Many people join The Bridge during their prep phase. Weeks 1-2 are specifically designed for skill assessment and planning. Your pod will help you build momentum.</p></div>
+      </div>
+      <div class="accordion-item">
+        <button class="accordion-trigger" aria-expanded="false" aria-controls="faq-5">What roles are supported?</button>
+        <div class="accordion-panel" id="faq-5" hidden><p>Frontend/Full-Stack Web, Backend/Infrastructure, Mobile Development, Data (Analytics, Engineering, Science), Design (UX/UI, Product Design), and Product/Program Management.</p></div>
+      </div>
+      <div class="accordion-item">
+        <button class="accordion-trigger" aria-expanded="false" aria-controls="faq-6">What do I need to graduate?</button>
+        <div class="accordion-panel" id="faq-6" hidden><p>Log your progress at least 6 of 8 weeks, attend at least 6 pod meetings, complete at least 4 mock interviews, and submit at least 10 job applications.</p></div>
+      </div>
+      <div class="accordion-item">
+        <button class="accordion-trigger" aria-expanded="false" aria-controls="faq-7">Can I do this program more than once?</button>
+        <div class="accordion-panel" id="faq-7" hidden><p>Yes. If you didn't land a role in your first cohort, you're welcome to apply again. Many people find that a second round with fresh pod members gives them the push they need.</p></div>
       </div>
     </div>
   </section>
 
-  <!-- Bottom CTA -->
-  <section class="section section--dark">
-    <div class="container text-center reveal">
-      <h2 style="color:var(--color-white);">Ready to Cross The Bridge?</h2>
-      <p style="color:var(--color-light-gray); margin-bottom:var(--space-lg);">Applications are open now for the next cohort. Your pod is waiting.</p>
-      <div class="cta-row">
-        <a href="https://forms.gle/BRIDGE_APPLICATION_LINK" target="_blank" rel="noopener" class="btn btn--primary">Apply Now</a>
-        <a href="../get-involved/slack.html" class="btn btn--outline">Join our Slack</a>
-      </div>
+  <!-- BOTTOM CTA -->
+  <section class="bridge-cta">
+    <h2 class="bridge-cta__heading">Ready to Cross The Bridge?</h2>
+    <p class="bridge-cta__text">Applications are open now for the next cohort. Your pod is waiting.</p>
+    <div class="bridge-buttons">
+      <a href="https://forms.gle/BRIDGE_APPLICATION_LINK" target="_blank" rel="noopener" class="ft-btn">Apply Now</a>
+      <a href="https://join.slack.com/t/webuildblack/shared_invite/zt-5qjylgiv-qHmkSNCRYWmowuBLV0O~rg" target="_blank" rel="noopener" class="ft-btn">Join Our Slack</a>
     </div>
   </section>
-
-  <footer class="footer">
-    <div class="container">
-      <div class="footer__grid">
-        <div class="footer__brand">
-          <img src="../assets/images/wbb-logo.svg" alt="We Build Black" width="48" height="48">
-          <p>Empowering the Black community through technical education and professional development since 2017.</p>
+  <!-- FOOTER -->
+  <footer class="footer" id="footer">
+    <div class="footer__main">
+      <div class="footer__left">
+        <div class="footer__left-content">
+          <h3>Make an impact</h3>
+          <ul class="footer__links">
+            <li class="footer__donate-item">
+              <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank" class="footer__donate-form">
+                <input type="hidden" name="cmd" value="_s-xclick">
+                <input type="hidden" name="hosted_button_id" value="RZWPA5VWQSV3U">
+                <button type="submit" class="footer__donate-btn">Donate</button>
+              </form>
+            </li>
+            <li><a href="../impact/hire.html">Hire</a></li>
+            <li><a href="../impact/partner.html">Partner</a></li>
+            <li><a href="../get-involved/volunteer.html" target="_blank" rel="noreferrer">Volunteer</a></li>
+          </ul>
         </div>
-        <div>
-          <h4>Programs</h4>
-          <a href="fast-track.html">Fast Track</a>
-          <a href="crowns-of-code.html">Crowns of Code</a>
-          <a href="mavens-io.html">Mavens I/O</a>
-          <a href="the-bridge.html">The Bridge</a>
-          <a href="../courses/index.html">Courses</a>
-        </div>
-        <div>
-          <h4>Community</h4>
-          <a href="../get-involved/slack.html">Join Slack</a>
-          <a href="../get-involved/meetups.html">Meetups</a>
-          <a href="../get-involved/volunteer.html">Volunteer</a>
-          <a href="../about.html">About Us</a>
-        </div>
-        <div>
-          <h4>Connect</h4>
-          <div class="footer__social">
-            <a href="https://instagram.com/webuildblack" target="_blank" rel="noopener" aria-label="Instagram">IG</a>
-            <a href="https://youtube.com/webuildblack" target="_blank" rel="noopener" aria-label="YouTube">YT</a>
-            <a href="https://linkedin.com/company/we-build-black" target="_blank" rel="noopener" aria-label="LinkedIn">LI</a>
-            <a href="https://twitter.com/webuildblack" target="_blank" rel="noopener" aria-label="Twitter">TW</a>
-            <a href="https://facebook.com/WeBuildBlackOfficial" target="_blank" rel="noopener" aria-label="Facebook">FB</a>
-            <a href="https://github.com/WeBuildBlack" target="_blank" rel="noopener" aria-label="GitHub">GH</a>
-          </div>
+        <div class="footer__logo">
+          <img src="../assets/images/wbb-gem.svg" alt="We Build Black">
         </div>
       </div>
-      <div class="footer__bottom">
-        <p>We Build Black &copy; 2026. 501(c)(3) Non-Profit Organization.</p>
+      <div class="footer__right">
+        <h3>Get in touch</h3>
+        <p class="footer__condensed">We Build Black</p>
+        <p class="footer__condensed">147 Front Street</p>
+        <p>Brooklyn, NY 11201</p>
+        <p>info@webuildblack.com</p>
+        <h3>Stay in the loop</h3>
+        <p>Be first to know about the latest community news, events, and job opportunities.</p>
+        <div class="footer__subscribe">
+          <a href="#" class="btn btn--subscribe">Subscribe</a>
+        </div>
       </div>
+    </div>
+    <div class="footer__end">
+      <ul class="footer__social">
+        <li><a href="https://instagram.com/webuildblack" target="_blank" rel="noreferrer" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a></li>
+        <li><a href="https://youtube.com/webuildblack" target="_blank" rel="noreferrer" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a></li>
+        <li><a href="https://linkedin.com/company/we-build-black" target="_blank" rel="noreferrer" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a></li>
+        <li><a href="https://twitter.com/webuildblack" target="_blank" rel="noreferrer" aria-label="Twitter"><i class="fa-brands fa-twitter"></i></a></li>
+        <li><a href="https://facebook.com/WeBuildBlackOfficial" target="_blank" rel="noreferrer" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a></li>
+        <li><a href="https://github.com/WeBuildBlack" target="_blank" rel="noreferrer" aria-label="GitHub"><i class="fa-brands fa-github"></i></a></li>
+      </ul>
+      <p class="footer__copyright">We Build Black &copy; 2026</p>
     </div>
   </footer>
   <script src="../js/main.js"></script>

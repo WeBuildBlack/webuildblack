@@ -5,163 +5,184 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>About | We Build Black</title>
   <meta name="description" content="Learn about We Build Black's origin story, mission, and the team building pathways for Black people in tech.">
-  <link rel="icon" href="assets/images/wbb-gem.svg" type="image/svg+xml">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon-16x16.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Arvo:wght@700&family=Jura:wght@300;500;700&family=Roboto:wght@700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
 </head>
 <body>
-
-  <!-- ═══ NAVIGATION ═══ -->
-  <nav class="nav" role="navigation" aria-label="Main navigation">
-    <div class="container">
-      <a href="index.html" class="nav-logo" aria-label="We Build Black home">
-        <img src="assets/images/wbb-logo.svg" alt="We Build Black" width="44" height="44">
+  <!-- NAV -->
+  <nav class="nav" role="navigation" aria-label="We Build Black site navigation">
+    <div class="nav__inner">
+      <a href="index.html" class="nav__brand" aria-label="We Build Black home">
+        <img src="assets/images/wbb-wordmark-white.svg" alt="We Build Black" class="nav__logo">
       </a>
-      <button class="nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Toggle navigation">
-        <span></span><span></span><span></span>
-      </button>
-      <ul class="nav-menu" id="nav-menu" role="menubar">
-        <li><a href="about.html" role="menuitem">About</a></li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" role="menuitem" aria-expanded="false" aria-haspopup="true">Get Involved</a>
-          <ul class="dropdown-menu" role="menu">
-            <li><span class="dropdown-label">Events</span></li>
-            <li><a href="programs/mavens-io.html" role="menuitem">Mavens I/O Conference</a></li>
-            <li><a href="get-involved/meetups.html" role="menuitem">Meetups</a></li>
-            <li><span class="dropdown-label">Programs</span></li>
-            <li><a href="programs/fast-track.html" role="menuitem">Fast Track</a></li>
-            <li><a href="programs/crowns-of-code.html" role="menuitem">Crowns of Code</a></li>
-            <li><a href="programs/the-bridge.html" role="menuitem">The Bridge</a></li>
-            <li><span class="dropdown-label">Community</span></li>
-            <li><a href="get-involved/slack.html" role="menuitem">Join our Slack</a></li>
+      <button class="nav__mobile-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Menu">Menu</button>
+      <ul class="nav__menu" id="nav-menu" role="menubar" aria-label="We Build Black site navigation">
+        <li role="none" class="nav__item">
+          <a href="about.html" role="menuitem" class="nav__link">About</a>
+        </li>
+        <li role="none" class="nav__item nav__dropdown">
+          <button type="button" role="menuitem" class="nav__link nav__dropdown-btn" aria-controls="get-involved-dropdown" aria-expanded="false">Get Involved</button>
+          <ul class="nav__dropdown-menu" id="get-involved-dropdown" role="menu">
+            <li role="none"><a role="menuitem" class="nav__dropdown-link" href="programs/mavens-io.html">Mavens I/O</a></li>
+            <li role="none"><a role="menuitem" class="nav__dropdown-link" href="get-involved/meetups.html">Meetups</a></li>
+            <li role="none"><a role="menuitem" class="nav__dropdown-link" href="programs/fast-track.html">Fast Track</a></li>
+            <li role="none"><a role="menuitem" class="nav__dropdown-link" href="programs/crowns-of-code.html">Crowns of Code</a></li>
+            <li role="none"><a role="menuitem" class="nav__dropdown-link" href="programs/the-bridge.html">The Bridge</a></li>
+            <li role="none"><a role="menuitem" class="nav__dropdown-link" href="https://join.slack.com/t/webuildblack/shared_invite/zt-5qjylgiv-qHmkSNCRYWmowuBLV0O~rg" target="_blank" rel="noreferrer">Slack</a></li>
           </ul>
         </li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" role="menuitem" aria-expanded="false" aria-haspopup="true">Make an Impact</a>
-          <ul class="dropdown-menu" role="menu">
-            <li><a href="impact/hire.html" role="menuitem">Hire</a></li>
-            <li><a href="impact/partner.html" role="menuitem">Partner</a></li>
-            <li><a href="get-involved/volunteer.html" role="menuitem">Volunteer</a></li>
+        <li role="none" class="nav__item nav__dropdown">
+          <button type="button" role="menuitem" class="nav__link nav__dropdown-btn" aria-controls="impact-dropdown" aria-expanded="false">Make an Impact</button>
+          <ul class="nav__dropdown-menu" id="impact-dropdown" role="menu">
+            <li role="none"><a role="menuitem" class="nav__dropdown-link" href="impact/hire.html">Hire</a></li>
+            <li role="none"><a role="menuitem" class="nav__dropdown-link" href="impact/partner.html">Partner</a></li>
+            <li role="none"><a role="menuitem" class="nav__dropdown-link" href="get-involved/volunteer.html" target="_blank" rel="noreferrer">Volunteer</a></li>
           </ul>
         </li>
-        <li><a href="https://shop.webuildblack.com" target="_blank" rel="noopener" role="menuitem">Shop</a></li>
+        <li role="none" class="nav__item">
+          <a href="courses/index.html" role="menuitem" class="nav__link">Courses</a>
+        </li>
+        <li role="none" class="nav__item">
+          <a href="https://shop.webuildblack.com" role="menuitem" class="nav__link" target="_blank" rel="noopener">Shop</a>
+        </li>
+        <li role="none" class="nav__item nav__item--donate">
+          <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank" class="nav__donate-form">
+            <input type="hidden" name="cmd" value="_s-xclick">
+            <input type="hidden" name="hosted_button_id" value="RZWPA5VWQSV3U">
+            <button type="submit" role="menuitem" class="nav__donate-btn">Donate</button>
+          </form>
+        </li>
       </ul>
     </div>
   </nav>
 
-  <!-- ═══ HERO ═══ -->
-  <section class="hero hero--page">
-    <div class="hero__bg" style="background: linear-gradient(135deg, #200E03, #2C170B);"></div>
-    <div class="hero__content">
-      <h1>About We Build Black</h1>
-      <p class="hero__tagline">How It All Started</p>
+  <!-- INTRO SECTION -->
+  <section class="about-intro">
+    <div class="about-intro__heading-wrapper">
+      <h1 class="about-intro__heading">How it all started</h1>
+      <div class="about-intro__vline"></div>
     </div>
-  </section>
-
-  <!-- ═══ ORIGIN STORY ═══ -->
-  <section class="section">
-    <div class="container" style="max-width:800px;">
-      <div class="reveal">
-        <h2>How It All Started</h2>
-        <p>In 2016, Devin Jackson founded Black Software Engineers of New York City (BSENYC) — a Meetup group that brought together Black software engineers for networking, learning, and community building. What started as a small meetup quickly grew into something bigger.</p>
-        <p>The community's energy and hunger for more resources, more programs, and more representation made it clear: this needed to be more than a meetup. In November 2017, We Build Black was officially incorporated as a 501(c)(3) non-profit organization in Brooklyn, NY.</p>
-        <p>Since then, WBB has expanded into workforce training programs, youth coding initiatives, an annual conference, and a thriving Slack community of Black technologists across the country.</p>
+    <div class="about-intro__content">
+      <div class="about-intro__text">
+        <p>In the fall of 2016, Devin Jackson was feeling isolated as the only Black software engineer at his company. He scoured the web for a local community of other devs like him, but none existed yet. So he decided to create the Black Software Engineers of NYC Meetup and hosted the group every Saturday afternoon in his small office in Williamsburg. The group's numbers exploded quickly, hitting the 1,000 member mark in its first 6 months. Devin and a core crew of members became fast friends, and after a year of building community together they wanted to create something bigger.</p>
+        <p>We Build Black was founded as a 501(c)(3) non-profit organization in November 2017. Since then, WBB has created the Mavens I/O: Black Women in Tech Conference, taught coding programs in schools, piloted a recidivism program, and connected members to hiring opportunities. In the process, we've garnered sponsorship from Google, JP Morgan Chase, Birchbox, The New York Times, and more.</p>
+      </div>
+      <div class="about-intro__image">
+        <img src="assets/images/about/mavens2019_staff-group-pic.jpg" alt="We Build Black staff group photo at Mavens I/O 2019">
       </div>
     </div>
   </section>
 
-  <!-- ═══ WHERE WE'RE HEADED ═══ -->
-  <section class="section section--alt">
-    <div class="container text-center reveal">
-      <h2>Where We're Headed</h2>
-      <p style="max-width:700px;margin:var(--space-sm) auto 0;">We're building the infrastructure for Black excellence in tech. Through education, mentorship, and industry partnerships, we're creating a pipeline that takes people from their first line of code to their first six-figure salary — and beyond.</p>
-    </div>
+  <!-- WHERE WE'RE HEADED -->
+  <section class="about-wwh">
+    <h2 class="about-wwh__heading">Where we're headed</h2>
+    <p>We Build Black has explored many avenues for community empowerment through technology over the years. From startup acceleration to criminal justice reform. Our goal continues to be to solve the decades old problem of Black underrepresentation in tech by creating dedicated spaces that support Black technologists' economic advancement and career growth.</p>
+    <p>As we adjust to a digital-first world, our NYC-based community is expanding to a global one and the scope of our focus is narrowing to career development and inclusion advocacy. Along with planning for <a href="programs/mavens-io.html">Mavens I/O</a>, we're piloting an online coding program for NYC youth.</p>
   </section>
 
-  <!-- ═══ TEAM ═══ -->
-  <section class="section">
-    <div class="container">
-      <div class="section-header reveal">
-        <h2>Our Team</h2>
+  <!-- MEET THE SQUAD -->
+  <section class="about-team">
+    <h2 class="about-team__heading">Meet the squad</h2>
+    <ul class="about-team__list">
+      <li class="about-team__member">
+        <div class="about-team__headshot-wrapper">
+          <img src="assets/images/about/adam-headshot.png" alt="Headshot of Adam Johnson" class="about-team__headshot">
+        </div>
+        <div class="about-team__info">
+          <p class="about-team__name">Adam Johnson</p>
+          <p class="about-team__role">Program Manager</p>
+          <p class="about-team__bio">Adam is a Flatiron School bootcamp grad who has since worked as a web developer and a QA Engineer for Broadway.com and is now a lead instructor for Flatiron School's immersive software engineering program. He has a passion for teaching others how to teach themselves and sharing the skills he's gained with the community.</p>
+        </div>
+      </li>
+      <li class="about-team__member">
+        <div class="about-team__headshot-wrapper">
+          <img src="assets/images/about/chloe-headshot.png" alt="Headshot of Chloé Rice" class="about-team__headshot">
+        </div>
+        <div class="about-team__info">
+          <p class="about-team__name">Chloé Rice</p>
+          <p class="about-team__role">Co-founder</p>
+          <p class="about-team__bio">Chloé is a UX Developer at Shopify by day and a fashion designer by night. She's passionate about accessibility and is one of "those" people that has to talk to every animal she comes across (even when flying by on her bike).</p>
+        </div>
+      </li>
+      <li class="about-team__member">
+        <div class="about-team__headshot-wrapper">
+          <img src="assets/images/about/devin-headshot.png" alt="Headshot of Devin Jackson" class="about-team__headshot">
+        </div>
+        <div class="about-team__info">
+          <p class="about-team__name">Devin Jackson</p>
+          <p class="about-team__role">CEO and Co-founder</p>
+          <p class="about-team__bio">Devin is a Full Stack Engineer with 5 years of experience building products with meaning. He loves finding people's hidden potential. His hobbies include debating Hip Hop, riding his bike, and sipping maple whiskey.</p>
+        </div>
+      </li>
+      <li class="about-team__member">
+        <div class="about-team__headshot-wrapper">
+          <img src="assets/images/about/kris-headshot.jpg" alt="Headshot of Kris Lee" class="about-team__headshot">
+        </div>
+        <div class="about-team__info">
+          <p class="about-team__name">Kris Lee</p>
+          <p class="about-team__role">Co-founder</p>
+          <p class="about-team__bio">Kris is a Systems Engineer with over 20 years of experience, 5 years in Cybersecurity, with a special interest in vulnerability and penetration testing. He's devoted to community development, technical literacy, and wellness.</p>
+        </div>
+      </li>
+    </ul>
+  </section>
+
+  <!-- CTA -->
+  <section class="about-cta">
+    <h2 class="about-cta__heading">Want to help grow the community?</h2>
+    <p class="about-cta__text">We're a volunteer run organization and are always looking to grow the team. Get in touch today about <a href="get-involved/volunteer.html">volunteering</a>!</p>
+  </section>
+  <!-- FOOTER -->
+  <footer class="footer" id="footer">
+    <div class="footer__main">
+      <div class="footer__left">
+        <div class="footer__left-content">
+          <h3>Make an impact</h3>
+          <ul class="footer__links">
+            <li class="footer__donate-item">
+              <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank" class="footer__donate-form">
+                <input type="hidden" name="cmd" value="_s-xclick">
+                <input type="hidden" name="hosted_button_id" value="RZWPA5VWQSV3U">
+                <button type="submit" class="footer__donate-btn">Donate</button>
+              </form>
+            </li>
+            <li><a href="impact/hire.html">Hire</a></li>
+            <li><a href="impact/partner.html">Partner</a></li>
+            <li><a href="get-involved/volunteer.html" target="_blank" rel="noreferrer">Volunteer</a></li>
+          </ul>
+        </div>
+        <div class="footer__logo">
+          <img src="assets/images/wbb-gem.svg" alt="We Build Black">
+        </div>
       </div>
-      <div class="team-grid">
-        <div class="team-member reveal">
-          <!-- TODO: Replace with devin.jpg headshot -->
-          <div class="team-member__photo" role="img" aria-label="Devin Jackson"></div>
-          <h3>Devin Jackson</h3>
-          <p class="team-member__role">Founder &amp; Executive Director</p>
-        </div>
-        <div class="team-member reveal">
-          <!-- TODO: Replace with chloe.jpg headshot -->
-          <div class="team-member__photo" role="img" aria-label="Chloé Rice"></div>
-          <h3>Chloé Rice</h3>
-          <p class="team-member__role">Program Director</p>
-        </div>
-        <div class="team-member reveal">
-          <!-- TODO: Replace with kris.jpg headshot -->
-          <div class="team-member__photo" role="img" aria-label="Kris Lee"></div>
-          <h3>Kris Lee</h3>
-          <p class="team-member__role">Community Lead</p>
-        </div>
-        <div class="team-member reveal">
-          <!-- TODO: Replace with adam.jpg headshot -->
-          <div class="team-member__photo" role="img" aria-label="Adam Johnson"></div>
-          <h3>Adam Johnson</h3>
-          <p class="team-member__role">Operations</p>
+      <div class="footer__right">
+        <h3>Get in touch</h3>
+        <p class="footer__condensed">We Build Black</p>
+        <p class="footer__condensed">147 Front Street</p>
+        <p>Brooklyn, NY 11201</p>
+        <p>info@webuildblack.com</p>
+        <h3>Stay in the loop</h3>
+        <p>Be first to know about the latest community news, events, and job opportunities.</p>
+        <div class="footer__subscribe">
+          <a href="#" class="btn btn--subscribe">Subscribe</a>
         </div>
       </div>
     </div>
-  </section>
-
-  <!-- ═══ VOLUNTEER CTA ═══ -->
-  <section class="section section--dark">
-    <div class="container text-center reveal">
-      <h2 style="color:var(--color-white);">Want to Help?</h2>
-      <p style="color:var(--color-light-gray);max-width:600px;margin:var(--space-sm) auto var(--space-lg);">We're always looking for passionate people to volunteer their time and skills. Whether you can mentor, teach, or help organize — we'd love to have you.</p>
-      <a href="get-involved/volunteer.html" class="btn btn--primary">Become a Volunteer</a>
-    </div>
-  </section>
-
-  <!-- ═══ FOOTER ═══ -->
-  <footer class="footer">
-    <div class="container">
-      <div class="footer__grid">
-        <div class="footer__brand">
-          <img src="assets/images/wbb-logo.svg" alt="We Build Black" width="48" height="48">
-          <p>Empowering the Black community through technical education and professional development since 2017.</p>
-        </div>
-        <div>
-          <h4>Programs</h4>
-          <a href="programs/fast-track.html">Fast Track</a>
-          <a href="programs/crowns-of-code.html">Crowns of Code</a>
-          <a href="programs/mavens-io.html">Mavens I/O</a>
-          <a href="programs/the-bridge.html">The Bridge</a>
-          <a href="courses/index.html">Courses</a>
-        </div>
-        <div>
-          <h4>Community</h4>
-          <a href="get-involved/slack.html">Join Slack</a>
-          <a href="get-involved/meetups.html">Meetups</a>
-          <a href="get-involved/volunteer.html">Volunteer</a>
-          <a href="about.html">About Us</a>
-        </div>
-        <div>
-          <h4>Connect</h4>
-          <div class="footer__social">
-            <a href="https://instagram.com/webuildblack" target="_blank" rel="noopener" aria-label="Instagram">IG</a>
-            <a href="https://youtube.com/webuildblack" target="_blank" rel="noopener" aria-label="YouTube">YT</a>
-            <a href="https://linkedin.com/company/we-build-black" target="_blank" rel="noopener" aria-label="LinkedIn">LI</a>
-            <a href="https://twitter.com/webuildblack" target="_blank" rel="noopener" aria-label="Twitter">TW</a>
-            <a href="https://facebook.com/WeBuildBlackOfficial" target="_blank" rel="noopener" aria-label="Facebook">FB</a>
-            <a href="https://github.com/WeBuildBlack" target="_blank" rel="noopener" aria-label="GitHub">GH</a>
-          </div>
-        </div>
-      </div>
-      <div class="footer__bottom">
-        <p>We Build Black &copy; 2026. 501(c)(3) Non-Profit Organization.</p>
-      </div>
+    <div class="footer__end">
+      <ul class="footer__social">
+        <li><a href="https://instagram.com/webuildblack" target="_blank" rel="noreferrer" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a></li>
+        <li><a href="https://youtube.com/webuildblack" target="_blank" rel="noreferrer" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a></li>
+        <li><a href="https://linkedin.com/company/we-build-black" target="_blank" rel="noreferrer" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a></li>
+        <li><a href="https://twitter.com/webuildblack" target="_blank" rel="noreferrer" aria-label="Twitter"><i class="fa-brands fa-twitter"></i></a></li>
+        <li><a href="https://facebook.com/WeBuildBlackOfficial" target="_blank" rel="noreferrer" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a></li>
+        <li><a href="https://github.com/WeBuildBlack" target="_blank" rel="noreferrer" aria-label="GitHub"><i class="fa-brands fa-github"></i></a></li>
+      </ul>
+      <p class="footer__copyright">We Build Black &copy; 2026</p>
     </div>
   </footer>
 

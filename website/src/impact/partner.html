@@ -5,198 +5,195 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Partner | We Build Black</title>
   <meta name="description" content="Partner with We Build Black to build a more equitable tech industry. Learn about our partnership benchmarks and apply.">
-  <link rel="icon" href="../assets/images/wbb-gem.svg" type="image/svg+xml">
+  <link rel="icon" type="image/png" sizes="32x32" href="../assets/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon-16x16.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Arvo:wght@700&family=Jura:wght@300;500;700&family=Roboto:wght@700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
 </head>
 <body>
-  <nav class="nav" role="navigation" aria-label="Main navigation">
-    <div class="container">
-      <a href="../index.html" class="nav-logo" aria-label="We Build Black home">
-        <img src="../assets/images/wbb-logo.svg" alt="We Build Black" width="44" height="44">
+  <!-- NAV -->
+  <nav class="nav" role="navigation" aria-label="We Build Black site navigation">
+    <div class="nav__inner">
+      <a href="../index.html" class="nav__brand" aria-label="We Build Black home">
+        <img src="../assets/images/wbb-wordmark-white.svg" alt="We Build Black" class="nav__logo">
       </a>
-      <button class="nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Toggle navigation">
-        <span></span><span></span><span></span>
-      </button>
-      <ul class="nav-menu" id="nav-menu" role="menubar">
-        <li><a href="../about.html" role="menuitem">About</a></li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" role="menuitem" aria-expanded="false" aria-haspopup="true">Get Involved</a>
-          <ul class="dropdown-menu" role="menu">
-            <li><span class="dropdown-label">Events</span></li>
-            <li><a href="../programs/mavens-io.html" role="menuitem">Mavens I/O Conference</a></li>
-            <li><a href="../get-involved/meetups.html" role="menuitem">Meetups</a></li>
-            <li><span class="dropdown-label">Programs</span></li>
-            <li><a href="../programs/fast-track.html" role="menuitem">Fast Track</a></li>
-            <li><a href="../programs/crowns-of-code.html" role="menuitem">Crowns of Code</a></li>
-            <li><a href="../programs/the-bridge.html" role="menuitem">The Bridge</a></li>
-            <li><span class="dropdown-label">Community</span></li>
-            <li><a href="../get-involved/slack.html" role="menuitem">Join our Slack</a></li>
+      <button class="nav__mobile-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Menu">Menu</button>
+      <ul class="nav__menu" id="nav-menu" role="menubar" aria-label="We Build Black site navigation">
+        <li role="none" class="nav__item">
+          <a href="../about.html" role="menuitem" class="nav__link">About</a>
+        </li>
+        <li role="none" class="nav__item nav__dropdown">
+          <button type="button" role="menuitem" class="nav__link nav__dropdown-btn" aria-controls="get-involved-dropdown" aria-expanded="false">Get Involved</button>
+          <ul class="nav__dropdown-menu" id="get-involved-dropdown" role="menu">
+            <li role="none"><a role="menuitem" class="nav__dropdown-link" href="../programs/mavens-io.html">Mavens I/O</a></li>
+            <li role="none"><a role="menuitem" class="nav__dropdown-link" href="../get-involved/meetups.html">Meetups</a></li>
+            <li role="none"><a role="menuitem" class="nav__dropdown-link" href="../programs/fast-track.html">Fast Track</a></li>
+            <li role="none"><a role="menuitem" class="nav__dropdown-link" href="../programs/crowns-of-code.html">Crowns of Code</a></li>
+            <li role="none"><a role="menuitem" class="nav__dropdown-link" href="../programs/the-bridge.html">The Bridge</a></li>
+            <li role="none"><a role="menuitem" class="nav__dropdown-link" href="https://join.slack.com/t/webuildblack/shared_invite/zt-5qjylgiv-qHmkSNCRYWmowuBLV0O~rg" target="_blank" rel="noreferrer">Slack</a></li>
           </ul>
         </li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" role="menuitem" aria-expanded="false" aria-haspopup="true">Make an Impact</a>
-          <ul class="dropdown-menu" role="menu">
-            <li><a href="hire.html" role="menuitem">Hire</a></li>
-            <li><a href="partner.html" role="menuitem">Partner</a></li>
-            <li><a href="../get-involved/volunteer.html" role="menuitem">Volunteer</a></li>
+        <li role="none" class="nav__item nav__dropdown">
+          <button type="button" role="menuitem" class="nav__link nav__dropdown-btn" aria-controls="impact-dropdown" aria-expanded="false">Make an Impact</button>
+          <ul class="nav__dropdown-menu" id="impact-dropdown" role="menu">
+            <li role="none"><a role="menuitem" class="nav__dropdown-link" href="../impact/hire.html">Hire</a></li>
+            <li role="none"><a role="menuitem" class="nav__dropdown-link" href="../impact/partner.html">Partner</a></li>
+            <li role="none"><a role="menuitem" class="nav__dropdown-link" href="../get-involved/volunteer.html" target="_blank" rel="noreferrer">Volunteer</a></li>
           </ul>
         </li>
-        <li><a href="https://shop.webuildblack.com" target="_blank" rel="noopener" role="menuitem">Shop</a></li>
+        <li role="none" class="nav__item">
+          <a href="../courses/index.html" role="menuitem" class="nav__link">Courses</a>
+        </li>
+        <li role="none" class="nav__item">
+          <a href="https://shop.webuildblack.com" role="menuitem" class="nav__link" target="_blank" rel="noopener">Shop</a>
+        </li>
+        <li role="none" class="nav__item nav__item--donate">
+          <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank" class="nav__donate-form">
+            <input type="hidden" name="cmd" value="_s-xclick">
+            <input type="hidden" name="hosted_button_id" value="RZWPA5VWQSV3U">
+            <button type="submit" role="menuitem" class="nav__donate-btn">Donate</button>
+          </form>
+        </li>
       </ul>
     </div>
   </nav>
 
-  <section class="hero hero--page" style="min-height:40vh;">
-    <!-- TODO: Replace with mavens-2019-swag-bags.jpg -->
-    <div class="hero__bg" style="background: linear-gradient(135deg, #2C170B, #200E03);"></div>
-    <div class="hero__content">
-      <h1>Partner With Us</h1>
-      <p class="hero__tagline">Build a More Equitable Tech Industry</p>
+  <!-- HERO: split text + image -->
+  <header class="partner-hero">
+    <div class="partner-hero__content">
+      <h1 class="partner-hero__heading">Partnership is key to reaching our destination.</h1>
+      <p class="partner-hero__body">We believe that in order to build a tech industry that truly includes everyone, we need partners that seek to actively dismantle the status quo.</p>
+      <a href="partner-apply.html" class="partner-hero__btn">Apply to Partner</a>
     </div>
-  </section>
+    <div class="partner-hero__image-wrapper">
+      <div class="partner-hero__image-overlay"></div>
+      <img src="../assets/images/partner/mavens-2019-social-hour.JPG" alt="Mavens I/O social hour" class="partner-hero__image">
+    </div>
+  </header>
 
-  <!-- What We Look For -->
-  <section class="section" id="what-we-look-for">
-    <div class="container">
-      <div class="section-header reveal">
-        <h2>What We Look For</h2>
-        <p>Diversity isn't a nice-to-have, it's imperative. These benchmarks are signals that help us distinguish where companies are at on the path toward equity. Use them to identify opportunities to affect systemic change within your business.</p>
-      </div>
-      <div class="benchmark-grid">
-        <div class="benchmark reveal">
-          <div class="benchmark__icon">1</div>
-          <div>
-            <h4>Employee Resource Group</h4>
-            <p>Having ERGs gives employees of targeted identities a safe space to be heard and take action on the change they would like to see in and out of the workplace and are key to creating a culture of belonging.</p>
-          </div>
-        </div>
-        <div class="benchmark reveal">
-          <div class="benchmark__icon">2</div>
-          <div>
-            <h4>Dedicated D&amp;I Leadership</h4>
-            <p>No person should ever be paid for one job and have to do another on top of it. Having a dedicated D&amp;I leader or team ensures that employees can focus on mastering their crafts. Inclusion isn't a side-of-desk task.</p>
-          </div>
-        </div>
-        <div class="benchmark reveal">
-          <div class="benchmark__icon">3</div>
-          <div>
-            <h4>Black Owned</h4>
-            <p>Building Black is at the core of our mission. We support Black businesses by hiring and highlighting them. The vendors and services you use every day are also opportunities for change.</p>
-          </div>
-        </div>
-        <div class="benchmark reveal">
-          <div class="benchmark__icon">4</div>
-          <div>
-            <h4>Transparent Demographics</h4>
-            <p>Publishing diversity statistics is a signal that you recognize there is a problem. It lets the public know you're working toward a solution and have a reference for your progress.</p>
-          </div>
-        </div>
-        <div class="benchmark reveal">
-          <div class="benchmark__icon">5</div>
-          <div>
-            <h4>Transparent Salary Bands</h4>
-            <p>Wage inequality is a long-standing issue across industries. Unless there is salary transparency, efforts to build a more representative workforce will only widen the gap.</p>
-          </div>
-        </div>
-        <div class="benchmark reveal">
-          <div class="benchmark__icon">6</div>
-          <div>
-            <h4>External Activism</h4>
-            <p>Your commitment to inclusion shouldn't only be internal. Investment in community organizations is key to building a diverse pipeline. Support programs that broaden exposure to technical career paths.</p>
-          </div>
-        </div>
-        <div class="benchmark reveal">
-          <div class="benchmark__icon">7</div>
-          <div>
-            <h4>Black Executives</h4>
-            <p>From executives to individual contributors, Black people need to have a seat at the table. A company's leadership is indicative of its broader diversity perspective.</p>
-          </div>
-        </div>
-        <div class="benchmark reveal">
-          <div class="benchmark__icon">8</div>
-          <div>
-            <h4>Internship/Apprenticeship Program</h4>
-            <p>A large number of the Black community coming into tech are coming in at the ground level. Open internships bridge the experience gap for less traditional candidates.</p>
-          </div>
-        </div>
-        <div class="benchmark reveal">
-          <div class="benchmark__icon">9</div>
-          <div>
-            <h4>Mentorship Program</h4>
-            <p>A big aspect of D&amp;I work is not only hiring but retaining that diverse talent. Structured mentorship programs give employees a guiding hand in navigating their careers.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+  <!-- GOLD ACCENT STRIP -->
+  <div style="height:8px;background:var(--color-gold);width:100%;"></div>
 
-  <!-- Our Partners -->
-  <section class="section section--alt" id="our-partners">
-    <div class="container text-center">
-      <div class="section-header reveal">
-        <h2>Our Partners</h2>
-      </div>
-      <div class="partner-logos reveal">
-        <!-- TODO: Replace with real partner logo images -->
-        <img src="../assets/images/wbb-gem.svg" alt="Google" style="height:40px;">
-        <img src="../assets/images/wbb-gem.svg" alt="JP Morgan Chase" style="height:40px;">
-        <img src="../assets/images/wbb-gem.svg" alt="Shopify" style="height:40px;">
-        <img src="../assets/images/wbb-gem.svg" alt="Microsoft" style="height:40px;">
-        <img src="../assets/images/wbb-gem.svg" alt="Birchbox" style="height:40px;">
-        <img src="../assets/images/wbb-gem.svg" alt="The New York Times" style="height:40px;">
-      </div>
+  <!-- BODY: benchmarks + logos -->
+  <main class="partner-body">
+    <nav class="partner-body__nav" aria-label="Page sections">
+      <ul class="partner-body__nav-list">
+        <li><a href="#what-we-look-for">What we look for</a></li>
+        <li><a href="#our-partners">Our partners</a></li>
+      </ul>
+    </nav>
+
+    <div class="partner-body__content">
+      <section id="what-we-look-for" class="partner-body__section">
+        <h2 class="partner-body__heading">What we look for</h2>
+        <p class="partner-body__intro">Diversity isn't a nice-to-have, it's imperative. These benchmarks are signals that help us distinguish where companies are at on the path toward equity. Use them to identify opportunities to affect systemic change within your business.</p>
+
+        <dl class="partner-benchmarks">
+          <dt>Employee Resource Group</dt>
+          <dd>Having ERGs gives employees of targeted identities a safe space to be heard and take action on the change they would like to see in and out of the workplace and are key to creating a culture of belonging.</dd>
+
+          <dt>Dedicated D&amp;I Leadership</dt>
+          <dd>No person should ever be paid for one job and have to do another on top of it. Having a dedicated D&amp;I leader or team ensures that employees can focus on mastering their crafts. Inclusion isn't a side-of-desk task. It's important work that needs to have dedicated professionals pushing for progress.</dd>
+
+          <dt>Black Owned</dt>
+          <dd>Building Black is at the core of our mission. We support Black businesses by hiring and highlighting them. Inclusion doesn't stop with recruitment. The vendors and services you use every day are also opportunities for change.</dd>
+
+          <dt>Transparent Demographics</dt>
+          <dd>Publishing diversity statistics is a signal that you recognize there is a problem. It lets the public know you're working toward a solution and have a reference for your progress.</dd>
+
+          <dt>Transparent Salary Bands</dt>
+          <dd>Wage inequality is a long-standing issue across industries, and tech is no exception. Black tech employees earn considerably less than the average salary across technical roles, and the gender pay gap compounds this disparity for Black women. Unless there is salary transparency, efforts to build a more representative workforce will only widen the gap.</dd>
+
+          <dt>External Activism</dt>
+          <dd>Your commitment to inclusion shouldn't only be internal. Investment in community organizations is key to building a diverse pipeline. Donate resources to organizations and schools that provide access to technical education. Support programs that broaden exposure to technical career paths.</dd>
+
+          <dt>Black Executives</dt>
+          <dd>From executives to individual contributors, Black people need to have a seat at the table. A company's leadership is indicative of its broader diversity perspective. Diverse leadership lends itself to inclusive decision making.</dd>
+
+          <dt>Internship/Apprenticeship Program</dt>
+          <dd>A large number of the Black community coming into tech are coming in at the ground level. Historically, entry-level job opportunities have been reserved for those with a CS degree. Open internships bridge the experience gap for less traditional candidates.</dd>
+
+          <dt>Mentorship Program</dt>
+          <dd>A big aspect of D&amp;I work is not only hiring but retaining that diverse talent. Structured mentorship programs give employees a guiding hand in navigating their careers. Successful mentorship leads to increased morale, productivity, and upward mobility.</dd>
+        </dl>
+      </section>
+
+      <section id="our-partners" class="partner-body__section">
+        <h2 class="partner-body__heading">Our partners</h2>
+        <div class="partner-logos-grid">
+          <img src="../assets/images/partner/sponsor-logo_birchbox.png" alt="Birchbox">
+          <img src="../assets/images/partner/sponsor-logo_etsy.png" alt="Etsy">
+          <img src="../assets/images/partner/sponsor-logo_facebook.png" alt="Facebook">
+          <img src="../assets/images/partner/sponsor-logo_flatiron-health.png" alt="Flatiron Health">
+          <img src="../assets/images/partner/sponsor-logo_google.png" alt="Google">
+          <img src="../assets/images/partner/sponsor-logo_iac-applications.png" alt="IAC Applications">
+          <img src="../assets/images/partner/sponsor-logo_jp-morgan-chase.png" alt="JP Morgan Chase">
+          <img src="../assets/images/partner/sponsor-logo_microsoft.png" alt="Microsoft">
+          <img src="../assets/images/partner/sponsor-logo_new-york-times.png" alt="The New York Times">
+          <img src="../assets/images/partner/sponsor-logo_shopify.png" alt="Shopify">
+          <img src="../assets/images/partner/sponsor-logo_stack-overflow.png" alt="Stack Overflow">
+          <img src="../assets/images/partner/sponsor-logo_stride.png" alt="Stride">
+          <img src="../assets/images/partner/sponsor-logo_thoughtworks.png" alt="ThoughtWorks">
+        </div>
+      </section>
     </div>
-  </section>
+  </main>
 
   <!-- CTA -->
-  <section class="section section--dark">
-    <div class="container text-center reveal">
-      <h2 style="color:var(--color-white);">Let's Make the Tech Industry Better Together</h2>
-      <p style="color:var(--color-light-gray);max-width:600px;margin:var(--space-sm) auto var(--space-lg);">Ready to partner with We Build Black? Fill out our partnership inquiry form and a member of our team will be in touch within one week.</p>
-      <a href="partner-apply.html" class="btn btn--primary">Apply to Partner</a>
-    </div>
+  <section class="partner-cta">
+    <h2 class="partner-cta__heading">Let's make the tech industry better together</h2>
+    <p class="partner-cta__text">Ready to partner with We Build Black? Fill out our partnership inquiry form and a member of our team will be in touch within one week.</p>
+    <a href="partner-apply.html" class="partner-cta__btn">Apply to Partner</a>
   </section>
-
-  <footer class="footer">
-    <div class="container">
-      <div class="footer__grid">
-        <div class="footer__brand">
-          <img src="../assets/images/wbb-logo.svg" alt="We Build Black" width="48" height="48">
-          <p>Empowering the Black community through technical education and professional development since 2017.</p>
+  <!-- FOOTER -->
+  <footer class="footer" id="footer">
+    <div class="footer__main">
+      <div class="footer__left">
+        <div class="footer__left-content">
+          <h3>Make an impact</h3>
+          <ul class="footer__links">
+            <li class="footer__donate-item">
+              <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank" class="footer__donate-form">
+                <input type="hidden" name="cmd" value="_s-xclick">
+                <input type="hidden" name="hosted_button_id" value="RZWPA5VWQSV3U">
+                <button type="submit" class="footer__donate-btn">Donate</button>
+              </form>
+            </li>
+            <li><a href="../impact/hire.html">Hire</a></li>
+            <li><a href="../impact/partner.html">Partner</a></li>
+            <li><a href="../get-involved/volunteer.html" target="_blank" rel="noreferrer">Volunteer</a></li>
+          </ul>
         </div>
-        <div>
-          <h4>Programs</h4>
-          <a href="../programs/fast-track.html">Fast Track</a>
-          <a href="../programs/crowns-of-code.html">Crowns of Code</a>
-          <a href="../programs/mavens-io.html">Mavens I/O</a>
-          <a href="../programs/the-bridge.html">The Bridge</a>
-          <a href="../courses/index.html">Courses</a>
-        </div>
-        <div>
-          <h4>Community</h4>
-          <a href="../get-involved/slack.html">Join Slack</a>
-          <a href="../get-involved/meetups.html">Meetups</a>
-          <a href="../get-involved/volunteer.html">Volunteer</a>
-          <a href="../about.html">About Us</a>
-        </div>
-        <div>
-          <h4>Connect</h4>
-          <div class="footer__social">
-            <a href="https://instagram.com/webuildblack" target="_blank" rel="noopener" aria-label="Instagram">IG</a>
-            <a href="https://youtube.com/webuildblack" target="_blank" rel="noopener" aria-label="YouTube">YT</a>
-            <a href="https://linkedin.com/company/we-build-black" target="_blank" rel="noopener" aria-label="LinkedIn">LI</a>
-            <a href="https://twitter.com/webuildblack" target="_blank" rel="noopener" aria-label="Twitter">TW</a>
-            <a href="https://facebook.com/WeBuildBlackOfficial" target="_blank" rel="noopener" aria-label="Facebook">FB</a>
-            <a href="https://github.com/WeBuildBlack" target="_blank" rel="noopener" aria-label="GitHub">GH</a>
-          </div>
+        <div class="footer__logo">
+          <img src="../assets/images/wbb-gem.svg" alt="We Build Black">
         </div>
       </div>
-      <div class="footer__bottom">
-        <p>We Build Black &copy; 2026. 501(c)(3) Non-Profit Organization.</p>
+      <div class="footer__right">
+        <h3>Get in touch</h3>
+        <p class="footer__condensed">We Build Black</p>
+        <p class="footer__condensed">147 Front Street</p>
+        <p>Brooklyn, NY 11201</p>
+        <p>info@webuildblack.com</p>
+        <h3>Stay in the loop</h3>
+        <p>Be first to know about the latest community news, events, and job opportunities.</p>
+        <div class="footer__subscribe">
+          <a href="#" class="btn btn--subscribe">Subscribe</a>
+        </div>
       </div>
+    </div>
+    <div class="footer__end">
+      <ul class="footer__social">
+        <li><a href="https://instagram.com/webuildblack" target="_blank" rel="noreferrer" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a></li>
+        <li><a href="https://youtube.com/webuildblack" target="_blank" rel="noreferrer" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a></li>
+        <li><a href="https://linkedin.com/company/we-build-black" target="_blank" rel="noreferrer" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a></li>
+        <li><a href="https://twitter.com/webuildblack" target="_blank" rel="noreferrer" aria-label="Twitter"><i class="fa-brands fa-twitter"></i></a></li>
+        <li><a href="https://facebook.com/WeBuildBlackOfficial" target="_blank" rel="noreferrer" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a></li>
+        <li><a href="https://github.com/WeBuildBlack" target="_blank" rel="noreferrer" aria-label="GitHub"><i class="fa-brands fa-github"></i></a></li>
+      </ul>
+      <p class="footer__copyright">We Build Black &copy; 2026</p>
     </div>
   </footer>
   <script src="../js/main.js"></script>

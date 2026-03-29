@@ -5,7 +5,7 @@ import remarkGfm from 'remark-gfm';
 export async function renderMarkdown(content: string) {
   const mdxSource = await serialize(content, {
     mdxOptions: {
-      remarkPlugins: [remarkGfm],
+      remarkPlugins: [remarkGfm as any],
       rehypePlugins: [rehypeHighlight as any],
     },
   });
