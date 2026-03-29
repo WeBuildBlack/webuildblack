@@ -1,12 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Allow reading course markdown files from parent courses/ directory
+  // Include course markdown files in serverless function bundles
   experimental: {
     outputFileTracingIncludes: {
-      '/**': ['../courses/**/*'],
+      '/**': ['./courses/**/*'],
     },
   },
-  // Ensure markdown/MDX files from courses/ are watchable in dev
   webpack: (config) => {
     config.resolve.fallback = { fs: false, path: false };
     return config;
