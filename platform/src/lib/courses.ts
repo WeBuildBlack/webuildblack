@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
 
-const COURSES_DIR = path.join(process.cwd(), '..', 'courses');
+const COURSES_DIR = path.join(process.cwd(), 'courses');
 
 export interface CourseModule {
   id: string;
